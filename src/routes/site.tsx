@@ -1,6 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { useEffect } from "react";
-import { Button, Logo, ToastProvider } from "@/index";
+import { Button, Logo, ToastProvider , MobileNav } from "@/index";
 
 export const Route = createFileRoute("/site")({ component: SiteLayout });
 
@@ -18,26 +18,26 @@ function SiteLayout() {
   }, [navigate]);
   return (
     <ToastProvider>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen overflow-x-clip bg-background responsive-center">
         <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
-          <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-3">
-            <Link to="/site" aria-label="VisionZ — início" className="group flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
-              <Logo brand="visionz-symbol" alt="" className="h-8 w-auto transition-transform duration-300 drop-shadow-[0_0_10px_var(--magenta)] group-hover:scale-105" />
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-lg font-bold tracking-[0.12em] text-foreground">VISIONZ</span>
-                <span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span>
-              </span>
-            </Link>
-            <nav className="hidden flex-1 gap-1 md:flex" aria-label="Site">
+          <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-3 sm:px-6 lg:gap-6">
+            <BrandLink />
+            <nav className="hidden flex-1 gap-1 lg:flex" aria-label="Site">
               {links.map((l) => (
                 <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-neon-pink hover:[text-shadow:0_0_12px_var(--neon-pink)]" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
               ))}
             </nav>
-            <Link to="/app" className="ml-auto"><Button size="sm">Abrir protótipo</Button></Link>
+            <Link to="/app" className="ml-auto hidden sm:block"><Button size="sm">Abrir protótipo</Button></Link>
+            <MobileNav className="ml-auto sm:ml-0" header={<BrandLink />}>
+              {links.map((l) => (
+                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-lg px-4 py-3 text-center font-display text-lg tracking-wide text-foreground transition-colors hover:text-neon-pink" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
+              ))}
+              <div className="mx-auto mt-6 flex w-full max-w-xs flex-col gap-3">
+                <Link to="/app"><Button className="w-full">Abrir protótipo</Button></Link>
+                <Link to="/site/investidores"><Button variant="neon" className="w-full">Sou investidor</Button></Link>
+              </div>
+            </MobileNav>
           </div>
-          <nav className="flex gap-1 overflow-x-auto px-4 pb-2 md:hidden" aria-label="Site">
-            {links.map((l) => <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="shrink-0 rounded-md px-3 py-1 text-xs text-muted-foreground hover:text-neon-pink" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>)}
-          </nav>
         </header>
         <Outlet />
         <footer className="border-t bg-surface/40">
@@ -48,5 +48,17 @@ function SiteLayout() {
         </footer>
       </div>
     </ToastProvider>
+  );
+}
+
+function BrandLink() {
+  return (
+    <Link to="/site" aria-label="VisionZ — início" className="group flex shrink-0 items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:gap-2.5">
+      <Logo brand="visionz-symbol" alt="" className="h-7 w-auto transition-transform duration-300 drop-shadow-[0_0_10px_var(--magenta)] group-hover:scale-105 sm:h-8" />
+      <span className="flex flex-col leading-none">
+        <span className="font-display text-base font-bold tracking-[0.12em] text-foreground sm:text-lg">VISIONZ</span>
+        <span className="mt-1 text-[0.5rem] font-medium uppercase tracking-[0.36em] text-muted-foreground sm:text-[0.55rem] sm:tracking-[0.42em]">Entertainment</span>
+      </span>
+    </Link>
   );
 }

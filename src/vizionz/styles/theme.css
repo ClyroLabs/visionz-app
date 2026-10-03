@@ -143,7 +143,7 @@
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.35em;
+  letter-spacing: clamp(0.14em, 0.9vw, 0.35em);
 }
 @utility underline-brand {
   position: relative;
