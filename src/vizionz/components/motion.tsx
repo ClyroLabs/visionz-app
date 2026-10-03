@@ -41,7 +41,7 @@ export interface RevealProps extends ComponentProps<"div">, Omit<VariantProps<ty
 /** Reveals its children when scrolled into view. Respects reduced motion. */
 export function Reveal({ className, effect, delay = 0, style, ...props }: RevealProps) {
   const { ref, seen } = useInView<HTMLDivElement>();
-  return <div ref={ref} className={cn(revealVariants({ effect, state: seen ? "shown" : "hidden" }), className)} style={{ transitionDelay: `${delay}ms`, ...style }} {...props} />;
+  return <div ref={ref} data-seen={seen ? "1" : "0"} className={cn(revealVariants({ effect, state: seen ? "shown" : "hidden" }), className)} style={{ transitionDelay: `${delay}ms`, ...style }} {...props} />;
 }
 
 export interface CountUpProps extends ComponentProps<"span"> {
