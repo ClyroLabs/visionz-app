@@ -26,3 +26,4 @@ export {
   type StatProps, type SectionHeadingProps, type PricingCardProps, type TimelineProps, type TimelineItem, type ModerationItemProps,
 } from "./vizionz/components/marketing";
 export { Reveal, revealVariants, CountUp, type RevealProps, type CountUpProps } from "./vizionz/components/motion";
+export { ScrollSnapRow, scrollSnapRowVariants, type ScrollSnapRowProps } from "./vizionz/components/scroll-snap-row";
