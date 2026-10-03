@@ -9,6 +9,7 @@ import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { agents, catalog, roadmap } from "@/experience/data";
 import { filterCatalog } from "@/experience/logic";
 import heroCover from "@/assets/covers/jukebox-live.jpg";
+import heroVideo from "@/assets/videos/visionz-hero-bg.mp4.asset.json";
 
 export const Route = createFileRoute("/site/")({
   head: () => ({
@@ -34,8 +35,9 @@ function Landing() {
     <>
       {/* Hero */}
       <div className="relative overflow-hidden">
-        <img src={heroCover} alt="" width={1280} height={720} className="absolute inset-0 size-full object-cover opacity-10" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/85 to-background" />
+        <video src={heroVideo.url} poster={heroCover} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" className="absolute inset-0 size-full object-cover opacity-0 animate-[vz-fade_2.4s_ease-out_0.3s_forwards] [--tw-final:0.35] motion-reduce:hidden" style={{ filter: "saturate(1.1)" }} />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/70 to-background" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--background)_0%,transparent_70%)] opacity-60" />
         <div className="absolute inset-0 bg-stage-glow animate-breathe" />
         <div className="absolute inset-0 bg-light-streaks animate-drift" />
         <div className="absolute inset-x-0 bottom-0 h-64 floor-reflection" />
@@ -61,7 +63,7 @@ function Landing() {
               <span className="text-metallic">O entretenimento</span> <span className="text-gradient-brand">nunca mais</span> <span className="text-metallic">será o mesmo.</span>
             </h1>
             <Eyebrow tone="foreground" className="animate-rise relative mt-8 [animation-delay:450ms]" items={["Assista", "Crie", "Ganhe"]} />
-            <p className="animate-rise relative mx-auto mt-6 max-w-2xl [animation-delay:550ms] text-lg text-muted-foreground">
+            <p className="animate-rise relative mx-auto mt-6 max-w-2xl [animation-delay:550ms] text-lg font-medium leading-relaxed text-foreground/90 [text-shadow:0_2px_12px_var(--background)]">
               A VisionZ vai revolucionar o streaming no Brasil e no mundo. Assista sob demanda ou à la carte, crie com IA e participe de um ecossistema de recompensas que cresce com você.
             </p>
             <div className="animate-rise relative mt-10 flex flex-wrap justify-center gap-3 [animation-delay:700ms]">
