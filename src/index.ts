@@ -19,3 +19,7 @@ export {
   type LogoProps, type NetworkTagProps, type Network, type AgeRatingProps, type AgeRatingValue, type AIVerifiedBadgeProps,
   type KidsModeToggleProps, type ContentCardProps, type WalletBalanceProps, type EarningsCardProps, type PlayerBarProps,
 } from "./vizionz/components/platform";
+export {
+  Stat, statVariants, SectionHeading, sectionHeadingVariants, PricingCard, pricingCardVariants, Timeline, ModerationItem, moderationItemVariants,
+  type StatProps, type SectionHeadingProps, type PricingCardProps, type TimelineProps, type TimelineItem, type ModerationItemProps,
+} from "./vizionz/components/marketing";

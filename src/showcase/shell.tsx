@@ -22,7 +22,7 @@ export function Shell({ children }: { children: ReactNode }) {
           <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-3">
             <Link to="/" className="flex items-center gap-3">
               <Logo brand="clyro-icon" size="sm" alt="" />
-              <span className="font-display text-sm font-bold tracking-[0.2em]">VIZIONZ <span className="text-cyan">DS</span></span>
+              <span className="font-display text-sm font-bold tracking-[0.2em]">VISIONZ <span className="text-cyan">DS</span></span>
             </Link>
             <nav className="hidden flex-1 gap-1 md:flex" aria-label="Seções">
               {nav.map((n) => (
@@ -42,7 +42,7 @@ export function Shell({ children }: { children: ReactNode }) {
           </nav>
         </header>
         <main className="mx-auto max-w-7xl px-6 py-12">{children}</main>
-        <footer className="border-t py-8 text-center text-xs text-muted-foreground">VizionZ Entertainment · powered by Clyro Labs</footer>
+        <footer className="border-t py-8 text-center text-xs text-muted-foreground">VisionZ Entertainment · powered by Clyro Labs</footer>
       </div>
     </ToastProvider>
   );

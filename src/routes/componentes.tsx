@@ -11,10 +11,10 @@ import {
 export const Route = createFileRoute("/componentes")({
   head: () => ({
     meta: [
-      { title: "Componentes — VizionZ Design System" },
-      { name: "description", content: "Galeria interativa de todos os componentes da VizionZ, com variantes, estados e código." },
-      { property: "og:title", content: "Componentes — VizionZ Design System" },
-      { property: "og:description", content: "Galeria interativa de todos os componentes da VizionZ, com variantes, estados e código." },
+      { title: "Componentes — VisionZ Design System" },
+      { name: "description", content: "Galeria interativa de todos os componentes da VisionZ, com variantes, estados e código." },
+      { property: "og:title", content: "Componentes — VisionZ Design System" },
+      { property: "og:description", content: "Galeria interativa de todos os componentes da VisionZ, com variantes, estados e código." },
     ],
   }),
   component: Components,
@@ -43,7 +43,7 @@ function Components() {
   const [q, setQ] = useState("");
   return (
     <Shell>
-      <PageHeader eyebrow="Biblioteca" title="Componentes">Tudo que a plataforma VizionZ precisa — do botão ao player e à carteira multichain.</PageHeader>
+      <PageHeader eyebrow="Biblioteca" title="Componentes">Tudo que a plataforma VisionZ precisa — do botão ao player e à carteira multichain.</PageHeader>
       <div className="grid gap-10 lg:grid-cols-[14rem_1fr]">
         <aside className="lg:sticky lg:top-24 lg:h-[calc(100vh-8rem)] lg:overflow-y-auto">
           <Input size="sm" placeholder="Buscar componente…" aria-label="Buscar componente" value={q} onChange={(e) => setQ(e.target.value)} />
@@ -227,7 +227,7 @@ function Gallery() {
 
       <Section id="exemplo-login" title="Exemplo: Login" code={`<Card variant="glass">…<Input/><Button/>…</Card>`}>
         <Card variant="glass" padding="lg" className="max-w-sm space-y-4">
-          <div><CardTitle className="text-xl">Entrar na VizionZ</CardTitle><CardDescription>Assista, crie e ganhe.</CardDescription></div>
+          <div><CardTitle className="text-xl">Entrar na VisionZ</CardTitle><CardDescription>Assista, crie e ganhe.</CardDescription></div>
           <div className="space-y-1.5"><Label htmlFor="em">E-mail</Label><Input id="em" type="email" placeholder="voce@exemplo.com" /></div>
           <div className="space-y-1.5"><Label htmlFor="pw">Senha</Label><Input id="pw" type="password" placeholder="••••••••" /></div>
           <Button className="w-full">Entrar</Button>
