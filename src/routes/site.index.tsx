@@ -59,7 +59,7 @@ function Landing() {
               <Badge variant="cyan"><Bot />IA Clyro nativa</Badge><Badge variant="neutral" className="hidden sm:inline-flex">4K / 8K sem lag</Badge>
               <Badge variant="neutral" className="hidden sm:inline-flex">Multichain</Badge><AIVerifiedBadge>Seguro para crianças</AIVerifiedBadge>
             </div>
-            <h1 className="animate-rise relative [animation-delay:300ms] text-balance font-display text-[2.1rem] font-extrabold leading-[1.08] tracking-wide sm:text-5xl md:text-7xl">
+            <h1 className="animate-rise relative [animation-delay:300ms] text-balance font-display text-[1.8rem] font-extrabold leading-[1.08] tracking-wide sm:text-5xl md:text-7xl">
               <span className="text-metallic">O entretenimento</span> <span className="text-gradient-brand">nunca mais</span> <span className="text-metallic">será o mesmo.</span>
             </h1>
             <Eyebrow tone="foreground" className="animate-rise relative mt-8 [animation-delay:450ms]" items={["Assista", "Crie", "Ganhe"]} />
