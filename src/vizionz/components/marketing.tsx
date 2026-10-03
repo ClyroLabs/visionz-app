@@ -167,7 +167,7 @@ export function Eyebrow({ className, tone, underline, items, children, ...props 
 }
 
 /* ---------------- OrbitRing ---------------- */
-export const orbitRingVariants = cva("pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] border-2 border-transparent", {
+export const orbitRingVariants = cva("pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] p-[2px] bg-gradient-brand", {
   variants: {
     size: { md: "h-40 w-[28rem]", lg: "h-56 w-[40rem]", xl: "h-72 w-[52rem]" },
   },
@@ -179,7 +179,7 @@ export function OrbitRing({ className, size, ...props }: OrbitRingProps) {
   return (
     <div
       aria-hidden
-      className={cn(orbitRingVariants({ size }), "-rotate-12 [background:linear-gradient(transparent,transparent)_padding-box,var(--gradient-brand)_border-box] shadow-glow-hot [mask:radial-gradient(closest-side,transparent_96%,#000_97%)] opacity-80", className)}
+      className={cn(orbitRingVariants({ size }), "-rotate-12 opacity-80 [mask:linear-gradient(#000_0_0)_content-box_exclude,linear-gradient(#000_0_0)] drop-shadow-[0_0_12px_var(--magenta)]", className)}
       {...props}
     />
   );
