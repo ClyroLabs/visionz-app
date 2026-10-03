@@ -53,7 +53,7 @@ export function SectionHeading({ eyebrow, title, description, align, className, 
 /* ---------------- PricingCard ---------------- */
 export const pricingCardVariants = cva("flex flex-col gap-6 rounded-xl border p-7", {
   variants: {
-    variant: { default: "bg-surface shadow-panel", featured: "border-magenta/50 bg-surface-raised shadow-glow-brand" },
+    variant: { default: "bg-surface shadow-panel", featured: "border-gradient-brand shadow-glow-brand" },
   },
   defaultVariants: { variant: "default" },
 });
