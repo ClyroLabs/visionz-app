@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Music, Play, ShieldCheck, Sparkles, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
@@ -9,7 +9,7 @@ import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { agents, catalog, roadmap } from "@/experience/data";
 import { filterCatalog } from "@/experience/logic";
 import heroCover from "@/assets/covers/jukebox-live.jpg";
-import heroVideo from "@/assets/videos/visionz-hero-bg.mp4.asset.json";
+import heroVideo from "@/assets/videos/visionz-hero-bg-720.mp4.asset.json";
 
 export const Route = createFileRoute("/site/")({
   head: () => ({
@@ -35,11 +35,11 @@ function Landing() {
     <>
       {/* Hero */}
       <div className="relative overflow-hidden">
-        <video src={heroVideo.url} poster={heroCover} autoPlay muted loop playsInline preload="metadata" aria-hidden="true" className="absolute inset-0 size-full object-cover opacity-0 animate-[vz-fade_2.4s_ease-out_0.3s_forwards] [--tw-final:0.35] motion-reduce:hidden" style={{ filter: "saturate(1.1)" }} />
+        <HeroVideo src={heroVideo.url} poster={heroCover} />
         <div className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/70 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--background)_0%,transparent_70%)] opacity-60" />
-        <div className="absolute inset-0 bg-stage-glow animate-breathe" />
-        <div className="absolute inset-0 bg-light-streaks animate-drift" />
+        <div className="absolute inset-0 bg-stage-glow" />
+        <div className="absolute inset-0 bg-light-streaks" />
         <div className="absolute inset-x-0 bottom-0 h-64 floor-reflection" />
         <Section className="relative pb-24 pt-16 md:pt-20">
           <div className="animate-rise flex flex-col justify-between gap-6 md:flex-row">
@@ -233,5 +233,24 @@ function Landing() {
 
       <LeadDialog open={lead !== null} onOpenChange={(o) => !o && setLead(null)} kind={lead ?? "espera"} />
     </>
+  );
+}
+
+/** Background video: lightweight, paused when off-screen or tab hidden. */
+function HeroVideo({ src, poster }: { src: string; poster: string }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const v = ref.current;
+    if (!v) return;
+    let visible = true;
+    const sync = () => (visible && !document.hidden ? v.play().catch(() => {}) : v.pause());
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; sync(); });
+    io.observe(v);
+    document.addEventListener("visibilitychange", sync);
+    return () => { io.disconnect(); document.removeEventListener("visibilitychange", sync); };
+  }, []);
+  return (
+    <video ref={ref} src={src} poster={poster} autoPlay muted loop playsInline preload="auto" aria-hidden="true"
+      className="pointer-events-none absolute inset-0 size-full transform-gpu object-cover opacity-0 animate-[vz-fade_1.6s_ease-out_0.2s_forwards] [--tw-final:0.35] motion-reduce:hidden" />
   );
 }
