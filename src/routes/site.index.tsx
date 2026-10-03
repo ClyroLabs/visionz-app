@@ -118,7 +118,7 @@ function Landing() {
 
       {/* Segurança */}
       <div className="border-y bg-surface/40">
-        <Section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
+        <Section className="grid items-center gap-10 [&>*]:min-w-0 lg:grid-cols-2 lg:gap-14">
           <div className="flex flex-col items-center space-y-6 text-center md:items-start md:space-y-8 md:text-left">
             <Reveal><SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." /></Reveal>
             <ol className="w-full space-y-3 md:space-y-4">
@@ -171,7 +171,7 @@ function Landing() {
       {/* Ecossistema */}
       <div className="relative overflow-hidden border-y bg-surface/40">
         <Glow className="right-0 top-0 size-96 bg-magenta/20" />
-        <Section className="relative grid items-center gap-10 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
+        <Section className="relative grid items-center gap-10 [&>*]:min-w-0 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
           <div className="space-y-6 md:space-y-8">
             <Reveal><SectionHeading eyebrow="Ecossistema de ganhos" title={<>Ganhos <span className="text-gradient-brand">ilimitados</span> para quem faz parte</>} description="Cada novo usuário, título e indicação gera valor que circula entre todos os participantes, em várias redes blockchain." /></Reveal>
             <ScrollSnapRow label="Quem ganha" item="narrow" className="md:grid-cols-2 md:gap-4">
