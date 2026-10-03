@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Music, Play, ShieldCheck, Sparkles, UserCheck, Users } from "lucide-react";
+import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Play, ShieldCheck, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
   SectionHeading, ScrollSnapRow, Stat, Timeline, WalletBalance, Reveal, Eyebrow, OrbitRing, TokenBadge, type Network,

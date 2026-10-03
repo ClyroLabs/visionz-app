@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Award, Music, Sparkles, Wand2 } from "lucide-react";
-import { Button, Card, CardDescription, CardTitle, EarningsCard, Progress, ScrollSnapRow, SectionHeading, Stat } from "@/index";
+import { Logo, Button, Card, CardDescription, CardTitle, EarningsCard, Progress, ScrollSnapRow, SectionHeading, Stat } from "@/index";
 import { LeadDialog, Section } from "@/experience/site-parts";
 import trio from "@/assets/covers/trio-alegria.jpg";
 
