@@ -20,6 +20,7 @@
   --gold: #ffc21a;
   --primary-foreground: #ffffff;
   --magenta: #e8318a;
+  --neon-pink: #ff2bd6;
   --ember: #ff7a1a;
   --cyan: #16d9d5;
   --cyan-deep: #22b0c5;
@@ -73,6 +74,8 @@
   --color-gold: var(--gold);
   --color-primary-foreground: var(--primary-foreground);
   --color-magenta: var(--magenta);
+  --color-neon-pink: var(--neon-pink);
+  --shadow-glow-pink: 0 0 0 1px color-mix(in oklab, var(--neon-pink) 60%, transparent), 0 0 24px color-mix(in oklab, var(--neon-pink) 55%, transparent);
   --color-ember: var(--ember);
   --color-cyan: var(--cyan);
   --color-cyan-deep: var(--cyan-deep);
