@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AberturaRouteImport } from './routes/abertura'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ComponentesRouteImport } from './routes/componentes'
 import { Route as CoresRouteImport } from './routes/cores'
@@ -34,6 +35,11 @@ import { Route as Char91__mockupChar93PreviewSplatRouteImport } from './routes/[
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AberturaRoute = AberturaRouteImport.update({
+  id: '/abertura',
+  path: '/abertura',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppRoute = AppRouteImport.update({
@@ -141,6 +147,7 @@ const Char91__mockupChar93PreviewSplatRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/abertura': typeof AberturaRoute
   '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
@@ -164,6 +171,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/abertura': typeof AberturaRoute
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
@@ -186,6 +194,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/abertura': typeof AberturaRoute
   '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
@@ -211,6 +220,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/abertura'
     | '/app'
     | '/componentes'
     | '/cores'
@@ -234,6 +244,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/abertura'
     | '/componentes'
     | '/cores'
     | '/icones'
@@ -255,6 +266,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/abertura'
     | '/app'
     | '/componentes'
     | '/cores'
@@ -279,6 +291,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AberturaRoute: typeof AberturaRoute
   AppRoute: typeof AppRouteWithChildren
   ComponentesRoute: typeof ComponentesRoute
   CoresRoute: typeof CoresRoute
@@ -297,6 +310,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/abertura': {
+      id: '/abertura'
+      path: '/abertura'
+      fullPath: '/abertura'
+      preLoaderRoute: typeof AberturaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app': {
@@ -482,6 +502,7 @@ const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AberturaRoute: AberturaRoute,
   AppRoute: AppRouteWithChildren,
   ComponentesRoute: ComponentesRoute,
   CoresRoute: CoresRoute,
