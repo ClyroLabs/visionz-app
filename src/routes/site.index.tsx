@@ -178,7 +178,7 @@ function Landing() {
                 { icon: Megaphone, t: "Embaixadores", d: "Participação direta no crescimento que trazem para a rede." },
                 { icon: Gem, t: "Parceiros", d: "Valorização cruzada no ecossistema Clyro Labs." },
               ].map(({ icon: Icon, t, d }) => (
-                <div key={t} className="flex gap-3"><Icon className="mt-0.5 size-5 shrink-0 text-magenta" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></div>
+                <div key={t} className="flex flex-col items-center gap-2 rounded-xl border border-border/60 bg-card/40 p-4 text-center"><Icon className="size-6 shrink-0 text-magenta" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></div>
               ))}
             </div>
             <p className="text-xs text-muted-foreground">Recompensas dependem da atividade no ecossistema e não representam retorno garantido.</p>
