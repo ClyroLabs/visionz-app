@@ -109,7 +109,7 @@ function Landing() {
             { icon: Coins, n: "03", t: "Ganhe", d: "Receba pela sua obra e por trazer pessoas ao ecossistema, direto na sua carteira interna." },
           ].map(({ icon: Icon, n, t, d }) => (
             <Reveal key={t}><Card variant="glass" padding="lg" className="h-full space-y-4">
-              <div className="flex items-center justify-between gap-4"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="font-display text-3xl font-bold text-muted">{n}</span></div>
+              <div className="relative flex items-center justify-center lg:justify-between"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="absolute right-0 top-0 font-display text-2xl font-bold text-muted lg:static lg:text-3xl">{n}</span></div>
               <CardTitle className="text-xl">{t}</CardTitle><CardDescription className="text-base">{d}</CardDescription>
             </Card></Reveal>
           ))}
