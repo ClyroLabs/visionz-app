@@ -10,8 +10,8 @@ export const buttonVariants = cva(
       variant: {
         primary: "shine bg-gradient-brand text-primary-foreground shadow-glow-brand hover:shadow-glow-hot hover:brightness-110 active:brightness-95",
         neon: "border border-cyan/60 bg-cyan/10 text-cyan hover:bg-cyan/20 hover:shadow-glow-cyan active:bg-cyan/25",
-        secondary: "border border-border bg-surface-raised text-foreground hover:bg-muted",
-        ghost: "text-foreground hover:bg-muted",
+        secondary: "border border-border bg-surface-raised text-foreground hover:bg-magenta/10 hover:text-magenta",
+        ghost: "text-foreground hover:bg-magenta/10 hover:text-magenta",
         destructive: "bg-destructive text-destructive-foreground hover:brightness-110",
       },
       size: {
