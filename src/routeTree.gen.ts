@@ -10,12 +10,36 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CoresRouteImport } from './routes/cores'
+import { Route as IconesRouteImport } from './routes/icones'
+import { Route as MarcaRouteImport } from './routes/marca'
+import { Route as TipografiaRouteImport } from './routes/tipografia'
 import { Route as Char91__componentChar93PreviewSplatRouteImport } from './routes/[__component].preview.$'
 import { Route as Char91__mockupChar93PreviewSplatRouteImport } from './routes/[__mockup].preview.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CoresRoute = CoresRouteImport.update({
+  id: '/cores',
+  path: '/cores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IconesRoute = IconesRouteImport.update({
+  id: '/icones',
+  path: '/icones',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MarcaRoute = MarcaRouteImport.update({
+  id: '/marca',
+  path: '/marca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TipografiaRoute = TipografiaRouteImport.update({
+  id: '/tipografia',
+  path: '/tipografia',
   getParentRoute: () => rootRouteImport,
 } as any)
 const Char91__componentChar93PreviewSplatRoute =
@@ -33,30 +57,68 @@ const Char91__mockupChar93PreviewSplatRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cores': typeof CoresRoute
+  '/icones': typeof IconesRoute
+  '/marca': typeof MarcaRoute
+  '/tipografia': typeof TipografiaRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cores': typeof CoresRoute
+  '/icones': typeof IconesRoute
+  '/marca': typeof MarcaRoute
+  '/tipografia': typeof TipografiaRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cores': typeof CoresRoute
+  '/icones': typeof IconesRoute
+  '/marca': typeof MarcaRoute
+  '/tipografia': typeof TipografiaRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/__component/preview/$' | '/__mockup/preview/$'
+  fullPaths:
+    | '/'
+    | '/cores'
+    | '/icones'
+    | '/marca'
+    | '/tipografia'
+    | '/__component/preview/$'
+    | '/__mockup/preview/$'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/__component/preview/$' | '/__mockup/preview/$'
-  id: '__root__' | '/' | '/__component/preview/$' | '/__mockup/preview/$'
+  to:
+    | '/'
+    | '/cores'
+    | '/icones'
+    | '/marca'
+    | '/tipografia'
+    | '/__component/preview/$'
+    | '/__mockup/preview/$'
+  id:
+    | '__root__'
+    | '/'
+    | '/cores'
+    | '/icones'
+    | '/marca'
+    | '/tipografia'
+    | '/__component/preview/$'
+    | '/__mockup/preview/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CoresRoute: typeof CoresRoute
+  IconesRoute: typeof IconesRoute
+  MarcaRoute: typeof MarcaRoute
+  TipografiaRoute: typeof TipografiaRoute
   Char91__componentChar93PreviewSplatRoute: typeof Char91__componentChar93PreviewSplatRoute
   Char91__mockupChar93PreviewSplatRoute: typeof Char91__mockupChar93PreviewSplatRoute
 }
@@ -68,6 +130,34 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cores': {
+      id: '/cores'
+      path: '/cores'
+      fullPath: '/cores'
+      preLoaderRoute: typeof CoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/icones': {
+      id: '/icones'
+      path: '/icones'
+      fullPath: '/icones'
+      preLoaderRoute: typeof IconesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/marca': {
+      id: '/marca'
+      path: '/marca'
+      fullPath: '/marca'
+      preLoaderRoute: typeof MarcaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tipografia': {
+      id: '/tipografia'
+      path: '/tipografia'
+      fullPath: '/tipografia'
+      preLoaderRoute: typeof TipografiaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/__component/preview/$': {
@@ -89,6 +179,10 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CoresRoute: CoresRoute,
+  IconesRoute: IconesRoute,
+  MarcaRoute: MarcaRoute,
+  TipografiaRoute: TipografiaRoute,
   Char91__componentChar93PreviewSplatRoute:
     Char91__componentChar93PreviewSplatRoute,
   Char91__mockupChar93PreviewSplatRoute: Char91__mockupChar93PreviewSplatRoute,
