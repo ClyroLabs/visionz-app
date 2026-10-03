@@ -31,8 +31,3 @@ Compose existing components (see `components.md`) before writing new ones. Varia
 
 ## Accessibility
 Semantic elements (`button`, `a`, `label`), visible focus (`focus-visible:ring-ring`), `aria-label` on icon-only buttons, AA contrast — use the foreground token paired with its background.
-
-## Responsive
-- Mobile-first. Below 1024px, card, stat and heading content is centered — wrap the page in `responsive-center`; desktop keeps start alignment.
-- Navigation below 1024px uses `<MobileNav>` (full-screen panel that fits one screen; `layout="grid"` for icon tiles). Never a horizontally scrolling link row.
-- Display type scales with `clamp()`; never let a page scroll sideways (`overflow-x-clip` on the page root, `min-w-0` on grid items).

@@ -26,4 +26,3 @@ export {
   type StatProps, type SectionHeadingProps, type PricingCardProps, type TimelineProps, type TimelineItem, type ModerationItemProps,
 } from "./vizionz/components/marketing";
 export { Reveal, revealVariants, CountUp, type RevealProps, type CountUpProps } from "./vizionz/components/motion";
-export { MobileNav, mobileNavPanelVariants, type MobileNavProps } from "./vizionz/components/navigation";

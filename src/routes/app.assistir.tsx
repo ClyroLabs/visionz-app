@@ -66,7 +66,7 @@ function Watch() {
         </div>
         <div className="space-y-3">
           <div className="flex flex-wrap items-center gap-2"><AgeRating rating={t.rating} /><AIVerifiedBadge /><Badge variant="cyan">4K HDR</Badge></div>
-          <h1 className="font-display text-[clamp(1.375rem,4.5vw,1.875rem)] font-bold tracking-wide">{t.title}</h1>
+          <h1 className="font-display text-3xl font-bold tracking-wide">{t.title}</h1>
           <div className="flex items-center gap-3"><Avatar name={t.creator} size="sm" ring="brand" /><span className="text-sm text-muted-foreground">{t.creator} · {t.duration}</span></div>
         </div>
       </div>

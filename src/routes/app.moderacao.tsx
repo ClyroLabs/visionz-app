@@ -20,7 +20,7 @@ function Moderation() {
   const toast = useToast();
   return (
     <div className="space-y-8">
-      <h1 className="font-display text-[clamp(1.375rem,4.5vw,1.875rem)] font-bold tracking-wide">Central de moderação</h1>
+      <h1 className="font-display text-3xl font-bold tracking-wide">Central de moderação</h1>
       <div className="grid gap-4 sm:grid-cols-3">
         <Card><Stat value={String(flags.length)} label="itens aguardando revisão" tone="default" size="md" /></Card>
         <Card><Stat value="98,7%" label="decididos sozinhos pela IA" tone="cyan" size="md" /></Card>

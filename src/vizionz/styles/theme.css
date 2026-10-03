@@ -20,7 +20,6 @@
   --gold: #ffc21a;
   --primary-foreground: #ffffff;
   --magenta: #e8318a;
-  --neon-pink: #ff2bd6;
   --ember: #ff7a1a;
   --cyan: #16d9d5;
   --cyan-deep: #22b0c5;
@@ -74,8 +73,6 @@
   --color-gold: var(--gold);
   --color-primary-foreground: var(--primary-foreground);
   --color-magenta: var(--magenta);
-  --color-neon-pink: var(--neon-pink);
-  --shadow-glow-pink: 0 0 0 1px color-mix(in oklab, var(--neon-pink) 60%, transparent), 0 0 24px color-mix(in oklab, var(--neon-pink) 55%, transparent);
   --color-ember: var(--ember);
   --color-cyan: var(--cyan);
   --color-cyan-deep: var(--cyan-deep);
@@ -127,23 +124,12 @@
   background-clip: text;
   color: transparent;
 }
-/* Centers card, stat and heading content on phones and tablets (below 1024px). */
-@utility responsive-center {
-  @media (max-width: 1023px) {
-    & :where(.vz-card, .vz-stat, .vz-heading) { text-align: center; }
-    & :where(.vz-heading) { margin-inline: auto; }
-    & :where(.vz-card) :where(.flex:not(.flex-col)) { justify-content: center; }
-    & :where(.vz-card) :where(.flex-col) { align-items: center; }
-    & :where(.vz-card) :where(ul) { display: inline-flex; flex-direction: column; text-align: left; }
-  }
-}
-
 @utility label-eyebrow {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: clamp(0.14em, 0.9vw, 0.35em);
+  letter-spacing: 0.35em;
 }
 @utility underline-brand {
   position: relative;

@@ -41,39 +41,39 @@ function Landing() {
         <div className="absolute inset-0 bg-stage-glow" />
         <div className="absolute inset-0 bg-light-streaks" />
         <div className="absolute inset-x-0 bottom-0 h-64 floor-reflection" />
-        <Section className="relative pb-16 pt-10 sm:pb-20 sm:pt-14 lg:pb-24 lg:pt-20">
-          <div className="animate-rise flex flex-col items-center justify-between gap-5 text-center md:flex-row md:items-start md:text-left">
+        <Section className="relative pb-24 pt-16 md:pt-20">
+          <div className="animate-rise flex flex-col justify-between gap-6 md:flex-row">
             <div>
-              <p className="font-display text-sm italic tracking-[0.18em] sm:text-lg md:text-2xl md:tracking-[0.25em]">MAIS QUE TECNOLOGIA,</p>
-              <p className="underline-brand font-display text-sm font-bold italic tracking-[0.18em] sm:text-lg md:text-2xl md:tracking-[0.25em] [&::after]:max-md:mx-auto">É <span className="text-gradient-brand">VISÃO DE FUTURO.</span></p>
+              <p className="font-display text-lg italic tracking-[0.25em] md:text-2xl">MAIS QUE TECNOLOGIA,</p>
+              <p className="underline-brand font-display text-lg font-bold italic tracking-[0.25em] md:text-2xl">É <span className="text-gradient-brand">VISÃO DE FUTURO.</span></p>
             </div>
             <div className="md:text-right">
               <Eyebrow tone="foreground" items={["Inovação", "Streaming", "Recompensas"]} />
-              <Eyebrow className="mt-2 text-[0.6rem] sm:text-[0.65rem]">Construindo um mundo mais conectado.</Eyebrow>
+              <Eyebrow className="mt-2 text-[0.65rem]">Construindo um mundo mais conectado.</Eyebrow>
             </div>
           </div>
 
-          <div className="relative mx-auto mt-12 max-w-5xl text-center sm:mt-16 lg:mt-20">
-            <OrbitRing size="xl" className="hidden lg:block" />
+          <div className="relative mx-auto mt-20 max-w-5xl text-center">
+            <OrbitRing size="xl" className="hidden md:block" />
             <div className="animate-rise relative mb-6 flex flex-wrap justify-center gap-2 [animation-delay:150ms]">
               <Badge variant="cyan"><Bot />IA Clyro nativa</Badge><Badge variant="neutral">4K / 8K sem lag</Badge>
               <Badge variant="neutral">Multichain</Badge><AIVerifiedBadge>Seguro para crianças</AIVerifiedBadge>
             </div>
-            <h1 className="animate-rise relative [animation-delay:300ms] text-balance font-display text-[clamp(1.75rem,6.6vw,4.5rem)] font-extrabold leading-[1.08] tracking-wide">
+            <h1 className="animate-rise relative [animation-delay:300ms] font-display text-5xl font-extrabold leading-[1.05] tracking-wide md:text-7xl">
               <span className="text-metallic">O entretenimento</span> <span className="text-gradient-brand">nunca mais</span> <span className="text-metallic">será o mesmo.</span>
             </h1>
             <Eyebrow tone="foreground" className="animate-rise relative mt-8 [animation-delay:450ms]" items={["Assista", "Crie", "Ganhe"]} />
-            <p className="animate-rise relative mx-auto mt-5 max-w-2xl [animation-delay:550ms] text-[0.95rem] font-medium sm:mt-6 sm:text-base lg:text-lg leading-relaxed text-foreground/90 [text-shadow:0_2px_12px_var(--background)]">
+            <p className="animate-rise relative mx-auto mt-6 max-w-2xl [animation-delay:550ms] text-lg font-medium leading-relaxed text-foreground/90 [text-shadow:0_2px_12px_var(--background)]">
               A VisionZ vai revolucionar o streaming no Brasil e no mundo. Assista sob demanda ou à la carte, crie com IA e participe de um ecossistema de recompensas que cresce com você.
             </p>
-            <div className="animate-rise relative mx-auto mt-8 flex max-w-xs flex-col justify-center gap-3 [animation-delay:700ms] sm:mt-10 sm:max-w-none sm:flex-row sm:flex-wrap [&>*]:w-full sm:[&>*]:w-auto">
+            <div className="animate-rise relative mt-10 flex flex-wrap justify-center gap-3 [animation-delay:700ms]">
               <Button size="lg" onClick={() => setLead("espera")}>Entrar na lista de espera</Button>
               <Button size="lg" variant="neon" onClick={() => setLead("investidor")}>Sou investidor</Button>
-              <Link to="/app"><Button size="lg" variant="ghost" className="w-full"><Play />Ver o protótipo</Button></Link>
+              <Link to="/app"><Button size="lg" variant="ghost"><Play />Ver o protótipo</Button></Link>
             </div>
           </div>
 
-          <div className="relative mx-auto mt-12 grid max-w-5xl grid-cols-2 gap-x-4 gap-y-8 sm:mt-16 sm:grid-cols-5 lg:mt-20 lg:divide-x lg:divide-border [&>*:last-child]:col-span-2 sm:[&>*:last-child]:col-span-1">
+          <div className="relative mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-y-8 md:grid-cols-5 md:divide-x md:divide-border">
             {[
               { icon: Clapperboard, t: "Criação audiovisual", c: "text-primary" },
               { icon: Play, t: "Streaming 4K/8K", c: "text-indigo" },
@@ -81,16 +81,16 @@ function Landing() {
               { icon: ShieldCheck, t: "Seguro para crianças", c: "text-ember" },
               { icon: Coins, t: "Recompensas multichain", c: "text-gold" },
             ].map(({ icon: Icon, t, c }) => (
-              <Reveal key={t} className="flex min-w-0 flex-col items-center gap-2 px-1 text-center sm:gap-3 sm:px-2 lg:px-4">
-                <Icon className={`size-7 sm:size-8 lg:size-9 ${c}`} strokeWidth={1.5} />
-                <span className="label-eyebrow text-[0.58rem] leading-relaxed tracking-[0.12em] text-foreground sm:text-[0.6rem] lg:text-[0.65rem] lg:tracking-[0.2em]">{t}</span>
+              <Reveal key={t} className="flex flex-col items-center gap-3 px-4 text-center">
+                <Icon className={`size-9 ${c}`} strokeWidth={1.5} />
+                <span className="label-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
               </Reveal>
             ))}
           </div>
 
-          <Reveal effect="zoom" className="relative mt-10 flex justify-center sm:mt-14 lg:mt-16"><TokenBadge size="lg" /></Reveal>
+          <Reveal effect="zoom" className="relative mt-16 flex justify-center"><TokenBadge size="lg" /></Reveal>
 
-          <div className="relative mt-12 grid grid-cols-2 gap-6 sm:mt-16 sm:gap-8 lg:mt-20 lg:grid-cols-4">
+          <div className="relative mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
             <Stat value="0%" label="exposição infantil a conteúdo impróprio — nossa meta" />
             <Stat value="40%" tone="cyan" label="menos custo de banda com a tecnologia Clyro" />
             <Stat value="4K/8K" tone="default" label="streaming de alta performance" />
@@ -102,14 +102,14 @@ function Landing() {
       {/* Como funciona */}
       <Section>
         <Reveal><SectionHeading align="center" eyebrow="Como funciona" title="Assista. Crie. Ganhe." description="Um único ecossistema em que todo mundo participa do valor gerado." /></Reveal>
-        <div className="mt-8 grid gap-4 sm:mt-10 sm:grid-cols-2 sm:gap-6 lg:mt-14 lg:grid-cols-3 [&>*:last-child]:sm:col-span-2 lg:[&>*:last-child]:col-span-1">
+        <div className="mt-14 grid gap-6 md:grid-cols-3">
           {[
             { icon: Eye, n: "01", t: "Assista", d: "Assine o catálogo ou compre só o título que quiser. Cada hora assistida gera recompensas." },
             { icon: Clapperboard, n: "02", t: "Crie", d: "Produza séries, filmes, curtas, documentários e músicas com o Clyro Synth e o Clyro Jukebox." },
             { icon: Coins, n: "03", t: "Ganhe", d: "Receba pela sua obra e por trazer pessoas ao ecossistema, direto na sua carteira interna." },
           ].map(({ icon: Icon, n, t, d }) => (
             <Reveal key={t}><Card variant="glass" padding="lg" className="h-full space-y-4">
-              <div className="relative flex items-center justify-center lg:justify-between"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="absolute right-0 top-0 font-display text-2xl font-bold text-muted lg:static lg:text-3xl">{n}</span></div>
+              <div className="flex items-center justify-between"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="font-display text-3xl font-bold text-muted">{n}</span></div>
               <CardTitle className="text-xl">{t}</CardTitle><CardDescription className="text-base">{d}</CardDescription>
             </Card></Reveal>
           ))}
@@ -118,16 +118,16 @@ function Landing() {
 
       {/* Segurança */}
       <div className="border-y bg-surface/40">
-        <Section className="grid items-center gap-10 lg:grid-cols-2 lg:gap-14">
-          <div className="space-y-8 max-lg:text-center">
+        <Section className="grid items-center gap-14 lg:grid-cols-2">
+          <div className="space-y-8">
             <Reveal><SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." /></Reveal>
-            <ol className="space-y-5 sm:space-y-4">
+            <ol className="space-y-4">
               {[
                 { icon: Eye, t: "Análise visual", d: "Padrões e gestos impróprios identificados quadro a quadro." },
                 { icon: AudioLines, t: "Auditoria sonora", d: "Transcrição e detecção de tom agressivo em vários idiomas." },
                 { icon: UserCheck, t: "Revisão humana", d: "Casos difíceis vão a especialistas, e cada decisão retreina a IA." },
               ].map(({ icon: Icon, t, d }, i) => (
-                <li key={t} className="flex flex-col items-center gap-3 text-center sm:flex-row sm:items-start sm:gap-4 sm:text-left">
+                <li key={t} className="flex gap-4">
                   <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-cyan/40 bg-cyan/10 text-cyan"><Icon className="size-5" /><span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-cyan font-mono text-[10px] text-cyan-foreground">{i + 1}</span></span>
                   <div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div>
                 </li>
@@ -178,7 +178,7 @@ function Landing() {
                 { icon: Megaphone, t: "Embaixadores", d: "Participação direta no crescimento que trazem para a rede." },
                 { icon: Gem, t: "Parceiros", d: "Valorização cruzada no ecossistema Clyro Labs." },
               ].map(({ icon: Icon, t, d }) => (
-                <div key={t} className="flex flex-col items-center gap-2 rounded-xl border border-border/60 bg-card/40 p-4 text-center"><Icon className="size-6 shrink-0 text-magenta" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></div>
+                <div key={t} className="flex gap-3"><Icon className="mt-0.5 size-5 shrink-0 text-magenta" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></div>
               ))}
             </div>
             <p className="text-xs text-muted-foreground">Recompensas dependem da atividade no ecossistema e não representam retorno garantido.</p>
@@ -221,7 +221,7 @@ function Landing() {
           <div className="absolute inset-0 bg-circuit-grid opacity-30" />
           <div className="relative max-w-2xl space-y-6 text-primary-foreground">
             <p className="font-mono text-xs uppercase tracking-[0.25em]">Programa VisionZ Ambassadors</p>
-            <h2 className="text-balance font-display text-[clamp(1.375rem,4.6vw,3rem)] font-bold tracking-wide">Lance sua carreira com a gente.</h2>
+            <h2 className="font-display text-3xl font-bold tracking-wide md:text-5xl">Lance sua carreira com a gente.</h2>
             <p className="text-lg opacity-90">Crie com o Synth e o Jukebox, leve seu público para a VisionZ e participe diretamente do crescimento da plataforma.</p>
             <div className="flex flex-wrap gap-3">
               <Button size="lg" variant="secondary" onClick={() => setLead("espera")}>Quero ser embaixador</Button>
