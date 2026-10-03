@@ -60,8 +60,8 @@ function Studio() {
           <Button disabled={!title.trim() || step === "upload" || step === "ai"} onClick={() => { setP(0); setStep("upload"); }}><Upload />Enviar vídeo</Button>
         </Card>
         <div className="space-y-4">
-          <Card variant="glass" className="space-y-2"><Logo brand="clyro-synth" alt="" className="h-12 w-auto" /><CardTitle>Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Synth em breve no protótipo" })}>Abrir Synth</Button></Card>
-          <Card variant="glass" className="space-y-2"><Logo brand="clyro-jukebox" alt="" className="h-12 w-auto" /><CardTitle>Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Jukebox em breve no protótipo" })}>Abrir Jukebox</Button></Card>
+          <Card variant="glass" className="space-y-2 border-cyan/30 bg-gradient-to-br from-cyan/10 to-magenta/10"><Logo brand="clyro-synth" alt="" className="h-16 w-auto drop-shadow-[0_0_12px_var(--cyan)]" /><CardTitle className="text-gradient-brand">Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Synth em breve no protótipo" })}>Abrir Synth</Button></Card>
+          <Card variant="glass" className="space-y-2 border-magenta/30 bg-gradient-to-br from-magenta/10 to-ember/10"><Logo brand="clyro-jukebox" alt="" className="h-16 w-auto drop-shadow-[0_0_12px_var(--magenta)]" /><CardTitle className="text-gradient-brand">Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Jukebox em breve no protótipo" })}>Abrir Jukebox</Button></Card>
         </div>
       </div>
     </div>

@@ -152,15 +152,15 @@ function Landing() {
       <Section>
         <Reveal><SectionHeading eyebrow="Redemocratização audiovisual" title="Um estúdio inteiro dentro da plataforma" description="Quem deu vida à criação tem o direito de explorá-la e distribuí-la. A VisionZ valida a autoria de quem usa IA para materializar ideias." /></Reveal>
         <ScrollSnapRow label="Estúdio Clyro" className="mt-10 md:mt-12 md:grid-cols-2 md:gap-6">
-          <Card padding="lg" className="flex flex-col items-center space-y-4 text-center md:items-start md:text-left">
-            <div className="flex flex-col items-center gap-3 md:flex-row"><Logo brand="clyro-synth" alt="" className="h-14 w-auto shrink-0 drop-shadow-[0_0_12px_var(--magenta)]" /><CardTitle className="text-xl">Clyro Synth</CardTitle></div>
-            <CardDescription className="text-base">Estúdio de mídia sintética para séries animadas, filmes, curtas e longas, e documentários, com custo de produção muito menor.</CardDescription>
+          <Card padding="lg" className="relative flex flex-col items-center space-y-4 overflow-hidden border-cyan/30 bg-gradient-to-br from-cyan/10 via-surface to-magenta/10 text-center shadow-glow-cyan transition-shadow hover:shadow-glow-brand md:items-start md:text-left">
+            <div className="flex flex-col items-center gap-4 md:flex-row"><Logo brand="clyro-synth" alt="" className="h-24 w-auto shrink-0 drop-shadow-[0_0_16px_var(--cyan)]" /><div><p className="label-eyebrow text-cyan">Mídia sintética</p><CardTitle className="font-display text-2xl tracking-wide text-gradient-brand">Clyro Synth</CardTitle></div></div>
+            <CardDescription className="text-base text-foreground/85">Estúdio de mídia sintética para séries animadas, filmes, curtas e longas, e documentários, com custo de produção muito menor.</CardDescription>
             <div className="flex flex-wrap justify-center gap-2 md:justify-start"><Badge variant="cyan">Em produção: Aventuras do Trio Alegria</Badge><Badge variant="cyan">Rebeca e sua turma</Badge></div>
           </Card>
-          <Card padding="lg" className="flex flex-col items-center space-y-4 text-center md:items-start md:text-left">
-            <div className="flex flex-col items-center gap-3 md:flex-row"><Logo brand="clyro-jukebox" alt="" className="h-14 w-auto shrink-0 drop-shadow-[0_0_12px_var(--cyan)]" /><CardTitle className="text-xl">Clyro Jukebox</CardTitle></div>
-            <CardDescription className="text-base">Trilhas e canções originais geradas com IA, sem entraves de direitos autorais complexos. A obra é sua.</CardDescription>
-            <div className="flex flex-wrap justify-center gap-2 md:justify-start"><Badge>Trilhas originais</Badge><Badge>Distribuição direta</Badge><Badge>Autoria validada</Badge></div>
+          <Card padding="lg" className="relative flex flex-col items-center space-y-4 overflow-hidden border-magenta/30 bg-gradient-to-br from-magenta/10 via-surface to-ember/10 text-center shadow-glow-brand transition-shadow hover:shadow-glow-hot md:items-start md:text-left">
+            <div className="flex flex-col items-center gap-4 md:flex-row"><Logo brand="clyro-jukebox" alt="" className="h-24 w-auto shrink-0 drop-shadow-[0_0_16px_var(--magenta)]" /><div><p className="label-eyebrow text-magenta">Música original</p><CardTitle className="font-display text-2xl tracking-wide text-gradient-brand">Clyro Jukebox</CardTitle></div></div>
+            <CardDescription className="text-base text-foreground/85">Trilhas e canções originais geradas com IA, sem entraves de direitos autorais complexos. A obra é sua.</CardDescription>
+            <div className="flex flex-wrap justify-center gap-2 md:justify-start"><Badge className="border-magenta/40 bg-magenta/10 text-magenta">Trilhas originais</Badge><Badge className="border-ember/40 bg-ember/10 text-ember">Distribuição direta</Badge><Badge className="border-gold/40 bg-gold/10 text-gold">Autoria validada</Badge></div>
           </Card>
         </ScrollSnapRow>
         <div className="-mx-5 mt-8 flex snap-x gap-4 px-5 [&>*]:snap-start sm:mx-0 sm:px-0 overflow-x-auto pb-2">
