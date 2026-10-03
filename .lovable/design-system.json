@@ -1,0 +1,1290 @@
+{
+  "meta": {
+    "name": "VizionZ Entertainment",
+    "package": "@ws-dsemu75buanfvmj07xd6/80f50366-df9f-44b1-8a4e-23a11b0357e9",
+    "version": "1.0.0",
+    "framework": "react",
+    "css_framework": "tailwind",
+    "starter_template": "custom_design_system",
+    "theme_files": [
+      "src/vizionz/styles/theme.css"
+    ],
+    "source_type": "local",
+    "source_manifest": {
+      "#enrichment": "5265a1471f88f29a7574f36f67919fcb0f8f4ca00183555638fe20b4adf2d714",
+      ".dsignore": "f74266630c99425541b8beb865033a4f",
+      ".gitignore": "6059213806e442947666752f3db6bfdc",
+      ".lovable/meta.yaml": "8ec7245def9c0ef39976dd2bc212ff0a",
+      ".lovable/plan.md": "7348e2429ae96464c4ccef6bd7e4d170",
+      ".lovable/plan/logo-sem-fundo-movimento-na-landing-e-abertura-com-vídeo-2026-10-03.md": "30ece6be8f13ebd1f453275f00269dbb",
+      ".lovable/plan/sistema-de-design-vizionz-futurista-blockchain-streaming-2026-10-03.md": "82619070e21f317351f0286dc0d7ea92",
+      ".lovable/plan/visionz-landing-page-e-protótipo-da-plataforma-2026-10-03.md": "767d3dfcbf9760aeb2f99637a2bbbab0",
+      ".lovable/plan/visionz-visual-mais-profissional-baseado-na-arte-visionz-8k-2026-10-03.md": "52844932eb97307bf1be6dc74c3fd456",
+      ".lovable/sources.yaml": "3b834b967d637856890d16fe9bd0a02a",
+      ".lovable/system.md": "3800c84e6e74d447b8789489a698be30",
+      "AGENTS.md": "d2868c531485bd8f009b55596b6e053a",
+      "README.md": "d19675c449605f23c7cfa133c69b398b",
+      "bunfig.toml": "25f4c8696b22b0943db7191e0cdf7942",
+      "eslint.config.js": "07a67437fb1a45ab36d6de0145ff09de",
+      "lovable.toml": "9636c1bf32f9901bfba4eabb92981217",
+      "mockupPreviewPlugin.ts": "70d01fe16b7ca25f16ff6bdb97f08b0b",
+      "package.json": "a81993421aa1957f46072cc2f097168d",
+      "public/favicon.svg": "29b1dd4985101084408ef023e96c68b4",
+      "src/assets/covers/codigo-zero.jpg": "c1461608a00b28971d6576188f3b1660",
+      "src/assets/covers/jukebox-live.jpg": "0103782da885be0656d7bd49f88abb4d",
+      "src/assets/covers/rios-de-neon.jpg": "00a183cfcc9142b7ddb91f3b44376788",
+      "src/assets/covers/trio-alegria.jpg": "57381ab9a231adee08c6bc6abe8b4afb",
+      "src/assets/logos/clyro-icon.svg": "29b1dd4985101084408ef023e96c68b4",
+      "src/assets/logos/clyro-labs-ai.svg": "e8d09064a759d404dbae955acdde5674",
+      "src/assets/logos/clyro-logo.svg": "b5475525b9328520b59c7525061af886",
+      "src/assets/logos/visionz-simbolo-fundo-escuro.png": "faea9b4532287b3a5a67fda211d5bd1d",
+      "src/assets/logos/visionz-symbol.png": "c0a9bd365fc462d98b8d8a10e751d8ab",
+      "src/assets/logos/vizionz-logo-transparent.png": "a8bf154488c3857a30aaa7d65a544e6a",
+      "src/assets/logos/vizionz-logo.svg": "a3c48bf2dc053a665da1c7e256f767b7",
+      "src/assets/videos/video_de_intro.mp4.asset.json": "03150b02e621f6e0e92ff385015d32d5",
+      "src/assets/videos/visionz-hero-bg-720.mp4.asset.json": "b71f5d58040060f4f54f7ef000b825e2",
+      "src/assets/videos/visionz-hero-bg.mp4.asset.json": "7abda445f78a332498a1d8b161ae9a3f",
+      "src/experience/catalog-row.tsx": "ec069f087eea544b944a6a676b02cd1d",
+      "src/experience/data.ts": "b94aa48a1e8bc4a7dd5cdfb69f52ef5b",
+      "src/experience/logic.test.ts": "9cb8371de4a02807b481895df8952361",
+      "src/experience/logic.ts": "3ce97bfa44680bce160b3a508b6feff4",
+      "src/experience/site-parts.tsx": "b526391d5d425863af70eda49b5b49c5",
+      "src/experience/store.tsx": "ac99eae5c32b0464ff0530b8c24c6aac",
+      "src/index.ts": "87910ba4ecd233d579d931bfc2dc1706",
+      "src/mockup-preview.d.ts": "ae9d81e2b8514e13fd59b5b6bece9a64",
+      "src/routeTree.gen.ts": "92006f8129a852c01a823dc0cb2f14c0",
+      "src/router.tsx": "8f905e713b0eba7fa8148b7995a708c9",
+      "src/routes/[__component].preview.$.tsx": "e4bf310e591541d31abf0cfeeb1121a4",
+      "src/routes/[__mockup].preview.$.tsx": "5d9f42470848aa60148f20f9580e240e",
+      "src/routes/__root.tsx": "c6f1d515a0b92fc5a358420dd55b2789",
+      "src/routes/abertura.tsx": "248228a26e212cf86324875c280d173c",
+      "src/routes/app.assistir.tsx": "3c32e5e9b6a2ed17be658074b4a3f31d",
+      "src/routes/app.carteira.tsx": "81b2137800c1797249f2fc0ea1ed3fb3",
+      "src/routes/app.ecossistema.tsx": "a8497d6ea9c92b9c019510e465576111",
+      "src/routes/app.estudio.tsx": "b54b3078d4d2308e0758e9563a36b9f3",
+      "src/routes/app.index.tsx": "336f19f4006bd6f08afb0dbad1d6d3dc",
+      "src/routes/app.moderacao.tsx": "54304a0f1024f7c0891ab15ee0eec9d3",
+      "src/routes/app.perfis.tsx": "eefbbd70179f01980abecc7b33384193",
+      "src/routes/app.tsx": "69083542520fafbd915422f1cdad259a",
+      "src/routes/componentes.tsx": "849c484365b55debaeaae9fd88d98a54",
+      "src/routes/cores.tsx": "6714250928c7afc1c0d77afed85b934e",
+      "src/routes/icones.tsx": "81b6f3e28e38629f1e14f51fcd8e60f8",
+      "src/routes/index.tsx": "8ac8fd8ff1ac36658fe228c33c878bee",
+      "src/routes/marca.tsx": "b6c9aa04c483ae76e35f9a93eae7a91f",
+      "src/routes/site.criadores.tsx": "1ef871b24046d36a64862dbdbafc05b3",
+      "src/routes/site.index.tsx": "d06ee2a760601882acd0765bc36dc080",
+      "src/routes/site.investidores.tsx": "5a56034e3da3fbb6cd08212c3a6eefd9",
+      "src/routes/site.seguranca.tsx": "691aa0fcfff6c3bb3d9433404f5f5d07",
+      "src/routes/site.tsx": "486c9f6dfe70999841d4e202f9264dcb",
+      "src/routes/tipografia.tsx": "14e24aee4aa0d0c1245e28c1d66bc203",
+      "src/showcase/shell.tsx": "55d389c1ef89f7f7789b32368c131f92",
+      "src/styles.css": "993e17f65277e9db003d5f03d8f9e6bf",
+      "src/vizionz/components/button.tsx": "931dc2f5f854a36b0f2bd7a5c0e50338",
+      "src/vizionz/components/display.tsx": "dbeda2132d352a0d2d22e6b193fbe7d4",
+      "src/vizionz/components/form.tsx": "9aeab936ef6a375d8bea9225bc8a44ef",
+      "src/vizionz/components/marketing.tsx": "74af6ff860bff3943064ed049f781f90",
+      "src/vizionz/components/motion.tsx": "7b7226ff2a274151afd8c015b0f2f089",
+      "src/vizionz/components/overlay.tsx": "21d79dd2228c6a2b62e7172cbfdf45d8",
+      "src/vizionz/components/platform.tsx": "97d99621ef5cb71e2161c5c9b54f3a3c",
+      "src/vizionz/lib/utils.ts": "ae0f52217217761c1ac935b5698a4876",
+      "src/vizionz/styles/theme.css": "32999da88fd0e4d47d3afa3e2432758e",
+      "tsconfig.json": "994abf64c2b9f78b568879f80ed0170e",
+      "vite.config.ts": "63049136ce802a61ad47ed2061a99934",
+      "wrangler.jsonc": "680b897d48e44bcc65fe437c29b38f3b"
+    },
+    "pipeline_version": 8
+  },
+  "tokens": {
+    "color": [
+      {
+        "name": "--background",
+        "raw": "#07050d",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--surface",
+        "raw": "#0f0b1a",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--surface-raised",
+        "raw": "#181228",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--foreground",
+        "raw": "#f3f0fa",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--muted",
+        "raw": "#221a36",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--muted-foreground",
+        "raw": "#9a92b0",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--border",
+        "raw": "#2a2140",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--ring",
+        "raw": "#16d9d5",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--primary",
+        "raw": "#8b3dff",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--indigo",
+        "raw": "#4b3bff",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--gold",
+        "raw": "#ffc21a",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--primary-foreground",
+        "raw": "#ffffff",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--magenta",
+        "raw": "#e8318a",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--neon-pink",
+        "raw": "#ff2bd6",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--ember",
+        "raw": "#ff7a1a",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--cyan",
+        "raw": "#16d9d5",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--cyan-deep",
+        "raw": "#22b0c5",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--cyan-foreground",
+        "raw": "#04161a",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--steel",
+        "raw": "#45576b",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--steel-light",
+        "raw": "#70879b",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--success",
+        "raw": "#2bd97f",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--warning",
+        "raw": "#ffb020",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--destructive",
+        "raw": "#ff4d5e",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--destructive-foreground",
+        "raw": "#ffffff",
+        "source": "src/vizionz/styles/theme.css"
+      }
+    ],
+    "typography": [
+      {
+        "name": "--font-display",
+        "raw": "\"Orbitron\", \"Exo 2\", ui-sans-serif, sans-serif",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--font-sans",
+        "raw": "\"Inter\", ui-sans-serif, system-ui, sans-serif",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--font-mono",
+        "raw": "\"JetBrains Mono\", ui-monospace, monospace",
+        "source": "src/vizionz/styles/theme.css"
+      }
+    ],
+    "radius": [
+      {
+        "name": "--radius-sm",
+        "raw": "0.375rem",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--radius-md",
+        "raw": "0.625rem",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--radius-lg",
+        "raw": "0.875rem",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--radius-xl",
+        "raw": "1.25rem",
+        "source": "src/vizionz/styles/theme.css"
+      }
+    ],
+    "shadow": [
+      {
+        "name": "--shadow-glow-cyan",
+        "raw": "0 0 0 1px rgb(22 217 213 / 0.35), 0 0 24px rgb(22 217 213 / 0.25)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--shadow-glow-brand",
+        "raw": "0 0 0 1px rgb(232 49 138 / 0.45), 0 8px 32px rgb(139 61 255 / 0.4), 0 0 48px rgb(255 122 26 / 0.18)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--shadow-glow-hot",
+        "raw": "0 0 0 1px rgb(255 122 26 / 0.5), 0 0 40px rgb(232 49 138 / 0.45), 0 0 80px rgb(139 61 255 / 0.3)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--shadow-panel",
+        "raw": "0 1px 0 rgb(255 255 255 / 0.04) inset, 0 12px 40px rgb(0 0 0 / 0.45)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--shadow-glow-pink",
+        "raw": "0 0 0 1px color-mix(in oklab, var(--neon-pink) 60%, transparent), 0 0 24px color-mix(in oklab, var(--neon-pink) 55%, transparent)",
+        "source": "src/vizionz/styles/theme.css"
+      }
+    ],
+    "other": [
+      {
+        "name": "--gradient-brand",
+        "raw": "linear-gradient(100deg, #4b3bff 0%, #8b3dff 22%, #e8318a 50%, #ff7a1a 78%, #ffc21a 100%)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--gradient-metal",
+        "raw": "linear-gradient(180deg, #ffffff 0%, #e6e3ee 45%, #9d98ab 70%, #f5f3fa 100%)",
+        "source": "src/vizionz/styles/theme.css"
+      },
+      {
+        "name": "--gradient-tech",
+        "raw": "linear-gradient(135deg, #16d9d5 0%, #22b0c5 60%, #45576b 100%)",
+        "source": "src/vizionz/styles/theme.css"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "Button",
+      "file": "src/vizionz/components/button",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "primary",
+            "neon",
+            "secondary",
+            "ghost",
+            "destructive"
+          ],
+          "default": "primary"
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg",
+            "icon"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "loading",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "name": "Input",
+      "file": "src/vizionz/components/form",
+      "import_path": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "name": "Label",
+      "file": "src/vizionz/components/form",
+      "import_path": ""
+    },
+    {
+      "name": "Select",
+      "file": "src/vizionz/components/form",
+      "import_path": ""
+    },
+    {
+      "name": "Switch",
+      "file": "src/vizionz/components/form",
+      "import_path": "",
+      "props": [
+        {
+          "name": "checked",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "onCheckedChange",
+          "type": "function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Checkbox",
+      "file": "src/vizionz/components/form",
+      "import_path": ""
+    },
+    {
+      "name": "Badge",
+      "file": "src/vizionz/components/display",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "brand",
+            "cyan",
+            "neutral",
+            "success",
+            "warning",
+            "destructive"
+          ],
+          "default": "neutral"
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "name": "Card",
+      "file": "src/vizionz/components/display",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "default",
+            "glass",
+            "glow",
+            "featured"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "padding",
+          "type": "enum",
+          "values": [
+            "none",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "name": "CardTitle",
+      "file": "src/vizionz/components/display",
+      "import_path": ""
+    },
+    {
+      "name": "CardDescription",
+      "file": "src/vizionz/components/display",
+      "import_path": ""
+    },
+    {
+      "name": "Avatar",
+      "file": "src/vizionz/components/display",
+      "import_path": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "ring",
+          "type": "enum",
+          "values": [
+            "none",
+            "brand",
+            "cyan"
+          ],
+          "default": "none"
+        },
+        {
+          "name": "src",
+          "type": "string"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Progress",
+      "file": "src/vizionz/components/display",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "brand",
+            "cyan",
+            "success"
+          ],
+          "default": "brand"
+        },
+        {
+          "name": "value",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "Skeleton",
+      "file": "src/vizionz/components/display",
+      "import_path": ""
+    },
+    {
+      "name": "Tabs",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "defaultValue",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string"
+        },
+        {
+          "name": "onValueChange",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "TabsList",
+      "file": "src/vizionz/components/overlay",
+      "import_path": ""
+    },
+    {
+      "name": "TabsTrigger",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "TabsContent",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Dialog",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "open",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "onOpenChange",
+          "type": "function",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "any"
+        }
+      ]
+    },
+    {
+      "name": "Menu",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "trigger",
+          "type": "function",
+          "required": true
+        },
+        {
+          "name": "items",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "start",
+            "end"
+          ],
+          "default": "start"
+        }
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "content",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "side",
+          "type": "enum",
+          "values": [
+            "top",
+            "bottom"
+          ],
+          "default": "top"
+        }
+      ]
+    },
+    {
+      "name": "ToastProvider",
+      "file": "src/vizionz/components/overlay",
+      "import_path": "",
+      "props": [
+        {
+          "name": "children",
+          "type": "any",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Logo",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg",
+            "xl"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "brand",
+          "type": "enum",
+          "values": [
+            "vizionz",
+            "vizionz-transparent",
+            "visionz-symbol",
+            "clyro",
+            "clyro-icon",
+            "clyro-labs-ai"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "NetworkTag",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "network",
+          "type": "enum",
+          "values": [
+            "polygon",
+            "ethereum",
+            "solana",
+            "bnb",
+            "base"
+          ],
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "AgeRating",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "rating",
+          "type": "enum",
+          "values": [
+            "L",
+            "10",
+            "12",
+            "14",
+            "16",
+            "18"
+          ],
+          "default": "L",
+          "required": true
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md"
+          ],
+          "default": "md"
+        }
+      ]
+    },
+    {
+      "name": "AIVerifiedBadge",
+      "file": "src/vizionz/components/platform",
+      "import_path": ""
+    },
+    {
+      "name": "KidsModeToggle",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "enabled",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "onEnabledChange",
+          "type": "function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "ContentCard",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "orientation",
+          "type": "enum",
+          "values": [
+            "portrait",
+            "landscape"
+          ],
+          "default": "landscape"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "creator",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "duration",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "rating",
+          "type": "enum",
+          "values": [
+            "L",
+            "10",
+            "12",
+            "14",
+            "16",
+            "18"
+          ],
+          "required": true
+        },
+        {
+          "name": "price",
+          "type": "string"
+        },
+        {
+          "name": "cover",
+          "type": "any"
+        },
+        {
+          "name": "verified",
+          "type": "boolean",
+          "default": "true"
+        },
+        {
+          "name": "href",
+          "type": "string",
+          "default": "#"
+        }
+      ]
+    },
+    {
+      "name": "WalletBalance",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "balance",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "token",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "fiat",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "network",
+          "type": "enum",
+          "values": [
+            "polygon",
+            "ethereum",
+            "solana",
+            "bnb",
+            "base"
+          ],
+          "required": true
+        },
+        {
+          "name": "onNetworkChange",
+          "type": "function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "EarningsCard",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Modo infantil",
+          "required": true
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "change",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "trend",
+          "type": "enum",
+          "values": [
+            "up",
+            "down"
+          ],
+          "default": "up"
+        },
+        {
+          "name": "points",
+          "type": "any"
+        }
+      ]
+    },
+    {
+      "name": "PlayerBar",
+      "file": "src/vizionz/components/platform",
+      "import_path": "",
+      "props": [
+        {
+          "name": "playing",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "name": "onPlayingChange",
+          "type": "function",
+          "required": true
+        },
+        {
+          "name": "progress",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "current",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "total",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "quality",
+          "type": "string",
+          "default": "4K"
+        }
+      ]
+    },
+    {
+      "name": "Stat",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "tone",
+          "type": "enum",
+          "values": [
+            "brand",
+            "cyan",
+            "default"
+          ],
+          "default": "brand"
+        },
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "md",
+            "lg",
+            "xl"
+          ],
+          "default": "lg"
+        },
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "SectionHeading",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "align",
+          "type": "enum",
+          "values": [
+            "start",
+            "center"
+          ],
+          "default": "start"
+        },
+        {
+          "name": "eyebrow",
+          "type": "string"
+        },
+        {
+          "name": "title",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "any"
+        }
+      ]
+    },
+    {
+      "name": "PricingCard",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "variant",
+          "type": "enum",
+          "values": [
+            "default",
+            "featured"
+          ],
+          "default": "default"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "price",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "period",
+          "type": "string",
+          "default": "/mês"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "features",
+          "type": "any",
+          "required": true
+        },
+        {
+          "name": "cta",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "badge",
+          "type": "string"
+        },
+        {
+          "name": "onSelect",
+          "type": "function"
+        }
+      ]
+    },
+    {
+      "name": "Timeline",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "items",
+          "type": "any",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "ModerationItem",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "severity",
+          "type": "enum",
+          "values": [
+            "low",
+            "medium",
+            "high"
+          ],
+          "default": "medium"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "reason",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "confidence",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "timestamp",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "onApprove",
+          "type": "function",
+          "required": true
+        },
+        {
+          "name": "onBlock",
+          "type": "function",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "Eyebrow",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "tone",
+          "type": "enum",
+          "values": [
+            "muted",
+            "foreground",
+            "brand"
+          ],
+          "default": "muted"
+        },
+        {
+          "name": "underline",
+          "type": "enum",
+          "values": [
+            "none",
+            "brand"
+          ],
+          "default": "none"
+        },
+        {
+          "name": "items",
+          "type": "any"
+        }
+      ]
+    },
+    {
+      "name": "OrbitRing",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "md",
+            "lg",
+            "xl"
+          ],
+          "default": "lg"
+        }
+      ]
+    },
+    {
+      "name": "TokenBadge",
+      "file": "src/vizionz/components/marketing",
+      "import_path": "",
+      "props": [
+        {
+          "name": "size",
+          "type": "enum",
+          "values": [
+            "sm",
+            "md",
+            "lg"
+          ],
+          "default": "md"
+        },
+        {
+          "name": "symbol",
+          "type": "string",
+          "default": "VZN"
+        }
+      ]
+    },
+    {
+      "name": "Reveal",
+      "file": "src/vizionz/components/motion",
+      "import_path": "",
+      "props": [
+        {
+          "name": "effect",
+          "type": "enum",
+          "values": [
+            "rise",
+            "zoom",
+            "fade"
+          ],
+          "default": "rise"
+        }
+      ]
+    },
+    {
+      "name": "CountUp",
+      "file": "src/vizionz/components/motion",
+      "import_path": "",
+      "props": [
+        {
+          "name": "value",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "duration",
+          "type": "number",
+          "default": "1400"
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "file": "src/assets/covers/codigo-zero.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/covers/jukebox-live.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/covers/rios-de-neon.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/covers/trio-alegria.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/logos/clyro-icon.svg",
+      "kind": "logo",
+      "format": "svg"
+    },
+    {
+      "file": "src/assets/logos/clyro-labs-ai.svg",
+      "kind": "logo",
+      "format": "svg"
+    },
+    {
+      "file": "src/assets/logos/clyro-logo.svg",
+      "kind": "logo",
+      "format": "svg"
+    },
+    {
+      "file": "src/assets/logos/visionz-simbolo-fundo-escuro.png",
+      "kind": "logo",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/logos/visionz-symbol.png",
+      "kind": "logo",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/logos/vizionz-logo-transparent.png",
+      "kind": "logo",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/logos/vizionz-logo.svg",
+      "kind": "logo",
+      "format": "svg"
+    },
+    {
+      "file": "src/assets/videos/video_de_intro.mp4.asset.json",
+      "kind": "video",
+      "format": "mp4",
+      "pointer": true
+    },
+    {
+      "file": "src/assets/videos/visionz-hero-bg-720.mp4.asset.json",
+      "kind": "video",
+      "format": "mp4",
+      "pointer": true
+    },
+    {
+      "file": "src/assets/videos/visionz-hero-bg.mp4.asset.json",
+      "kind": "video",
+      "format": "mp4",
+      "pointer": true
+    }
+  ]
+}
