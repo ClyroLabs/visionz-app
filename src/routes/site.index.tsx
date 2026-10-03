@@ -118,7 +118,7 @@ function Landing() {
       <div className="border-y bg-surface/40">
         <Section className="grid items-center gap-14 lg:grid-cols-2">
           <div className="space-y-8">
-            <Reveal><SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</></Reveal>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." />
+            <Reveal><SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." /></Reveal>
             <ol className="space-y-4">
               {[
                 { icon: Eye, t: "Análise visual", d: "Padrões e gestos impróprios identificados quadro a quadro." },
@@ -168,7 +168,7 @@ function Landing() {
         <Glow className="right-0 top-0 size-96 bg-magenta/20" />
         <Section className="relative grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-8">
-            <Reveal><SectionHeading eyebrow="Ecossistema de ganhos" title={<>Ganhos <span className="text-gradient-brand">ilimitados</span> para quem faz parte</></Reveal>} description="Cada novo usuário, título e indicação gera valor que circula entre todos os participantes, em várias redes blockchain." />
+            <Reveal><SectionHeading eyebrow="Ecossistema de ganhos" title={<>Ganhos <span className="text-gradient-brand">ilimitados</span> para quem faz parte</>} description="Cada novo usuário, título e indicação gera valor que circula entre todos os participantes, em várias redes blockchain." /></Reveal>
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 { icon: Clapperboard, t: "Criadores", d: "Até 85% de cada venda avulsa e participação nas assinaturas." },
