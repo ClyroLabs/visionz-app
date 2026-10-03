@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Music, Play, ShieldCheck, Sparkles, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
-  SectionHeading, Stat, Timeline, WalletBalance, type Network,
+  SectionHeading, Stat, Timeline, WalletBalance, Eyebrow, OrbitRing, TokenBadge, type Network,
 } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { agents, catalog, roadmap } from "@/experience/data";
