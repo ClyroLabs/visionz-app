@@ -23,25 +23,17 @@ function useInView<T extends Element>() {
   return { ref, seen };
 }
 
-export const revealVariants = cva("transition-[opacity,transform,filter] duration-700 ease-out motion-reduce:transition-none", {
-  variants: {
-    effect: { rise: "", fade: "", zoom: "" },
-    state: { hidden: "opacity-0 motion-reduce:opacity-100", shown: "opacity-100 translate-y-0 scale-100 blur-0" },
-  },
-  compoundVariants: [
-    { effect: "rise", state: "hidden", className: "translate-y-8 blur-sm motion-reduce:translate-y-0 motion-reduce:blur-0" },
-    { effect: "zoom", state: "hidden", className: "scale-95 motion-reduce:scale-100" },
-  ],
-  defaultVariants: { effect: "rise", state: "hidden" },
+export const revealVariants = cva("", {
+  variants: { effect: { rise: "reveal-rise", zoom: "reveal-zoom", fade: "reveal-fade" } },
+  defaultVariants: { effect: "rise" },
 });
-export interface RevealProps extends ComponentProps<"div">, Omit<VariantProps<typeof revealVariants>, "state"> {
-  /** Delay in ms before the reveal starts. */
-  delay?: number;
-}
-/** Reveals its children when scrolled into view. Respects reduced motion. */
-export function Reveal({ className, effect, delay = 0, style, ...props }: RevealProps) {
-  const { ref, seen } = useInView<HTMLDivElement>();
-  return <div ref={ref} data-seen={seen ? "1" : "0"} className={cn(revealVariants({ effect, state: seen ? "shown" : "hidden" }), className)} style={{ transitionDelay: `${delay}ms`, ...style }} {...props} />;
+export interface RevealProps extends ComponentProps<"div">, VariantProps<typeof revealVariants> {}
+/**
+ * Animates its children as they scroll into view (CSS scroll-driven animation).
+ * Content stays fully visible in browsers without support and under reduced motion.
+ */
+export function Reveal({ className, effect, ...props }: RevealProps) {
+  return <div className={cn(revealVariants({ effect }), className)} {...props} />;
 }
 
 export interface CountUpProps extends ComponentProps<"span"> {

@@ -78,8 +78,8 @@ function Landing() {
               { icon: Bot, t: "Inteligência artificial", c: "text-magenta" },
               { icon: ShieldCheck, t: "Seguro para crianças", c: "text-ember" },
               { icon: Coins, t: "Recompensas multichain", c: "text-gold" },
-            ].map(({ icon: Icon, t, c }, i) => (
-              <Reveal key={t} delay={i * 90} className="flex flex-col items-center gap-3 px-4 text-center">
+            ].map(({ icon: Icon, t, c }) => (
+              <Reveal key={t} className="flex flex-col items-center gap-3 px-4 text-center">
                 <Icon className={`size-9 ${c}`} strokeWidth={1.5} />
                 <span className="label-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
               </Reveal>
