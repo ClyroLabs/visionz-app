@@ -28,7 +28,7 @@ function Moderation() {
       </div>
       <div className="space-y-3">
         {flags.map((f) => (
-          <ModerationItem key={f.id} {...f}
+          <ModerationItem key={f.id} title={f.title} reason={f.reason} confidence={f.confidence} timestamp={f.timestamp} severity={f.severity}
             onApprove={() => { decide(f.id); toast({ title: "Aprovado", description: "A IA aprendeu com sua decisão." }); }}
             onBlock={() => { decide(f.id); toast({ title: "Bloqueado", description: "Conteúdo removido e IA retreinada.", variant: "error" }); }} />
         ))}
