@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Bar, CartesianGrid, Line, ComposedChart, ResponsiveContainer, Tooltip as RTooltip, XAxis, YAxis } from "recharts";
 import { BrainCircuit, Megaphone, ShieldAlert, Store, Ticket, TvMinimalPlay } from "lucide-react";
-import { Button, Card, CardDescription, CardTitle, SectionHeading, Stat, Timeline } from "@/index";
+import { Button, Card, CardDescription, CardTitle, ScrollSnapRow, SectionHeading, Stat, Timeline } from "@/index";
 import { LeadDialog, Section } from "@/experience/site-parts";
 import { projections, roadmap } from "@/experience/data";
 
@@ -41,7 +41,7 @@ function Investors() {
     <>
       <Section className="pb-10">
         <SectionHeading eyebrow="Investidores" title={<>Inovação brasileira com <span className="text-gradient-brand">alcance global</span></>} description="A VisionZ é o motor de criação que alimenta o ecossistema Clyro Labs. Ao reduzir custos de produção e eliminar intermediários, a margem por conteúdo é muito maior que no streaming tradicional." />
-        <div className="mt-12 grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 text-center md:mt-12 md:grid-cols-4 md:gap-8 md:text-left">
           <Stat value="1,2 mi" label="usuários ativos no ano 3" />
           <Stat value="R$ 58 mi" label="receita bruta no ano 3" tone="cyan" />
           <Stat value="21%" label="margem EBITDA no ano 3" tone="default" />
@@ -49,12 +49,12 @@ function Investors() {
         </div>
       </Section>
 
-      <Section className="py-10">
+      <Section className="py-6 md:py-10">
         <Card padding="lg" className="space-y-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div><CardTitle className="text-xl">Projeção de 3 anos — cenário inicial conservador</CardTitle><CardDescription>Receita em R$ milhões (barras) e margem EBITDA em % (linha).</CardDescription></div>
+            <div className="w-full text-center md:text-left"><CardTitle className="text-lg md:text-xl">Projeção de 3 anos — cenário inicial conservador</CardTitle><CardDescription>Receita em R$ milhões (barras) e margem EBITDA em % (linha).</CardDescription></div>
           </div>
-          <div className="h-80">
+          <div className="-mx-2 h-60 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart data={projections}>
                 <CartesianGrid stroke="var(--border)" strokeDasharray="3 3" />
@@ -68,7 +68,7 @@ function Investors() {
             </ResponsiveContainer>
           </div>
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full min-w-[480px] text-sm">
               <thead><tr className="border-b text-left text-muted-foreground"><th className="py-2">Indicador</th>{projections.map((p) => <th key={p.ano} className="py-2">{p.ano}</th>)}</tr></thead>
               <tbody>
                 <tr className="border-b"><td className="py-2">Usuários ativos</td>{projections.map((p) => <td key={p.ano} className="font-mono">{fmt(p.usuarios)}</td>)}</tr>
@@ -81,32 +81,33 @@ function Investors() {
         </Card>
       </Section>
 
-      <Section className="py-10">
-        <h2 className="mb-6 font-display text-2xl font-bold tracking-wide">Fontes de receita</h2>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <Section className="py-6 md:py-10">
+        <h2 className="mb-5 text-center font-display text-xl font-bold tracking-wide sm:text-2xl md:mb-6 md:text-left">Fontes de receita</h2>
+        <ScrollSnapRow label="Fontes de receita" item="narrow" className="sm:grid-cols-2 md:gap-4 lg:grid-cols-5">
           {revenue.map(({ icon: Icon, t, d }) => (
-            <Card key={t} variant="glass" className="space-y-3"><Icon className="size-6 text-magenta" /><CardTitle className="text-sm">{t}</CardTitle><CardDescription>{d}</CardDescription></Card>
+            <Card key={t} variant="glass" className="h-full space-y-3 flex flex-col items-center text-center md:items-start md:text-left"><Icon className="size-6 text-magenta" /><CardTitle className="text-sm">{t}</CardTitle><CardDescription>{d}</CardDescription></Card>
           ))}
+        </ScrollSnapRow>
+        <p className="mt-4 text-center text-sm text-muted-foreground md:text-left">Toda a movimentação é registrada em blockchain e processada por gateway de pagamentos (Pix, cartão e cripto), com carteira interna para cada usuário.</p>
+      </Section>
+
+      <Section className="py-6 md:py-10">
+        <h2 className="mb-5 text-center font-display text-xl font-bold tracking-wide sm:text-2xl md:mb-6 md:text-left">Roadmap</h2>
+        <details className="group md:hidden"><summary className="flex cursor-pointer list-none items-center justify-center gap-2 rounded-lg border p-3 text-sm [&::-webkit-details-marker]:hidden">Ver fases <span aria-hidden className="transition-transform group-open:rotate-45">+</span></summary><div className="mt-4"><Timeline items={roadmap} /></div></details>
+        <div className="hidden md:block"><Timeline items={roadmap} /></div>
+      </Section>
+
+      <Section className="py-6 md:py-10">
+        <h2 className="mb-5 text-center font-display text-xl font-bold tracking-wide sm:text-2xl md:mb-6 md:text-left">Gestão de risco</h2>
+        <div className="grid gap-3 md:grid-cols-2 md:gap-4">
+          {risks.map(([t, d]) => <Card key={t} className="flex flex-col items-center gap-2 text-center md:flex-row md:items-start md:gap-3 md:text-left"><ShieldAlert className="size-5 shrink-0 text-warning" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></Card>)}
         </div>
-        <p className="mt-4 text-sm text-muted-foreground">Toda a movimentação é registrada em blockchain e processada por gateway de pagamentos (Pix, cartão e cripto), com carteira interna para cada usuário.</p>
       </Section>
 
-      <Section className="py-10">
-        <h2 className="mb-6 font-display text-2xl font-bold tracking-wide">Roadmap</h2>
-        <Timeline items={roadmap} />
-      </Section>
-
-      <Section className="py-10">
-        <h2 className="mb-6 font-display text-2xl font-bold tracking-wide">Gestão de risco</h2>
-        <div className="grid gap-4 md:grid-cols-2">
-          {risks.map(([t, d]) => <Card key={t} className="flex gap-3"><ShieldAlert className="size-5 shrink-0 text-warning" /><div><p className="font-semibold">{t}</p><p className="text-sm text-muted-foreground">{d}</p></div></Card>)}
-        </div>
-      </Section>
-
-      <Section className="pt-10">
-        <Card variant="glow" padding="lg" className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+      <Section className="pt-6 md:pt-10">
+        <Card variant="glow" padding="lg" className="flex flex-col items-center text-center md:text-left justify-between gap-6 md:flex-row md:items-center">
           <div><CardTitle className="text-2xl">O convite</CardTitle><CardDescription className="mt-2 max-w-xl text-base">A VisionZ não está mudando só o que você assiste, mas como o mundo se diverte e lucra. Junte-se a nós.</CardDescription></div>
-          <Button size="lg" onClick={() => setLead(true)}>Falar com a VisionZ</Button>
+          <Button size="lg" className="w-full md:w-auto" onClick={() => setLead(true)}>Falar com a VisionZ</Button>
         </Card>
       </Section>
       <LeadDialog open={lead} onOpenChange={setLead} kind="investidor" />

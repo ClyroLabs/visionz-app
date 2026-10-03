@@ -5,7 +5,7 @@ import { Caption, Code, PageHeader, Shell } from "@/showcase/shell";
 import {
   AIVerifiedBadge, AgeRating, Avatar, Badge, Button, Card, CardDescription, CardTitle, Checkbox, ContentCard, Dialog, EarningsCard,
   Input, KidsModeToggle, Label, Menu, NetworkTag, PlayerBar, Progress, Select, Skeleton, Switch, Tabs, TabsContent, TabsList,
-  TabsTrigger, Tooltip, WalletBalance, useToast, type Network, Stat, SectionHeading, PricingCard, Timeline, ModerationItem,
+  TabsTrigger, Tooltip, WalletBalance, useToast, type Network, Stat, SectionHeading, PricingCard, Timeline, ModerationItem, ScrollSnapRow,
 } from "@/index";
 
 export const Route = createFileRoute("/componentes")({
@@ -36,7 +36,7 @@ function Spec({ label, children }: { label: string; children: ReactNode }) {
 const sections = [
   "Button", "Input", "Select", "Switch", "Checkbox", "Badge", "Avatar", "Card", "Tabs", "Dialog", "Menu", "Tooltip", "Toast",
   "Progress", "Skeleton", "Logo", "ContentCard", "AgeRating", "AIVerifiedBadge", "KidsModeToggle", "WalletBalance", "EarningsCard",
-  "NetworkTag", "PlayerBar", "Stat", "SectionHeading", "PricingCard", "Timeline", "ModerationItem", "Exemplo: Login",
+  "NetworkTag", "PlayerBar", "Stat", "SectionHeading", "ScrollSnapRow", "PricingCard", "Timeline", "ModerationItem", "Exemplo: Login",
 ];
 
 function Components() {
@@ -229,6 +229,11 @@ function Gallery() {
         <div className="flex flex-wrap gap-10"><Stat value="1,2 mi" label="usuários ativos" /><Stat value="40%" tone="cyan" label="menos custo de banda" /><Stat value="4K/8K" tone="default" size="md" label="streaming" /></div>
       </Section>
 
+      <Section id="scrollsnaprow" title="ScrollSnapRow" code={`<ScrollSnapRow label="Planos" className="md:grid-cols-3">…</ScrollSnapRow>`}>
+        <ScrollSnapRow label="Exemplo" className="md:grid-cols-3 md:gap-4">
+          {["Assista", "Crie", "Ganhe"].map((t) => <div key={t} className="rounded-lg border bg-surface p-6 text-center font-display">{t}</div>)}
+        </ScrollSnapRow>
+      </Section>
       <Section id="sectionheading" title="SectionHeading" code={`<SectionHeading eyebrow="Planos" title="Assine ou pague por título" description="…" />`}>
         <SectionHeading eyebrow="Segurança familiar" title="Segurança absoluta para a sua família." description="O Filtro Inteligente analisa imagem e áudio em milissegundos." />
       </Section>
