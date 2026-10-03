@@ -63,7 +63,7 @@ function Investors() {
                 <YAxis yAxisId="e" orientation="right" stroke="var(--muted-foreground)" unit="%" />
                 <RTooltip contentStyle={{ background: "var(--surface-raised)", border: "1px solid var(--border)", borderRadius: 8, color: "var(--foreground)" }} />
                 <Bar yAxisId="r" dataKey="receita" name="Receita (R$ mi)" fill="var(--primary)" radius={[6, 6, 0, 0]} />
-                <Line yAxisId="e" dataKey="ebitda" name="EBITDA %" stroke="var(--cyan)" strokeWidth={3} />
+                <Line yAxisId="e" dataKey="ebitda" name="EBITDA %" stroke="var(--cyan)" strokeWidth={3} isAnimationActive={false} />
               </ComposedChart>
             </ResponsiveContainer>
           </div>

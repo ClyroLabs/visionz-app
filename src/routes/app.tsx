@@ -30,7 +30,7 @@ function Frame() {
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r bg-surface/60 p-4 md:flex">
-        <Link to="/site" className="mb-8 rounded-md bg-white px-2 py-1"><Logo brand="vizionz" size="sm" className="mx-auto" /></Link>
+        <Link to="/site" className="mb-8 rounded-md bg-white px-2 py-1"><Logo brand="vizionz" size="lg" className="mx-auto -my-4" /></Link>
         <nav className="flex flex-1 flex-col gap-1" aria-label="Plataforma">
           {nav.map(({ to, label, icon: Icon }) => (
             <Link key={to} to={to} activeOptions={{ exact: true }} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground" activeProps={{ className: "bg-surface-raised !text-cyan shadow-glow-cyan" }}>
