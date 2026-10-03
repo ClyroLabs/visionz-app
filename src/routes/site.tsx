@@ -1,4 +1,5 @@
-import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Button, Logo, ToastProvider } from "@/index";
 
 export const Route = createFileRoute("/site")({ component: SiteLayout });
@@ -11,6 +12,10 @@ const links = [
 ] as const;
 
 function SiteLayout() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (!sessionStorage.getItem("vz-intro-seen")) navigate({ to: "/abertura", replace: true });
+  }, [navigate]);
   return (
     <ToastProvider>
       <div className="min-h-screen bg-background">

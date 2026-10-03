@@ -106,10 +106,10 @@ function Landing() {
             { icon: Clapperboard, n: "02", t: "Crie", d: "Produza séries, filmes, curtas, documentários e músicas com o Clyro Synth e o Clyro Jukebox." },
             { icon: Coins, n: "03", t: "Ganhe", d: "Receba pela sua obra e por trazer pessoas ao ecossistema, direto na sua carteira interna." },
           ].map(({ icon: Icon, n, t, d }) => (
-            <Reveal key={t}><Card variant="glass" padding="lg" className="space-y-4">
+            <Reveal key={t}><Card variant="glass" padding="lg" className="h-full space-y-4">
               <div className="flex items-center justify-between"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="font-display text-3xl font-bold text-muted">{n}</span></div>
               <CardTitle className="text-xl">{t}</CardTitle><CardDescription className="text-base">{d}</CardDescription>
-            </Card>
+            </Card></Reveal>
           ))}
         </div>
       </Section>
