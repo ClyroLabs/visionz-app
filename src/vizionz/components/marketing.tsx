@@ -144,7 +144,7 @@ export function ModerationItem({ title, reason, confidence, timestamp, onApprove
 }
 
 /* ---------------- Eyebrow ---------------- */
-export const eyebrowVariants = cva("text-eyebrow", {
+export const eyebrowVariants = cva("label-eyebrow", {
   variants: {
     tone: { muted: "text-muted-foreground", foreground: "text-foreground", brand: "text-gradient-brand" },
     underline: { none: "", brand: "underline-brand mb-3 inline-block" },

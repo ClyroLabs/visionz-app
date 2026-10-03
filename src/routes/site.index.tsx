@@ -81,7 +81,7 @@ function Landing() {
             ].map(({ icon: Icon, t, c }) => (
               <div key={t} className="flex flex-col items-center gap-3 px-4 text-center">
                 <Icon className={`size-9 ${c}`} strokeWidth={1.5} />
-                <span className="text-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
+                <span className="label-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
               </div>
             ))}
           </div>
