@@ -30,7 +30,7 @@ function AppHome() {
           <div className="absolute inset-0 bg-gradient-to-r from-background via-background/70 to-transparent" />
           <div className="absolute inset-0 flex max-w-xl flex-col justify-end gap-4 p-8">
             <div className="flex gap-2"><AgeRating rating={hero.rating} /><AIVerifiedBadge /></div>
-            <h1 className="font-display text-4xl font-bold tracking-wide">{hero.title}</h1>
+            <h1 className="font-display text-[clamp(1.625rem,5.5vw,2.25rem)] font-bold tracking-wide">{hero.title}</h1>
             <p className="text-muted-foreground">{hero.creator} · {hero.duration}</p>
             <Link to="/app/assistir" search={{ id: hero.id }}><Button size="lg"><Play />Assistir agora</Button></Link>
           </div>

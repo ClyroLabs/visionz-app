@@ -36,7 +36,7 @@ function Studio() {
 
   return (
     <div className="space-y-8">
-      <h1 className="font-display text-3xl font-bold tracking-wide">Estúdio do criador</h1>
+      <h1 className="font-display text-[clamp(1.375rem,4.5vw,1.875rem)] font-bold tracking-wide">Estúdio do criador</h1>
       <div className="grid gap-4 md:grid-cols-3">
         <EarningsCard label="Ganhos do mês" value="R$ 3.420" change="+18%" />
         <EarningsCard label="Visualizações" value="84,2 mil" change="+9%" points={[3, 4, 6, 5, 7, 9, 8]} />
