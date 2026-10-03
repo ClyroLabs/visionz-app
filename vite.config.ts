@@ -3,6 +3,7 @@ import { defineConfig } from "vite";
 import tsConfigPaths from "vite-tsconfig-paths";
 import { cloudflare } from "@cloudflare/vite-plugin";
 import { tanstackStart } from "@tanstack/react-start/plugin/vite";
+import tailwindcss from "@tailwindcss/vite";
 import viteReact from "@vitejs/plugin-react";
 import { componentTagger } from "lovable-tagger";
 import { mockupPreviewPlugin } from "./mockupPreviewPlugin";
@@ -26,6 +27,7 @@ export default defineConfig(({ command, mode }) => {
       mockupPreviewPlugin({ designSystemPolling: true }),
       tsConfigPaths({ projects: ["./tsconfig.json"] }),
       ...(useCloudflare ? [cloudflare({ viteEnvironment: { name: "ssr" } })] : []),
+      tailwindcss(),
       tanstackStart(),
       viteReact(),
       ...(mode === "development" ? [componentTagger()] : []),

@@ -1,0 +1,125 @@
+/*
+ * VizionZ theme — canonical entry. Import after `@import "tailwindcss";`.
+ * Dark is the default; add `.light` on <html> for the light theme.
+ * Fonts: Orbitron (display) + Inter (body) loaded by the host page.
+ */
+@custom-variant light (&:where(.light, .light *));
+
+:root {
+  --background: #080f19;
+  --surface: #0d1726;
+  --surface-raised: #13213a;
+  --foreground: #e8f1fa;
+  --muted: #1a2a42;
+  --muted-foreground: #8a9bb0;
+  --border: #22344d;
+  --ring: #16d9d5;
+
+  --primary: #8b3dff;
+  --primary-foreground: #ffffff;
+  --magenta: #e8318a;
+  --ember: #ff7a1a;
+  --cyan: #16d9d5;
+  --cyan-deep: #22b0c5;
+  --cyan-foreground: #04161a;
+  --steel: #45576b;
+  --steel-light: #70879b;
+
+  --success: #2bd97f;
+  --warning: #ffb020;
+  --destructive: #ff4d5e;
+  --destructive-foreground: #ffffff;
+
+  --gradient-brand: linear-gradient(100deg, #8b3dff 0%, #e8318a 55%, #ff7a1a 100%);
+  --gradient-tech: linear-gradient(135deg, #16d9d5 0%, #22b0c5 60%, #45576b 100%);
+
+  --shadow-glow-cyan: 0 0 0 1px rgb(22 217 213 / 0.35), 0 0 24px rgb(22 217 213 / 0.25);
+  --shadow-glow-brand: 0 0 0 1px rgb(232 49 138 / 0.4), 0 8px 32px rgb(139 61 255 / 0.35);
+  --shadow-panel: 0 1px 0 rgb(255 255 255 / 0.04) inset, 0 12px 40px rgb(0 0 0 / 0.45);
+}
+
+.light {
+  --background: #f4f7fb;
+  --surface: #ffffff;
+  --surface-raised: #eef3f9;
+  --foreground: #0b1522;
+  --muted: #e3eaf3;
+  --muted-foreground: #4f6075;
+  --border: #cfd9e5;
+  --ring: #0f9fa0;
+  --cyan: #0fa5a6;
+  --cyan-deep: #1a8a9e;
+  --cyan-foreground: #ffffff;
+  --shadow-glow-cyan: 0 0 0 1px rgb(15 165 166 / 0.35), 0 4px 16px rgb(15 165 166 / 0.15);
+  --shadow-panel: 0 1px 2px rgb(11 21 34 / 0.06), 0 8px 24px rgb(11 21 34 / 0.08);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-magenta: var(--magenta);
+  --color-ember: var(--ember);
+  --color-cyan: var(--cyan);
+  --color-cyan-deep: var(--cyan-deep);
+  --color-cyan-foreground: var(--cyan-foreground);
+  --color-steel: var(--steel);
+  --color-steel-light: var(--steel-light);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+
+  --font-display: "Orbitron", "Exo 2", ui-sans-serif, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-glow-cyan: var(--shadow-glow-cyan);
+  --shadow-glow-brand: var(--shadow-glow-brand);
+  --shadow-panel: var(--shadow-panel);
+}
+
+@utility bg-gradient-brand {
+  background-image: var(--gradient-brand);
+}
+@utility bg-gradient-tech {
+  background-image: var(--gradient-tech);
+}
+@utility text-gradient-brand {
+  background-image: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility bg-circuit-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--cyan) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--cyan) 7%, transparent) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--border);
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
