@@ -10,6 +10,8 @@ const nav = [
   { to: "/tipografia", label: "Tipografia" },
   { to: "/icones", label: "Ícones" },
   { to: "/componentes", label: "Componentes" },
+  { to: "/site", label: "Site" },
+  { to: "/app", label: "Protótipo" },
 ] as const;
 
 export function Shell({ children }: { children: ReactNode }) {

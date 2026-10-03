@@ -5,7 +5,7 @@ import { Caption, Code, PageHeader, Shell } from "@/showcase/shell";
 import {
   AIVerifiedBadge, AgeRating, Avatar, Badge, Button, Card, CardDescription, CardTitle, Checkbox, ContentCard, Dialog, EarningsCard,
   Input, KidsModeToggle, Label, Menu, NetworkTag, PlayerBar, Progress, Select, Skeleton, Switch, Tabs, TabsContent, TabsList,
-  TabsTrigger, Tooltip, WalletBalance, useToast, type Network,
+  TabsTrigger, Tooltip, WalletBalance, useToast, type Network, Stat, SectionHeading, PricingCard, Timeline, ModerationItem,
 } from "@/index";
 
 export const Route = createFileRoute("/componentes")({
@@ -36,7 +36,7 @@ function Spec({ label, children }: { label: string; children: ReactNode }) {
 const sections = [
   "Button", "Input", "Select", "Switch", "Checkbox", "Badge", "Avatar", "Card", "Tabs", "Dialog", "Menu", "Tooltip", "Toast",
   "Progress", "Skeleton", "Logo", "ContentCard", "AgeRating", "AIVerifiedBadge", "KidsModeToggle", "WalletBalance", "EarningsCard",
-  "NetworkTag", "PlayerBar", "Exemplo: Login",
+  "NetworkTag", "PlayerBar", "Stat", "SectionHeading", "PricingCard", "Timeline", "ModerationItem", "Exemplo: Login",
 ];
 
 function Components() {
@@ -222,6 +222,36 @@ function Gallery() {
         <div className="relative max-w-2xl overflow-hidden rounded-xl bg-gradient-tech">
           <div className="flex aspect-video items-center justify-center"><Film className="size-12 text-cyan-foreground/60" /></div>
           <PlayerBar className="absolute inset-x-3 bottom-3" playing={playing} onPlayingChange={setPlaying} progress={38} current="38:12" total="1:42:00" />
+        </div>
+      </Section>
+
+      <Section id="stat" title="Stat" code={`<Stat value="R$ 58 mi" label="receita no ano 3" />`}>
+        <div className="flex flex-wrap gap-10"><Stat value="1,2 mi" label="usuários ativos" /><Stat value="40%" tone="cyan" label="menos custo de banda" /><Stat value="4K/8K" tone="default" size="md" label="streaming" /></div>
+      </Section>
+
+      <Section id="sectionheading" title="SectionHeading" code={`<SectionHeading eyebrow="Planos" title="Assine ou pague por título" description="…" />`}>
+        <SectionHeading eyebrow="Segurança familiar" title="Segurança absoluta para a sua família." description="O Filtro Inteligente analisa imagem e áudio em milissegundos." />
+      </Section>
+
+      <Section id="pricingcard" title="PricingCard" code={`<PricingCard variant="featured" name="Premium" price="R$ 29,90" … />`}>
+        <div className="grid max-w-3xl gap-4 md:grid-cols-2">
+          <PricingCard name="Family" price="R$ 44,90" description="Até 5 perfis com Modo infantil." features={["5 perfis", "Modo infantil com IA"]} cta="Assinar" />
+          <PricingCard variant="featured" badge="Mais popular" name="Premium" price="R$ 29,90" description="Catálogo completo em 4K/8K." features={["Catálogo completo", "Recompensas em dobro"]} cta="Assinar" />
+        </div>
+      </Section>
+
+      <Section id="timeline" title="Timeline" code={`<Timeline items={[{ phase: "MVP", period: "0–1 mês", title: "…", items: [...], status: "current" }]} />`}>
+        <Timeline items={[
+          { phase: "MVP", period: "0–1 mês", title: "Orquestrador + catálogo", items: ["Login", "Filtro Inteligente v1"], status: "current" },
+          { phase: "Beta", period: "2–4 meses", title: "Ecossistema ativo", items: ["Web3Agent", "Ambassadors"], status: "next" },
+          { phase: "Produção", period: "4–5 meses", title: "Escala global", items: ["Multi-região", "Mainnet"], status: "next" },
+        ]} />
+      </Section>
+
+      <Section id="moderationitem" title="ModerationItem" code={`<ModerationItem severity="high" title="…" reason="…" confidence={74} timestamp="02:14" onApprove={…} onBlock={…} />`}>
+        <div className="space-y-3">
+          <ModerationItem severity="high" title="Clipe enviado: “Rua 23”" reason="Gesto impróprio detectado" confidence={74} timestamp="02:14" onApprove={() => toast({ title: "Aprovado" })} onBlock={() => toast({ title: "Bloqueado", variant: "error" })} />
+          <ModerationItem severity="low" title="Animação: “Robôs da Praia”" reason="Possível marca de terceiros" confidence={52} timestamp="00:47" onApprove={() => {}} onBlock={() => {}} />
         </div>
       </Section>
 
