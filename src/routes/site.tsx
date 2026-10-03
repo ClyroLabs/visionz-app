@@ -1,5 +1,6 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Menu, X } from "lucide-react";
 import { Button, Logo, ToastProvider } from "@/index";
 
 export const Route = createFileRoute("/site")({ component: SiteLayout });
@@ -13,6 +14,7 @@ const links = [
 
 function SiteLayout() {
   const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
   useEffect(() => {
     if (!sessionStorage.getItem("vz-intro-seen")) navigate({ to: "/abertura", replace: true });
   }, [navigate]);
@@ -30,14 +32,17 @@ function SiteLayout() {
             </Link>
             <nav className="hidden flex-1 gap-1 md:flex" aria-label="Site">
               {links.map((l) => (
-                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
+                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta" }}>{l.label}</Link>
               ))}
             </nav>
             <Link to="/app" className="ml-auto shrink-0"><Button size="sm"><span className="sm:hidden">Protótipo</span><span className="hidden sm:inline">Abrir protótipo</span></Button></Link>
+            <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-mobile-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
-          <nav className="flex justify-center gap-1 overflow-x-auto px-4 pb-2 [scrollbar-width:none] md:hidden" aria-label="Site">
-            {links.map((l) => <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="shrink-0 rounded-md px-3 py-1 text-xs text-muted-foreground" activeProps={{ className: "!text-cyan bg-cyan/10" }}>{l.label}</Link>)}
-          </nav>
+          {open && (
+            <nav id="vz-mobile-menu" className="absolute right-4 top-full mt-2 flex w-48 flex-col gap-1 rounded-lg border border-magenta/30 bg-surface/95 p-2 shadow-glow-brand backdrop-blur-md animate-rise md:hidden" aria-label="Site">
+              {links.map((l) => <Link key={l.to} to={l.to} onClick={() => setOpen(false)} activeOptions={{ exact: true }} className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}>{l.label}</Link>)}
+            </nav>
+          )}
         </header>
         <Outlet />
         <footer className="border-t bg-surface/40">
