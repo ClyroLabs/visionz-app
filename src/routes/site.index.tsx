@@ -127,12 +127,12 @@ function Landing() {
                 { icon: AudioLines, t: "Auditoria sonora", d: "Transcrição e detecção de tom agressivo em vários idiomas." },
                 { icon: UserCheck, t: "Revisão humana", d: "Casos difíceis vão a especialistas, e cada decisão retreina a IA." },
               ].map(({ icon: Icon, t, d }, i) => (
-                <li key={t}><details className="group rounded-lg border bg-background/40 p-3 text-left md:pointer-events-none md:border-0 md:bg-transparent md:p-0" open={undefined}>
+                <li key={t}><details className="group rounded-lg border bg-background/40 p-3 text-left md:border-0 md:bg-transparent md:p-0">
                   <summary className="flex cursor-pointer list-none items-center gap-4 [&::-webkit-details-marker]:hidden">
                   <span className="relative flex size-11 shrink-0 items-center justify-center rounded-full border border-cyan/40 bg-cyan/10 text-cyan"><Icon className="size-5" /><span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-cyan font-mono text-[10px] text-cyan-foreground">{i + 1}</span></span>
-                  <p className="flex-1 font-semibold">{t}</p><span aria-hidden className="text-muted-foreground transition-transform group-open:rotate-45 md:hidden">+</span>
+                  <div className="flex-1"><p className="font-semibold">{t}</p><p className="hidden text-sm text-muted-foreground md:block">{d}</p></div><span aria-hidden className="text-muted-foreground transition-transform group-open:rotate-45 md:hidden">+</span>
                   </summary>
-                  <p className="mt-2 pl-15 text-sm text-muted-foreground md:-mt-5 md:pl-15">{d}</p>
+                  <p className="mt-2 pl-15 text-sm text-muted-foreground md:hidden">{d}</p>
                 </details></li>
               ))}
             </ol>
