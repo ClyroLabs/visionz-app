@@ -21,7 +21,7 @@ Load fonts in the document head: Orbitron (500–800), Inter (400–700), JetBra
 ## Hard rules
 - Use tokens only (`bg-surface`, `text-muted-foreground`, `border-border`, `text-cyan`…). Never raw hex/rgb, never inline `style` for colors/spacing.
 - Headings use `font-display` with `tracking-wide`; body uses `font-sans`; addresses, hashes, durations use `font-mono`.
-- Logos: always `<Logo brand="vizionz|clyro|clyro-labs-ai|clyro-icon" />`. Never redraw, recolor, or generate substitutes. VisionZ logo sits on light backgrounds.
+- Logos: always `<Logo brand="vizionz|clyro|clyro-labs-ai|clyro-icon" />`. Never redraw, recolor, or generate substitutes. Use `brand="vizionz"` on light backgrounds and `brand="vizionz-transparent"` on dark ones. Animate with `<Reveal>` / `<CountUp>` and the `animate-*` utilities; all motion is disabled under reduced-motion.
 - Every content item shows `AgeRating`; show `AIVerifiedBadge` where moderation status matters. Kids-facing screens must respect `KidsModeToggle` (only L / 10).
 - Prices in BRL (`R$ 9,90`). Rewards token is `$VZN` — use `<TokenBadge/>` for the medallion, `NetworkTag` for its chain.
 - Never promise guaranteed returns in copy; say "recompensas" / "ganhos no ecossistema".

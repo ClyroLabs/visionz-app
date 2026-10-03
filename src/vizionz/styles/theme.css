@@ -169,6 +169,45 @@
     linear-gradient(to bottom, transparent, color-mix(in oklab, var(--foreground) 3%, transparent));
 }
 
+@keyframes vz-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
+@keyframes vz-orbit { 0%, 100% { transform: rotate(-12deg) scale(1); } 50% { transform: rotate(-6deg) scale(1.03); } }
+@keyframes vz-breathe { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
+@keyframes vz-drift { 0%, 100% { background-position: 0 0, 0 0, 0 0; } 50% { background-position: 40px 20px, -40px -20px, -60px 30px; } }
+@keyframes vz-shine { 0%, 70% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
+
+@utility animate-rise { animation: vz-rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+@utility animate-orbit { animation: vz-orbit 9s ease-in-out infinite; }
+@utility animate-breathe { animation: vz-breathe 6s ease-in-out infinite; }
+@utility animate-drift { animation: vz-drift 14s ease-in-out infinite; }
+@utility shine {
+  position: relative;
+  overflow: hidden;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, color-mix(in oklab, white 45%, transparent), transparent);
+    animation: vz-shine 4.5s ease-in-out infinite;
+    pointer-events: none;
+  }
+}
+
+@keyframes vz-zoom { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: none; } }
+@keyframes vz-fade { from { opacity: 0; } to { opacity: 1; } }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal-rise, .reveal-zoom, .reveal-fade { animation-timing-function: linear; animation-fill-mode: both; animation-timeline: view(); animation-range: entry 0% cover 25%; }
+    .reveal-rise { animation-name: vz-rise; }
+    .reveal-zoom { animation-name: vz-zoom; }
+    .reveal-fade { animation-name: vz-fade; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-rise, .animate-orbit, .animate-breathe, .animate-drift, .shine::after { animation: none !important; }
+}
+
 @layer base {
   *,
   *::before,
