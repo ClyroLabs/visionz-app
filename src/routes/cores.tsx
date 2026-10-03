@@ -20,8 +20,8 @@ const groups = [
     ["bg-border", "--border", "bordas e divisores"],
   ] },
   { title: "Marca — criação", items: [
-    ["bg-gradient-brand", "--gradient-brand", "ação principal, ganhos"], ["bg-primary", "--primary", "violeta VisionZ"],
-    ["bg-magenta", "--magenta", "destaque emocional"], ["bg-ember", "--ember", "calor, preço à la carte"],
+    ["bg-gradient-brand", "--gradient-brand", "ação principal, ganhos"], ["bg-indigo", "--indigo", "início do degradê"], ["bg-primary", "--primary", "violeta VisionZ"],
+    ["bg-magenta", "--magenta", "destaque emocional"], ["bg-ember", "--ember", "calor, preço à la carte"], ["bg-gold", "--gold", "brilho final, conquistas"],
   ] },
   { title: "Tecnologia — Clyro", items: [
     ["bg-gradient-tech", "--gradient-tech", "capas e camadas de IA"], ["bg-cyan", "--cyan", "foco, rede, segurança"],
@@ -41,7 +41,7 @@ const pairs = [
 function Colors() {
   return (
     <Shell>
-      <PageHeader eyebrow="Fundamentos" title="Cores">Duas energias: o degradê da VisionZ para criação e recompensas, o ciano da Clyro para tecnologia e segurança — sobre um azul-noite profundo.</PageHeader>
+      <PageHeader eyebrow="Fundamentos" title="Cores">Duas energias: o degradê da VisionZ para criação e recompensas, o ciano da Clyro para tecnologia e segurança — sobre um preto com leve tom violeta, iluminado por faixas de luz e brilho neon.</PageHeader>
       {groups.map((g) => (
         <section key={g.title} className="mb-12">
           <h2 className="mb-4 font-display text-lg font-semibold tracking-wide">{g.title}</h2>
