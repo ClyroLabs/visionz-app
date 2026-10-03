@@ -31,7 +31,7 @@ export function Stat({ value, label, tone, size, className, ...props }: StatProp
 
 /* ---------------- SectionHeading ---------------- */
 export const sectionHeadingVariants = cva("max-w-3xl space-y-4", {
-  variants: { align: { start: "", center: "mx-auto text-center" } },
+  variants: { align: { start: "mx-auto text-center md:mx-0 md:text-left", center: "mx-auto text-center" } },
   defaultVariants: { align: "start" },
 });
 export interface SectionHeadingProps extends Omit<ComponentProps<"div">, "title">, VariantProps<typeof sectionHeadingVariants> {
@@ -45,8 +45,8 @@ export function SectionHeading({ eyebrow, title, description, align, className, 
   return (
     <div className={cn(sectionHeadingVariants({ align }), className)} {...props}>
       {eyebrow && <p className="font-mono text-xs uppercase tracking-[0.25em] text-cyan">{eyebrow}</p>}
-      <h2 className="font-display text-3xl font-bold tracking-wide md:text-4xl">{title}</h2>
-      {description && <p className="text-lg text-muted-foreground">{description}</p>}
+      <h2 className="text-balance font-display text-2xl font-bold tracking-wide sm:text-3xl md:text-4xl">{title}</h2>
+      {description && <p className="text-base text-muted-foreground md:text-lg">{description}</p>}
     </div>
   );
 }
