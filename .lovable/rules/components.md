@@ -230,6 +230,20 @@ import { Menu } from "@ws-dsemu75buanfvmj07xd6/80f50366-df9f-44b1-8a4e-23a11b035
 | `items` | any | `—` |
 | `align` | start · end | `start` |
 
+### MobileNav
+
+```ts
+import { MobileNav } from "@ws-dsemu75buanfvmj07xd6/80f50366-df9f-44b1-8a4e-23a11b0357e9"
+```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `header` | any | `—` |
+| `label` | string | `Abrir menu` |
+| `children` | any | `—` |
+
 ### ModerationItem
 
 ```ts

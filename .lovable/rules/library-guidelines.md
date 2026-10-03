@@ -4,7 +4,7 @@
 
 The design system exports these components — import them from `@ws-dsemu75buanfvmj07xd6/80f50366-df9f-44b1-8a4e-23a11b0357e9` and compose them before building anything from scratch:
 
-`AIVerifiedBadge`, `AgeRating`, `Avatar`, `Badge`, `Button`, `CardDescription`, `CardTitle`, `Card`, `Checkbox`, `ContentCard`, `CountUp`, `Dialog`, `EarningsCard`, `Eyebrow`, `Input`, `KidsModeToggle`, `Label`, `Logo`, `Menu`, `ModerationItem`, `NetworkTag`, `OrbitRing`, `PlayerBar`, `PricingCard`, `Progress`, `Reveal`, `SectionHeading`, `Select`, `Skeleton`, `Stat`, `Switch`, `TabsContent`, `TabsList`, `TabsTrigger`, `Tabs`, `Timeline`, `ToastProvider`, `TokenBadge`, `Tooltip`, `WalletBalance`
+`AIVerifiedBadge`, `AgeRating`, `Avatar`, `Badge`, `Button`, `CardDescription`, `CardTitle`, `Card`, `Checkbox`, `ContentCard`, `CountUp`, `Dialog`, `EarningsCard`, `Eyebrow`, `Input`, `KidsModeToggle`, `Label`, `Logo`, `Menu`, `MobileNav`, `ModerationItem`, `NetworkTag`, `OrbitRing`, `PlayerBar`, `PricingCard`, `Progress`, `Reveal`, `SectionHeading`, `Select`, `Skeleton`, `Stat`, `Switch`, `TabsContent`, `TabsList`, `TabsTrigger`, `Tabs`, `Timeline`, `ToastProvider`, `TokenBadge`, `Tooltip`, `WalletBalance`
 
 Per-component details (import stanzas, props, variants, examples) live in `.lovable/rules/libraries/{slug}/components.md` — on disk, not auto-loaded. Read that file or the component source when the name alone isn't enough.
 
