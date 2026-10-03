@@ -142,3 +142,68 @@ export function ModerationItem({ title, reason, confidence, timestamp, onApprove
     </div>
   );
 }
+
+/* ---------------- Eyebrow ---------------- */
+export const eyebrowVariants = cva("text-eyebrow", {
+  variants: {
+    tone: { muted: "text-muted-foreground", foreground: "text-foreground", brand: "text-gradient-brand" },
+    underline: { none: "", brand: "underline-brand mb-3 inline-block" },
+  },
+  defaultVariants: { tone: "muted", underline: "none" },
+});
+export interface EyebrowProps extends ComponentProps<"p">, VariantProps<typeof eyebrowVariants> {
+  /** Optional list rendered with "•" separators (e.g. pillars). */
+  items?: string[];
+}
+/** Wide-tracked uppercase label, e.g. "INOVAÇÃO • MOBILIDADE • LIBERDADE". */
+export function Eyebrow({ className, tone, underline, items, children, ...props }: EyebrowProps) {
+  return (
+    <p className={cn(eyebrowVariants({ tone, underline }), className)} {...props}>
+      {items ? items.map((it, i) => (
+        <span key={it}>{i > 0 && <span aria-hidden className="mx-3 opacity-60">•</span>}{it}</span>
+      )) : children}
+    </p>
+  );
+}
+
+/* ---------------- OrbitRing ---------------- */
+export const orbitRingVariants = cva("pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-[50%] border-2 border-transparent", {
+  variants: {
+    size: { md: "h-40 w-[28rem]", lg: "h-56 w-[40rem]", xl: "h-72 w-[52rem]" },
+  },
+  defaultVariants: { size: "lg" },
+});
+export interface OrbitRingProps extends ComponentProps<"div">, VariantProps<typeof orbitRingVariants> {}
+/** Decorative tilted gradient orbit. Place inside a `relative` container. */
+export function OrbitRing({ className, size, ...props }: OrbitRingProps) {
+  return (
+    <div
+      aria-hidden
+      className={cn(orbitRingVariants({ size }), "-rotate-12 [background:linear-gradient(transparent,transparent)_padding-box,var(--gradient-brand)_border-box] shadow-glow-hot [mask:radial-gradient(closest-side,transparent_96%,#000_97%)] opacity-80", className)}
+      {...props}
+    />
+  );
+}
+
+/* ---------------- TokenBadge ---------------- */
+export const tokenBadgeVariants = cva("inline-flex items-center gap-3 font-display font-bold tracking-wide", {
+  variants: { size: { sm: "text-lg", md: "text-2xl", lg: "text-4xl" } },
+  defaultVariants: { size: "md" },
+});
+const medal = { sm: "size-9 text-xs", md: "size-12 text-sm", lg: "size-20 text-xl" } as const;
+export interface TokenBadgeProps extends ComponentProps<"div">, VariantProps<typeof tokenBadgeVariants> {
+  /** Ticker without the "$". Defaults to VZN. */
+  symbol?: string;
+}
+/** Rewards-token medallion: gradient ring + ticker, e.g. "$VZN". */
+export function TokenBadge({ className, size, symbol = "VZN", ...props }: TokenBadgeProps) {
+  const s = size ?? "md";
+  return (
+    <div className={cn(tokenBadgeVariants({ size }), className)} {...props}>
+      <span aria-hidden className={cn("flex items-center justify-center rounded-full border-gradient-brand shadow-glow-hot", medal[s])}>
+        <span className="text-gradient-brand">VZ</span>
+      </span>
+      <span className="underline-brand text-foreground">${symbol}</span>
+    </div>
+  );
+}
