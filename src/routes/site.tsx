@@ -21,7 +21,13 @@ function SiteLayout() {
       <div className="min-h-screen bg-background">
         <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-3">
-            <Link to="/site" className="flex items-center rounded-md"><Logo brand="vizionz-transparent" size="sm" className="h-10 w-auto drop-shadow-[0_0_12px_var(--magenta)]" /></Link>
+            <Link to="/site" aria-label="VisionZ — início" className="group flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+              <Logo brand="visionz-symbol" alt="" className="h-8 w-auto transition-transform duration-300 drop-shadow-[0_0_10px_var(--magenta)] group-hover:scale-105" />
+              <span className="flex flex-col leading-none">
+                <span className="font-display text-lg font-bold tracking-[0.12em] text-foreground">VISIONZ</span>
+                <span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span>
+              </span>
+            </Link>
             <nav className="hidden flex-1 gap-1 md:flex" aria-label="Site">
               {links.map((l) => (
                 <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
