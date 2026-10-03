@@ -5,9 +5,9 @@ import { Card } from "@/index";
 export const Route = createFileRoute("/tipografia")({
   head: () => ({
     meta: [
-      { title: "Tipografia — VizionZ Design System" },
+      { title: "Tipografia — VisionZ Design System" },
       { name: "description", content: "Orbitron para títulos, Inter para leitura e JetBrains Mono para dados on-chain." },
-      { property: "og:title", content: "Tipografia — VizionZ Design System" },
+      { property: "og:title", content: "Tipografia — VisionZ Design System" },
       { property: "og:description", content: "Orbitron para títulos, Inter para leitura e JetBrains Mono para dados on-chain." },
     ],
   }),

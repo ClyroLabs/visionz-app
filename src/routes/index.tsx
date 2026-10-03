@@ -6,9 +6,9 @@ import { AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, Logo,
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "VizionZ Design System — Visão geral" },
-      { name: "description", content: "A VizionZ vai revolucionar o streaming no Brasil e no mundo: criação, streaming sob demanda e recompensas multichain." },
-      { property: "og:title", content: "VizionZ Design System — Visão geral" },
+      { title: "VisionZ Design System — Visão geral" },
+      { name: "description", content: "A VisionZ vai revolucionar o streaming no Brasil e no mundo: criação, streaming sob demanda e recompensas multichain." },
+      { property: "og:title", content: "VisionZ Design System — Visão geral" },
       { property: "og:description", content: "Streaming on-demand e à la carte em blockchain, com recompensas gamificadas e conteúdo seguro para crianças." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -42,7 +42,7 @@ function Overview() {
               O streaming <span className="text-gradient-brand">reinventado</span>.
             </h1>
             <p className="mt-6 max-w-xl text-lg text-muted-foreground">
-              A VizionZ vai revolucionar a maneira como se lida com streaming no Brasil e fora dele: tecnologia de ponta e ganhos ilimitados para todos que fazem parte do ecossistema.
+              A VisionZ vai revolucionar a maneira como se lida com streaming no Brasil e fora dele: tecnologia de ponta e ganhos ilimitados para todos que fazem parte do ecossistema.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link to="/componentes"><Button size="lg">Ver componentes</Button></Link>

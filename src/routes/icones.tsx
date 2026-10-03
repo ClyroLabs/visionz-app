@@ -7,9 +7,9 @@ import { Input } from "@/index";
 export const Route = createFileRoute("/icones")({
   head: () => ({
     meta: [
-      { title: "Ícones — VizionZ Design System" },
+      { title: "Ícones — VisionZ Design System" },
       { name: "description", content: "Conjunto de ícones Lucide curado para streaming, criação e blockchain." },
-      { property: "og:title", content: "Ícones — VizionZ Design System" },
+      { property: "og:title", content: "Ícones — VisionZ Design System" },
       { property: "og:description", content: "Conjunto de ícones Lucide curado para streaming, criação e blockchain." },
     ],
   }),

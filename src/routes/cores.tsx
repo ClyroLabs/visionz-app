@@ -4,10 +4,10 @@ import { Caption, PageHeader, Shell } from "@/showcase/shell";
 export const Route = createFileRoute("/cores")({
   head: () => ({
     meta: [
-      { title: "Cores — VizionZ Design System" },
-      { name: "description", content: "Paleta da VizionZ: azul-noite, degradê de criação e ciano de tecnologia." },
-      { property: "og:title", content: "Cores — VizionZ Design System" },
-      { property: "og:description", content: "Paleta da VizionZ: azul-noite, degradê de criação e ciano de tecnologia." },
+      { title: "Cores — VisionZ Design System" },
+      { name: "description", content: "Paleta da VisionZ: azul-noite, degradê de criação e ciano de tecnologia." },
+      { property: "og:title", content: "Cores — VisionZ Design System" },
+      { property: "og:description", content: "Paleta da VisionZ: azul-noite, degradê de criação e ciano de tecnologia." },
     ],
   }),
   component: Colors,
@@ -20,7 +20,7 @@ const groups = [
     ["bg-border", "--border", "bordas e divisores"],
   ] },
   { title: "Marca — criação", items: [
-    ["bg-gradient-brand", "--gradient-brand", "ação principal, ganhos"], ["bg-primary", "--primary", "violeta VizionZ"],
+    ["bg-gradient-brand", "--gradient-brand", "ação principal, ganhos"], ["bg-primary", "--primary", "violeta VisionZ"],
     ["bg-magenta", "--magenta", "destaque emocional"], ["bg-ember", "--ember", "calor, preço à la carte"],
   ] },
   { title: "Tecnologia — Clyro", items: [
@@ -41,7 +41,7 @@ const pairs = [
 function Colors() {
   return (
     <Shell>
-      <PageHeader eyebrow="Fundamentos" title="Cores">Duas energias: o degradê da VizionZ para criação e recompensas, o ciano da Clyro para tecnologia e segurança — sobre um azul-noite profundo.</PageHeader>
+      <PageHeader eyebrow="Fundamentos" title="Cores">Duas energias: o degradê da VisionZ para criação e recompensas, o ciano da Clyro para tecnologia e segurança — sobre um azul-noite profundo.</PageHeader>
       {groups.map((g) => (
         <section key={g.title} className="mb-12">
           <h2 className="mb-4 font-display text-lg font-semibold tracking-wide">{g.title}</h2>

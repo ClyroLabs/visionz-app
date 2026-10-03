@@ -13,7 +13,7 @@ import clyroIcon from "../../assets/logos/clyro-icon.svg";
 import clyroLabsAi from "../../assets/logos/clyro-labs-ai.svg";
 
 const logoSources = { vizionz: vizionzLogo, clyro: clyroLogo, "clyro-icon": clyroIcon, "clyro-labs-ai": clyroLabsAi } as const;
-const logoAlt = { vizionz: "VizionZ Entertainment", clyro: "Clyro", "clyro-icon": "Clyro", "clyro-labs-ai": "Clyro Labs AI" } as const;
+const logoAlt = { vizionz: "VisionZ Entertainment", clyro: "Clyro", "clyro-icon": "Clyro", "clyro-labs-ai": "Clyro Labs AI" } as const;
 
 export const logoVariants = cva("block object-contain", {
   variants: { size: { sm: "h-8", md: "h-14", lg: "h-24", xl: "h-40" } },

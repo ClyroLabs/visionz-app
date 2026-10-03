@@ -10,17 +10,35 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as ComponentesRouteImport } from './routes/componentes'
 import { Route as CoresRouteImport } from './routes/cores'
 import { Route as IconesRouteImport } from './routes/icones'
 import { Route as MarcaRouteImport } from './routes/marca'
+import { Route as SiteRouteImport } from './routes/site'
 import { Route as TipografiaRouteImport } from './routes/tipografia'
+import { Route as AppIndexRouteImport } from './routes/app.index'
+import { Route as AppAssistirRouteImport } from './routes/app.assistir'
+import { Route as AppCarteiraRouteImport } from './routes/app.carteira'
+import { Route as AppEcossistemaRouteImport } from './routes/app.ecossistema'
+import { Route as AppEstudioRouteImport } from './routes/app.estudio'
+import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
+import { Route as AppPerfisRouteImport } from './routes/app.perfis'
+import { Route as SiteIndexRouteImport } from './routes/site.index'
+import { Route as SiteCriadoresRouteImport } from './routes/site.criadores'
+import { Route as SiteInvestidoresRouteImport } from './routes/site.investidores'
+import { Route as SiteSegurancaRouteImport } from './routes/site.seguranca'
 import { Route as Char91__componentChar93PreviewSplatRouteImport } from './routes/[__component].preview.$'
 import { Route as Char91__mockupChar93PreviewSplatRouteImport } from './routes/[__mockup].preview.$'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentesRoute = ComponentesRouteImport.update({
@@ -43,10 +61,70 @@ const MarcaRoute = MarcaRouteImport.update({
   path: '/marca',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SiteRoute = SiteRouteImport.update({
+  id: '/site',
+  path: '/site',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TipografiaRoute = TipografiaRouteImport.update({
   id: '/tipografia',
   path: '/tipografia',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAssistirRoute = AppAssistirRouteImport.update({
+  id: '/assistir',
+  path: '/assistir',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCarteiraRoute = AppCarteiraRouteImport.update({
+  id: '/carteira',
+  path: '/carteira',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEcossistemaRoute = AppEcossistemaRouteImport.update({
+  id: '/ecossistema',
+  path: '/ecossistema',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppEstudioRoute = AppEstudioRouteImport.update({
+  id: '/estudio',
+  path: '/estudio',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppModeracaoRoute = AppModeracaoRouteImport.update({
+  id: '/moderacao',
+  path: '/moderacao',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPerfisRoute = AppPerfisRouteImport.update({
+  id: '/perfis',
+  path: '/perfis',
+  getParentRoute: () => AppRoute,
+} as any)
+const SiteIndexRoute = SiteIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteCriadoresRoute = SiteCriadoresRouteImport.update({
+  id: '/criadores',
+  path: '/criadores',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteInvestidoresRoute = SiteInvestidoresRouteImport.update({
+  id: '/investidores',
+  path: '/investidores',
+  getParentRoute: () => SiteRoute,
+} as any)
+const SiteSegurancaRoute = SiteSegurancaRouteImport.update({
+  id: '/seguranca',
+  path: '/seguranca',
+  getParentRoute: () => SiteRoute,
 } as any)
 const Char91__componentChar93PreviewSplatRoute =
   Char91__componentChar93PreviewSplatRouteImport.update({
@@ -63,11 +141,24 @@ const Char91__mockupChar93PreviewSplatRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
+  '/site': typeof SiteRouteWithChildren
   '/tipografia': typeof TipografiaRoute
+  '/app/assistir': typeof AppAssistirRoute
+  '/app/carteira': typeof AppCarteiraRoute
+  '/app/ecossistema': typeof AppEcossistemaRoute
+  '/app/estudio': typeof AppEstudioRoute
+  '/app/moderacao': typeof AppModeracaoRoute
+  '/app/perfis': typeof AppPerfisRoute
+  '/site/criadores': typeof SiteCriadoresRoute
+  '/site/investidores': typeof SiteInvestidoresRoute
+  '/site/seguranca': typeof SiteSegurancaRoute
+  '/app/': typeof AppIndexRoute
+  '/site/': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
@@ -78,17 +169,41 @@ export interface FileRoutesByTo {
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
   '/tipografia': typeof TipografiaRoute
+  '/app/assistir': typeof AppAssistirRoute
+  '/app/carteira': typeof AppCarteiraRoute
+  '/app/ecossistema': typeof AppEcossistemaRoute
+  '/app/estudio': typeof AppEstudioRoute
+  '/app/moderacao': typeof AppModeracaoRoute
+  '/app/perfis': typeof AppPerfisRoute
+  '/site/criadores': typeof SiteCriadoresRoute
+  '/site/investidores': typeof SiteInvestidoresRoute
+  '/site/seguranca': typeof SiteSegurancaRoute
+  '/app': typeof AppIndexRoute
+  '/site': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
+  '/site': typeof SiteRouteWithChildren
   '/tipografia': typeof TipografiaRoute
+  '/app/assistir': typeof AppAssistirRoute
+  '/app/carteira': typeof AppCarteiraRoute
+  '/app/ecossistema': typeof AppEcossistemaRoute
+  '/app/estudio': typeof AppEstudioRoute
+  '/app/moderacao': typeof AppModeracaoRoute
+  '/app/perfis': typeof AppPerfisRoute
+  '/site/criadores': typeof SiteCriadoresRoute
+  '/site/investidores': typeof SiteInvestidoresRoute
+  '/site/seguranca': typeof SiteSegurancaRoute
+  '/app/': typeof AppIndexRoute
+  '/site/': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
   '/__mockup/preview/$': typeof Char91__mockupChar93PreviewSplatRoute
 }
@@ -96,11 +211,24 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/app'
     | '/componentes'
     | '/cores'
     | '/icones'
     | '/marca'
+    | '/site'
     | '/tipografia'
+    | '/app/assistir'
+    | '/app/carteira'
+    | '/app/ecossistema'
+    | '/app/estudio'
+    | '/app/moderacao'
+    | '/app/perfis'
+    | '/site/criadores'
+    | '/site/investidores'
+    | '/site/seguranca'
+    | '/app/'
+    | '/site/'
     | '/__component/preview/$'
     | '/__mockup/preview/$'
   fileRoutesByTo: FileRoutesByTo
@@ -111,26 +239,52 @@ export interface FileRouteTypes {
     | '/icones'
     | '/marca'
     | '/tipografia'
+    | '/app/assistir'
+    | '/app/carteira'
+    | '/app/ecossistema'
+    | '/app/estudio'
+    | '/app/moderacao'
+    | '/app/perfis'
+    | '/site/criadores'
+    | '/site/investidores'
+    | '/site/seguranca'
+    | '/app'
+    | '/site'
     | '/__component/preview/$'
     | '/__mockup/preview/$'
   id:
     | '__root__'
     | '/'
+    | '/app'
     | '/componentes'
     | '/cores'
     | '/icones'
     | '/marca'
+    | '/site'
     | '/tipografia'
+    | '/app/assistir'
+    | '/app/carteira'
+    | '/app/ecossistema'
+    | '/app/estudio'
+    | '/app/moderacao'
+    | '/app/perfis'
+    | '/site/criadores'
+    | '/site/investidores'
+    | '/site/seguranca'
+    | '/app/'
+    | '/site/'
     | '/__component/preview/$'
     | '/__mockup/preview/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AppRoute: typeof AppRouteWithChildren
   ComponentesRoute: typeof ComponentesRoute
   CoresRoute: typeof CoresRoute
   IconesRoute: typeof IconesRoute
   MarcaRoute: typeof MarcaRoute
+  SiteRoute: typeof SiteRouteWithChildren
   TipografiaRoute: typeof TipografiaRoute
   Char91__componentChar93PreviewSplatRoute: typeof Char91__componentChar93PreviewSplatRoute
   Char91__mockupChar93PreviewSplatRoute: typeof Char91__mockupChar93PreviewSplatRoute
@@ -143,6 +297,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/componentes': {
@@ -173,12 +334,96 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof MarcaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/site': {
+      id: '/site'
+      path: '/site'
+      fullPath: '/site'
+      preLoaderRoute: typeof SiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tipografia': {
       id: '/tipografia'
       path: '/tipografia'
       fullPath: '/tipografia'
       preLoaderRoute: typeof TipografiaRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/assistir': {
+      id: '/app/assistir'
+      path: '/assistir'
+      fullPath: '/app/assistir'
+      preLoaderRoute: typeof AppAssistirRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/carteira': {
+      id: '/app/carteira'
+      path: '/carteira'
+      fullPath: '/app/carteira'
+      preLoaderRoute: typeof AppCarteiraRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ecossistema': {
+      id: '/app/ecossistema'
+      path: '/ecossistema'
+      fullPath: '/app/ecossistema'
+      preLoaderRoute: typeof AppEcossistemaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/estudio': {
+      id: '/app/estudio'
+      path: '/estudio'
+      fullPath: '/app/estudio'
+      preLoaderRoute: typeof AppEstudioRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/moderacao': {
+      id: '/app/moderacao'
+      path: '/moderacao'
+      fullPath: '/app/moderacao'
+      preLoaderRoute: typeof AppModeracaoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/perfis': {
+      id: '/app/perfis'
+      path: '/perfis'
+      fullPath: '/app/perfis'
+      preLoaderRoute: typeof AppPerfisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/site/': {
+      id: '/site/'
+      path: '/'
+      fullPath: '/site/'
+      preLoaderRoute: typeof SiteIndexRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/site/criadores': {
+      id: '/site/criadores'
+      path: '/criadores'
+      fullPath: '/site/criadores'
+      preLoaderRoute: typeof SiteCriadoresRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/site/investidores': {
+      id: '/site/investidores'
+      path: '/investidores'
+      fullPath: '/site/investidores'
+      preLoaderRoute: typeof SiteInvestidoresRouteImport
+      parentRoute: typeof SiteRoute
+    }
+    '/site/seguranca': {
+      id: '/site/seguranca'
+      path: '/seguranca'
+      fullPath: '/site/seguranca'
+      preLoaderRoute: typeof SiteSegurancaRouteImport
+      parentRoute: typeof SiteRoute
     }
     '/__component/preview/$': {
       id: '/__component/preview/$'
@@ -197,12 +442,52 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AppRouteChildren {
+  AppAssistirRoute: typeof AppAssistirRoute
+  AppCarteiraRoute: typeof AppCarteiraRoute
+  AppEcossistemaRoute: typeof AppEcossistemaRoute
+  AppEstudioRoute: typeof AppEstudioRoute
+  AppModeracaoRoute: typeof AppModeracaoRoute
+  AppPerfisRoute: typeof AppPerfisRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAssistirRoute: AppAssistirRoute,
+  AppCarteiraRoute: AppCarteiraRoute,
+  AppEcossistemaRoute: AppEcossistemaRoute,
+  AppEstudioRoute: AppEstudioRoute,
+  AppModeracaoRoute: AppModeracaoRoute,
+  AppPerfisRoute: AppPerfisRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
+interface SiteRouteChildren {
+  SiteCriadoresRoute: typeof SiteCriadoresRoute
+  SiteInvestidoresRoute: typeof SiteInvestidoresRoute
+  SiteSegurancaRoute: typeof SiteSegurancaRoute
+  SiteIndexRoute: typeof SiteIndexRoute
+}
+
+const SiteRouteChildren: SiteRouteChildren = {
+  SiteCriadoresRoute: SiteCriadoresRoute,
+  SiteInvestidoresRoute: SiteInvestidoresRoute,
+  SiteSegurancaRoute: SiteSegurancaRoute,
+  SiteIndexRoute: SiteIndexRoute,
+}
+
+const SiteRouteWithChildren = SiteRoute._addFileChildren(SiteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AppRoute: AppRouteWithChildren,
   ComponentesRoute: ComponentesRoute,
   CoresRoute: CoresRoute,
   IconesRoute: IconesRoute,
   MarcaRoute: MarcaRoute,
+  SiteRoute: SiteRouteWithChildren,
   TipografiaRoute: TipografiaRoute,
   Char91__componentChar93PreviewSplatRoute:
     Char91__componentChar93PreviewSplatRoute,
