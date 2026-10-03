@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Music, Sparkles, Upload } from "lucide-react";
-import { AIVerifiedBadge, Button, Card, CardDescription, CardTitle, EarningsCard, Input, Label, Progress, Select, useToast } from "@/index";
+import { Upload } from "lucide-react";
+import { Logo, AIVerifiedBadge, Button, Card, CardDescription, CardTitle, EarningsCard, Input, Label, Progress, Select, useToast } from "@/index";
 
 export const Route = createFileRoute("/app/estudio")({
   head: () => ({
@@ -60,8 +60,8 @@ function Studio() {
           <Button disabled={!title.trim() || step === "upload" || step === "ai"} onClick={() => { setP(0); setStep("upload"); }}><Upload />Enviar vídeo</Button>
         </Card>
         <div className="space-y-4">
-          <Card variant="glass" className="space-y-2"><Sparkles className="size-6 text-magenta" /><CardTitle>Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Synth em breve no protótipo" })}>Abrir Synth</Button></Card>
-          <Card variant="glass" className="space-y-2"><Music className="size-6 text-cyan" /><CardTitle>Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Jukebox em breve no protótipo" })}>Abrir Jukebox</Button></Card>
+          <Card variant="glass" className="space-y-2"><Logo brand="clyro-synth" alt="" className="h-12 w-auto" /><CardTitle>Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Synth em breve no protótipo" })}>Abrir Synth</Button></Card>
+          <Card variant="glass" className="space-y-2"><Logo brand="clyro-jukebox" alt="" className="h-12 w-auto" /><CardTitle>Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Button size="sm" variant="secondary" onClick={() => toast({ title: "Clyro Jukebox em breve no protótipo" })}>Abrir Jukebox</Button></Card>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Award, Music, Sparkles, Wand2 } from "lucide-react";
-import { Button, Card, CardDescription, CardTitle, EarningsCard, Progress, ScrollSnapRow, SectionHeading, Stat } from "@/index";
+import { Logo, Button, Card, CardDescription, CardTitle, EarningsCard, Progress, ScrollSnapRow, SectionHeading, Stat } from "@/index";
 import { LeadDialog, Section } from "@/experience/site-parts";
 import trio from "@/assets/covers/trio-alegria.jpg";
 
@@ -28,10 +28,10 @@ function Creators() {
         <img src={trio} alt="Cena de Aventuras do Trio Alegria, série produzida com Clyro Synth" width={1280} height={720} className="rounded-xl border border-cyan/20 shadow-glow-brand" />
       </Section>
       <Section className="py-6 md:py-10"><ScrollSnapRow label="Ferramentas" className="md:grid-cols-3 md:gap-6">{[
-          { icon: Sparkles, t: "Clyro Synth", d: "Séries animadas, filmes, curtas e longas, documentários." },
-          { icon: Music, t: "Clyro Jukebox", d: "Trilhas e músicas originais sem entraves de direitos." },
-          { icon: Wand2, t: "Ferramentas Pro", d: "Render 8K, dublagem por IA e distribuição global." },
-        ].map(({ icon: Icon, t, d }) => <Card key={t} variant="glass" padding="lg" className="h-full space-y-3 flex flex-col items-center text-center md:items-start md:text-left"><Icon className="size-7 text-magenta" /><CardTitle className="text-lg">{t}</CardTitle><CardDescription>{d}</CardDescription></Card>)}
+          { icon: Sparkles, logo: "clyro-synth" as const, t: "Clyro Synth", d: "Séries animadas, filmes, curtas e longas, documentários." },
+          { icon: Music, logo: "clyro-jukebox" as const, t: "Clyro Jukebox", d: "Trilhas e músicas originais sem entraves de direitos." },
+          { icon: Wand2, logo: undefined, t: "Ferramentas Pro", d: "Render 8K, dublagem por IA e distribuição global." },
+        ].map(({ icon: Icon, logo, t, d }) => <Card key={t} variant="glass" padding="lg" className="h-full space-y-3 flex flex-col items-center text-center md:items-start md:text-left">{logo ? <Logo brand={logo} alt="" className="h-14 w-auto" /> : <Icon className="size-7 text-magenta" />}<CardTitle className="text-lg">{t}</CardTitle><CardDescription>{d}</CardDescription></Card>)}
       </ScrollSnapRow></Section>
       <Section className="grid gap-6 py-6 md:gap-10 md:py-10 lg:grid-cols-2">
         <Card padding="lg" className="space-y-6">

@@ -13,9 +13,11 @@ import clyroIcon from "../../assets/logos/clyro-icon.svg";
 import clyroLabsAi from "../../assets/logos/clyro-labs-ai.svg";
 import visionzSymbol from "../../assets/logos/visionz-symbol.png";
 import vizionzTransparent from "../../assets/logos/vizionz-logo-transparent.png";
+import synthLogo from "../../assets/logos/synth-logo.webp.asset.json";
+import jukeboxLogo from "../../assets/logos/jukebox-logo.webp.asset.json";
 
-const logoSources = { vizionz: vizionzLogo, "vizionz-transparent": vizionzTransparent, "visionz-symbol": visionzSymbol, clyro: clyroLogo, "clyro-icon": clyroIcon, "clyro-labs-ai": clyroLabsAi } as const;
-const logoAlt = { vizionz: "VisionZ Entertainment", "vizionz-transparent": "VisionZ Entertainment", "visionz-symbol": "VisionZ", clyro: "Clyro", "clyro-icon": "Clyro", "clyro-labs-ai": "Clyro Labs AI" } as const;
+const logoSources = { vizionz: vizionzLogo, "vizionz-transparent": vizionzTransparent, "visionz-symbol": visionzSymbol, clyro: clyroLogo, "clyro-icon": clyroIcon, "clyro-labs-ai": clyroLabsAi, "clyro-synth": synthLogo.url, "clyro-jukebox": jukeboxLogo.url } as const;
+const logoAlt = { vizionz: "VisionZ Entertainment", "vizionz-transparent": "VisionZ Entertainment", "visionz-symbol": "VisionZ", clyro: "Clyro", "clyro-icon": "Clyro", "clyro-labs-ai": "Clyro Labs AI", "clyro-synth": "Clyro Synth", "clyro-jukebox": "Clyro Jukebox" } as const;
 
 export const logoVariants = cva("block object-contain", {
   variants: { size: { sm: "h-8", md: "h-14", lg: "h-24", xl: "h-40" } },
