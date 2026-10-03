@@ -30,6 +30,7 @@ export const cardVariants = cva("rounded-xl border text-foreground", {
       default: "bg-surface shadow-panel",
       glass: "border-cyan/20 bg-surface/60 backdrop-blur-md shadow-panel",
       glow: "border-cyan/40 bg-surface shadow-glow-cyan",
+      featured: "border-gradient-brand shadow-glow-brand",
     },
     padding: { none: "", md: "p-5", lg: "p-7" },
   },

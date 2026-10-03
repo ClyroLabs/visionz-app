@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Music, Play, ShieldCheck, Sparkles, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
-  SectionHeading, Stat, Timeline, WalletBalance, type Network,
+  SectionHeading, Stat, Timeline, WalletBalance, Eyebrow, OrbitRing, TokenBadge, type Network,
 } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { agents, catalog, roadmap } from "@/experience/data";
@@ -34,30 +34,61 @@ function Landing() {
     <>
       {/* Hero */}
       <div className="relative overflow-hidden">
-        <img src={heroCover} alt="" width={1280} height={720} className="absolute inset-0 size-full object-cover opacity-25" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/80 to-background" />
-        <div className="absolute inset-0 bg-circuit-grid opacity-60" />
-        <Glow className="-left-32 top-10 size-[28rem] bg-primary/30" />
-        <Glow className="-right-20 bottom-0 size-[24rem] bg-cyan/20" />
-        <Section className="relative pb-24 pt-24 md:pt-32">
-          <div className="max-w-4xl">
-            <div className="mb-6 flex flex-wrap gap-2">
+        <img src={heroCover} alt="" width={1280} height={720} className="absolute inset-0 size-full object-cover opacity-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/85 to-background" />
+        <div className="absolute inset-0 bg-stage-glow" />
+        <div className="absolute inset-0 bg-light-streaks" />
+        <div className="absolute inset-x-0 bottom-0 h-64 floor-reflection" />
+        <Section className="relative pb-24 pt-16 md:pt-20">
+          <div className="flex flex-col justify-between gap-6 md:flex-row">
+            <div>
+              <p className="font-display text-lg italic tracking-[0.25em] md:text-2xl">MAIS QUE TECNOLOGIA,</p>
+              <p className="underline-brand font-display text-lg font-bold italic tracking-[0.25em] md:text-2xl">É <span className="text-gradient-brand">VISÃO DE FUTURO.</span></p>
+            </div>
+            <div className="md:text-right">
+              <Eyebrow tone="foreground" items={["Inovação", "Streaming", "Recompensas"]} />
+              <Eyebrow className="mt-2 text-[0.65rem]">Construindo um mundo mais conectado.</Eyebrow>
+            </div>
+          </div>
+
+          <div className="relative mx-auto mt-20 max-w-5xl text-center">
+            <OrbitRing size="xl" className="hidden md:block" />
+            <div className="relative mb-6 flex flex-wrap justify-center gap-2">
               <Badge variant="cyan"><Bot />IA Clyro nativa</Badge><Badge variant="neutral">4K / 8K sem lag</Badge>
               <Badge variant="neutral">Multichain</Badge><AIVerifiedBadge>Seguro para crianças</AIVerifiedBadge>
             </div>
-            <h1 className="font-display text-5xl font-extrabold leading-[1.05] tracking-wide md:text-7xl">
-              O entretenimento <span className="text-gradient-brand">nunca mais</span> será o mesmo.
+            <h1 className="relative font-display text-5xl font-extrabold leading-[1.05] tracking-wide md:text-7xl">
+              <span className="text-metallic">O entretenimento</span> <span className="text-gradient-brand">nunca mais</span> <span className="text-metallic">será o mesmo.</span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
+            <Eyebrow tone="foreground" className="relative mt-8" items={["Assista", "Crie", "Ganhe"]} />
+            <p className="relative mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
               A VisionZ vai revolucionar o streaming no Brasil e no mundo. Assista sob demanda ou à la carte, crie com IA e participe de um ecossistema de recompensas que cresce com você.
             </p>
-            <div className="mt-10 flex flex-wrap gap-3">
+            <div className="relative mt-10 flex flex-wrap justify-center gap-3">
               <Button size="lg" onClick={() => setLead("espera")}>Entrar na lista de espera</Button>
               <Button size="lg" variant="neon" onClick={() => setLead("investidor")}>Sou investidor</Button>
               <Link to="/app"><Button size="lg" variant="ghost"><Play />Ver o protótipo</Button></Link>
             </div>
           </div>
-          <div className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
+
+          <div className="relative mx-auto mt-20 grid max-w-5xl grid-cols-2 gap-y-8 md:grid-cols-5 md:divide-x md:divide-border">
+            {[
+              { icon: Clapperboard, t: "Criação audiovisual", c: "text-primary" },
+              { icon: Play, t: "Streaming 4K/8K", c: "text-indigo" },
+              { icon: Bot, t: "Inteligência artificial", c: "text-magenta" },
+              { icon: ShieldCheck, t: "Seguro para crianças", c: "text-ember" },
+              { icon: Coins, t: "Recompensas multichain", c: "text-gold" },
+            ].map(({ icon: Icon, t, c }) => (
+              <div key={t} className="flex flex-col items-center gap-3 px-4 text-center">
+                <Icon className={`size-9 ${c}`} strokeWidth={1.5} />
+                <span className="label-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="relative mt-16 flex justify-center"><TokenBadge size="lg" /></div>
+
+          <div className="relative mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
             <Stat value="0%" label="exposição infantil a conteúdo impróprio — nossa meta" />
             <Stat value="40%" tone="cyan" label="menos custo de banda com a tecnologia Clyro" />
             <Stat value="4K/8K" tone="default" label="streaming de alta performance" />

@@ -21,5 +21,7 @@ export {
 } from "./vizionz/components/platform";
 export {
   Stat, statVariants, SectionHeading, sectionHeadingVariants, PricingCard, pricingCardVariants, Timeline, ModerationItem, moderationItemVariants,
+  Eyebrow, eyebrowVariants, OrbitRing, orbitRingVariants, TokenBadge, tokenBadgeVariants,
+  type EyebrowProps, type OrbitRingProps, type TokenBadgeProps,
   type StatProps, type SectionHeadingProps, type PricingCardProps, type TimelineProps, type TimelineItem, type ModerationItemProps,
 } from "./vizionz/components/marketing";
