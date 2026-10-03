@@ -30,13 +30,13 @@ function SiteLayout() {
             </Link>
             <nav className="hidden flex-1 gap-1 md:flex" aria-label="Site">
               {links.map((l) => (
-                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
+                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:text-neon-pink hover:[text-shadow:0_0_12px_var(--neon-pink)]" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>
               ))}
             </nav>
             <Link to="/app" className="ml-auto"><Button size="sm">Abrir protótipo</Button></Link>
           </div>
           <nav className="flex gap-1 overflow-x-auto px-4 pb-2 md:hidden" aria-label="Site">
-            {links.map((l) => <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="shrink-0 rounded-md px-3 py-1 text-xs text-muted-foreground" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>)}
+            {links.map((l) => <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="shrink-0 rounded-md px-3 py-1 text-xs text-muted-foreground hover:text-neon-pink" activeProps={{ className: "!text-cyan" }}>{l.label}</Link>)}
           </nav>
         </header>
         <Outlet />
