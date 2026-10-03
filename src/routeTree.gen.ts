@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ComponentesRouteImport } from './routes/componentes'
 import { Route as CoresRouteImport } from './routes/cores'
 import { Route as IconesRouteImport } from './routes/icones'
 import { Route as MarcaRouteImport } from './routes/marca'
@@ -20,6 +21,11 @@ import { Route as Char91__mockupChar93PreviewSplatRouteImport } from './routes/[
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentesRoute = ComponentesRouteImport.update({
+  id: '/componentes',
+  path: '/componentes',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CoresRoute = CoresRouteImport.update({
@@ -57,6 +63,7 @@ const Char91__mockupChar93PreviewSplatRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
@@ -76,6 +84,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/componentes'
     | '/cores'
     | '/icones'
     | '/marca'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/componentes'
     | '/cores'
     | '/icones'
     | '/marca'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/componentes'
     | '/cores'
     | '/icones'
     | '/marca'
@@ -115,6 +127,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ComponentesRoute: typeof ComponentesRoute
   CoresRoute: typeof CoresRoute
   IconesRoute: typeof IconesRoute
   MarcaRoute: typeof MarcaRoute
@@ -130,6 +143,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/componentes': {
+      id: '/componentes'
+      path: '/componentes'
+      fullPath: '/componentes'
+      preLoaderRoute: typeof ComponentesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cores': {
@@ -179,6 +199,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ComponentesRoute: ComponentesRoute,
   CoresRoute: CoresRoute,
   IconesRoute: IconesRoute,
   MarcaRoute: MarcaRoute,
