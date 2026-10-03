@@ -170,7 +170,7 @@
 }
 
 @keyframes vz-rise { from { opacity: 0; transform: translateY(24px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
-@keyframes vz-orbit { from { transform: translate(-50%, -50%) rotate(-12deg) scale(1); } 50% { transform: translate(-50%, -50%) rotate(-6deg) scale(1.03); } to { transform: translate(-50%, -50%) rotate(-12deg) scale(1); } }
+@keyframes vz-orbit { 0%, 100% { transform: rotate(-12deg) scale(1); } 50% { transform: rotate(-6deg) scale(1.03); } }
 @keyframes vz-breathe { 0%, 100% { opacity: 0.75; } 50% { opacity: 1; } }
 @keyframes vz-drift { 0%, 100% { background-position: 0 0, 0 0, 0 0; } 50% { background-position: 40px 20px, -40px -20px, -60px 30px; } }
 @keyframes vz-shine { 0%, 70% { transform: translateX(-120%) skewX(-20deg); } 100% { transform: translateX(220%) skewX(-20deg); } }
