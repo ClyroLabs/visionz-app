@@ -2,7 +2,7 @@
   "meta": {
     "name": "VizionZ Entertainment",
     "package": "@ws-dsemu75buanfvmj07xd6/80f50366-df9f-44b1-8a4e-23a11b0357e9",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -76,7 +76,7 @@
       "src/routes/index.tsx": "8ac8fd8ff1ac36658fe228c33c878bee",
       "src/routes/marca.tsx": "b6c9aa04c483ae76e35f9a93eae7a91f",
       "src/routes/site.criadores.tsx": "1ef871b24046d36a64862dbdbafc05b3",
-      "src/routes/site.index.tsx": "6804c256a36a263e02f7c7d58a214a85",
+      "src/routes/site.index.tsx": "e3984c2da480f80187f21aa133796548",
       "src/routes/site.investidores.tsx": "5a56034e3da3fbb6cd08212c3a6eefd9",
       "src/routes/site.seguranca.tsx": "691aa0fcfff6c3bb3d9433404f5f5d07",
       "src/routes/site.tsx": "b098886cf420f871189363afed161631",
