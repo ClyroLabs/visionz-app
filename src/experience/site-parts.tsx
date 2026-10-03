@@ -2,7 +2,7 @@ import { useState, type FormEvent, type ReactNode } from "react";
 import { Button, Dialog, Input, Label, Select, cn, useToast } from "@/index";
 
 export function Section({ children, className, id }: { children: ReactNode; className?: string; id?: string }) {
-  return <section id={id} className={cn("mx-auto max-w-7xl px-6 py-20 md:py-28", className)}>{children}</section>;
+  return <section id={id} className={cn("mx-auto max-w-7xl px-5 py-12 sm:px-6 sm:py-16 lg:py-28", className)}>{children}</section>;
 }
 
 export function Glow({ className }: { className?: string }) {

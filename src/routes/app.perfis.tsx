@@ -25,7 +25,7 @@ function Profiles() {
   ];
   return (
     <div className="space-y-8">
-      <h1 className="font-display text-3xl font-bold tracking-wide">Quem está assistindo?</h1>
+      <h1 className="font-display text-[clamp(1.375rem,4.5vw,1.875rem)] font-bold tracking-wide">Quem está assistindo?</h1>
       <div className="flex flex-wrap gap-4">
         {profiles.map((p) => (
           <button key={p.name} type="button" onClick={() => setKids(p.kids)} className={cn("flex w-40 flex-col items-center gap-3 rounded-xl border bg-surface p-5 outline-none transition-all focus-visible:ring-2 focus-visible:ring-ring", kids === p.kids && "border-cyan shadow-glow-cyan")}>

@@ -127,12 +127,23 @@
   background-clip: text;
   color: transparent;
 }
+/* Centers card, stat and heading content on phones and tablets (below 1024px). */
+@utility responsive-center {
+  @media (max-width: 1023px) {
+    & :where(.vz-card, .vz-stat, .vz-heading) { text-align: center; }
+    & :where(.vz-heading) { margin-inline: auto; }
+    & :where(.vz-card) :where(.flex:not(.flex-col)) { justify-content: center; }
+    & :where(.vz-card) :where(.flex-col) { align-items: center; }
+    & :where(.vz-card) :where(ul) { display: inline-flex; flex-direction: column; text-align: left; }
+  }
+}
+
 @utility label-eyebrow {
   font-family: var(--font-sans);
   font-size: 0.75rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.35em;
+  letter-spacing: clamp(0.14em, 0.9vw, 0.35em);
 }
 @utility underline-brand {
   position: relative;

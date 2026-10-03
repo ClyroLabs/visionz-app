@@ -10,7 +10,7 @@ import { CountUp } from "./motion";
 export const statVariants = cva("font-display font-bold tracking-wide", {
   variants: {
     tone: { brand: "text-gradient-brand", cyan: "text-cyan", default: "text-foreground" },
-    size: { md: "text-2xl", lg: "text-4xl", xl: "text-5xl md:text-6xl" },
+    size: { md: "text-xl sm:text-2xl", lg: "text-3xl sm:text-4xl", xl: "text-4xl sm:text-5xl lg:text-6xl" },
   },
   defaultVariants: { tone: "brand", size: "lg" },
 });
@@ -22,15 +22,15 @@ export interface StatProps extends ComponentProps<"div">, VariantProps<typeof st
 /** Highlighted metric: big number + caption. */
 export function Stat({ value, label, tone, size, className, ...props }: StatProps) {
   return (
-    <div className={cn("space-y-1", className)} {...props}>
+    <div className={cn("vz-stat min-w-0 space-y-1", className)} {...props}>
       <p className={statVariants({ tone, size })}><CountUp value={value} /></p>
-      <p className="text-sm text-muted-foreground">{label}</p>
+      <p className="text-xs text-muted-foreground sm:text-sm">{label}</p>
     </div>
   );
 }
 
 /* ---------------- SectionHeading ---------------- */
-export const sectionHeadingVariants = cva("max-w-3xl space-y-4", {
+export const sectionHeadingVariants = cva("vz-heading max-w-3xl space-y-3 sm:space-y-4", {
   variants: { align: { start: "", center: "mx-auto text-center" } },
   defaultVariants: { align: "start" },
 });
@@ -44,15 +44,15 @@ export interface SectionHeadingProps extends Omit<ComponentProps<"div">, "title"
 export function SectionHeading({ eyebrow, title, description, align, className, ...props }: SectionHeadingProps) {
   return (
     <div className={cn(sectionHeadingVariants({ align }), className)} {...props}>
-      {eyebrow && <p className="font-mono text-xs uppercase tracking-[0.25em] text-cyan">{eyebrow}</p>}
-      <h2 className="font-display text-3xl font-bold tracking-wide md:text-4xl">{title}</h2>
-      {description && <p className="text-lg text-muted-foreground">{description}</p>}
+      {eyebrow && <p className="font-mono text-[0.65rem] uppercase tracking-[0.18em] text-cyan sm:text-xs sm:tracking-[0.25em]">{eyebrow}</p>}
+      <h2 className="text-balance font-display text-[clamp(1.375rem,4.2vw,2.5rem)] font-bold leading-tight tracking-wide">{title}</h2>
+      {description && <p className="text-[0.95rem] text-muted-foreground sm:text-base lg:text-lg">{description}</p>}
     </div>
   );
 }
 
 /* ---------------- PricingCard ---------------- */
-export const pricingCardVariants = cva("flex flex-col gap-6 rounded-xl border p-7", {
+export const pricingCardVariants = cva("vz-card flex min-w-0 flex-col gap-5 rounded-xl border p-5 sm:p-6 lg:gap-6 lg:p-7", {
   variants: {
     variant: { default: "bg-surface shadow-panel", featured: "border-gradient-brand shadow-glow-brand" },
   },
@@ -161,7 +161,7 @@ export function Eyebrow({ className, tone, underline, items, children, ...props 
   return (
     <p className={cn(eyebrowVariants({ tone, underline }), className)} {...props}>
       {items ? items.map((it, i) => (
-        <span key={it}>{i > 0 && <span aria-hidden className="mx-3 opacity-60">•</span>}{it}</span>
+        <span key={it}>{i > 0 && <span aria-hidden className="mx-1.5 opacity-60 sm:mx-3">•</span>}{it}</span>
       )) : children}
     </p>
   );

@@ -24,7 +24,7 @@ export function Badge({ className, variant, size, ...props }: BadgeProps) {
   return <span className={cn(badgeVariants({ variant, size }), className)} {...props} />;
 }
 
-export const cardVariants = cva("rounded-xl border text-foreground", {
+export const cardVariants = cva("vz-card min-w-0 rounded-xl border text-foreground", {
   variants: {
     variant: {
       default: "bg-surface shadow-panel",
@@ -32,7 +32,7 @@ export const cardVariants = cva("rounded-xl border text-foreground", {
       glow: "border-cyan/40 bg-surface shadow-glow-cyan",
       featured: "border-gradient-brand shadow-glow-brand",
     },
-    padding: { none: "", md: "p-5", lg: "p-7" },
+    padding: { none: "", md: "p-4 sm:p-5", lg: "p-5 sm:p-6 lg:p-7" },
   },
   defaultVariants: { variant: "default", padding: "md" },
 });

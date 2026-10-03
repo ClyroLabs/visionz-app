@@ -37,7 +37,7 @@ function Ecosystem() {
   }, []);
   return (
     <div className="space-y-8">
-      <h1 className="font-display text-3xl font-bold tracking-wide">Ecossistema Clyro</h1>
+      <h1 className="font-display text-[clamp(1.375rem,4.5vw,1.875rem)] font-bold tracking-wide">Ecossistema Clyro</h1>
       <div className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
         <Card padding="lg" className="bg-circuit-grid space-y-6">
           <div className="mx-auto flex w-fit items-center gap-3 rounded-xl border border-cyan/50 bg-surface px-5 py-3 shadow-glow-cyan"><Logo brand="clyro-icon" size="sm" alt="" /><span className="font-display font-semibold">Clyro Agent Core</span><Badge variant="success" size="sm">online</Badge></div>
