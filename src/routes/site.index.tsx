@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Music, Play, ShieldCheck, Sparkles, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
-  SectionHeading, Stat, Timeline, WalletBalance, Eyebrow, OrbitRing, TokenBadge, type Network,
+  SectionHeading, Stat, Timeline, WalletBalance, Reveal, Eyebrow, OrbitRing, TokenBadge, type Network,
 } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { agents, catalog, roadmap } from "@/experience/data";
@@ -36,11 +36,11 @@ function Landing() {
       <div className="relative overflow-hidden">
         <img src={heroCover} alt="" width={1280} height={720} className="absolute inset-0 size-full object-cover opacity-10" />
         <div className="absolute inset-0 bg-gradient-to-b from-background/30 via-background/85 to-background" />
-        <div className="absolute inset-0 bg-stage-glow" />
-        <div className="absolute inset-0 bg-light-streaks" />
+        <div className="absolute inset-0 bg-stage-glow animate-breathe" />
+        <div className="absolute inset-0 bg-light-streaks animate-drift" />
         <div className="absolute inset-x-0 bottom-0 h-64 floor-reflection" />
         <Section className="relative pb-24 pt-16 md:pt-20">
-          <div className="flex flex-col justify-between gap-6 md:flex-row">
+          <div className="animate-rise flex flex-col justify-between gap-6 md:flex-row">
             <div>
               <p className="font-display text-lg italic tracking-[0.25em] md:text-2xl">MAIS QUE TECNOLOGIA,</p>
               <p className="underline-brand font-display text-lg font-bold italic tracking-[0.25em] md:text-2xl">É <span className="text-gradient-brand">VISÃO DE FUTURO.</span></p>
@@ -53,18 +53,18 @@ function Landing() {
 
           <div className="relative mx-auto mt-20 max-w-5xl text-center">
             <OrbitRing size="xl" className="hidden md:block" />
-            <div className="relative mb-6 flex flex-wrap justify-center gap-2">
+            <div className="animate-rise relative mb-6 flex flex-wrap justify-center gap-2 [animation-delay:150ms]">
               <Badge variant="cyan"><Bot />IA Clyro nativa</Badge><Badge variant="neutral">4K / 8K sem lag</Badge>
               <Badge variant="neutral">Multichain</Badge><AIVerifiedBadge>Seguro para crianças</AIVerifiedBadge>
             </div>
-            <h1 className="relative font-display text-5xl font-extrabold leading-[1.05] tracking-wide md:text-7xl">
+            <h1 className="animate-rise relative [animation-delay:300ms] font-display text-5xl font-extrabold leading-[1.05] tracking-wide md:text-7xl">
               <span className="text-metallic">O entretenimento</span> <span className="text-gradient-brand">nunca mais</span> <span className="text-metallic">será o mesmo.</span>
             </h1>
-            <Eyebrow tone="foreground" className="relative mt-8" items={["Assista", "Crie", "Ganhe"]} />
-            <p className="relative mx-auto mt-6 max-w-2xl text-lg text-muted-foreground">
+            <Eyebrow tone="foreground" className="animate-rise relative mt-8 [animation-delay:450ms]" items={["Assista", "Crie", "Ganhe"]} />
+            <p className="animate-rise relative mx-auto mt-6 max-w-2xl [animation-delay:550ms] text-lg text-muted-foreground">
               A VisionZ vai revolucionar o streaming no Brasil e no mundo. Assista sob demanda ou à la carte, crie com IA e participe de um ecossistema de recompensas que cresce com você.
             </p>
-            <div className="relative mt-10 flex flex-wrap justify-center gap-3">
+            <div className="animate-rise relative mt-10 flex flex-wrap justify-center gap-3 [animation-delay:700ms]">
               <Button size="lg" onClick={() => setLead("espera")}>Entrar na lista de espera</Button>
               <Button size="lg" variant="neon" onClick={() => setLead("investidor")}>Sou investidor</Button>
               <Link to="/app"><Button size="lg" variant="ghost"><Play />Ver o protótipo</Button></Link>
@@ -78,15 +78,15 @@ function Landing() {
               { icon: Bot, t: "Inteligência artificial", c: "text-magenta" },
               { icon: ShieldCheck, t: "Seguro para crianças", c: "text-ember" },
               { icon: Coins, t: "Recompensas multichain", c: "text-gold" },
-            ].map(({ icon: Icon, t, c }) => (
-              <div key={t} className="flex flex-col items-center gap-3 px-4 text-center">
+            ].map(({ icon: Icon, t, c }, i) => (
+              <Reveal key={t} delay={i * 90} className="flex flex-col items-center gap-3 px-4 text-center">
                 <Icon className={`size-9 ${c}`} strokeWidth={1.5} />
                 <span className="label-eyebrow text-[0.65rem] tracking-[0.2em] text-foreground">{t}</span>
-              </div>
+              </Reveal>
             ))}
           </div>
 
-          <div className="relative mt-16 flex justify-center"><TokenBadge size="lg" /></div>
+          <Reveal effect="zoom" className="relative mt-16 flex justify-center"><TokenBadge size="lg" /></Reveal>
 
           <div className="relative mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
             <Stat value="0%" label="exposição infantil a conteúdo impróprio — nossa meta" />
@@ -99,14 +99,14 @@ function Landing() {
 
       {/* Como funciona */}
       <Section>
-        <SectionHeading align="center" eyebrow="Como funciona" title="Assista. Crie. Ganhe." description="Um único ecossistema em que todo mundo participa do valor gerado." />
+        <Reveal><SectionHeading align="center" eyebrow="Como funciona" title="Assista. Crie. Ganhe." description="Um único ecossistema em que todo mundo participa do valor gerado." /></Reveal>
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {[
             { icon: Eye, n: "01", t: "Assista", d: "Assine o catálogo ou compre só o título que quiser. Cada hora assistida gera recompensas." },
             { icon: Clapperboard, n: "02", t: "Crie", d: "Produza séries, filmes, curtas, documentários e músicas com o Clyro Synth e o Clyro Jukebox." },
             { icon: Coins, n: "03", t: "Ganhe", d: "Receba pela sua obra e por trazer pessoas ao ecossistema, direto na sua carteira interna." },
           ].map(({ icon: Icon, n, t, d }) => (
-            <Card key={t} variant="glass" padding="lg" className="space-y-4">
+            <Reveal key={t}><Card variant="glass" padding="lg" className="space-y-4">
               <div className="flex items-center justify-between"><span className="flex size-12 items-center justify-center rounded-lg bg-gradient-brand text-primary-foreground"><Icon className="size-6" /></span><span className="font-display text-3xl font-bold text-muted">{n}</span></div>
               <CardTitle className="text-xl">{t}</CardTitle><CardDescription className="text-base">{d}</CardDescription>
             </Card>
@@ -118,7 +118,7 @@ function Landing() {
       <div className="border-y bg-surface/40">
         <Section className="grid items-center gap-14 lg:grid-cols-2">
           <div className="space-y-8">
-            <SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." />
+            <Reveal><SectionHeading eyebrow="Segurança familiar" title={<>Segurança absoluta para a sua <span className="text-cyan">família</span>.</></Reveal>} description="O Filtro Inteligente da Clyro Labs analisa imagem e áudio em milissegundos e bloqueia o que é proibido, principalmente para crianças." />
             <ol className="space-y-4">
               {[
                 { icon: Eye, t: "Análise visual", d: "Padrões e gestos impróprios identificados quadro a quadro." },
@@ -145,7 +145,7 @@ function Landing() {
 
       {/* Estúdio */}
       <Section>
-        <SectionHeading eyebrow="Redemocratização audiovisual" title="Um estúdio inteiro dentro da plataforma" description="Quem deu vida à criação tem o direito de explorá-la e distribuí-la. A VisionZ valida a autoria de quem usa IA para materializar ideias." />
+        <Reveal><SectionHeading eyebrow="Redemocratização audiovisual" title="Um estúdio inteiro dentro da plataforma" description="Quem deu vida à criação tem o direito de explorá-la e distribuí-la. A VisionZ valida a autoria de quem usa IA para materializar ideias." /></Reveal>
         <div className="mt-12 grid gap-6 lg:grid-cols-2">
           <Card padding="lg" className="space-y-4">
             <div className="flex items-center gap-3"><span className="flex size-11 items-center justify-center rounded-lg bg-gradient-brand"><Sparkles className="size-5 text-primary-foreground" /></span><CardTitle className="text-xl">Clyro Synth</CardTitle></div>
@@ -168,7 +168,7 @@ function Landing() {
         <Glow className="right-0 top-0 size-96 bg-magenta/20" />
         <Section className="relative grid items-center gap-14 lg:grid-cols-[1.2fr_1fr]">
           <div className="space-y-8">
-            <SectionHeading eyebrow="Ecossistema de ganhos" title={<>Ganhos <span className="text-gradient-brand">ilimitados</span> para quem faz parte</>} description="Cada novo usuário, título e indicação gera valor que circula entre todos os participantes, em várias redes blockchain." />
+            <Reveal><SectionHeading eyebrow="Ecossistema de ganhos" title={<>Ganhos <span className="text-gradient-brand">ilimitados</span> para quem faz parte</></Reveal>} description="Cada novo usuário, título e indicação gera valor que circula entre todos os participantes, em várias redes blockchain." />
             <div className="grid gap-4 sm:grid-cols-2">
               {[
                 { icon: Clapperboard, t: "Criadores", d: "Até 85% de cada venda avulsa e participação nas assinaturas." },
@@ -187,7 +187,7 @@ function Landing() {
 
       {/* Planos */}
       <Section>
-        <SectionHeading align="center" eyebrow="Planos" title="Assine, ou pague só pelo que assistir" />
+        <Reveal><SectionHeading align="center" eyebrow="Planos" title="Assine, ou pague só pelo que assistir" /></Reveal>
         <div className="mx-auto mt-14 grid max-w-5xl gap-6 md:grid-cols-3">
           <PricingCard name="À la carte" price="R$ 4,90+" period="por título" description="Sem mensalidade. Compre e assista para sempre." features={["Compra avulsa de títulos", "Pacotes on-demand", "Recompensa a cada compra", "Carteira interna inclusa"]} cta="Explorar catálogo" onSelect={() => setLead("espera")} />
           <PricingCard variant="featured" badge="Mais popular" name="Premium" price="R$ 29,90" description="O catálogo completo em 4K/8K." features={["Catálogo completo", "4K / 8K sem lag", "2 telas simultâneas", "Recompensas em dobro"]} cta="Entrar na lista" onSelect={() => setLead("espera")} />
@@ -199,7 +199,7 @@ function Landing() {
       {/* Tecnologia */}
       <div className="border-y bg-surface/40">
         <Section className="space-y-12">
-          <SectionHeading eyebrow="Tecnologia Clyro" title="Um orquestrador de agentes de IA por trás de cada tela" description="O Clyro Agent Core coordena agentes especializados: moderação, marketing, Web3, desenvolvimento e pesquisa." />
+          <Reveal><SectionHeading eyebrow="Tecnologia Clyro" title="Um orquestrador de agentes de IA por trás de cada tela" description="O Clyro Agent Core coordena agentes especializados: moderação, marketing, Web3, desenvolvimento e pesquisa." /></Reveal>
           <div className="relative rounded-xl border border-cyan/20 bg-background/60 p-6 bg-circuit-grid">
             <div className="mx-auto mb-8 flex w-fit items-center gap-3 rounded-xl border border-cyan/50 bg-surface px-5 py-3 shadow-glow-cyan"><Logo brand="clyro-icon" size="sm" alt="" /><span className="font-display font-semibold tracking-wide">Clyro Agent Core</span></div>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-5">

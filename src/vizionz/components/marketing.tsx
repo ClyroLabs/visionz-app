@@ -4,6 +4,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { Badge } from "./display";
+import { CountUp } from "./motion";
 
 /* ---------------- Stat ---------------- */
 export const statVariants = cva("font-display font-bold tracking-wide", {
@@ -22,7 +23,7 @@ export interface StatProps extends ComponentProps<"div">, VariantProps<typeof st
 export function Stat({ value, label, tone, size, className, ...props }: StatProps) {
   return (
     <div className={cn("space-y-1", className)} {...props}>
-      <p className={statVariants({ tone, size })}>{value}</p>
+      <p className={statVariants({ tone, size })}><CountUp value={value} /></p>
       <p className="text-sm text-muted-foreground">{label}</p>
     </div>
   );
@@ -179,7 +180,7 @@ export function OrbitRing({ className, size, ...props }: OrbitRingProps) {
   return (
     <div
       aria-hidden
-      className={cn(orbitRingVariants({ size }), "-rotate-12 opacity-80 [mask:linear-gradient(#000_0_0)_content-box_exclude,linear-gradient(#000_0_0)] drop-shadow-[0_0_12px_var(--magenta)]", className)}
+      className={cn(orbitRingVariants({ size }), "animate-orbit opacity-80 [mask:linear-gradient(#000_0_0)_content-box_exclude,linear-gradient(#000_0_0)] drop-shadow-[0_0_12px_var(--magenta)]", className)}
       {...props}
     />
   );
