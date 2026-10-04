@@ -1,5 +1,5 @@
 import { useNavigate } from "@tanstack/react-router";
-import { ContentCard, useToast } from "@/index";
+import { Carousel, ContentCard, useToast } from "@/index";
 import type { Title } from "./data";
 import { useExperience } from "./store";
 
@@ -15,7 +15,7 @@ export function CatalogRow({ title, items }: { title: string; items: Title[] }) 
   return (
     <section className="space-y-3">
       <h2 className="font-display text-lg font-semibold tracking-wide">{title}</h2>
-      <div className="flex gap-4 overflow-x-auto pb-2">
+      <Carousel label={title}>
         {items.map((t) => {
           const isOwned = owned.includes(t.id);
           return (
@@ -32,7 +32,7 @@ export function CatalogRow({ title, items }: { title: string; items: Title[] }) 
             </div>
           );
         })}
-      </div>
+      </Carousel>
     </section>
   );
 }

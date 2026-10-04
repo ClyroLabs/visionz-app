@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Play, ShieldCheck, UserCheck, Users } from "lucide-react";
 import {
-  AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
+  AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, Carousel, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
   SectionHeading, ScrollSnapRow, Stat, Timeline, WalletBalance, Reveal, Eyebrow, OrbitRing, TokenBadge, type Network,
 } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
@@ -141,9 +141,9 @@ function Landing() {
           <Card variant="glow" padding="lg" className="space-y-5">
             <KidsModeToggle enabled={kids} onEnabledChange={setKids} />
             <p className="text-sm text-muted-foreground">Experimente: com o modo infantil {kids ? "ligado" : "desligado"}, o catálogo mostra {kids ? "só títulos Livre e 10 anos" : "todas as classificações"}.</p>
-            <div className="flex gap-3 overflow-x-auto pb-2">
+            <Carousel label="Catálogo de exemplo" key={String(kids)}>
               {preview.map((t) => <ContentCard key={t.id} orientation="portrait" className="shrink-0" title={t.title} creator={t.creator} duration={t.duration} rating={t.rating} price={t.price} cover={<img src={t.cover} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />} />)}
-            </div>
+            </Carousel>
           </Card>
         </Section>
       </div>
@@ -163,9 +163,9 @@ function Landing() {
             <div className="flex flex-wrap justify-center gap-2 md:justify-start"><Badge className="border-magenta/40 bg-magenta/10 text-magenta">Trilhas originais</Badge><Badge className="border-ember/40 bg-ember/10 text-ember">Distribuição direta</Badge><Badge className="border-gold/40 bg-gold/10 text-gold">Autoria validada</Badge></div>
           </Card>
         </ScrollSnapRow>
-        <div className="-mx-5 mt-8 flex snap-x gap-4 px-5 [&>*]:snap-start sm:mx-0 sm:px-0 overflow-x-auto pb-2 md:justify-center">
+        <Carousel label="Produções Clyro Synth" className="mt-8">
           {catalog.filter((c) => c.row === "synth").map((t) => <ContentCard key={t.id} className="shrink-0" title={t.title} creator={t.creator} duration={t.duration} rating={t.rating} price={t.price} cover={<img src={t.cover} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />} />)}
-        </div>
+        </Carousel>
       </Section>
 
       {/* Ecossistema */}
