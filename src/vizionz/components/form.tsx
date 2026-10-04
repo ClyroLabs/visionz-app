@@ -4,10 +4,10 @@ import type { ComponentProps } from "react";
 import { cn } from "../lib/utils";
 
 const fieldBase =
-  "w-full rounded-md border bg-surface text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-cyan focus-visible:shadow-glow-cyan disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-destructive";
+  "w-full rounded-xl border bg-surface/70 text-foreground placeholder:text-muted-foreground outline-none transition-colors focus-visible:border-cyan focus-visible:shadow-glow-cyan disabled:cursor-not-allowed disabled:opacity-50 aria-[invalid=true]:border-destructive";
 
 export const inputVariants = cva(fieldBase, {
-  variants: { size: { sm: "h-8 px-2.5 text-sm", md: "h-10 px-3 text-sm", lg: "h-12 px-4 text-base" } },
+  variants: { size: { sm: "h-9 px-3 text-sm", md: "h-11 px-4 text-sm", lg: "h-12 px-4 text-base" } },
   defaultVariants: { size: "md" },
 });
 

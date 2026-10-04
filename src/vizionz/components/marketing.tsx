@@ -17,14 +17,19 @@ export const statVariants = cva("font-display font-bold tracking-wide", {
 export interface StatProps extends ComponentProps<"div">, VariantProps<typeof statVariants> {
   value: string;
   label: string;
+  /** Optional icon shown in a tinted circle. */
+  icon?: ReactNode;
 }
 
 /** Highlighted metric: big number + caption. */
-export function Stat({ value, label, tone, size, className, ...props }: StatProps) {
+export function Stat({ value, label, tone, size, icon, className, ...props }: StatProps) {
   return (
-    <div className={cn("space-y-1", className)} {...props}>
-      <p className={statVariants({ tone, size })}><CountUp value={value} /></p>
-      <p className="text-sm text-muted-foreground">{label}</p>
+    <div className={cn(icon ? "flex flex-col items-center gap-3 sm:flex-row sm:items-center" : "space-y-1", className)} {...props}>
+      {icon && <span className={cn("grid size-12 shrink-0 place-items-center rounded-full [&_svg]:size-5", tone === "cyan" ? "bg-cyan/12 text-cyan" : tone === "default" ? "bg-foreground/8 text-foreground" : "bg-magenta/12 text-magenta")} aria-hidden>{icon}</span>}
+      <div className="space-y-1">
+        <p className={statVariants({ tone, size })}><CountUp value={value} /></p>
+        <p className="text-sm text-muted-foreground">{label}</p>
+      </div>
     </div>
   );
 }
@@ -114,8 +119,12 @@ export function Timeline({ items, className, ...props }: TimelineProps) {
 }
 
 /* ---------------- ModerationItem ---------------- */
-export const moderationItemVariants = cva("flex flex-col items-center gap-3 rounded-lg border bg-surface p-4 text-center sm:flex-row sm:items-center sm:text-left", {
-  variants: { severity: { low: "border-l-4 border-l-cyan", medium: "border-l-4 border-l-warning", high: "border-l-4 border-l-destructive" } },
+export const moderationItemVariants = cva("group flex flex-col items-center gap-4 rounded-2xl border bg-surface/80 p-5 text-center backdrop-blur transition-all hover:-translate-y-0.5 sm:flex-row sm:text-left", {
+  variants: { severity: {
+    low: "border-cyan/20 shadow-[0_0_30px_-18px_var(--cyan)]",
+    medium: "border-warning/25 shadow-[0_0_30px_-18px_var(--warning)]",
+    high: "border-destructive/30 shadow-[0_0_30px_-16px_var(--destructive)]",
+  } },
   defaultVariants: { severity: "medium" },
 });
 export interface ModerationItemProps extends ComponentProps<"div">, VariantProps<typeof moderationItemVariants> {
@@ -126,19 +135,34 @@ export interface ModerationItemProps extends ComponentProps<"div">, VariantProps
   onApprove: () => void;
   onBlock: () => void;
 }
+const sev = {
+  high: { label: "Alta", ring: "bg-destructive/12 text-destructive", bar: "bg-destructive" },
+  medium: { label: "Média", ring: "bg-warning/12 text-warning", bar: "bg-warning" },
+  low: { label: "Baixa", ring: "bg-cyan/12 text-cyan", bar: "bg-cyan" },
+} as const;
 
 /** Item flagged by AI moderation awaiting a human decision. */
 export function ModerationItem({ title, reason, confidence, timestamp, onApprove, onBlock, severity, className, ...props }: ModerationItemProps) {
+  const s = sev[severity ?? "medium"];
   return (
     <div className={cn(moderationItemVariants({ severity }), className)} {...props}>
-      <AlertTriangle className={cn("size-5 shrink-0", severity === "high" ? "text-destructive" : severity === "low" ? "text-cyan" : "text-warning")} aria-hidden />
-      <div className="flex-1">
-        <p className="font-semibold">{title}</p>
-        <p className="text-sm text-muted-foreground">{reason} · <span className="font-mono">{timestamp}</span> · confiança {confidence}%</p>
+      <span className={cn("grid size-12 shrink-0 place-items-center rounded-full", s.ring)}><AlertTriangle className="size-5" aria-hidden /></span>
+      <div className="w-full min-w-0 flex-1 space-y-2">
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-start">
+          <p className="font-semibold">{title}</p>
+          <span className={cn("rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wider", s.ring)}>Gravidade {s.label}</span>
+        </div>
+        <p className="text-sm text-muted-foreground">{reason} · <span className="font-mono">{timestamp}</span></p>
+        <div className="flex items-center gap-3">
+          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-muted" role="meter" aria-label="Confiança da IA" aria-valuenow={confidence} aria-valuemin={0} aria-valuemax={100}>
+            <div className={cn("h-full rounded-full", s.bar)} style={{ width: `${confidence}%` }} />
+          </div>
+          <span className="shrink-0 font-mono text-xs text-muted-foreground">IA {confidence}%</span>
+        </div>
       </div>
       <div className="flex w-full gap-2 sm:w-auto [&>*]:flex-1 sm:[&>*]:flex-none">
-        <Button size="sm" variant="neon" onClick={onApprove}><Check />Aprovar</Button>
-        <Button size="sm" variant="destructive" onClick={onBlock}><X />Bloquear</Button>
+        <Button size="sm" variant="success" onClick={onApprove}><Check />Aprovar</Button>
+        <Button size="sm" variant="danger" onClick={onBlock}><X />Bloquear</Button>
       </div>
     </div>
   );

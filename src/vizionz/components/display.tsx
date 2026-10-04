@@ -24,10 +24,10 @@ export function Badge({ className, variant, size, ...props }: BadgeProps) {
   return <span className={cn(badgeVariants({ variant, size }), className)} {...props} />;
 }
 
-export const cardVariants = cva("rounded-xl border text-foreground", {
+export const cardVariants = cva("rounded-2xl border text-foreground transition-shadow", {
   variants: {
     variant: {
-      default: "bg-surface shadow-panel",
+      default: "border-border/70 bg-surface/80 shadow-panel",
       glass: "border-cyan/20 bg-surface/60 backdrop-blur-md shadow-panel",
       glow: "border-cyan/40 bg-surface shadow-glow-cyan",
       featured: "border-gradient-brand shadow-glow-brand",
