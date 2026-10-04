@@ -50,6 +50,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
 
   useEffect(() => {
     if (!interval || paused || !overflow || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    console.log("vz-carousel autoplay on");
     const t = setInterval(() => {
       const el = ref.current;
       if (!el) return;
