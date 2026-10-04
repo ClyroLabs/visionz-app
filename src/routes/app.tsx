@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, Wallet } from "lucide-react";
+import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, Wallet } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
 
@@ -27,6 +28,7 @@ function AppLayout() {
 
 function Frame() {
   const { kids, setKids, vzn } = useExperience();
+  const [open, setOpen] = useState(false);
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r bg-surface/60 p-4 md:flex">
@@ -48,8 +50,18 @@ function Frame() {
         <p className="mt-4 text-center text-[10px] text-muted-foreground">Protótipo · dados de exemplo</p>
       </aside>
       <div className="min-w-0 flex-1">
-        <header className="sticky top-0 z-30 flex items-center gap-2 overflow-x-auto border-b bg-background/80 px-4 py-2 backdrop-blur md:hidden">
-          {nav.map(({ to, label }) => <Link key={to} to={to} activeOptions={{ exact: true }} className="shrink-0 rounded-md px-2 py-1 text-xs text-muted-foreground" activeProps={{ className: "!text-cyan" }}>{label}</Link>)}
+        <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur md:hidden">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2">
+            <Link to="/app" className="min-w-0" onClick={() => setOpen(false)}><Logo brand="visionz-symbol" className="h-8 w-auto" /></Link>
+            <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-app-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
+          </div>
+          {open && (
+            <nav id="vz-app-menu" aria-label="Plataforma" className="absolute inset-x-3 top-full mt-2 grid gap-1 rounded-xl border border-border bg-surface/95 p-2 shadow-panel backdrop-blur animate-rise">
+              {nav.map(({ to, label, icon: Icon }) => (
+                <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
+              ))}
+            </nav>
+          )}
         </header>
         {kids && <div className="border-b border-success/30 bg-success/10 px-6 py-2 text-sm text-success"><Badge variant="success" size="sm">Perfil infantil</Badge> Mostrando só conteúdos Livre e 10 anos.</div>}
         <main className="p-6 md:p-10"><Outlet /></main>
