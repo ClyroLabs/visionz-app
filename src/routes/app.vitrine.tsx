@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { Clapperboard } from "lucide-react";
-import { Button, Card, CardDescription, CardTitle, Dialog, Tabs, TabsContent, TabsList, TabsTrigger } from "@/index";
+import { Button, buttonVariants, Card, CardDescription, CardTitle, Dialog, Tabs, TabsContent, TabsList, TabsTrigger } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
 import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, type Creation } from "@/experience/creator-ui";
@@ -36,7 +36,7 @@ function Vitrine() {
       <header className="space-y-2 text-center sm:text-left">
         <h1 className="font-display text-3xl font-bold tracking-wide">Vitrine de criadores</h1>
         <p className="text-muted-foreground">Tudo aqui passou pela análise da IA de moderação.{kids && " Modo infantil: só Livre e 10 anos."}</p>
-        <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Button size="sm" asChild={false} variant="soft"><Link to="/app/synth">Criar no Synth</Link></Button><Button size="sm" variant="soft"><Link to="/app/jukebox">Criar no Jukebox</Link></Button></div>
+        <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Link to="/app/synth" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Synth</Link><Link to="/app/jukebox" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Jukebox</Link></div>
       </header>
       <Tabs defaultValue="synth" className="space-y-6">
         <TabsList><TabsTrigger value="synth">Produções ({synth.length})</TabsTrigger><TabsTrigger value="jukebox">Músicas ({jukebox.length})</TabsTrigger></TabsList>
