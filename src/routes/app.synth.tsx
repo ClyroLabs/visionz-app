@@ -82,7 +82,7 @@ function Synth() {
     const { error } = await supabase.from("creations").insert({
       user_id: user.id, tool: "synth", title: board.title, description: board.logline, age_rating: age,
       cover_path: scenePaths[0] ?? null,
-      data: { ...board, style, scene_paths: scenePaths, scene_images: paths },
+      data: JSON.parse(JSON.stringify({ ...board, style, scene_paths: scenePaths, scene_images: paths })),
     });
     setBusy(null);
     if (error) return toast({ title: "Não foi possível salvar", variant: "error" });

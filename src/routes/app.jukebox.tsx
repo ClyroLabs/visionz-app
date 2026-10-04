@@ -80,7 +80,7 @@ function Compose() {
   };
   const save = async () => {
     if (!song) return;
-    const { error } = await supabase.from("creations").insert({ user_id: user.id, tool: "jukebox", title: song.title, description: `${genre} · ${song.mood || mood}`, age_rating: age, data: { kind: "composed", genre, ...song } });
+    const { error } = await supabase.from("creations").insert({ user_id: user.id, tool: "jukebox", title: song.title, description: `${genre} · ${song.mood || mood}`, age_rating: age, data: JSON.parse(JSON.stringify({ kind: "composed", genre, ...song })) });
     if (error) return toast({ title: "Não foi possível salvar", variant: "error" });
     toast({ title: "Faixa salva na sua biblioteca", variant: "success" });
     setSong(null); setIdea("");
