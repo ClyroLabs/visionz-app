@@ -19,6 +19,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
   const [paused, setPaused] = useState(false);
   const [overflow, setOverflow] = useState(true);
 
+  const lock = useRef(0);
   const go = useCallback((i: number) => {
     const el = ref.current;
     if (!el || !count) return;
@@ -27,6 +28,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     const max = el.scrollWidth - el.clientWidth;
     const left = child ? Math.min(max, child.offsetLeft - (el.children[0] as HTMLElement).offsetLeft) : 0;
     setActive(n);
+    lock.current = Date.now() + 900;
     el.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [count]);
 
@@ -38,6 +40,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
       cancelAnimationFrame(raf);
       raf = requestAnimationFrame(() => {
         setOverflow(el.scrollWidth > el.clientWidth + 4);
+        if (Date.now() < lock.current) return;
         const max = el.scrollWidth - el.clientWidth;
         if (el.scrollLeft >= max - 4) { setActive(count - 1); return; }
         const base = (el.children[0] as HTMLElement | undefined)?.offsetLeft ?? 0;
