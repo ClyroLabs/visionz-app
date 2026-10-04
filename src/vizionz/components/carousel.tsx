@@ -19,44 +19,61 @@ export function Carousel({ label, interval = 3500, className, children, ...props
   const [paused, setPaused] = useState(false);
   const [overflow, setOverflow] = useState(true);
 
-  const step = useCallback(() => {
-    const el = ref.current;
-    const first = el?.firstElementChild as HTMLElement | null;
-    return first ? first.offsetWidth + parseFloat(getComputedStyle(el!).columnGap || "16") : 0;
-  }, []);
-
+  const lock = useRef(0);
   const go = useCallback((i: number) => {
     const el = ref.current;
-    if (!el) return;
+    if (!el || !count) return;
+    const n = ((i % count) + count) % count;
+    const child = el.children[n] as HTMLElement | undefined;
     const max = el.scrollWidth - el.clientWidth;
-    const atEnd = el.scrollLeft >= max - 4;
-    const target = i < 0 ? max : atEnd && i * step() > el.scrollLeft ? 0 : Math.min(max, Math.max(0, i * step()));
-    el.scrollTo({ left: target, behavior: "smooth" });
-  }, [step]);
+    const left = child ? Math.min(max, child.offsetLeft - (el.children[0] as HTMLElement).offsetLeft) : 0;
+    setActive(n);
+    lock.current = Date.now() + 900;
+    el.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+  }, [count]);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    let raf = 0;
     const sync = () => {
-      const s = step();
-      setOverflow(el.scrollWidth > el.clientWidth + 4);
-      if (s) setActive(Math.min(count - 1, Math.round(el.scrollLeft / s)));
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        setOverflow(el.scrollWidth > el.clientWidth + 4);
+        if (Date.now() < lock.current) return;
+        const max = el.scrollWidth - el.clientWidth;
+        if (el.scrollLeft >= max - 4) { setActive(count - 1); return; }
+        const base = (el.children[0] as HTMLElement | undefined)?.offsetLeft ?? 0;
+        let best = 0, dist = Infinity;
+        Array.from(el.children).forEach((c, i) => {
+          const d = Math.abs((c as HTMLElement).offsetLeft - base - el.scrollLeft);
+          if (d < dist) { dist = d; best = i; }
+        });
+        setActive(best);
+      });
     };
     sync();
     el.addEventListener("scroll", sync, { passive: true });
     const ro = new ResizeObserver(sync);
     ro.observe(el);
     Array.from(el.children).forEach((c) => ro.observe(c));
-    return () => { el.removeEventListener("scroll", sync); ro.disconnect(); };
-  }, [count, step]);
+    return () => { cancelAnimationFrame(raf); el.removeEventListener("scroll", sync); ro.disconnect(); };
+  }, [count]);
 
   const live = useRef({ paused, active, go });
   live.current = { paused, active, go };
+  const resume = useRef<number | undefined>(undefined);
+  const pauseFor = (ms: number) => {
+    setPaused(true);
+    window.clearTimeout(resume.current);
+    resume.current = window.setTimeout(() => setPaused(false), ms);
+  };
+  useEffect(() => () => window.clearTimeout(resume.current), []);
   useEffect(() => {
     if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setInterval(() => {
       const el = ref.current;
-      if (!el || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
+      if (!el || document.hidden || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
       live.current.go(live.current.active + 1);
     }, interval);
     return () => window.clearInterval(t);
@@ -66,9 +83,10 @@ export function Carousel({ label, interval = 3500, className, children, ...props
 
   return (
     <div className={cn("relative", className)}
-      onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
-      onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}
-      onTouchStart={() => setPaused(true)} onTouchEnd={() => setTimeout(() => setPaused(false), 4000)}>
+      onPointerEnter={(e) => { if (e.pointerType === "mouse") { window.clearTimeout(resume.current); setPaused(true); } }}
+      onPointerLeave={(e) => { if (e.pointerType === "mouse") setPaused(false); }}
+      onPointerDown={(e) => { if (e.pointerType !== "mouse") pauseFor(5000); }}
+      onClickCapture={() => pauseFor(5000)}>
       <div id={id} ref={box} role="region" aria-roledescription="carrossel" aria-label={label} tabIndex={0}
         className={cn("flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>*]:shrink-0 [&>*]:snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", !overflow && "justify-center")} {...props}>
         {children}
