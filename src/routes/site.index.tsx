@@ -163,7 +163,7 @@ function Landing() {
             <div className="flex flex-wrap justify-center gap-2 md:justify-start"><Badge className="border-magenta/40 bg-magenta/10 text-magenta">Trilhas originais</Badge><Badge className="border-ember/40 bg-ember/10 text-ember">Distribuição direta</Badge><Badge className="border-gold/40 bg-gold/10 text-gold">Autoria validada</Badge></div>
           </Card>
         </ScrollSnapRow>
-        <div className="-mx-5 mt-8 flex snap-x gap-4 px-5 [&>*]:snap-start sm:mx-0 sm:px-0 overflow-x-auto pb-2">
+        <div className="-mx-5 mt-8 flex snap-x gap-4 px-5 [&>*]:snap-start sm:mx-0 sm:px-0 overflow-x-auto pb-2 md:justify-center">
           {catalog.filter((c) => c.row === "synth").map((t) => <ContentCard key={t.id} className="shrink-0" title={t.title} creator={t.creator} duration={t.duration} rating={t.rating} price={t.price} cover={<img src={t.cover} alt="" loading="lazy" className="absolute inset-0 size-full object-cover" />} />)}
         </div>
       </Section>
