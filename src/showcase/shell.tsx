@@ -4,7 +4,7 @@ import { useEffect, useState, type ReactNode } from "react";
 import { Logo, ToastProvider, Button, cn } from "@/index";
 
 const nav = [
-  { to: "/", label: "Visão geral" },
+  { to: "/design-system", label: "Visão geral" },
   { to: "/marca", label: "Marca" },
   { to: "/cores", label: "Cores" },
   { to: "/tipografia", label: "Tipografia" },
@@ -22,7 +22,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <div className="min-h-screen bg-background bg-circuit-grid">
         <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
           <div className="mx-auto flex max-w-7xl items-center gap-6 px-6 py-3">
-            <Link to="/" className="flex items-center gap-3">
+            <Link to="/design-system" className="flex items-center gap-3">
               <Logo brand="clyro-icon" size="sm" alt="" />
               <span className="font-display text-sm font-bold tracking-[0.2em]">VISIONZ <span className="text-cyan">DS</span></span>
             </Link>
