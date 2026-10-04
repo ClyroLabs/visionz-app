@@ -31,7 +31,7 @@ export function cardBrand(cardNumber: string): string {
   return "Cartão";
 }
 
-const opt = (s: z.ZodString) => s.trim().optional().or(z.literal("")).transform((v) => (v ? v : null));
+const opt = (s: z.ZodTypeAny) => s.trim().optional().or(z.literal("")).transform((v: string | undefined) => (v ? v : null));
 
 export const profileSchema = z.object({
   full_name: opt(z.string().max(100)),
