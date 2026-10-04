@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/index";
-import intro from "@/assets/videos/video_de_intro.mp4.asset.json";
+import intro from "@/assets/videos/visionz-hero-bg-720.mp4.asset.json";
 
 export const Route = createFileRoute("/abertura")({
   head: () => ({
