@@ -54,12 +54,13 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     console.log("vz-eff", interval, window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setInterval(() => {
+      console.log('vz-tick');
       const el = ref.current;
       if (el) el.dataset.tick = String(Number(el.dataset.tick || 0) + 1) + (live.current.paused ? 'p' : '');
       if (!el || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
       live.current.go(live.current.active + 1);
     }, interval);
-    return () => window.clearInterval(t);
+    return () => { console.log('vz-clear'); window.clearInterval(t); };
   }, [interval]);
 
   const arrow = "absolute top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-magenta/40 bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-magenta/15 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
