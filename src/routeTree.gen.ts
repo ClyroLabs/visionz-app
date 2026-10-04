@@ -23,6 +23,7 @@ import { Route as TipografiaRouteImport } from './routes/tipografia'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAssistirRouteImport } from './routes/app.assistir'
 import { Route as AppCarteiraRouteImport } from './routes/app.carteira'
+import { Route as AppContaRouteImport } from './routes/app.conta'
 import { Route as AppEcossistemaRouteImport } from './routes/app.ecossistema'
 import { Route as AppEstudioRouteImport } from './routes/app.estudio'
 import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
@@ -104,6 +105,11 @@ const AppCarteiraRoute = AppCarteiraRouteImport.update({
   path: '/carteira',
   getParentRoute: () => AppRoute,
 } as any)
+const AppContaRoute = AppContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppEcossistemaRoute = AppEcossistemaRouteImport.update({
   id: '/ecossistema',
   path: '/ecossistema',
@@ -171,6 +177,7 @@ export interface FileRoutesByFullPath {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/moderacao': typeof AppModeracaoRoute
@@ -195,6 +202,7 @@ export interface FileRoutesByTo {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/moderacao': typeof AppModeracaoRoute
@@ -222,6 +230,7 @@ export interface FileRoutesById {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/moderacao': typeof AppModeracaoRoute
@@ -250,6 +259,7 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/moderacao'
@@ -274,6 +284,7 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/moderacao'
@@ -300,6 +311,7 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/moderacao'
@@ -429,6 +441,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCarteiraRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/conta': {
+      id: '/app/conta'
+      path: '/conta'
+      fullPath: '/app/conta'
+      preLoaderRoute: typeof AppContaRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/ecossistema': {
       id: '/app/ecossistema'
       path: '/ecossistema'
@@ -505,6 +524,7 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAssistirRoute: typeof AppAssistirRoute
   AppCarteiraRoute: typeof AppCarteiraRoute
+  AppContaRoute: typeof AppContaRoute
   AppEcossistemaRoute: typeof AppEcossistemaRoute
   AppEstudioRoute: typeof AppEstudioRoute
   AppModeracaoRoute: typeof AppModeracaoRoute
@@ -515,6 +535,7 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAssistirRoute: AppAssistirRoute,
   AppCarteiraRoute: AppCarteiraRoute,
+  AppContaRoute: AppContaRoute,
   AppEcossistemaRoute: AppEcossistemaRoute,
   AppEstudioRoute: AppEstudioRoute,
   AppModeracaoRoute: AppModeracaoRoute,
