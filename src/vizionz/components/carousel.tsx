@@ -42,8 +42,10 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     };
     sync();
     el.addEventListener("scroll", sync, { passive: true });
-    window.addEventListener("resize", sync);
-    return () => { el.removeEventListener("scroll", sync); window.removeEventListener("resize", sync); };
+    const ro = new ResizeObserver(sync);
+    ro.observe(el);
+    Array.from(el.children).forEach((c) => ro.observe(c));
+    return () => { el.removeEventListener("scroll", sync); ro.disconnect(); };
   }, [count, step]);
 
   useEffect(() => {
