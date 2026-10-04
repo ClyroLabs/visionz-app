@@ -90,7 +90,7 @@ function Landing() {
 
           <Reveal effect="zoom" className="relative mt-10 flex justify-center md:mt-16"><TokenBadge size="lg" /></Reveal>
 
-          <div className="relative mt-10 grid grid-cols-2 gap-x-4 gap-y-6 text-center md:mt-20 md:grid-cols-4 md:gap-8 md:text-left">
+          <div className="relative mt-10 grid grid-cols-2 gap-x-4 gap-y-6 text-center md:mt-20 md:grid-cols-4 md:gap-8">
             <Stat className="text-center" value="0%" label="exposição infantil a conteúdo impróprio — nossa meta" />
             <Stat className="text-center" value="40%" tone="cyan" label="menos custo de banda com a tecnologia Clyro" />
             <Stat className="text-center" value="4K/8K" tone="default" label="streaming de alta performance" />
