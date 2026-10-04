@@ -54,6 +54,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setInterval(() => {
       const el = ref.current;
+      if (el) el.dataset.tick = String(Number(el.dataset.tick || 0) + 1) + (live.current.paused ? 'p' : '');
       if (!el || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
       live.current.go(live.current.active + 1);
     }, interval);
