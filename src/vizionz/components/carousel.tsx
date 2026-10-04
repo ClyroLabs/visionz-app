@@ -65,7 +65,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
       onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}
       onTouchStart={() => setPaused(true)} onTouchEnd={() => setTimeout(() => setPaused(false), 4000)}>
       <div ref={ref} role="region" aria-roledescription="carrossel" aria-label={label} tabIndex={0}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>*]:shrink-0 [&>*]:snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" {...props}>
+        className={cn("flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>*]:shrink-0 [&>*]:snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", !overflow && "justify-center")} {...props}>
         {children}
       </div>
       {overflow && count > 1 && (
