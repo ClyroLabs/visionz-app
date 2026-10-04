@@ -30,9 +30,8 @@ function Intro() {
   };
 
   useEffect(() => {
-    sessionStorage.setItem("vz-intro-seen", "1");
     video.current?.play().catch(() => {});
-    const safety = setTimeout(finish, 9000);
+    const safety = setTimeout(finish, 20000);
     return () => clearTimeout(safety);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

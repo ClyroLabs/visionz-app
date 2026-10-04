@@ -30,7 +30,10 @@ function Frame() {
   return (
     <div className="flex min-h-screen bg-background">
       <aside className="sticky top-0 hidden h-screen w-60 shrink-0 flex-col border-r bg-surface/60 p-4 md:flex">
-        <Link to="/site" className="mb-8 rounded-md bg-white px-2 py-1"><Logo brand="vizionz" size="lg" className="mx-auto -my-4" /></Link>
+        <Link to="/site" aria-label="VisionZ — início" className="group mb-8 flex items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <Logo brand="visionz-symbol" alt="" className="h-8 w-auto shrink-0 drop-shadow-[0_0_10px_var(--magenta)] transition-transform duration-300 group-hover:scale-105" />
+          <span className="flex flex-col leading-none"><span className="font-display text-lg font-bold tracking-[0.12em] text-foreground">VISIONZ</span><span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span></span>
+        </Link>
         <nav className="flex flex-1 flex-col gap-1" aria-label="Plataforma">
           {nav.map(({ to, label, icon: Icon }) => (
             <Link key={to} to={to} activeOptions={{ exact: true }} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground" activeProps={{ className: "bg-surface-raised !text-cyan shadow-glow-cyan" }}>
