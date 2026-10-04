@@ -54,7 +54,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     console.log("vz-eff", interval, window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setInterval(() => {
-      console.log('vz-tick');
+      console.log('vz-tick', !!ref.current, ref.current?.scrollWidth, ref.current?.clientWidth, live.current.paused);
       const el = ref.current;
       if (el) el.dataset.tick = String(Number(el.dataset.tick || 0) + 1) + (live.current.paused ? 'p' : '');
       if (!el || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
