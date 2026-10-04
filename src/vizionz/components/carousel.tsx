@@ -54,7 +54,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     const t = setInterval(() => {
       const el = ref.current;
       if (!el) return;
-      go(active + 1);
+      console.log("vz-tick", el.scrollLeft, el.scrollWidth, el.clientWidth); go(active + 1);
     }, interval);
     return () => clearInterval(t);
   }, [interval, paused, overflow, active, go]);
