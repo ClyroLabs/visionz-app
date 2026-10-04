@@ -21,7 +21,7 @@ function Moderation() {
   return (
     <div className="space-y-8">
       <h1 className="text-center font-display text-2xl sm:text-left sm:text-3xl font-bold tracking-wide">Central de moderação</h1>
-      <div className="grid gap-4 text-center sm:grid-cols-3 sm:text-left [&_*]:sm:items-start">
+      <div className="grid gap-4 text-center sm:grid-cols-3 sm:text-left">
         <Card><Stat value={String(flags.length)} label="itens aguardando revisão" tone="default" size="md" /></Card>
         <Card><Stat value="98,7%" label="decididos sozinhos pela IA" tone="cyan" size="md" /></Card>
         <Card variant="glow"><div className="flex flex-col items-center gap-3 sm:flex-row"><BrainCircuit className="size-8 text-cyan" /><Stat value={retrained.toLocaleString("pt-BR")} label="vezes que a IA foi retreinada" size="md" /></div></Card>
