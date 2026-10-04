@@ -27,8 +27,9 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     const el = ref.current;
     if (!el) return;
     const max = el.scrollWidth - el.clientWidth;
-    const target = i * step();
-    el.scrollTo({ left: target > max + 4 ? 0 : Math.max(0, target), behavior: "smooth" });
+    const atEnd = el.scrollLeft >= max - 4;
+    const target = i < 0 ? max : atEnd && i * step() > el.scrollLeft ? 0 : Math.min(max, Math.max(0, i * step()));
+    el.scrollTo({ left: target, behavior: "smooth" });
   }, [step]);
 
   useEffect(() => {
@@ -50,9 +51,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     const t = setInterval(() => {
       const el = ref.current;
       if (!el) return;
-      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 4;
-      if (atEnd) el.scrollTo({ left: 0, behavior: "smooth" });
-      else go(active + 1);
+      go(active + 1);
     }, interval);
     return () => clearInterval(t);
   }, [interval, paused, overflow, active, go]);
