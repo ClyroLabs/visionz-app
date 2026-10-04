@@ -26,8 +26,11 @@ import { Route as AppCarteiraRouteImport } from './routes/app.carteira'
 import { Route as AppContaRouteImport } from './routes/app.conta'
 import { Route as AppEcossistemaRouteImport } from './routes/app.ecossistema'
 import { Route as AppEstudioRouteImport } from './routes/app.estudio'
+import { Route as AppJukeboxRouteImport } from './routes/app.jukebox'
 import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
 import { Route as AppPerfisRouteImport } from './routes/app.perfis'
+import { Route as AppSynthRouteImport } from './routes/app.synth'
+import { Route as AppVitrineRouteImport } from './routes/app.vitrine'
 import { Route as SiteIndexRouteImport } from './routes/site.index'
 import { Route as SiteCriadoresRouteImport } from './routes/site.criadores'
 import { Route as SiteInvestidoresRouteImport } from './routes/site.investidores'
@@ -120,6 +123,11 @@ const AppEstudioRoute = AppEstudioRouteImport.update({
   path: '/estudio',
   getParentRoute: () => AppRoute,
 } as any)
+const AppJukeboxRoute = AppJukeboxRouteImport.update({
+  id: '/jukebox',
+  path: '/jukebox',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppModeracaoRoute = AppModeracaoRouteImport.update({
   id: '/moderacao',
   path: '/moderacao',
@@ -128,6 +136,16 @@ const AppModeracaoRoute = AppModeracaoRouteImport.update({
 const AppPerfisRoute = AppPerfisRouteImport.update({
   id: '/perfis',
   path: '/perfis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSynthRoute = AppSynthRouteImport.update({
+  id: '/synth',
+  path: '/synth',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppVitrineRoute = AppVitrineRouteImport.update({
+  id: '/vitrine',
+  path: '/vitrine',
   getParentRoute: () => AppRoute,
 } as any)
 const SiteIndexRoute = SiteIndexRouteImport.update({
@@ -180,8 +198,11 @@ export interface FileRoutesByFullPath {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/synth': typeof AppSynthRoute
+  '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
@@ -205,8 +226,11 @@ export interface FileRoutesByTo {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/synth': typeof AppSynthRoute
+  '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
@@ -233,8 +257,11 @@ export interface FileRoutesById {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/synth': typeof AppSynthRoute
+  '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
@@ -262,8 +289,11 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/synth'
+    | '/app/vitrine'
     | '/site/criadores'
     | '/site/investidores'
     | '/site/seguranca'
@@ -287,8 +317,11 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/synth'
+    | '/app/vitrine'
     | '/site/criadores'
     | '/site/investidores'
     | '/site/seguranca'
@@ -314,8 +347,11 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/synth'
+    | '/app/vitrine'
     | '/site/criadores'
     | '/site/investidores'
     | '/site/seguranca'
@@ -462,6 +498,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEstudioRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/jukebox': {
+      id: '/app/jukebox'
+      path: '/jukebox'
+      fullPath: '/app/jukebox'
+      preLoaderRoute: typeof AppJukeboxRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/moderacao': {
       id: '/app/moderacao'
       path: '/moderacao'
@@ -474,6 +517,20 @@ declare module '@tanstack/react-router' {
       path: '/perfis'
       fullPath: '/app/perfis'
       preLoaderRoute: typeof AppPerfisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/synth': {
+      id: '/app/synth'
+      path: '/synth'
+      fullPath: '/app/synth'
+      preLoaderRoute: typeof AppSynthRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/vitrine': {
+      id: '/app/vitrine'
+      path: '/vitrine'
+      fullPath: '/app/vitrine'
+      preLoaderRoute: typeof AppVitrineRouteImport
       parentRoute: typeof AppRoute
     }
     '/site/': {
@@ -527,8 +584,11 @@ interface AppRouteChildren {
   AppContaRoute: typeof AppContaRoute
   AppEcossistemaRoute: typeof AppEcossistemaRoute
   AppEstudioRoute: typeof AppEstudioRoute
+  AppJukeboxRoute: typeof AppJukeboxRoute
   AppModeracaoRoute: typeof AppModeracaoRoute
   AppPerfisRoute: typeof AppPerfisRoute
+  AppSynthRoute: typeof AppSynthRoute
+  AppVitrineRoute: typeof AppVitrineRoute
   AppIndexRoute: typeof AppIndexRoute
 }
 
@@ -538,8 +598,11 @@ const AppRouteChildren: AppRouteChildren = {
   AppContaRoute: AppContaRoute,
   AppEcossistemaRoute: AppEcossistemaRoute,
   AppEstudioRoute: AppEstudioRoute,
+  AppJukeboxRoute: AppJukeboxRoute,
   AppModeracaoRoute: AppModeracaoRoute,
   AppPerfisRoute: AppPerfisRoute,
+  AppSynthRoute: AppSynthRoute,
+  AppVitrineRoute: AppVitrineRoute,
   AppIndexRoute: AppIndexRoute,
 }
 

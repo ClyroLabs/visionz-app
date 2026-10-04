@@ -14,6 +14,54 @@ export type Database = {
   }
   public: {
     Tables: {
+      creations: {
+        Row: {
+          age_rating: string
+          audio_path: string | null
+          cover_path: string | null
+          created_at: string
+          data: Json
+          description: string | null
+          id: string
+          moderation_note: string | null
+          status: string
+          title: string
+          tool: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          age_rating?: string
+          audio_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          data?: Json
+          description?: string | null
+          id?: string
+          moderation_note?: string | null
+          status?: string
+          title?: string
+          tool: string
+          updated_at?: string
+          user_id?: string
+        }
+        Update: {
+          age_rating?: string
+          audio_path?: string | null
+          cover_path?: string | null
+          created_at?: string
+          data?: Json
+          description?: string | null
+          id?: string
+          moderation_note?: string | null
+          status?: string
+          title?: string
+          tool?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       payment_methods: {
         Row: {
           brand: string | null
