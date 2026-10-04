@@ -31,7 +31,8 @@ export function cardBrand(cardNumber: string): string {
   return "Cartão";
 }
 
-const opt = (s: z.ZodTypeAny) => s.trim().optional().or(z.literal("")).transform((v: string | undefined) => (v ? v : null));
+const blank = (v: unknown) => (typeof v === "string" && v.trim() === "" ? null : typeof v === "string" ? v.trim() : v);
+const opt = <T extends z.ZodTypeAny>(s: T) => z.preprocess(blank, s.nullable().optional()).transform((v) => (v ?? null) as z.infer<T> | null);
 
 export const profileSchema = z.object({
   full_name: opt(z.string().max(100)),
@@ -40,7 +41,7 @@ export const profileSchema = z.object({
   birth_date: opt(z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Data inválida")),
   cpf: opt(z.string().refine(isValidCpf, "CPF inválido")),
   city: opt(z.string().max(80)),
-  state: opt(z.string().regex(/^[A-Za-z]{2}$/, "Use a sigla, ex.: CE")).transform((v) => (v ? v.toUpperCase() : null)),
+  state: opt(z.string().regex(/^[A-Za-z]{2}$/, "Use a sigla, ex.: CE").transform((v) => v.toUpperCase())),
 });
 
 export const walletAddressSchema = z.string().trim().regex(/^(0x[a-fA-F0-9]{40}|[1-9A-HJ-NP-Za-km-z]{32,44})$/, "Endereço de carteira inválido");
