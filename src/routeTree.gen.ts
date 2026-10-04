@@ -14,6 +14,7 @@ import { Route as AberturaRouteImport } from './routes/abertura'
 import { Route as AppRouteImport } from './routes/app'
 import { Route as ComponentesRouteImport } from './routes/componentes'
 import { Route as CoresRouteImport } from './routes/cores'
+import { Route as DesignSystemRouteImport } from './routes/design-system'
 import { Route as IconesRouteImport } from './routes/icones'
 import { Route as MarcaRouteImport } from './routes/marca'
 import { Route as SiteRouteImport } from './routes/site'
@@ -55,6 +56,11 @@ const ComponentesRoute = ComponentesRouteImport.update({
 const CoresRoute = CoresRouteImport.update({
   id: '/cores',
   path: '/cores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DesignSystemRoute = DesignSystemRouteImport.update({
+  id: '/design-system',
+  path: '/design-system',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IconesRoute = IconesRouteImport.update({
@@ -151,6 +157,7 @@ export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
+  '/design-system': typeof DesignSystemRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
   '/site': typeof SiteRouteWithChildren
@@ -174,6 +181,7 @@ export interface FileRoutesByTo {
   '/abertura': typeof AberturaRoute
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
+  '/design-system': typeof DesignSystemRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
   '/tipografia': typeof TipografiaRoute
@@ -198,6 +206,7 @@ export interface FileRoutesById {
   '/app': typeof AppRouteWithChildren
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
+  '/design-system': typeof DesignSystemRoute
   '/icones': typeof IconesRoute
   '/marca': typeof MarcaRoute
   '/site': typeof SiteRouteWithChildren
@@ -224,6 +233,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/componentes'
     | '/cores'
+    | '/design-system'
     | '/icones'
     | '/marca'
     | '/site'
@@ -247,6 +257,7 @@ export interface FileRouteTypes {
     | '/abertura'
     | '/componentes'
     | '/cores'
+    | '/design-system'
     | '/icones'
     | '/marca'
     | '/tipografia'
@@ -270,6 +281,7 @@ export interface FileRouteTypes {
     | '/app'
     | '/componentes'
     | '/cores'
+    | '/design-system'
     | '/icones'
     | '/marca'
     | '/site'
@@ -295,6 +307,7 @@ export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
   ComponentesRoute: typeof ComponentesRoute
   CoresRoute: typeof CoresRoute
+  DesignSystemRoute: typeof DesignSystemRoute
   IconesRoute: typeof IconesRoute
   MarcaRoute: typeof MarcaRoute
   SiteRoute: typeof SiteRouteWithChildren
@@ -338,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/cores'
       fullPath: '/cores'
       preLoaderRoute: typeof CoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/design-system': {
+      id: '/design-system'
+      path: '/design-system'
+      fullPath: '/design-system'
+      preLoaderRoute: typeof DesignSystemRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/icones': {
@@ -506,6 +526,7 @@ const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
   ComponentesRoute: ComponentesRoute,
   CoresRoute: CoresRoute,
+  DesignSystemRoute: DesignSystemRoute,
   IconesRoute: IconesRoute,
   MarcaRoute: MarcaRoute,
   SiteRoute: SiteRouteWithChildren,
