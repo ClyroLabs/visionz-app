@@ -51,6 +51,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
   const live = useRef({ paused, active, go });
   live.current = { paused, active, go };
   useEffect(() => {
+    console.log("vz-eff", interval, window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const t = window.setInterval(() => {
       const el = ref.current;
