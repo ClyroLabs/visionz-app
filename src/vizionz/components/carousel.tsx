@@ -1,5 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Children, useCallback, useEffect, useRef, useState, type ComponentProps } from "react";
+import { Children, useId, useCallback, useEffect, useRef, useState, type ComponentProps } from "react";
 import { cn } from "../lib/utils";
 
 export interface CarouselProps extends ComponentProps<"div"> {
@@ -11,7 +11,9 @@ export interface CarouselProps extends ComponentProps<"div"> {
 
 /** Auto-advancing horizontal carousel with arrows and dots. Loops back to the start. */
 export function Carousel({ label, interval = 3500, className, children, ...props }: CarouselProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const id = useId();
+  const box = useRef<HTMLDivElement | null>(null);
+  const ref = { get current() { return box.current ?? (typeof document !== "undefined" ? (document.getElementById(id) as HTMLDivElement | null) : null); } };
   const count = Children.count(children);
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -70,7 +72,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
       onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}
       onFocus={() => setPaused(true)} onBlur={() => setPaused(false)}
       onTouchStart={() => setPaused(true)} onTouchEnd={() => setTimeout(() => setPaused(false), 4000)}>
-      <div ref={(n) => { ref.current = n; }} role="region" aria-roledescription="carrossel" aria-label={label} tabIndex={0}
+      <div id={id} ref={box} role="region" aria-roledescription="carrossel" aria-label={label} tabIndex={0}
         className={cn("flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [&>*]:shrink-0 [&>*]:snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", !overflow && "justify-center")} {...props}>
         {children}
       </div>
