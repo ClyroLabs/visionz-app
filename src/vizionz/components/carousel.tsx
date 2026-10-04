@@ -25,7 +25,7 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     const n = ((i % count) + count) % count;
     const child = el.children[n] as HTMLElement | undefined;
     const max = el.scrollWidth - el.clientWidth;
-    const left = child ? Math.min(max, child.offsetLeft - el.offsetLeft - (el.children[0] as HTMLElement).offsetLeft + el.offsetLeft) : 0;
+    const left = child ? Math.min(max, child.offsetLeft - (el.children[0] as HTMLElement).offsetLeft) : 0;
     setActive(n);
     el.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
   }, [count]);
