@@ -28,7 +28,7 @@ export function Tabs({ defaultValue, value, onValueChange, className, ...props }
 
 export interface TabsListProps extends ComponentProps<"div"> {}
 export function TabsList({ className, ...props }: TabsListProps) {
-  return <div role="tablist" className={cn("inline-flex w-fit gap-1 rounded-lg border bg-surface p-1", className)} {...props} />;
+  return <div role="tablist" className={cn("inline-flex w-fit max-w-full gap-1 overflow-x-auto rounded-full border bg-surface/80 p-1 [scrollbar-width:none]", className)} {...props} />;
 }
 
 export interface TabsTriggerProps extends ComponentProps<"button"> { value: string }
@@ -44,8 +44,8 @@ export function TabsTrigger({ value, className, ...props }: TabsTriggerProps) {
       aria-controls={`${ctx.id}-p-${value}`}
       onClick={() => ctx.setValue(value)}
       className={cn(
-        "rounded-md px-3 py-1.5 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-        active ? "bg-surface-raised text-cyan shadow-glow-cyan" : "text-muted-foreground hover:text-foreground",
+        "shrink-0 rounded-full px-4 py-2 text-sm font-medium outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
+        active ? "bg-magenta/15 text-magenta" : "text-muted-foreground hover:text-foreground",
         className,
       )}
       {...props}
@@ -138,7 +138,7 @@ export function Menu({ trigger, items, align = "start", className, ...props }: M
               type="button"
               role="menuitem"
               onClick={() => { it.onSelect(); setOpen(false); }}
-              className={cn("flex w-full items-center gap-2 rounded-md px-3 py-2 text-left text-sm outline-none hover:bg-muted focus-visible:bg-muted [&_svg]:size-4", it.destructive ? "text-destructive" : "text-foreground")}
+              className={cn("flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm outline-none hover:bg-muted focus-visible:bg-muted [&_svg]:size-4", it.destructive ? "text-destructive" : "text-foreground")}
             >
               {it.icon}
               {it.label}
