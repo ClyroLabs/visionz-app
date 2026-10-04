@@ -48,16 +48,17 @@ export function Carousel({ label, interval = 3500, className, children, ...props
     return () => { el.removeEventListener("scroll", sync); ro.disconnect(); };
   }, [count, step]);
 
+  const live = useRef({ paused, active, go });
+  live.current = { paused, active, go };
   useEffect(() => {
-    if (!interval || paused || !overflow || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    console.log("vz-carousel autoplay on");
-    const t = setInterval(() => {
+    if (!interval || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const t = window.setInterval(() => {
       const el = ref.current;
-      if (!el) return;
-      console.log("vz-tick", el.scrollLeft, el.scrollWidth, el.clientWidth); go(active + 1);
+      if (!el || live.current.paused || el.scrollWidth <= el.clientWidth + 4) return;
+      live.current.go(live.current.active + 1);
     }, interval);
-    return () => clearInterval(t);
-  }, [interval, paused, overflow, active, go]);
+    return () => window.clearInterval(t);
+  }, [interval]);
 
   const arrow = "absolute top-1/2 z-10 grid size-9 -translate-y-1/2 place-items-center rounded-full border border-magenta/40 bg-background/80 text-foreground backdrop-blur transition-colors hover:bg-magenta/15 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
