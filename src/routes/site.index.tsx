@@ -193,11 +193,11 @@ function Landing() {
       {/* Planos */}
       <Section>
         <Reveal><SectionHeading align="center" eyebrow="Planos" title="Assine, ou pague só pelo que assistir" /></Reveal>
-        <ScrollSnapRow label="Planos" className="mx-auto mt-10 max-w-5xl md:mt-14 md:grid-cols-3 md:gap-6">
-          <PricingCard className="order-2 md:order-none" name="À la carte" price="R$ 4,90+" period="por título" description="Sem mensalidade. Compre e assista para sempre." features={["Compra avulsa de títulos", "Pacotes on-demand", "Recompensa a cada compra", "Carteira interna inclusa"]} cta="Explorar catálogo" onSelect={() => setLead("espera")} />
-          <PricingCard className="order-1 md:order-none" variant="featured" badge="Mais popular" name="Premium" price="R$ 29,90" description="O catálogo completo em 4K/8K." features={["Catálogo completo", "4K / 8K sem lag", "2 telas simultâneas", "Recompensas em dobro"]} cta="Entrar na lista" onSelect={() => setLead("espera")} />
-          <PricingCard className="order-3 md:order-none" name="Family" price="R$ 44,90" description="Até 5 perfis, com Modo infantil." features={["5 perfis", "Modo infantil com IA", "Relatório para os pais", "4 telas simultâneas"]} cta="Entrar na lista" onSelect={() => setLead("espera")} />
-        </ScrollSnapRow>
+        <Carousel label="Planos" interval={4000} className="mx-auto mt-10 max-w-5xl md:mt-14 [&_[role=region]]:px-2 [&_[role=region]]:py-4">
+          <PricingCard className="w-[85%] sm:w-[46%] lg:w-[40%]" name="À la carte" price="R$ 4,90+" period="por título" description="Sem mensalidade. Compre e assista para sempre." features={["Compra avulsa de títulos", "Pacotes on-demand", "Recompensa a cada compra", "Carteira interna inclusa"]} cta="Explorar catálogo" onSelect={() => setLead("espera")} />
+          <PricingCard className="w-[85%] sm:w-[46%] lg:w-[40%]" variant="featured" badge="Mais popular" name="Premium" price="R$ 29,90" description="O catálogo completo em 4K/8K." features={["Catálogo completo", "4K / 8K sem lag", "2 telas simultâneas", "Recompensas em dobro"]} cta="Entrar na lista" onSelect={() => setLead("espera")} />
+          <PricingCard className="w-[85%] sm:w-[46%] lg:w-[40%]" name="Family" price="R$ 44,90" description="Até 5 perfis, com Modo infantil." features={["5 perfis", "Modo infantil com IA", "Relatório para os pais", "4 telas simultâneas"]} cta="Entrar na lista" onSelect={() => setLead("espera")} />
+        </Carousel>
         <p className="mt-6 text-center text-sm text-muted-foreground">Criadores: ferramentas Pro do Synth e do Jukebox a partir de R$ 49,90/mês. Pagamentos por Pix, cartão e cripto.</p>
       </Section>
 
