@@ -14,7 +14,192 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      payment_methods: {
+        Row: {
+          brand: string | null
+          created_at: string
+          id: string
+          is_default: boolean
+          kind: string
+          label: string
+          last4: string | null
+          pix_key: string | null
+          user_id: string
+        }
+        Insert: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          kind: string
+          label: string
+          last4?: string | null
+          pix_key?: string | null
+          user_id: string
+        }
+        Update: {
+          brand?: string | null
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          kind?: string
+          label?: string
+          last4?: string | null
+          pix_key?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      payout_accounts: {
+        Row: {
+          account: string | null
+          agency: string | null
+          bank: string | null
+          created_at: string
+          id: string
+          is_default: boolean
+          kind: string
+          label: string
+          min_withdraw: number
+          network: string | null
+          pix_key: string | null
+          user_id: string
+          wallet_address: string | null
+        }
+        Insert: {
+          account?: string | null
+          agency?: string | null
+          bank?: string | null
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          kind: string
+          label: string
+          min_withdraw?: number
+          network?: string | null
+          pix_key?: string | null
+          user_id: string
+          wallet_address?: string | null
+        }
+        Update: {
+          account?: string | null
+          agency?: string | null
+          bank?: string | null
+          created_at?: string
+          id?: string
+          is_default?: boolean
+          kind?: string
+          label?: string
+          min_withdraw?: number
+          network?: string | null
+          pix_key?: string | null
+          user_id?: string
+          wallet_address?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          birth_date: string | null
+          city: string | null
+          cpf: string | null
+          created_at: string
+          full_name: string | null
+          id: string
+          nickname: string | null
+          phone: string | null
+          state: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          birth_date?: string | null
+          city?: string | null
+          cpf?: string | null
+          created_at?: string
+          full_name?: string | null
+          id: string
+          nickname?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          birth_date?: string | null
+          city?: string | null
+          cpf?: string | null
+          created_at?: string
+          full_name?: string | null
+          id?: string
+          nickname?: string | null
+          phone?: string | null
+          state?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          kids_default: boolean
+          language: string
+          network: string
+          notify_email: boolean
+          notify_push: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          kids_default?: boolean
+          language?: string
+          network?: string
+          notify_email?: boolean
+          notify_push?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          kids_default?: boolean
+          language?: string
+          network?: string
+          notify_email?: boolean
+          notify_push?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wallet_transactions: {
+        Row: {
+          amount: number
+          created_at: string
+          currency: string
+          direction: string
+          id: string
+          label: string
+          user_id: string
+        }
+        Insert: {
+          amount: number
+          created_at?: string
+          currency: string
+          direction: string
+          id?: string
+          label: string
+          user_id: string
+        }
+        Update: {
+          amount?: number
+          created_at?: string
+          currency?: string
+          direction?: string
+          id?: string
+          label?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
