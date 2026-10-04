@@ -14,9 +14,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "VisionZ Design System" },
+      { title: "VisionZ Entertainment" },
       { name: "description", content: "Sistema de design da VisionZ: streaming, criação audiovisual e recompensas multichain." },
-      { property: "og:title", content: "VisionZ Design System" },
+      { property: "og:title", content: "VisionZ Entertainment" },
       { property: "og:description", content: "Sistema de design da VisionZ: streaming, criação audiovisual e recompensas multichain." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
