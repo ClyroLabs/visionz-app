@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AberturaRouteImport } from './routes/abertura'
 import { Route as AppRouteImport } from './routes/app'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as ComponentesRouteImport } from './routes/componentes'
 import { Route as CoresRouteImport } from './routes/cores'
 import { Route as DesignSystemRouteImport } from './routes/design-system'
@@ -46,6 +47,11 @@ const AberturaRoute = AberturaRouteImport.update({
 const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentesRoute = ComponentesRouteImport.update({
@@ -155,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/abertura': typeof AberturaRoute
   '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/design-system': typeof DesignSystemRoute
@@ -179,6 +186,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/abertura': typeof AberturaRoute
+  '/auth': typeof AuthRoute
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/design-system': typeof DesignSystemRoute
@@ -204,6 +212,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/abertura': typeof AberturaRoute
   '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
   '/componentes': typeof ComponentesRoute
   '/cores': typeof CoresRoute
   '/design-system': typeof DesignSystemRoute
@@ -231,6 +240,7 @@ export interface FileRouteTypes {
     | '/'
     | '/abertura'
     | '/app'
+    | '/auth'
     | '/componentes'
     | '/cores'
     | '/design-system'
@@ -255,6 +265,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/abertura'
+    | '/auth'
     | '/componentes'
     | '/cores'
     | '/design-system'
@@ -279,6 +290,7 @@ export interface FileRouteTypes {
     | '/'
     | '/abertura'
     | '/app'
+    | '/auth'
     | '/componentes'
     | '/cores'
     | '/design-system'
@@ -305,6 +317,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AberturaRoute: typeof AberturaRoute
   AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
   ComponentesRoute: typeof ComponentesRoute
   CoresRoute: typeof CoresRoute
   DesignSystemRoute: typeof DesignSystemRoute
@@ -337,6 +350,13 @@ declare module '@tanstack/react-router' {
       path: '/app'
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/componentes': {
@@ -524,6 +544,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AberturaRoute: AberturaRoute,
   AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
   ComponentesRoute: ComponentesRoute,
   CoresRoute: CoresRoute,
   DesignSystemRoute: DesignSystemRoute,
