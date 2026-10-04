@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet } from "lucide-react";
+import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
 
@@ -11,6 +11,9 @@ const nav = [
   { to: "/app/assistir", label: "Assistir", icon: PlayCircle },
   { to: "/app/perfis", label: "Perfis", icon: Baby },
   { to: "/app/estudio", label: "Estúdio", icon: Clapperboard },
+  { to: "/app/synth", label: "Clyro Synth", icon: Sparkles },
+  { to: "/app/jukebox", label: "Clyro Jukebox", icon: Music2 },
+  { to: "/app/vitrine", label: "Vitrine", icon: LayoutGrid },
   { to: "/app/carteira", label: "Carteira", icon: Wallet },
   { to: "/app/moderacao", label: "Moderação", icon: ShieldCheck },
   { to: "/app/ecossistema", label: "Ecossistema", icon: Network },

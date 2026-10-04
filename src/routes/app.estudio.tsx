@@ -1,7 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Upload } from "lucide-react";
-import { Logo, AIVerifiedBadge, Button, Card, CardDescription, CardTitle, EarningsCard, Input, Label, Progress, Select, useToast } from "@/index";
+import { buttonVariants, Logo, AIVerifiedBadge, Button, Card, CardDescription, CardTitle, EarningsCard, Input, Label, Progress, Select, useToast } from "@/index";
 
 export const Route = createFileRoute("/app/estudio")({
   head: () => ({
@@ -60,8 +60,8 @@ function Studio() {
           <Button disabled={!title.trim() || step === "upload" || step === "ai"} onClick={() => { setP(0); setStep("upload"); }}><Upload />Enviar vídeo</Button>
         </Card>
         <div className="space-y-4">
-          <Card variant="glass" className="flex flex-col items-center space-y-2 text-center md:items-start md:text-left border-cyan/30 bg-gradient-to-br from-cyan/10 to-magenta/10"><Logo brand="clyro-synth" alt="" className="h-20 w-auto md:h-16 drop-shadow-[0_0_12px_var(--cyan)]" /><CardTitle className="text-gradient-brand">Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Button size="sm" variant="secondary" className="w-full sm:w-auto" onClick={() => toast({ title: "Clyro Synth em breve no protótipo" })}>Abrir Synth</Button></Card>
-          <Card variant="glass" className="flex flex-col items-center space-y-2 text-center md:items-start md:text-left border-magenta/30 bg-gradient-to-br from-magenta/10 to-ember/10"><Logo brand="clyro-jukebox" alt="" className="h-20 w-auto md:h-16 drop-shadow-[0_0_12px_var(--magenta)]" /><CardTitle className="text-gradient-brand">Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Button size="sm" variant="secondary" className="w-full sm:w-auto" onClick={() => toast({ title: "Clyro Jukebox em breve no protótipo" })}>Abrir Jukebox</Button></Card>
+          <Card variant="glass" className="flex flex-col items-center space-y-2 text-center md:items-start md:text-left border-cyan/30 bg-gradient-to-br from-cyan/10 to-magenta/10"><Logo brand="clyro-synth" alt="" className="h-20 w-auto md:h-16 drop-shadow-[0_0_12px_var(--cyan)]" /><CardTitle className="text-gradient-brand">Clyro Synth</CardTitle><CardDescription>Crie séries, filmes e documentários com IA.</CardDescription><Link to="/app/synth" className={buttonVariants({ size: "sm", variant: "secondary", className: "w-full sm:w-auto" })}>Abrir Synth</Link></Card>
+          <Card variant="glass" className="flex flex-col items-center space-y-2 text-center md:items-start md:text-left border-magenta/30 bg-gradient-to-br from-magenta/10 to-ember/10"><Logo brand="clyro-jukebox" alt="" className="h-20 w-auto md:h-16 drop-shadow-[0_0_12px_var(--magenta)]" /><CardTitle className="text-gradient-brand">Clyro Jukebox</CardTitle><CardDescription>Componha trilhas originais para suas obras.</CardDescription><Link to="/app/jukebox" className={buttonVariants({ size: "sm", variant: "secondary", className: "w-full sm:w-auto" })}>Abrir Jukebox</Link></Card>
         </div>
       </div>
     </div>
