@@ -114,7 +114,7 @@ export function Timeline({ items, className, ...props }: TimelineProps) {
 }
 
 /* ---------------- ModerationItem ---------------- */
-export const moderationItemVariants = cva("flex flex-col gap-3 rounded-lg border bg-surface p-4 sm:flex-row sm:items-center", {
+export const moderationItemVariants = cva("flex flex-col items-center gap-3 rounded-lg border bg-surface p-4 text-center sm:flex-row sm:items-center sm:text-left", {
   variants: { severity: { low: "border-l-4 border-l-cyan", medium: "border-l-4 border-l-warning", high: "border-l-4 border-l-destructive" } },
   defaultVariants: { severity: "medium" },
 });
@@ -136,7 +136,7 @@ export function ModerationItem({ title, reason, confidence, timestamp, onApprove
         <p className="font-semibold">{title}</p>
         <p className="text-sm text-muted-foreground">{reason} · <span className="font-mono">{timestamp}</span> · confiança {confidence}%</p>
       </div>
-      <div className="flex gap-2">
+      <div className="flex w-full gap-2 sm:w-auto [&>*]:flex-1 sm:[&>*]:flex-none">
         <Button size="sm" variant="neon" onClick={onApprove}><Check />Aprovar</Button>
         <Button size="sm" variant="destructive" onClick={onBlock}><X />Bloquear</Button>
       </div>
