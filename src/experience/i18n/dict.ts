@@ -1,5 +1,5 @@
 // Auto-generated PT-BR → [EN, ES, ZH] dictionary. Keys are the exact PT text shown in the UI (whitespace-normalized).
-export const DICT: Record<string, [string, string, string]> = {
+const BASE: Record<string, [string, string, string]> = {
 "Ecossistema e embaixadores": [
 "Ecosystem and ambassadors",
 "Ecosistema y embajadores",
@@ -2831,3 +2831,27 @@ export const DICT: Record<string, [string, string, string]> = {
 "钱包 — VisionZ 原型"
 ]
 };
+
+// Short words the extractor skips, plus brand words that must stay as-is.
+const EXTRA: Record<string, [string, string, string]> = {
+  Criadores: ["Creators", "Creadores", "创作者"],
+  Investidores: ["Investors", "Inversores", "投资者"],
+  Segurança: ["Safety", "Seguridad", "安全"],
+  Início: ["Home", "Inicio", "首页"],
+  Assista: ["Watch", "Mira", "观看"],
+  Crie: ["Create", "Crea", "创作"],
+  Ganhe: ["Earn", "Gana", "赚取"],
+  ASSISTA: ["WATCH", "MIRA", "观看"],
+  CRIE: ["CREATE", "CREA", "创作"],
+  GANHE: ["EARN", "GANA", "赚取"],
+  Entrar: ["Sign in", "Entrar", "登录"],
+  Pular: ["Skip", "Saltar", "跳过"],
+  Publicar: ["Publish", "Publicar", "发布"],
+  Salvar: ["Save", "Guardar", "保存"],
+  Excluir: ["Delete", "Eliminar", "删除"],
+  Ouvir: ["Listen", "Escuchar", "试听"],
+  Aprovar: ["Approve", "Aprobar", "批准"],
+  Bloquear: ["Block", "Bloquear", "屏蔽"],
+};
+export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
+delete DICT["Entertainment"];
