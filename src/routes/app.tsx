@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { LanguageSwitcher } from "@/experience/i18n";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
@@ -51,12 +52,14 @@ function Frame() {
           <div className="flex items-center justify-between text-sm"><span>Modo infantil</span><Switch checked={kids} onCheckedChange={setKids} aria-label="Modo infantil" /></div>
           <p className="font-mono text-xs text-muted-foreground">{vzn.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} VZN</p>
         </div>
-        <p className="mt-4 text-center text-[10px] text-muted-foreground">Protótipo · dados de exemplo</p>
+        <LanguageSwitcher className="mx-auto mt-4" />
+        <p className="mt-3 text-center text-[10px] text-muted-foreground">Protótipo · dados de exemplo</p>
       </aside>
       <div className="min-w-0 flex-1">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur md:hidden">
-          <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2">
+          <div className="grid grid-cols-[minmax(0,1fr)_auto_auto] items-center gap-2 px-4 py-2">
             <Link to="/app" className="min-w-0" onClick={() => setOpen(false)}><Logo brand="visionz-symbol" className="h-8 w-auto" /></Link>
+            <LanguageSwitcher />
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-app-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (
