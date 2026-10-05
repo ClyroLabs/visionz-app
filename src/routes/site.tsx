@@ -1,4 +1,5 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
+import { LanguageSwitcher } from "@/experience/i18n";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button, Logo, ToastProvider } from "@/index";
@@ -35,7 +36,8 @@ function SiteLayout() {
                 <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta" }}>{l.label}</Link>
               ))}
             </nav>
-            <Link to="/app" className="ml-auto shrink-0"><Button size="sm"><span className="sm:hidden">Protótipo</span><span className="hidden sm:inline">Abrir protótipo</span></Button></Link>
+            <LanguageSwitcher className="ml-auto" />
+            <Link to="/app" className="shrink-0"><Button size="sm"><span className="sm:hidden">Protótipo</span><span className="hidden sm:inline">Abrir protótipo</span></Button></Link>
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-mobile-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (

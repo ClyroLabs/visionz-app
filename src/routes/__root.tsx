@@ -6,6 +6,8 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
+import { LanguageProvider, I18N_BOOT_SCRIPT } from "@/experience/i18n";
 
 import appCss from "../styles.css?url";
 
@@ -35,8 +37,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en">
       <head>
+        <script dangerouslySetInnerHTML={{ __html: I18N_BOOT_SCRIPT }} />
         <HeadContent />
       </head>
       <body>
@@ -51,11 +54,14 @@ function RootShell({ children }: { children: ReactNode }) {
 // /__component) render inside it, so any chrome leaks into every frame.
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <LanguageProvider pathname={pathname}>
+        <Outlet />
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }
