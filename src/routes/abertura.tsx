@@ -2,7 +2,13 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/index";
-import intro from "@/assets/videos/video_de_intro.mp4.asset.json";
+import introEn from "@/assets/videos/intro-en.mp4.asset.json";
+import introPt from "@/assets/videos/intro-pt.mp4.asset.json";
+import introEs from "@/assets/videos/intro-es.mp4.asset.json";
+import introZh from "@/assets/videos/intro-zh.mp4.asset.json";
+import { LanguageSwitcher, useLang } from "@/experience/i18n";
+
+const INTRO = { en: introEn.url, pt: introPt.url, es: introEs.url, zh: introZh.url } as const;
 
 export const Route = createFileRoute("/abertura")({
   head: () => ({
@@ -18,6 +24,7 @@ export const Route = createFileRoute("/abertura")({
 
 function Intro() {
   const navigate = useNavigate();
+  const { lang } = useLang();
   const video = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const [leaving, setLeaving] = useState(false);
@@ -46,13 +53,14 @@ function Intro() {
     const safety = setTimeout(finish, 20000);
     return () => clearTimeout(safety);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [lang]);
 
   return (
     <div className={`fixed inset-0 z-50 bg-background transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}>
       <video
         ref={video}
-        src={intro.url}
+        key={lang}
+        src={INTRO[lang]}
         className="size-full object-cover"
         autoPlay
         muted={muted}
@@ -61,6 +69,7 @@ function Intro() {
         onEnded={finish}
         aria-label="Vídeo de abertura da VisionZ"
       />
+      <LanguageSwitcher className="absolute right-6 top-6" />
       <div className="absolute bottom-6 right-6 flex gap-2">
         <Button variant="secondary" size="icon" aria-label={muted ? "Ligar som" : "Desligar som"} onClick={() => setMuted((m) => !m)}>
           {muted ? <VolumeX /> : <Volume2 />}
