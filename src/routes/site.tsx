@@ -11,6 +11,7 @@ const links = [
   { to: "/site/criadores", label: "Criadores" },
   { to: "/site/seguranca", label: "Segurança" },
   { to: "/site/investidores", label: "Investidores" },
+  { to: "/site/ecossistema", label: "O que vem por aí" },
 ] as const;
 
 function SiteLayout() {
