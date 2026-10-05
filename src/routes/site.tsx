@@ -31,13 +31,13 @@ function SiteLayout() {
                 <span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span>
               </span>
             </Link>
-            <nav className="hidden flex-1 gap-1 md:flex" aria-label="Site">
+            <nav className="hidden min-w-0 flex-1 gap-0.5 md:flex lg:gap-1" aria-label="Site">
               {links.map((l) => (
-                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-3 py-1.5 text-sm text-muted-foreground transition-colors duration-300 hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta" }}>{l.label}</Link>
+                <Link key={l.to} to={l.to} activeOptions={{ exact: true }} className="rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors duration-300 lg:px-3 hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta" }}>{l.label}</Link>
               ))}
             </nav>
             <LanguageSwitcher className="ml-auto hidden md:inline-flex" />
-            <Link to="/app" className="ml-auto shrink-0 md:ml-0"><Button size="sm"><span className="sm:hidden">Protótipo</span><span className="hidden sm:inline">Abrir protótipo</span></Button></Link>
+            <Link to="/app" className="ml-auto shrink-0 md:ml-0"><Button size="sm"><span className="lg:hidden">Protótipo</span><span className="hidden lg:inline">Abrir protótipo</span></Button></Link>
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-mobile-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (
