@@ -2834,6 +2834,7 @@ const BASE: Record<string, [string, string, string]> = {
 
 // Short words the extractor skips, plus brand words that must stay as-is.
 const EXTRA: Record<string, [string, string, string]> = {
+  "O que vem por aí — VisionZ": ["What's coming — VisionZ", "Lo que viene — VisionZ", "即将推出 — VisionZ"],
   "Criar vídeos com IA.": ["Create videos with AI.", "Crear videos con IA.", "用 AI 制作视频。"],
   "Você escreve uma ideia e o Synth monta as cenas. Sua equipe revisa e aprova antes de publicar.": ["You write down an idea and Synth puts the scenes together. Your team reviews and approves before publishing.", "Escribes una idea y Synth arma las escenas. Tu equipo revisa y aprueba antes de publicar.", "你写下一个想法，Synth 就会编排场景。发布前，由你的团队审核并批准。"],
   "Criar músicas e provar que são suas.": ["Create songs and prove they're yours.", "Crear canciones y demostrar que son tuyas.", "创作歌曲，并证明它们属于你。"],
