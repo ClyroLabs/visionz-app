@@ -58,7 +58,7 @@ const phases = [
   { n: "04", period: "Mês 13 em diante", title: "Crescimento", items: ["Conselho de criadores e parceiros", "Relatórios públicos", "Novos mercados"] },
 ] as const;
 
-const badgeTone = { success: "success", warning: "warning", danger: "danger" } as const;
+const badgeTone = { success: "success", warning: "warning", danger: "destructive" } as const;
 
 function Roadmap() {
   const [pillar, setPillar] = useState<(typeof pillars)[number]["key"]>("synth");
@@ -198,7 +198,7 @@ function Roadmap() {
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {projections.map((p) => (
             <Card key={p.ano} padding="lg" className="flex flex-col items-center gap-2 text-center">
-              <Badge variant="outline" size="sm">{p.ano}</Badge>
+              <Badge variant="neutral" size="sm">{p.ano}</Badge>
               <Stat value={`${p.usuarios >= 1_000_000 ? `${(p.usuarios / 1_000_000).toLocaleString("pt-BR")} mi` : `${p.usuarios / 1000} mil`}`} label="pessoas usando" />
               <p className="font-mono text-sm text-muted-foreground">R$ {p.receita.toLocaleString("pt-BR")} mi de receita</p>
             </Card>
