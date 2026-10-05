@@ -5,3 +5,4 @@
 - Tokens are CSS variables in `src/vizionz/styles/theme.css` mapped with Tailwind v4 `@theme inline`; dark default, `.light` class for light — single canonical theme entry.
 - Components use CVA variant maps, no extra UI deps (native dialog/select) — keeps consumer install light.
 - Scroll reveals use CSS scroll-driven animations (`reveal-*` in theme.css) with visible fallback — content never hidden if JS or support is missing.
+- UI translation is a DOM-level translator (`src/experience/i18n/`) keyed by the exact PT-BR source text in `dict.ts`; PT stays the authoring language — new PT strings need a matching dict entry or they render untranslated.

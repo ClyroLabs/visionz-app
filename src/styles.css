@@ -1,2 +1,4 @@
 @import "tailwindcss";
 @import "./vizionz/styles/theme.css";
+
+html.vz-i18n-pending body { visibility: hidden; }

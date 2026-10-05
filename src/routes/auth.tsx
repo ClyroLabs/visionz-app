@@ -1,4 +1,5 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
+import { LanguageSwitcher } from "@/experience/i18n";
 import { useEffect, useState } from "react";
 import { z } from "zod";
 import { Button, Card, Input, Label, Logo } from "@/index";
@@ -58,6 +59,7 @@ function AuthPage() {
 
   return (
     <main className="relative grid min-h-screen place-items-center bg-background bg-stage-glow px-4 py-10">
+      <LanguageSwitcher className="absolute right-4 top-4" />
       <Card variant="glass" padding="lg" className="w-full max-w-md space-y-6 rounded-3xl">
         <Link to="/site" className="mx-auto flex w-fit items-center gap-2.5"><Logo brand="visionz-symbol" alt="" className="h-9 w-auto drop-shadow-[0_0_10px_var(--magenta)]" /><span className="font-display text-lg font-bold tracking-[0.12em]">VISIONZ</span></Link>
         <div className="text-center">
