@@ -2852,6 +2852,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   Ouvir: ["Listen", "Escuchar", "试听"],
   Aprovar: ["Approve", "Aprobar", "批准"],
   Bloquear: ["Block", "Bloquear", "屏蔽"],
+  "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];

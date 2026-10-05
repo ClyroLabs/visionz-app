@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LanguageSwitcher } from "@/experience/i18n";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid } from "lucide-react";
+import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
 
@@ -52,13 +52,14 @@ function Frame() {
           <div className="flex items-center justify-between text-sm"><span>Modo infantil</span><Switch checked={kids} onCheckedChange={setKids} aria-label="Modo infantil" /></div>
           <p className="font-mono text-xs text-muted-foreground">{vzn.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} VZN</p>
         </div>
-        <LanguageSwitcher className="mx-auto mt-4" />
+        <div className="mt-3"><Link to="/site" className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4 shrink-0" />Voltar ao site</Link></div>
+        <LanguageSwitcher className="mx-auto mt-3" />
         <p className="mt-3 text-center text-[10px] text-muted-foreground">Protótipo · dados de exemplo</p>
       </aside>
       <div className="min-w-0 flex-1 overflow-x-clip">
         <header className="sticky top-0 z-30 border-b bg-background/85 backdrop-blur md:hidden">
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-2">
-            <Link to="/app" className="min-w-0" onClick={() => setOpen(false)}><Logo brand="visionz-symbol" className="h-8 w-auto" /></Link>
+            <Link to="/site" aria-label="VisionZ — início" className="min-w-0" onClick={() => setOpen(false)}><Logo brand="visionz-symbol" alt="" className="h-8 w-auto" /></Link>
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-app-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (
@@ -67,6 +68,7 @@ function Frame() {
               {nav.map(({ to, label, icon: Icon }) => (
                 <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
               ))}
+              <div className="mt-1 border-t border-border pt-1"><Link to="/site" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4 shrink-0" />Voltar ao site</Link></div>
             </nav>
           )}
         </header>
