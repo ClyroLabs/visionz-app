@@ -37,6 +37,7 @@ function Intro() {
   const [leaving, setLeaving] = useState(false);
   const [ready, setReady] = useState(false);
   const [small, setSmall] = useState<boolean | null>(null);
+  useEffect(() => { const t = setTimeout(() => setReady(true), 2500); return () => clearTimeout(t); }, []);
   useEffect(() => { setSmall(window.matchMedia("(max-width: 767px)").matches); }, []);
   const src = small == null ? undefined : (small ? INTRO_SMALL : INTRO)[lang];
 
@@ -85,6 +86,7 @@ function Intro() {
           playsInline
           preload="auto"
           onPlaying={() => setReady(true)}
+          onLoadedData={() => setReady(true)}
           onEnded={finish}
           aria-label="Vídeo de abertura da VisionZ"
         />
