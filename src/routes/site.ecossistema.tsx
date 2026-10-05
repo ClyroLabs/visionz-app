@@ -77,7 +77,7 @@ function Roadmap() {
       <section className="relative isolate bg-stage-glow">
         <Glow className="left-1/2 top-10 h-64 w-64 -translate-x-1/2 bg-magenta/25" />
         <div className="mx-auto max-w-3xl px-5 py-20 text-center md:py-28">
-          <Reveal><Eyebrow underline>O que vem por aí</Eyebrow></Reveal>
+          <Reveal><Eyebrow underline="brand">O que vem por aí</Eyebrow></Reveal>
           <Reveal><h1 className="mt-5 text-balance font-display text-4xl font-bold tracking-wide sm:text-5xl md:text-6xl">A VisionZ está <span className="text-gradient-brand">crescendo</span>.</h1></Reveal>
           <Reveal><p className="mx-auto mt-5 max-w-xl text-base text-foreground/85 md:text-lg">Hoje você assiste, cria e ganha recompensas. Em breve, suas recompensas vão poder crescer, viajar entre redes e ajudar parceiros a criar coisas novas. Veja tudo em poucos minutos.</p></Reveal>
           <Reveal><a href="#existe"><Button size="lg" className="mt-8">Começar</Button></a></Reveal>
