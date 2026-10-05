@@ -27,3 +27,13 @@ describe("resgate", () => {
     expect(redeem(100, -5).ok).toBe(false);
   });
 });
+
+import { rewardsExample } from "./logic";
+describe("rewardsExample", () => {
+  it("compounds monthly: 1000 at 12%/yr for 12 months", () => {
+    expect(rewardsExample(1000, 12, 12).final).toBe(1126.83);
+  });
+  it("never goes negative", () => {
+    expect(rewardsExample(-50, 6, 5)).toEqual({ final: 0, gain: 0 });
+  });
+});
