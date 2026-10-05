@@ -33,6 +33,7 @@ import { Route as AppSynthRouteImport } from './routes/app.synth'
 import { Route as AppVitrineRouteImport } from './routes/app.vitrine'
 import { Route as SiteIndexRouteImport } from './routes/site.index'
 import { Route as SiteCriadoresRouteImport } from './routes/site.criadores'
+import { Route as SiteEcossistemaRouteImport } from './routes/site.ecossistema'
 import { Route as SiteInvestidoresRouteImport } from './routes/site.investidores'
 import { Route as SiteSegurancaRouteImport } from './routes/site.seguranca'
 import { Route as Char91__componentChar93PreviewSplatRouteImport } from './routes/[__component].preview.$'
@@ -158,6 +159,11 @@ const SiteCriadoresRoute = SiteCriadoresRouteImport.update({
   path: '/criadores',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteEcossistemaRoute = SiteEcossistemaRouteImport.update({
+  id: '/ecossistema',
+  path: '/ecossistema',
+  getParentRoute: () => SiteRoute,
+} as any)
 const SiteInvestidoresRoute = SiteInvestidoresRouteImport.update({
   id: '/investidores',
   path: '/investidores',
@@ -204,6 +210,7 @@ export interface FileRoutesByFullPath {
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
+  '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
   '/app/': typeof AppIndexRoute
@@ -232,6 +239,7 @@ export interface FileRoutesByTo {
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
+  '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
   '/app': typeof AppIndexRoute
@@ -263,6 +271,7 @@ export interface FileRoutesById {
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
+  '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
   '/app/': typeof AppIndexRoute
@@ -295,6 +304,7 @@ export interface FileRouteTypes {
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
+    | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
     | '/app/'
@@ -323,6 +333,7 @@ export interface FileRouteTypes {
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
+    | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
     | '/app'
@@ -353,6 +364,7 @@ export interface FileRouteTypes {
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
+    | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
     | '/app/'
@@ -547,6 +559,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteCriadoresRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/site/ecossistema': {
+      id: '/site/ecossistema'
+      path: '/ecossistema'
+      fullPath: '/site/ecossistema'
+      preLoaderRoute: typeof SiteEcossistemaRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/site/investidores': {
       id: '/site/investidores'
       path: '/investidores'
@@ -610,6 +629,7 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 interface SiteRouteChildren {
   SiteCriadoresRoute: typeof SiteCriadoresRoute
+  SiteEcossistemaRoute: typeof SiteEcossistemaRoute
   SiteInvestidoresRoute: typeof SiteInvestidoresRoute
   SiteSegurancaRoute: typeof SiteSegurancaRoute
   SiteIndexRoute: typeof SiteIndexRoute
@@ -617,6 +637,7 @@ interface SiteRouteChildren {
 
 const SiteRouteChildren: SiteRouteChildren = {
   SiteCriadoresRoute: SiteCriadoresRoute,
+  SiteEcossistemaRoute: SiteEcossistemaRoute,
   SiteInvestidoresRoute: SiteInvestidoresRoute,
   SiteSegurancaRoute: SiteSegurancaRoute,
   SiteIndexRoute: SiteIndexRoute,
