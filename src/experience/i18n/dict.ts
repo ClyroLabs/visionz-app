@@ -2574,5 +2574,260 @@ export const DICT: Record<string, [string, string, string]> = {
 "Full screen",
 "Pantalla completa",
 "全屏"
+],
+"Assista e ganhe recompensas na VisionZ.": [
+"Watch and earn rewards on VisionZ.",
+"Mira y gana recompensas en VisionZ.",
+"在 VisionZ 观看内容并赚取奖励。"
+],
+"Clyro Jukebox — Música original VisionZ": [
+"Clyro Jukebox — VisionZ Original Music",
+"Clyro Jukebox — Música original de VisionZ",
+"Clyro Jukebox — VisionZ 原创音乐"
+],
+"Gerencie saldo e recompensas na VisionZ.": [
+"Manage your balance and rewards on VisionZ.",
+"Gestiona tu saldo y tus recompensas en VisionZ.",
+"在 VisionZ 管理余额和奖励。"
+],
+"Mapa dos agentes Clyro com status e eventos em tempo real (simulados).": [
+"Map of Clyro agents with real-time status and events (simulated).",
+"Mapa de los agentes Clyro con estados y eventos en tiempo real (simulados).",
+"Clyro 智能体地图，展示实时状态和事件（模拟）。"
+],
+"Acesse sua conta VisionZ.": [
+"Access your VisionZ account.",
+"Accede a tu cuenta de VisionZ.",
+"访问你的 VisionZ 账户。"
+],
+"Entre ou crie sua conta VisionZ para gerenciar perfil, saldos e pagamentos.": [
+"Sign in or create your VisionZ account to manage your profile, balances, and payments.",
+"Inicia sesión o crea tu cuenta de VisionZ para gestionar tu perfil, saldos y pagos.",
+"登录或创建 VisionZ 账户，管理个人资料、余额和付款。"
+],
+"Painel do Clyro Agent Core na VisionZ.": [
+"Clyro Agent Core dashboard on VisionZ.",
+"Panel de Clyro Agent Core en VisionZ.",
+"VisionZ 上的 Clyro Agent Core 控制面板。"
+],
+"Criadores — VisionZ": [
+"Creators — VisionZ",
+"Creadores — VisionZ",
+"创作者 — VisionZ"
+],
+"Se você deu vida à criação, você tem o direito de explorá-la e distribuí-la.": [
+"If you brought a creation to life, you have the right to commercialize and distribute it.",
+"Si diste vida a una creación, tienes derecho a explotarla y distribuirla.",
+"如果你赋予了作品生命，你就有权对其进行商业开发和发行。"
+],
+"Gerencie sua conta VisionZ.": [
+"Manage your VisionZ account.",
+"Gestiona tu cuenta de VisionZ.",
+"管理你的 VisionZ 账户。"
+],
+"Central de moderação — Protótipo VisionZ": [
+"Moderation Center — VisionZ Prototype",
+"Centro de moderación — Prototipo de VisionZ",
+"内容审核中心 — VisionZ 原型"
+],
+"Fila de conteúdos marcados pela IA com decisão humana que retreina o modelo.": [
+"Queue of AI-flagged content with human decisions used to retrain the model.",
+"Cola de contenidos marcados por la IA con decisiones humanas que se utilizan para reentrenar el modelo.",
+"AI 标记的内容队列，由人工作出审核决定，并用于重新训练模型。"
+],
+"Entrar — VisionZ": [
+"Sign In — VisionZ",
+"Iniciar sesión — VisionZ",
+"登录 — VisionZ"
+],
+"Modelo de negócio, fontes de receita, projeções de 3 anos e gestão de risco da VisionZ.": [
+"VisionZ's business model, revenue sources, 3-year projections, and risk management.",
+"Modelo de negocio, fuentes de ingresos, proyecciones a 3 años y gestión de riesgos de VisionZ.",
+"VisionZ 的商业模式、收入来源、三年预测和风险管理。"
+],
+"Assista à abertura da VisionZ antes de entrar.": [
+"Watch the VisionZ intro before entering.",
+"Mira la introducción de VisionZ antes de entrar.",
+"进入前，先观看 VisionZ 开场视频。"
+],
+"Vídeo de abertura da VisionZ, o streaming ético, criativo e lucrativo.": [
+"Intro video for VisionZ, the ethical, creative, and profitable streaming platform.",
+"Vídeo de introducción de VisionZ, la plataforma de streaming ética, creativa y rentable.",
+"VisionZ 开场视频：一个秉持道德、充满创意且能创造收益的流媒体平台。"
+],
+"Streaming on-demand e à la carte com IA da Clyro Labs, conteúdo seguro para crianças e recompensas multichain para todo o ecossistema.": [
+"On-demand and à la carte streaming with AI from Clyro Labs, child-safe content, and multichain rewards for the entire ecosystem.",
+"Streaming bajo demanda y a la carta con IA de Clyro Labs, contenido seguro para niños y recompensas multicadena para todo el ecosistema.",
+"提供按需点播和单片购买的流媒体服务，搭载 Clyro Labs 的 AI 技术，为儿童提供安全内容，并为整个生态系统提供多链奖励。"
+],
+"Investidores — VisionZ Entertainment": [
+"Investors — VisionZ Entertainment",
+"Inversores — VisionZ Entertainment",
+"投资者 — VisionZ Entertainment"
+],
+"Painel do criador na VisionZ.": [
+"Creator dashboard on VisionZ.",
+"Panel del creador en VisionZ.",
+"VisionZ 创作者控制面板。"
+],
+"Catálogo de streaming da VisionZ com compra avulsa e Modo infantil.": [
+"VisionZ streaming catalog with individual purchases and Kids Mode.",
+"Catálogo de streaming de VisionZ con compras individuales y modo infantil.",
+"VisionZ 流媒体内容目录，支持单独购买和儿童模式。"
+],
+"Criações da comunidade VisionZ verificadas pela IA.": [
+"AI-verified creations from the VisionZ community.",
+"Creaciones de la comunidad de VisionZ verificadas por IA.",
+"经 AI 验证的 VisionZ 社区作品。"
+],
+"Produções do Clyro Synth e músicas do Clyro Jukebox publicadas pela comunidade, verificadas pela IA.": [
+"Clyro Synth productions and Clyro Jukebox music published by the community and verified by AI.",
+"Producciones de Clyro Synth y música de Clyro Jukebox publicadas por la comunidad y verificadas por IA.",
+"由社区发布并经 AI 验证的 Clyro Synth 作品和 Clyro Jukebox 音乐。"
+],
+"Componha canções originais com IA ou envie suas faixas no Clyro Jukebox.": [
+"Compose original songs with AI or upload your tracks to Clyro Jukebox.",
+"Compón canciones originales con IA o sube tus pistas a Clyro Jukebox.",
+"在 Clyro Jukebox 使用 AI 创作原创歌曲，或上传你的音乐。"
+],
+"VisionZ — Abertura": [
+"VisionZ — Intro",
+"VisionZ — Introducción",
+"VisionZ — 开场视频"
+],
+"Estúdio do criador — Protótipo VisionZ": [
+"Creator Studio — VisionZ Prototype",
+"Estudio del creador — Prototipo de VisionZ",
+"创作者工作室 — VisionZ 原型"
+],
+"Clyro Synth — Estúdio de mídia sintética VisionZ": [
+"Clyro Synth — VisionZ Synthetic Media Studio",
+"Clyro Synth — Estudio de medios sintéticos de VisionZ",
+"Clyro Synth — VisionZ 合成媒体工作室"
+],
+"Por que investir agora na VisionZ: inovação brasileira com alcance global.": [
+"Why invest in VisionZ now: Brazilian innovation with global reach.",
+"Por qué invertir ahora en VisionZ: innovación brasileña con alcance global.",
+"为何现在投资 VisionZ：源自巴西、面向全球的创新。"
+],
+"Assistir — Protótipo VisionZ": [
+"Watch — VisionZ Prototype",
+"Ver — Prototipo de VisionZ",
+"观看 — VisionZ 原型"
+],
+"Transforme uma ideia em roteiro, cenas e imagens com IA no Clyro Synth.": [
+"Turn an idea into a script, scenes, and images with AI in Clyro Synth.",
+"Transforma una idea en un guion, escenas e imágenes con IA en Clyro Synth.",
+"在 Clyro Synth 中，借助 AI 将创意转化为剧本、场景和图像。"
+],
+"Assista, crie e ganhe: o streaming ético, criativo e lucrativo da VisionZ.": [
+"Watch, create, and earn: ethical, creative, and profitable streaming from VisionZ.",
+"Mira, crea y gana: el streaming ético, creativo y rentable de VisionZ.",
+"观看、创作、赚取收益：VisionZ 提供秉持道德、充满创意且能创造收益的流媒体服务。"
+],
+"Minha conta — VisionZ": [
+"My Account — VisionZ",
+"Mi cuenta — VisionZ",
+"我的账户 — VisionZ"
+],
+"Perfil, saldos, pagamentos e recebimentos da sua conta VisionZ.": [
+"Profile, balances, payments, and incoming funds for your VisionZ account.",
+"Perfil, saldos, pagos y cobros de tu cuenta de VisionZ.",
+"你的 VisionZ 账户的个人资料、余额、付款和收款。"
+],
+"Como o Filtro Inteligente da Clyro Labs protege crianças: análise visual, auditoria sonora e revisão humana.": [
+"How the Clyro Labs Smart Filter protects children: visual analysis, audio auditing, and human review.",
+"Cómo protege a los niños el Filtro Inteligente de Clyro Labs: análisis visual, auditoría de audio y revisión humana.",
+"Clyro Labs 智能过滤器如何保护儿童：视觉分析、音频审核和人工复核。"
+],
+"Início — Protótipo VisionZ": [
+"Home — VisionZ Prototype",
+"Inicio — Prototipo de VisionZ",
+"首页 — VisionZ 原型"
+],
+"Explore o catálogo navegável da plataforma VisionZ.": [
+"Explore the browsable catalog on the VisionZ platform.",
+"Explora el catálogo navegable de la plataforma VisionZ.",
+"浏览探索 VisionZ 平台的内容目录。"
+],
+"Player VisionZ com classificação indicativa, verificação por IA e recompensas por tempo assistido.": [
+"VisionZ player with age ratings, AI verification, and rewards based on watch time.",
+"Reproductor de VisionZ con clasificación por edades, verificación por IA y recompensas según el tiempo de visualización.",
+"VisionZ 播放器，提供年龄分级、AI 验证和按观看时长发放的奖励。"
+],
+"Troque de perfil e veja o catálogo ser filtrado pela IA na hora.": [
+"Switch profiles and watch AI instantly filter the catalog.",
+"Cambia de perfil y ve cómo la IA filtra el catálogo al instante.",
+"切换用户档案，即可看到 AI 即时筛选内容目录。"
+],
+"Controle parental com IA na VisionZ.": [
+"AI-powered parental controls on VisionZ.",
+"Control parental con IA en VisionZ.",
+"VisionZ 上由 AI 驱动的家长控制功能。"
+],
+"Segurança infantil — VisionZ": [
+"Child Safety — VisionZ",
+"Seguridad infantil — VisionZ",
+"儿童安全 — VisionZ"
+],
+"Perfis e Modo infantil — Protótipo VisionZ": [
+"Profiles and Kids Mode — VisionZ Prototype",
+"Perfiles y modo infantil — Prototipo de VisionZ",
+"用户档案与儿童模式 — VisionZ 原型"
+],
+"Envie vídeos, acompanhe a análise da IA e veja seus ganhos como criador.": [
+"Upload videos, track the AI review, and view your earnings as a creator.",
+"Sube vídeos, sigue el análisis de la IA y consulta tus ganancias como creador.",
+"上传视频，跟踪 AI 审核进度，并查看你的创作者收益。"
+],
+"Estúdio de mídia sintética com IA.": [
+"AI-powered synthetic media studio.",
+"Estudio de medios sintéticos con IA.",
+"由 AI 驱动的合成媒体工作室。"
+],
+"Ecossistema Clyro — Protótipo VisionZ": [
+"Clyro Ecosystem — VisionZ Prototype",
+"Ecosistema Clyro — Prototipo de VisionZ",
+"Clyro 生态系统 — VisionZ 原型"
+],
+"VisionZ — O entretenimento nunca mais será o mesmo": [
+"VisionZ — Entertainment Will Never Be the Same",
+"VisionZ — El entretenimiento nunca volverá a ser el mismo",
+"VisionZ — 娱乐从此不同"
+],
+"Crie séries, filmes, documentários e música com Clyro Synth e Jukebox e receba pelo que criou.": [
+"Create series, films, documentaries, and music with Clyro Synth and Jukebox, and get paid for what you create.",
+"Crea series, películas, documentales y música con Clyro Synth y Jukebox, y recibe ingresos por tus creaciones.",
+"使用 Clyro Synth 和 Jukebox 创作剧集、电影、纪录片和音乐，并通过作品获得报酬。"
+],
+"Carteira interna VisionZ: saldo em reais, recompensas VZN multichain e histórico.": [
+"VisionZ internal wallet: balance in Brazilian reais, multichain VZN rewards, and transaction history.",
+"Billetera interna de VisionZ: saldo en reales brasileños, recompensas VZN multicadena e historial.",
+"VisionZ 内置钱包：巴西雷亚尔余额、VZN 多链奖励和交易记录。"
+],
+"Música original com IA na VisionZ.": [
+"Original music with AI on VisionZ.",
+"Música original con IA en VisionZ.",
+"在 VisionZ 借助 AI 创作原创音乐。"
+],
+"Tranquilidade para pais e educadores com moderação automática por IA.": [
+"Peace of mind for parents and educators with automated AI moderation.",
+"Tranquilidad para padres y educadores con moderación automática por IA.",
+"通过 AI 自动内容审核，让家长和教育工作者安心。"
+],
+"Vitrine de criadores — VisionZ": [
+"Creator Showcase — VisionZ",
+"Escaparate de creadores — VisionZ",
+"创作者展示 — VisionZ"
+],
+"Revisão humana do Filtro Inteligente VisionZ.": [
+"Human review for the VisionZ Smart Filter.",
+"Revisión humana del Filtro Inteligente de VisionZ.",
+"VisionZ 智能过滤器的人工复核。"
+],
+"Carteira — Protótipo VisionZ": [
+"Wallet — VisionZ Prototype",
+"Billetera — Prototipo de VisionZ",
+"钱包 — VisionZ 原型"
 ]
 };
