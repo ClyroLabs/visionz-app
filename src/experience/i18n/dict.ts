@@ -2834,6 +2834,17 @@ const BASE: Record<string, [string, string, string]> = {
 
 // Short words the extractor skips, plus brand words that must stay as-is.
 const EXTRA: Record<string, [string, string, string]> = {
+  Estimativas: ["Estimates", "Estimaciones", "预估"],
+  Cuidados: ["Safeguards", "Cuidados", "保障"],
+  Acompanhando: ["Monitoring", "En seguimiento", "持续关注"],
+  Crescimento: ["Growth", "Crecimiento", "增长"],
+  Recompensas: ["Rewards", "Recompensas", "奖励"],
+  Usar: ["Use", "Usar", "使用"],
+  Ganhar: ["Earn", "Ganar", "赚取"],
+  Participar: ["Take part", "Participar", "参与"],
+  Criar: ["Create", "Crear", "创作"],
+  Proteger: ["Protect", "Proteger", "保护"],
+  Prever: ["Predict", "Prever", "预测"],
   "O que vem por aí — VisionZ": ["What's coming — VisionZ", "Lo que viene — VisionZ", "即将推出 — VisionZ"],
   "Criar vídeos com IA.": ["Create videos with AI.", "Crear videos con IA.", "用 AI 制作视频。"],
   "Você escreve uma ideia e o Synth monta as cenas. Sua equipe revisa e aprova antes de publicar.": ["You write down an idea and Synth puts the scenes together. Your team reviews and approves before publishing.", "Escribes una idea y Synth arma las escenas. Tu equipo revisa y aprueba antes de publicar.", "你写下一个想法，Synth 就会编排场景。发布前，由你的团队审核并批准。"],

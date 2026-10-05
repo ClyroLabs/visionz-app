@@ -199,8 +199,8 @@ function Roadmap() {
           {projections.map((p) => (
             <Card key={p.ano} padding="lg" className="flex flex-col items-center gap-2 text-center">
               <Badge variant="neutral" size="sm">{p.ano}</Badge>
-              <Stat value={`${p.usuarios >= 1_000_000 ? `${(p.usuarios / 1_000_000).toLocaleString("pt-BR")} mi` : `${p.usuarios / 1000} mil`}`} label="pessoas usando" />
-              <p className="font-mono text-sm text-muted-foreground">R$ {p.receita.toLocaleString("pt-BR")} mi de receita</p>
+              <Stat value={`${p.usuarios >= 1_000_000 ? `${(p.usuarios / 1_000_000).toLocaleString("pt-BR")}M` : `${p.usuarios / 1000}K`}`} label="pessoas usando" />
+              <p className="font-mono text-sm text-muted-foreground">R$ {p.receita.toLocaleString("pt-BR")}M · receita</p>
             </Card>
           ))}
         </div>
