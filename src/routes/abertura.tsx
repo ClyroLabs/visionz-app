@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/index";
-import intro from "@/assets/videos/visionz-hero-bg-720.mp4.asset.json";
+import intro from "@/assets/videos/video_de_intro.mp4.asset.json";
 
 export const Route = createFileRoute("/abertura")({
   head: () => ({
@@ -30,7 +30,19 @@ function Intro() {
   };
 
   useEffect(() => {
-    video.current?.play().catch(() => {});
+    const v = video.current;
+    if (v) {
+      // Tenta tocar com som; se o navegador bloquear, toca mudo e libera o som no primeiro toque.
+      v.muted = false;
+      v.play().then(() => setMuted(false)).catch(() => {
+        v.muted = true;
+        setMuted(true);
+        v.play().catch(() => {});
+        const unlock = () => { v.muted = false; setMuted(false); };
+        window.addEventListener("pointerdown", unlock, { once: true });
+        window.addEventListener("keydown", unlock, { once: true });
+      });
+    }
     const safety = setTimeout(finish, 20000);
     return () => clearTimeout(safety);
     // eslint-disable-next-line react-hooks/exhaustive-deps
