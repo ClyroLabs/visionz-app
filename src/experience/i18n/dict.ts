@@ -2834,6 +2834,7 @@ const BASE: Record<string, [string, string, string]> = {
 
 // Short words the extractor skips, plus brand words that must stay as-is.
 const EXTRA: Record<string, [string, string, string]> = {
+  receita: ["revenue", "ingresos", "收入"],
   Estimativas: ["Estimates", "Estimaciones", "预估"],
   Cuidados: ["Safeguards", "Cuidados", "保障"],
   Acompanhando: ["Monitoring", "En seguimiento", "持续关注"],
