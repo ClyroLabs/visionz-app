@@ -2974,6 +2974,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   Aprovar: ["Approve", "Aprobar", "批准"],
   Bloquear: ["Block", "Bloquear", "屏蔽"],
   "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
+  "Veja em 3 minutos como a VisionZ funciona.": ["See how VisionZ works in 3 minutes.", "Mira en 3 minutos cómo funciona VisionZ.", "3 分钟了解 VisionZ 如何运作。"],
   "Conte o que você precisa. Respondemos no seu e-mail.": ["Tell us what you need. We'll reply by email.", "Cuéntanos qué necesitas. Respondemos por correo.", "告诉我们您的需求，我们会通过邮件回复。"],
   "Assunto": ["Subject", "Asunto", "主题"],
   "Mensagem": ["Message", "Mensaje", "留言"],
