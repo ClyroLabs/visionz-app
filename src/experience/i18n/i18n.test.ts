@@ -41,3 +41,7 @@ describe("currency by language", () => {
   it("PT stays in reais", () => expect(convertMoney("R$ 29,90", "pt")).toBe("R$ 29,90"));
   it("millions keep their unit", () => expect(convertMoney("R$ 232 mi", "en")).toBe("US$ 41.8M"));
 });
+describe("currency in translated text", () => {
+  it("handles EN-style decimals", () => expect(convertMoney("R$ 29.90/month", "en")).toBe("US$ 5.38/month"));
+  it("handles million words", () => expect(convertMoney("R$ 232 million", "en")).toBe("US$ 41.8M"));
+});
