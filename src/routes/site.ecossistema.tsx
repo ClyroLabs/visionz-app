@@ -1,10 +1,13 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Bot, Clapperboard, Coins, Handshake, Lock, Music2, Network, ShieldCheck, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
+import { Bot, Coins, Handshake, Lock, Network, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Eyebrow, Input, Label, Reveal, ScrollSnapRow, SectionHeading, Stat, Tabs, TabsContent, TabsList, TabsTrigger, TokenBadge, cn } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { projections } from "@/experience/data";
 import { rewardsExample } from "@/experience/logic";
+import synthLogo from "@/assets/logos/synth-logo.webp.asset.json";
+import jukeboxLogo from "@/assets/logos/jukebox-logo.webp.asset.json";
+import filterLogo from "@/assets/logos/filtro-inteligente-logo.png";
 
 export const Route = createFileRoute("/site/ecossistema")({
   head: () => ({
@@ -21,9 +24,9 @@ export const Route = createFileRoute("/site/ecossistema")({
 });
 
 const pillars = [
-  { key: "synth", icon: Clapperboard, name: "Clyro Synth", short: "Criar vídeos com IA.", more: "Você escreve uma ideia e o Synth monta as cenas. Sua equipe revisa e aprova antes de publicar." },
-  { key: "jukebox", icon: Music2, name: "Clyro Jukebox", short: "Criar músicas e provar que são suas.", more: "Cada música guarda quem criou e quando. O crédito fica sempre visível e o pagamento vai direto para quem criou." },
-  { key: "filter", icon: ShieldCheck, name: "Filtro Inteligente", short: "Protege as crianças e explica cada decisão.", more: "A IA olha imagem, som e contexto. Quando tem dúvida, uma pessoa decide — e a IA aprende com essa decisão." },
+  { key: "synth", logo: synthLogo.url, glow: "drop-shadow-[0_0_14px_var(--cyan)]", name: "Clyro Synth", short: "Criar vídeos com IA.", more: "Você escreve uma ideia e o Synth monta as cenas. Sua equipe revisa e aprova antes de publicar." },
+  { key: "jukebox", logo: jukeboxLogo.url, glow: "drop-shadow-[0_0_14px_var(--magenta)]", name: "Clyro Jukebox", short: "Criar músicas e provar que são suas.", more: "Cada música guarda quem criou e quando. O crédito fica sempre visível e o pagamento vai direto para quem criou." },
+  { key: "filter", logo: filterLogo, glow: "drop-shadow-[0_0_14px_var(--indigo)]", name: "Filtro Inteligente", short: "Protege as crianças e explica cada decisão.", more: "A IA olha imagem, som e contexto. Quando tem dúvida, uma pessoa decide — e a IA aprende com essa decisão." },
 ] as const;
 
 const news = [
@@ -90,8 +93,8 @@ function Roadmap() {
         <div className="mt-10 grid gap-4 md:grid-cols-3">
           {pillars.map((p) => (
             <button key={p.key} type="button" onClick={() => setPillar(p.key)} aria-pressed={pillar === p.key}
-              className={cn("flex flex-col items-center gap-3 rounded-2xl border bg-surface p-6 text-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", pillar === p.key ? "border-magenta/60 shadow-glow-brand" : "hover:border-magenta/40")}>
-              <span className="grid size-12 place-items-center rounded-full bg-magenta/12 text-magenta"><p.icon className="size-5" /></span>
+              className={cn("group flex flex-col items-center gap-3 rounded-2xl border bg-surface p-6 text-center transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", pillar === p.key ? "border-magenta/60 shadow-glow-brand" : "hover:border-magenta/40")}>
+              <img src={p.logo} alt={`Logo ${p.name}`} loading="lazy" className={cn("h-20 w-auto max-w-[9rem] object-contain transition-transform duration-300 group-hover:scale-105", p.glow)} />
               <span className="font-display font-semibold tracking-wide">{p.name}</span>
               <span className="text-sm text-muted-foreground">{p.short}</span>
             </button>
