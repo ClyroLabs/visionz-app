@@ -238,7 +238,7 @@ function Roadmap() {
           ))}
         </div>
         <Card padding="lg" className="mx-auto mt-4 max-w-2xl animate-rise" key={phase}>
-          <ul className="space-y-2 text-center sm:text-left">{phases[phase].items.map((it) => <li key={it} className="text-sm text-foreground/90"><span className="mr-2 text-magenta">•</span>{it}</li>)}</ul>
+          <ul className="flex flex-col items-center gap-2 text-center md:flex-row md:flex-wrap md:justify-center md:gap-x-8">{phases[phase].items.map((it) => <li key={it} className="text-sm text-foreground/90"><span className="mr-2 text-magenta">•</span>{it}</li>)}</ul>
         </Card>
       </Section>
 
