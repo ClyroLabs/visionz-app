@@ -131,7 +131,7 @@ function Whitepaper() {
 
           <Block id="riscos" eyebrow="9. Riscos e roadmap" title="Riscos que levamos a sério">
             <div className="grid gap-3 md:grid-cols-2">
-              {risks.map((r) => <Card key={r.t} className="space-y-2"><div className="flex items-center justify-between gap-2"><p className="font-semibold">{r.t}</p><Badge variant={r.level === "Elevado" ? "danger" : r.level === "Médio" ? "warning" : "success"}>{r.level}</Badge></div><p className="text-sm text-muted-foreground">{r.d}</p></Card>)}
+              {risks.map((r) => <Card key={r.t} className="space-y-2"><div className="flex items-center justify-between gap-2"><p className="font-semibold">{r.t}</p><Badge variant={r.level === "Elevado" ? "destructive" : r.level === "Médio" ? "warning" : "success"}>{r.level}</Badge></div><p className="text-sm text-muted-foreground">{r.d}</p></Card>)}
             </div>
             <ol className="grid gap-3 md:grid-cols-4">
               {expansionPhases.map((p) => <li key={p.phase}><Card className="h-full text-center"><p className="font-mono text-xs text-cyan">{p.period}</p><p className="font-display font-semibold tracking-wide">{p.phase}</p><p className="text-sm text-muted-foreground">{p.title}</p></Card></li>)}
