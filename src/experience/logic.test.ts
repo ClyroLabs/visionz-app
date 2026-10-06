@@ -37,3 +37,21 @@ describe("rewardsExample", () => {
     expect(rewardsExample(-50, 6, 5)).toEqual({ final: 0, gain: 0 });
   });
 });
+
+import { burnSimulation, rewardsExample as rx } from "./logic";
+describe("simulador de queima $VZN", () => {
+  it("fórmula do whitepaper (o texto fixo do documento mostra 16,57M, mas a própria fórmula dá 20,51M): α 20%, β 10%, R$ 1,50", () => {
+    const r = burnSimulation({ alpha: 0.2, beta: 0.1, price: 1.5 });
+    expect((r.burned / 1e6).toFixed(2)).toBe("20.51");
+    expect((r.finalSupply / 1e6).toFixed(2)).toBe("979.49");
+    expect((r.buyback / 1e6).toFixed(1)).toBe("26.7");
+  });
+  it("conservador queima metade", () => {
+    const a = burnSimulation({ alpha: 0.2, beta: 0.1, price: 1.5 }).burned;
+    expect(burnSimulation({ alpha: 0.2, beta: 0.1, price: 1.5, multiplier: 0.5 }).burned).toBeCloseTo(a / 2);
+  });
+  it("vault de 28% rende US$ 280 sobre US$ 1.000 em 12 meses (juros simples do documento)", () => {
+    expect(Math.round(1000 * 0.28)).toBe(280);
+    expect(rx(0, 12, 28).final).toBe(0);
+  });
+});

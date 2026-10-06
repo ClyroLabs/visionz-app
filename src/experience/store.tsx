@@ -23,7 +23,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   const [kids, setKids] = useState(false);
   const [vzn, setVzn] = useState(1284.5);
   const [brl, setBrl] = useState(48.6);
-  const [network, setNetwork] = useState<Network>("polygon");
+  const [network, setNetwork] = useState<Network>("solana");
   const [owned, setOwned] = useState<string[]>([]);
   const [txs, setTxs] = useState<Tx[]>([
     { id: 1, label: "Recompensa: 10h assistidas", amount: 25, kind: "in", when: "ontem" },

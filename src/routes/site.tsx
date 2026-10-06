@@ -12,6 +12,7 @@ const links = [
   { to: "/site/seguranca", label: "Segurança" },
   { to: "/site/investidores", label: "Investidores" },
   { to: "/site/ecossistema", label: "O que vem por aí" },
+  { to: "/site/whitepaper", label: "Whitepaper" },
 ] as const;
 
 function SiteLayout() {

@@ -39,6 +39,7 @@ export const networks = {
   solana: { label: "Solana", dot: "bg-cyan" },
   bnb: { label: "BNB Chain", dot: "bg-warning" },
   base: { label: "Base", dot: "bg-cyan-deep" },
+  arbitrum: { label: "Arbitrum", dot: "bg-indigo" },
 } as const;
 export type Network = keyof typeof networks;
 

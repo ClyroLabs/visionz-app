@@ -34,7 +34,7 @@ export const Route = createFileRoute("/site/")({
 function Landing() {
   const [lead, setLead] = useState<null | "espera" | "investidor">(null);
   const [kids, setKids] = useState(true);
-  const [net, setNet] = useState<Network>("polygon");
+  const [net, setNet] = useState<Network>("solana");
   const preview = filterCatalog(catalog, kids).slice(0, 3);
 
   return (
@@ -100,7 +100,7 @@ function Landing() {
             <Stat className="text-center" value="0%" label="exposição infantil a conteúdo impróprio — nossa meta" />
             <Stat className="text-center" value="40%" tone="cyan" label="menos custo de banda com a tecnologia Clyro" />
             <Stat className="text-center" value="4K/8K" tone="default" label="streaming de alta performance" />
-            <Stat className="text-center" value="5" tone="cyan" label="redes blockchain suportadas" />
+            <Stat className="text-center" value="3" tone="cyan" label="redes conectadas (Solana, Base, Arbitrum)" />
           </div>
         </Section>
       </div>
@@ -224,7 +224,7 @@ function Landing() {
                 <div key={a.name} className="rounded-lg border bg-surface flex flex-col items-center p-3 text-center"><ShieldCheck className="mx-auto mb-2 size-5 text-cyan" /><p className="text-sm font-semibold">{a.name}</p><p className="text-xs text-muted-foreground">{a.role}</p></div>
               ))}
             </ScrollSnapRow>
-            <div className="mt-6 flex flex-wrap justify-center gap-2"><NetworkTag network="polygon" /><NetworkTag network="ethereum" /><NetworkTag network="solana" /><NetworkTag network="bnb" /><NetworkTag network="base" /></div>
+            <div className="mt-6 flex flex-wrap justify-center gap-2"><NetworkTag network="solana" /><NetworkTag network="base" /><NetworkTag network="arbitrum" /></div>
           </div>
           <details className="group md:hidden"><summary className="flex cursor-pointer list-none items-center justify-center gap-2 rounded-lg border p-3 font-display text-sm tracking-wide [&::-webkit-details-marker]:hidden">Roadmap <span aria-hidden className="transition-transform group-open:rotate-45">+</span></summary><div className="mt-4"><Timeline items={roadmap} /></div></details>
           <div className="hidden md:block"><Timeline items={roadmap} /></div>

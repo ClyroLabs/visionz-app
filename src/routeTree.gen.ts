@@ -26,6 +26,7 @@ import { Route as AppCarteiraRouteImport } from './routes/app.carteira'
 import { Route as AppContaRouteImport } from './routes/app.conta'
 import { Route as AppEcossistemaRouteImport } from './routes/app.ecossistema'
 import { Route as AppEstudioRouteImport } from './routes/app.estudio'
+import { Route as AppFinancasRouteImport } from './routes/app.financas'
 import { Route as AppJukeboxRouteImport } from './routes/app.jukebox'
 import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
 import { Route as AppPerfisRouteImport } from './routes/app.perfis'
@@ -36,6 +37,7 @@ import { Route as SiteCriadoresRouteImport } from './routes/site.criadores'
 import { Route as SiteEcossistemaRouteImport } from './routes/site.ecossistema'
 import { Route as SiteInvestidoresRouteImport } from './routes/site.investidores'
 import { Route as SiteSegurancaRouteImport } from './routes/site.seguranca'
+import { Route as SiteWhitepaperRouteImport } from './routes/site.whitepaper'
 import { Route as Char91__componentChar93PreviewSplatRouteImport } from './routes/[__component].preview.$'
 import { Route as Char91__mockupChar93PreviewSplatRouteImport } from './routes/[__mockup].preview.$'
 
@@ -124,6 +126,11 @@ const AppEstudioRoute = AppEstudioRouteImport.update({
   path: '/estudio',
   getParentRoute: () => AppRoute,
 } as any)
+const AppFinancasRoute = AppFinancasRouteImport.update({
+  id: '/financas',
+  path: '/financas',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppJukeboxRoute = AppJukeboxRouteImport.update({
   id: '/jukebox',
   path: '/jukebox',
@@ -174,6 +181,11 @@ const SiteSegurancaRoute = SiteSegurancaRouteImport.update({
   path: '/seguranca',
   getParentRoute: () => SiteRoute,
 } as any)
+const SiteWhitepaperRoute = SiteWhitepaperRouteImport.update({
+  id: '/whitepaper',
+  path: '/whitepaper',
+  getParentRoute: () => SiteRoute,
+} as any)
 const Char91__componentChar93PreviewSplatRoute =
   Char91__componentChar93PreviewSplatRouteImport.update({
     id: '/__component/preview/$',
@@ -204,6 +216,7 @@ export interface FileRoutesByFullPath {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
@@ -213,6 +226,7 @@ export interface FileRoutesByFullPath {
   '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
+  '/site/whitepaper': typeof SiteWhitepaperRoute
   '/app/': typeof AppIndexRoute
   '/site/': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
@@ -233,6 +247,7 @@ export interface FileRoutesByTo {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
@@ -242,6 +257,7 @@ export interface FileRoutesByTo {
   '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
+  '/site/whitepaper': typeof SiteWhitepaperRoute
   '/app': typeof AppIndexRoute
   '/site': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
@@ -265,6 +281,7 @@ export interface FileRoutesById {
   '/app/conta': typeof AppContaRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
+  '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
@@ -274,6 +291,7 @@ export interface FileRoutesById {
   '/site/ecossistema': typeof SiteEcossistemaRoute
   '/site/investidores': typeof SiteInvestidoresRoute
   '/site/seguranca': typeof SiteSegurancaRoute
+  '/site/whitepaper': typeof SiteWhitepaperRoute
   '/app/': typeof AppIndexRoute
   '/site/': typeof SiteIndexRoute
   '/__component/preview/$': typeof Char91__componentChar93PreviewSplatRoute
@@ -298,6 +316,7 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/financas'
     | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
@@ -307,6 +326,7 @@ export interface FileRouteTypes {
     | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
+    | '/site/whitepaper'
     | '/app/'
     | '/site/'
     | '/__component/preview/$'
@@ -327,6 +347,7 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/financas'
     | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
@@ -336,6 +357,7 @@ export interface FileRouteTypes {
     | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
+    | '/site/whitepaper'
     | '/app'
     | '/site'
     | '/__component/preview/$'
@@ -358,6 +380,7 @@ export interface FileRouteTypes {
     | '/app/conta'
     | '/app/ecossistema'
     | '/app/estudio'
+    | '/app/financas'
     | '/app/jukebox'
     | '/app/moderacao'
     | '/app/perfis'
@@ -367,6 +390,7 @@ export interface FileRouteTypes {
     | '/site/ecossistema'
     | '/site/investidores'
     | '/site/seguranca'
+    | '/site/whitepaper'
     | '/app/'
     | '/site/'
     | '/__component/preview/$'
@@ -510,6 +534,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppEstudioRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/financas': {
+      id: '/app/financas'
+      path: '/financas'
+      fullPath: '/app/financas'
+      preLoaderRoute: typeof AppFinancasRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/jukebox': {
       id: '/app/jukebox'
       path: '/jukebox'
@@ -580,6 +611,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SiteSegurancaRouteImport
       parentRoute: typeof SiteRoute
     }
+    '/site/whitepaper': {
+      id: '/site/whitepaper'
+      path: '/whitepaper'
+      fullPath: '/site/whitepaper'
+      preLoaderRoute: typeof SiteWhitepaperRouteImport
+      parentRoute: typeof SiteRoute
+    }
     '/__component/preview/$': {
       id: '/__component/preview/$'
       path: '/__component/preview/$'
@@ -603,6 +641,7 @@ interface AppRouteChildren {
   AppContaRoute: typeof AppContaRoute
   AppEcossistemaRoute: typeof AppEcossistemaRoute
   AppEstudioRoute: typeof AppEstudioRoute
+  AppFinancasRoute: typeof AppFinancasRoute
   AppJukeboxRoute: typeof AppJukeboxRoute
   AppModeracaoRoute: typeof AppModeracaoRoute
   AppPerfisRoute: typeof AppPerfisRoute
@@ -617,6 +656,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppContaRoute: AppContaRoute,
   AppEcossistemaRoute: AppEcossistemaRoute,
   AppEstudioRoute: AppEstudioRoute,
+  AppFinancasRoute: AppFinancasRoute,
   AppJukeboxRoute: AppJukeboxRoute,
   AppModeracaoRoute: AppModeracaoRoute,
   AppPerfisRoute: AppPerfisRoute,
@@ -632,6 +672,7 @@ interface SiteRouteChildren {
   SiteEcossistemaRoute: typeof SiteEcossistemaRoute
   SiteInvestidoresRoute: typeof SiteInvestidoresRoute
   SiteSegurancaRoute: typeof SiteSegurancaRoute
+  SiteWhitepaperRoute: typeof SiteWhitepaperRoute
   SiteIndexRoute: typeof SiteIndexRoute
 }
 
@@ -640,6 +681,7 @@ const SiteRouteChildren: SiteRouteChildren = {
   SiteEcossistemaRoute: SiteEcossistemaRoute,
   SiteInvestidoresRoute: SiteInvestidoresRoute,
   SiteSegurancaRoute: SiteSegurancaRoute,
+  SiteWhitepaperRoute: SiteWhitepaperRoute,
   SiteIndexRoute: SiteIndexRoute,
 }
 
