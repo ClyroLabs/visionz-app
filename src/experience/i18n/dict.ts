@@ -3086,6 +3086,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Vídeo: como a VisionZ funciona": ["Video: how VisionZ works", "Video: cómo funciona VisionZ", "视频: VisionZ 如何运作"],
   "Baixar": ["Download", "Descargar", "下载"],
   "Fechar": ["Close", "Cerrar", "关闭"],
+  "Simulação com a fórmula do whitepaper: S(t+1) = S(t) − (α·Receita/Preço + β·Volume de IA). Exemplo para entender o modelo, não é promessa de valorização.": ["Simulation using the whitepaper formula: S(t+1) = S(t) − (α·Revenue/Price + β·AI volume). An example to understand the model, not a promise of appreciation.", "Simulación con la fórmula del whitepaper: S(t+1) = S(t) − (α·Ingresos/Precio + β·Volumen de IA). Ejemplo para entender el modelo, no es promesa de valorización.", "按白皮书公式模拟：S(t+1) = S(t) − (α·收入/价格 + β·AI 用量)。仅为理解模型的示例，并非升值承诺。"],
   "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
   "Veja em 3 minutos como a VisionZ funciona.": ["See how VisionZ works in 3 minutes.", "Mira en 3 minutos cómo funciona VisionZ.", "3 分钟了解 VisionZ 如何运作。"],
   "Conte o que você precisa. Respondemos no seu e-mail.": ["Tell us what you need. We'll reply by email.", "Cuéntanos qué necesitas. Respondemos por correo.", "告诉我们您的需求，我们会通过邮件回复。"],

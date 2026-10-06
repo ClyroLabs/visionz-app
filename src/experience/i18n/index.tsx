@@ -22,12 +22,26 @@ export function readLang(stored: string | null | undefined): Lang {
   return isLang(stored) ? stored : DEFAULT_LANG;
 }
 
+/** Templated UI strings with a variable part ($1), e.g. numbers or titles. */
+const PATTERNS: [RegExp, [string, string, string]][] = [
+  [/^Ir para o item (\d+)$/, ["Go to item $1", "Ir al elemento $1", "跳到第 $1 项"]],
+  [/^Não recomendado para menores de (\d+) anos$/, ["Not recommended for under $1", "No recomendado para menores de $1 años", "不建议 $1 岁以下观看"]],
+  [/^Mês (\d+)$/, ["Month $1", "Mes $1", "第 $1 个月"]],
+  [/^Ver (.+)$/, ["View $1", "Ver $1", "查看 $1"]],
+];
+function matchPattern(key: string): [string, string, string] | undefined {
+  for (const [re, out] of PATTERNS) {
+    const m = key.match(re);
+    if (m) return out.map((s) => s.replace("$1", m[1])) as [string, string, string];
+  }
+}
+
 /** Translate one PT-BR UI string; unknown strings pass through unchanged. */
 export function translate(pt: string, lang: Lang): string {
   if (lang === "pt") return pt;
   const key = norm(pt);
   if (!key) return pt;
-  const hit = DICT[key];
+  const hit = DICT[key] ?? matchPattern(key);
   if (!hit) return pt;
   const lead = pt.match(/^\s*/)?.[0] ?? "";
   const trail = pt.match(/\s*$/)?.[0] ?? "";

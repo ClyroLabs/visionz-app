@@ -22,3 +22,13 @@ describe("i18n", () => {
     expect(translate(" Como funciona ", "en")).toBe(` ${DICT["Como funciona"][0]} `);
   });
 });
+
+import { translate as tr } from "./index";
+describe("textos com variável", () => {
+  it("traduz pontos do carrossel e classificação indicativa", () => {
+    expect(tr("Ir para o item 3", "en")).toBe("Go to item 3");
+    expect(tr("Não recomendado para menores de 14 anos", "es")).toBe("No recomendado para menores de 14 años");
+    expect(tr("Mês 11", "en")).toBe("Month 11");
+    expect(tr("Mês 11", "pt")).toBe("Mês 11");
+  });
+});
