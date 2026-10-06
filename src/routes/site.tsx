@@ -30,7 +30,7 @@ function SiteLayout() {
           <div className="mx-auto flex max-w-7xl min-w-0 items-center gap-2 px-4 py-2.5 sm:gap-6 sm:px-6 sm:py-3">
             <Link to="/site" aria-label="VisionZ — início" className="group flex min-w-0 shrink-0 items-center gap-2.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
               <Logo brand="visionz-symbol" alt="" className="h-7 w-auto shrink-0 sm:h-8 transition-transform duration-300 drop-shadow-[0_0_10px_var(--magenta)] group-hover:scale-105" />
-              <span className="flex flex-col leading-none md:hidden lg:flex">
+              <span className="hidden flex-col leading-none min-[420px]:flex md:hidden lg:flex">
                 <span className="font-display text-base font-bold sm:text-lg tracking-[0.12em] text-foreground">VISIONZ</span>
                 <span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span>
               </span>
