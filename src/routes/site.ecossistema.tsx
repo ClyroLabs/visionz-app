@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Bot, Clapperboard, Coins, Handshake, Lock, Music2, Network, ShieldCheck, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Eyebrow, Input, Label, Reveal, ScrollSnapRow, SectionHeading, Stat, Tabs, TabsContent, TabsList, TabsTrigger, TokenBadge, cn } from "@/index";
@@ -80,7 +80,7 @@ function Roadmap() {
           <Reveal><Eyebrow underline="brand">O que vem por aí</Eyebrow></Reveal>
           <Reveal><h1 className="mt-5 text-balance font-display text-4xl font-bold tracking-wide sm:text-5xl md:text-6xl">A VisionZ está <span className="text-gradient-brand">crescendo</span>.</h1></Reveal>
           <Reveal><p className="mx-auto mt-5 max-w-xl text-base text-foreground/85 md:text-lg">Hoje você assiste, cria e ganha recompensas. Em breve, suas recompensas vão poder crescer, viajar entre redes e ajudar parceiros a criar coisas novas. Veja tudo em poucos minutos.</p></Reveal>
-          <Reveal><a href="#existe"><Button size="lg" className="mt-8">Começar</Button></a></Reveal>
+          <Reveal><Link to="/app"><Button size="lg" className="mt-8">Começar</Button></Link></Reveal>
         </div>
       </section>
 
