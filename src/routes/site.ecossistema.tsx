@@ -199,7 +199,7 @@ function Roadmap() {
 
       {/* 5. Números */}
       <Section className="pt-0 md:pt-0">
-        <SectionHeading align="center" eyebrow="Estimativas" title="Para onde queremos chegar" description="Números conservadores. São metas, não garantias." />
+        <SectionHeading align="center" eyebrow="Estimativas" title="Para onde queremos chegar" description="Cenário de expansão. São metas, não garantias." />
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {projections.map((p) => (
             <Card key={p.ano} padding="lg" className="flex flex-col items-center gap-2 text-center">

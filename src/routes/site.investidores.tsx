@@ -42,17 +42,17 @@ function Investors() {
       <Section className="pb-10">
         <SectionHeading eyebrow="Investidores" title={<>Inovação brasileira com <span className="text-gradient-brand">alcance global</span></>} description="A VisionZ é o motor de criação que alimenta o ecossistema Clyro Labs. Ao reduzir custos de produção e eliminar intermediários, a margem por conteúdo é muito maior que no streaming tradicional." />
         <div className="mt-8 grid grid-cols-2 gap-x-4 gap-y-6 text-center md:mt-12 md:grid-cols-4 md:gap-8 md:text-left">
-          <Stat value="1,2 mi" label="usuários ativos no ano 3" />
-          <Stat value="R$ 58 mi" label="receita bruta no ano 3" tone="cyan" />
-          <Stat value="21%" label="margem EBITDA no ano 3" tone="default" />
-          <Stat value="Mês 20" label="ponto de equilíbrio estimado" tone="cyan" />
+          <Stat value="2,5 mi" label="usuários ativos no ano 3" />
+          <Stat value="R$ 232 mi" label="receita bruta no ano 3" tone="cyan" />
+          <Stat value="42%" label="margem EBITDA no ano 3" tone="default" />
+          <Stat value="Mês 11" label="ponto de equilíbrio estimado" tone="cyan" />
         </div>
       </Section>
 
       <Section className="py-6 md:py-10">
         <Card padding="lg" className="space-y-6">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <div className="w-full text-center md:text-left"><CardTitle className="text-lg md:text-xl">Projeção de 3 anos — cenário inicial conservador</CardTitle><CardDescription>Receita em R$ milhões (barras) e margem EBITDA em % (linha).</CardDescription></div>
+            <div className="w-full text-center md:text-left"><CardTitle className="text-lg md:text-xl">Projeção de 3 anos — cenário de expansão</CardTitle><CardDescription>Receita em R$ milhões (barras) e margem EBITDA em % (linha).</CardDescription></div>
           </div>
           <div className="-mx-2 h-60 sm:h-80">
             <ResponsiveContainer width="100%" height="100%">
@@ -77,7 +77,7 @@ function Investors() {
               </tbody>
             </table>
           </div>
-          <p className="text-xs text-muted-foreground">Recalculado a partir do Master Plan (R$ 15 / 90 / 350 mi) para um início mais realista: adoção gradual, ticket médio de cerca de R$ 40/mês por usuário pagante e conversão menor no primeiro ano. Estimativas, não garantia de resultado.</p>
+          <p className="text-xs text-muted-foreground">Cenário do Relatório de Expansão: assinaturas, DeFi, Launchpad e ponte entre redes. Estimativas, não garantia de resultado.</p>
         </Card>
       </Section>
 
