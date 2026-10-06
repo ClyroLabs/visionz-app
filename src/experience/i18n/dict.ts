@@ -3084,6 +3084,8 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Recompensas, parceiros, conexão entre redes e IA: o futuro da VisionZ em palavras simples.": ["Rewards, partners, cross-chain connectivity and AI: the future of VisionZ in simple terms.", "Recompensas, socios, conexión entre redes e IA: el futuro de VisionZ en palabras sencillas.", "奖励, 合作伙伴, 跨链连接和 AI: 用简单的话介绍 VisionZ 的未来."],
   "Cenário de expansão. São metas, não garantias.": ["Expansion scenario. These are targets, not guarantees.", "Escenario de expansión. Son metas, no garantías.", "扩展情景. 这些是目标, 不是保证."],
   "Vídeo: como a VisionZ funciona": ["Video: how VisionZ works", "Video: cómo funciona VisionZ", "视频: VisionZ 如何运作"],
+  "Baixar": ["Download", "Descargar", "下载"],
+  "Fechar": ["Close", "Cerrar", "关闭"],
   "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
   "Veja em 3 minutos como a VisionZ funciona.": ["See how VisionZ works in 3 minutes.", "Mira en 3 minutos cómo funciona VisionZ.", "3 分钟了解 VisionZ 如何运作。"],
   "Conte o que você precisa. Respondemos no seu e-mail.": ["Tell us what you need. We'll reply by email.", "Cuéntanos qué necesitas. Respondemos por correo.", "告诉我们您的需求，我们会通过邮件回复。"],
