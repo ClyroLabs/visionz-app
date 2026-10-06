@@ -250,6 +250,7 @@ function Landing() {
         </div>
       </Section>
 
+      <LitepaperViewer open={paper} onClose={() => setPaper(false)} />
       <LeadDialog open={lead !== null} onOpenChange={(o) => !o && setLead(null)} kind={lead ?? "espera"} />
     </>
   );
