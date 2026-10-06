@@ -2834,6 +2834,19 @@ const BASE: Record<string, [string, string, string]> = {
 
 // Short words the extractor skips, plus brand words that must stay as-is.
 const EXTRA: Record<string, [string, string, string]> = {
+  "Verificando rosto…": ["Checking face…", "Verificando rostro…", "正在验证面部…"],
+  "Adulto autorizado": ["Authorized adult", "Adulto autorizado", "已授权成人"],
+  "Controle parental liberado": ["Parental control unlocked", "Control parental desbloqueado", "家长控制已解锁"],
+  "Biometria facial": ["Facial biometrics", "Biometría facial", "面部识别"],
+  "Só um": ["Only an", "Solo un", "只有"],
+  "adulto autorizado": ["authorized adult", "adulto autorizado", "已授权的成人"],
+  "muda as regras.": ["can change the rules.", "cambia las reglas.", "才能更改规则。"],
+  "Sair do modo infantil, mudar a classificação ou liberar um título exige o rosto do responsável cadastrado. A criança não consegue burlar.": ["Leaving kids mode, changing the age rating or unlocking a title requires the registered guardian's face. Kids can't get around it.", "Salir del modo infantil, cambiar la clasificación o desbloquear un título requiere el rostro del responsable registrado. El niño no puede saltárselo.", "退出儿童模式、更改分级或解锁内容，都需要已登记监护人的面部验证。孩子无法绕过。"],
+  "Reconhecimento facial com prova de vida: fotos ou vídeos não enganam.": ["Face recognition with liveness check: photos or videos won't fool it.", "Reconocimiento facial con prueba de vida: fotos o videos no lo engañan.", "带活体检测的面部识别：照片或视频无法蒙混过关。"],
+  "Os dados do rosto ficam protegidos no aparelho e nunca são vendidos.": ["Face data stays protected on the device and is never sold.", "Los datos del rostro quedan protegidos en el dispositivo y nunca se venden.", "面部数据安全保存在设备上，绝不出售。"],
+  "Toda liberação fica registrada para o responsável conferir.": ["Every unlock is logged for the guardian to review.", "Cada desbloqueo queda registrado para que el responsable lo revise.", "每次解锁都会记录，供监护人查看。"],
+  "Demonstração ilustrativa do recurso em desenvolvimento.": ["Illustrative demo of a feature in development.", "Demostración ilustrativa de una función en desarrollo.", "开发中功能的示意演示。"],
+  "Adulto liberando o modo infantil com biometria facial enquanto a criança assiste TV": ["Adult unlocking kids mode with face biometrics while a child watches TV", "Adulto desbloqueando el modo infantil con biometría facial mientras el niño ve la TV", "成人用面部识别解锁儿童模式，孩子正在看电视"],
   receita: ["revenue", "ingresos", "收入"],
   Estimativas: ["Estimates", "Estimaciones", "预估"],
   Cuidados: ["Safeguards", "Cuidados", "保障"],
