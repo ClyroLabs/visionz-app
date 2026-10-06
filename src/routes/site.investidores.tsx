@@ -72,7 +72,7 @@ function Investors() {
               <thead><tr className="border-b text-left text-muted-foreground"><th className="py-2">Indicador</th>{projections.map((p) => <th key={p.ano} className="py-2">{p.ano}</th>)}</tr></thead>
               <tbody>
                 <tr className="border-b"><td className="py-2">Usuários ativos</td>{projections.map((p) => <td key={p.ano} className="font-mono">{fmt(p.usuarios)}</td>)}</tr>
-                <tr className="border-b"><td className="py-2">Receita bruta</td>{projections.map((p) => <td key={p.ano} className="font-mono">R$ {fmt(p.receita)} mi</td>)}</tr>
+                <tr className="border-b"><td className="py-2">Receita bruta</td>{projections.map((p) => <td key={p.ano} className="font-mono">{`R$ ${fmt(p.receita)} mi`}</td>)}</tr>
                 <tr><td className="py-2">Margem EBITDA</td>{projections.map((p) => <td key={p.ano} className="font-mono">{p.ebitda}%</td>)}</tr>
               </tbody>
             </table>

@@ -172,9 +172,9 @@ function BalancesTab({ uid }: { uid: string }) {
       <div className="grid gap-4 md:grid-cols-2">
         <Card variant="glass" padding="lg" className="space-y-4 text-center sm:text-left">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Banknote className="size-4" />Saldo em reais</span>
-          <p className="font-display text-4xl font-bold">R$ {money(brl)}</p>
+          <p className="font-display text-4xl font-bold">{`R$ ${money(brl)}`}</p>
           <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
-            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="soft" onClick={() => add.mutate({ label: `Depósito via Pix (simulado)`, amount: v, currency: "BRL", direction: "in" }, { onSuccess: () => toast({ title: `R$ ${v},00 adicionados (simulado)`, variant: "success" }) })}><Plus />R$ {v}</Button>)}
+            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="soft" onClick={() => add.mutate({ label: `Depósito via Pix (simulado)`, amount: v, currency: "BRL", direction: "in" }, { onSuccess: () => toast({ title: `R$ ${v},00 adicionados (simulado)`, variant: "success" }) })}><Plus />{`R$ ${v}`}</Button>)}
           </div>
         </Card>
         <Card variant="featured" padding="lg" className="space-y-4 text-center sm:text-left">

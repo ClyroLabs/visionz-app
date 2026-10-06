@@ -29,10 +29,10 @@ function WalletPage() {
       <div className="grid gap-6 lg:grid-cols-2">
         <Card variant="glass" padding="lg" className="space-y-4">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Banknote className="size-4" />Saldo em reais</span>
-          <p className="font-display text-4xl font-bold">R$ {money(brl)}</p>
+          <p className="font-display text-4xl font-bold">{`R$ ${money(brl)}`}</p>
           <p className="text-sm text-muted-foreground">Usado para compras avulsas e pacotes on-demand.</p>
           <div className="flex flex-wrap gap-2">
-            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="secondary" onClick={() => { deposit(v); toast({ title: `R$ ${v},00 adicionados via Pix`, variant: "success" }); }}>+ R$ {v}</Button>)}
+            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="secondary" onClick={() => { deposit(v); toast({ title: `R$ ${v},00 adicionados via Pix`, variant: "success" }); }}>{`+ R$ ${v}`}</Button>)}
           </div>
         </Card>
         <Card variant="glow" padding="lg" className="space-y-4">

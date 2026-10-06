@@ -42,10 +42,31 @@ export function translate(pt: string, lang: Lang): string {
   const key = norm(pt);
   if (!key) return pt;
   const hit = DICT[key] ?? matchPattern(key);
-  if (!hit) return pt;
+  if (!hit) return convertMoney(pt, lang);
   const lead = pt.match(/^\s*/)?.[0] ?? "";
   const trail = pt.match(/\s*$/)?.[0] ?? "";
-  return lead + hit[COL[lang]] + trail;
+  return convertMoney(lead + hit[COL[lang]] + trail, lang);
+}
+
+/** Fixed demo exchange rates: 1 BRL in each display currency. */
+export const FX: Record<Exclude<Lang, "pt">, number> = { en: 0.18, es: 0.17, zh: 1.3 };
+// Accepts PT ("1.234,56") and already-translated EN ("1,234.56") amounts, plus million/billion words.
+const MONEY_RE = /R\$\s?(\d{1,3}(?:[.,]\d{3})+(?![.,]?\d)|\d+)(?:[.,](\d{1,2})(?!\d))?(\s?(?:mi|bi|mil|M|K|million|millones|millón|billion|百万|亿)(?![a-z]))?/g;
+const SYMBOL: Record<Exclude<Lang, "pt">, string> = { en: "US$", es: "€", zh: "¥" };
+
+/** Rewrites every "R$ 1.234,56" amount into the visitor's currency (EN US$, ES €, ZH ¥). */
+export function convertMoney(text: string, lang: Lang): string {
+  if (lang === "pt" || !text.includes("R$")) return text;
+  return text.replace(MONEY_RE, (_m, int: string, dec: string | undefined, suf: string | undefined) => {
+    const v = Number(int.replace(/[.,]/g, "") + (dec ? "." + dec : "")) * FX[lang];
+    const unit = suf ? suf.trim() : "";
+    const big = /^(mi|M|million|millones|millón|百万)$/.test(unit) ? "M" : /^(bi|billion)$/.test(unit) ? "B" : unit === "亿" ? "00M" : /^(mil|K)$/.test(unit) ? "K" : "";
+    const digits = big ? (v >= 100 ? 0 : 1) : dec ? 2 : 0;
+    const num = v.toLocaleString(lang === "es" ? "es-ES" : lang === "zh" ? "zh-CN" : "en-US", { minimumFractionDigits: digits, maximumFractionDigits: digits, useGrouping: true });
+    if (lang === "es") return `${num}${big ? " " + big : ""} €`;
+    if (lang === "zh") return `¥${num}${big}`;
+    return `US$ ${num}${big}`;
+  }).replace(/R\$/g, SYMBOL[lang]);
 }
 
 // Design-system catalog stays in Portuguese.
