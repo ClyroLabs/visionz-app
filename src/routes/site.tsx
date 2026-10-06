@@ -1,7 +1,8 @@
 import { createFileRoute, Link, Outlet, useNavigate } from "@tanstack/react-router";
 import { LanguageSwitcher } from "@/experience/i18n";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { FileText, Menu, X } from "lucide-react";
+import { LitepaperViewer } from "@/experience/litepaper-viewer";
 import { Button, Logo, ToastProvider } from "@/index";
 
 export const Route = createFileRoute("/site")({ component: SiteLayout });
@@ -18,6 +19,7 @@ const links = [
 function SiteLayout() {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [paper, setPaper] = useState(false);
   useEffect(() => {
     if (!sessionStorage.getItem("vz-intro-seen")) navigate({ to: "/abertura", replace: true });
   }, [navigate]);
@@ -39,7 +41,12 @@ function SiteLayout() {
               ))}
             </nav>
             <LanguageSwitcher className="ml-auto hidden md:inline-flex" />
-            <Link to="/app" className="ml-auto shrink-0 md:ml-0"><Button size="sm"><span className="lg:hidden">Protótipo</span><span className="hidden lg:inline">Abrir protótipo</span></Button></Link>
+            <button type="button" onClick={() => setPaper(true)} aria-label="Abrir Litepaper" title="Litepaper"
+              className="group relative ml-auto grid h-9 w-9 shrink-0 place-items-center rounded-md border border-cyan/40 bg-cyan/10 text-cyan shadow-glow-cyan transition-all hover:scale-105 hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:ml-0">
+              <FileText className="h-5 w-5" />
+              <span aria-hidden className="absolute -right-1 -top-1 size-2.5 animate-breathe rounded-full bg-magenta" />
+            </button>
+            <Link to="/app" className="shrink-0"><Button size="sm"><span className="lg:hidden">Protótipo</span><span className="hidden lg:inline">Abrir protótipo</span></Button></Link>
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-mobile-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring md:hidden">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (
@@ -50,6 +57,7 @@ function SiteLayout() {
           )}
         </header>
         <Outlet />
+        <LitepaperViewer open={paper} onClose={() => setPaper(false)} />
         <footer className="border-t bg-surface/40">
           <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-5 py-8 text-center md:flex-row md:py-10 md:text-left">
             <div className="flex flex-col items-center gap-2 sm:flex-row sm:gap-3"><Logo brand="clyro-icon" size="sm" alt="" /><p className="text-sm text-muted-foreground">VisionZ Entertainment &amp; Clyro Labs</p></div>

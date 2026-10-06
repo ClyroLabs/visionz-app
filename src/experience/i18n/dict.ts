@@ -3225,6 +3225,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Não foi possível publicar agora.": ["Unable to publish right now.", "No se pudo publicar ahora.", "暂时无法发布."],
   "Não foi possível despublicar.": ["Unable to unpublish.", "No se pudo retirar la publicación.", "无法取消发布."],
   "Sem título": ["Untitled", "Sin título", "无标题"],
+  "Abrir Litepaper": ["Open Litepaper", "Abrir Litepaper", "打开轻皮书"],
   "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
   "Veja em 3 minutos como a VisionZ funciona.": ["See how VisionZ works in 3 minutes.", "Mira en 3 minutos cómo funciona VisionZ.", "3 分钟了解 VisionZ 如何运作。"],
   "Conte o que você precisa. Respondemos no seu e-mail.": ["Tell us what you need. We'll reply by email.", "Cuéntanos qué necesitas. Respondemos por correo.", "告诉我们您的需求，我们会通过邮件回复。"],
