@@ -33,6 +33,7 @@ export const Route = createFileRoute("/site/")({
 });
 
 function Landing() {
+  const { lang } = useLang();
   const [lead, setLead] = useState<null | "espera" | "investidor">(null);
   const [kids, setKids] = useState(true);
   const [net, setNet] = useState<Network>("solana");
