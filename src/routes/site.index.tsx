@@ -10,6 +10,8 @@ import { agents, catalog, roadmap } from "@/experience/data";
 import { filterCatalog } from "@/experience/logic";
 import heroCover from "@/assets/covers/jukebox-live.jpg";
 import heroVideo from "@/assets/videos/visionz-hero-bg-720.mp4.asset.json";
+import comoVideo from "@/assets/videos/como-funciona.mp4.asset.json";
+import comoPoster from "@/assets/videos/como-funciona-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/site/")({
   head: () => ({
@@ -118,6 +120,12 @@ function Landing() {
             </Card></Reveal>
           ))}
         </ScrollSnapRow>
+        <Reveal effect="zoom" className="mx-auto mt-10 max-w-5xl md:mt-14">
+          <div className="border-gradient-brand overflow-hidden rounded-2xl bg-surface shadow-glow-brand">
+            <video src={comoVideo.url} poster={comoPoster.url} controls playsInline preload="none" className="block aspect-video w-full bg-background object-cover" aria-label="Vídeo: como a VisionZ funciona" />
+          </div>
+          <p className="mt-3 text-center text-sm text-muted-foreground">Veja em 3 minutos como a VisionZ funciona.</p>
+        </Reveal>
       </Section>
 
       {/* Segurança */}
