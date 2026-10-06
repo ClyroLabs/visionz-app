@@ -1,3 +1,4 @@
+import { useLang } from "@/experience/i18n";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Play, ShieldCheck, UserCheck, Users } from "lucide-react";
@@ -32,6 +33,7 @@ export const Route = createFileRoute("/site/")({
 });
 
 function Landing() {
+  const { lang } = useLang();
   const [lead, setLead] = useState<null | "espera" | "investidor">(null);
   const [kids, setKids] = useState(true);
   const [net, setNet] = useState<Network>("solana");
@@ -120,12 +122,12 @@ function Landing() {
             </Card></Reveal>
           ))}
         </ScrollSnapRow>
-        <Reveal effect="zoom" className="mx-auto mt-10 max-w-5xl md:mt-14">
+        {lang === "pt" && <Reveal effect="zoom" className="mx-auto mt-10 max-w-5xl md:mt-14">
           <div className="border-gradient-brand overflow-hidden rounded-2xl bg-surface shadow-glow-brand">
             <video src={comoVideo.url} poster={comoPoster.url} controls playsInline preload="none" className="block aspect-video w-full bg-background object-cover" aria-label="Vídeo: como a VisionZ funciona" />
           </div>
           <p className="mt-3 text-center text-sm text-muted-foreground">Veja em 3 minutos como a VisionZ funciona.</p>
-        </Reveal>
+        </Reveal>}
       </Section>
 
       {/* Segurança */}
