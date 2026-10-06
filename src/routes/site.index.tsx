@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
-import { AudioLines, Bot, Clapperboard, Coins, Eye, FileText, Gem, Megaphone, Play, ShieldCheck, UserCheck, Users } from "lucide-react";
-import { LitepaperViewer } from "@/experience/litepaper-viewer";
+import { AudioLines, Bot, Clapperboard, Coins, Eye, Gem, Megaphone, Play, ShieldCheck, UserCheck, Users } from "lucide-react";
 import {
   AIVerifiedBadge, Badge, Button, Card, CardDescription, CardTitle, Carousel, ContentCard, KidsModeToggle, Logo, NetworkTag, PricingCard,
   SectionHeading, ScrollSnapRow, Stat, Timeline, WalletBalance, Reveal, Eyebrow, OrbitRing, TokenBadge, type Network,
@@ -34,7 +33,6 @@ export const Route = createFileRoute("/site/")({
 
 function Landing() {
   const [lead, setLead] = useState<null | "espera" | "investidor">(null);
-  const [paper, setPaper] = useState(false);
   const [kids, setKids] = useState(true);
   const [net, setNet] = useState<Network>("solana");
   const preview = filterCatalog(catalog, kids).slice(0, 3);
@@ -77,7 +75,6 @@ function Landing() {
             <div className="animate-rise relative mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:justify-center md:mt-10 [animation-delay:700ms]">
               <Button size="lg" onClick={() => setLead("espera")}>Entrar na lista de espera</Button>
               <Button size="lg" variant="neon" onClick={() => setLead("investidor")}>Sou investidor</Button>
-              <Button size="lg" variant="soft" onClick={() => setPaper(true)}><FileText />Litepaper</Button>
               <Link to="/app" className="self-center"><Button size="lg" variant="ghost"><Play />Ver o protótipo</Button></Link>
             </div>
           </div>
@@ -250,7 +247,6 @@ function Landing() {
         </div>
       </Section>
 
-      <LitepaperViewer open={paper} onClose={() => setPaper(false)} />
       <LeadDialog open={lead !== null} onOpenChange={(o) => !o && setLead(null)} kind={lead ?? "espera"} />
     </>
   );
