@@ -2974,6 +2974,17 @@ const EXTRA: Record<string, [string, string, string]> = {
   Aprovar: ["Approve", "Aprobar", "批准"],
   Bloquear: ["Block", "Bloquear", "屏蔽"],
   "Voltar ao site": ["Back to site", "Volver al sitio", "返回网站"],
+  "Conte o que você precisa. Respondemos no seu e-mail.": ["Tell us what you need. We'll reply by email.", "Cuéntanos qué necesitas. Respondemos por correo.", "告诉我们您的需求，我们会通过邮件回复。"],
+  "Assunto": ["Subject", "Asunto", "主题"],
+  "Mensagem": ["Message", "Mensaje", "留言"],
+  "Parceria": ["Partnership", "Alianza", "合作"],
+  "Investimento": ["Investment", "Inversión", "投资"],
+  "Imprensa": ["Press", "Prensa", "媒体"],
+  "Outro": ["Other", "Otro", "其他"],
+  "Enviar mensagem": ["Send message", "Enviar mensaje", "发送消息"],
+  "Enviando…": ["Sending…", "Enviando…", "发送中…"],
+  "Mensagem enviada!": ["Message sent!", "¡Mensaje enviado!", "消息已发送！"],
+  "Recebemos seu contato e vamos responder no seu e-mail.": ["We got your message and will reply by email.", "Recibimos tu mensaje y responderemos por correo.", "我们已收到您的消息，将通过邮件回复。"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];

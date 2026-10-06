@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Bot, Coins, Handshake, Lock, Network, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Eyebrow, Input, Label, Reveal, ScrollSnapRow, SectionHeading, Stat, Tabs, TabsContent, TabsList, TabsTrigger, TokenBadge, cn } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
+import { ContactDialog } from "@/experience/contact-dialog";
 import { projections } from "@/experience/data";
 import { rewardsExample } from "@/experience/logic";
 import synthLogo from "@/assets/logos/synth-logo.webp.asset.json";
@@ -70,6 +71,7 @@ function Roadmap() {
   const [amount, setAmount] = useState(1000);
   const [months, setMonths] = useState(12);
   const [lead, setLead] = useState<"espera" | "investidor" | null>(null);
+  const [contact, setContact] = useState(false);
   const sim = rewardsExample(amount, months, 5);
   const fmt = (n: number) => n.toLocaleString("pt-BR", { maximumFractionDigits: 2 });
   const active = pillars.find((p) => p.key === pillar)!;
@@ -248,11 +250,12 @@ function Roadmap() {
           <h2 className="text-balance font-display text-2xl font-bold tracking-wide md:text-3xl">Quer fazer parte desde o começo?</h2>
           <div className="flex flex-col justify-center gap-3 sm:flex-row">
             <Button size="lg" onClick={() => setLead("espera")}>Entrar na lista de espera</Button>
-            <Button size="lg" variant="secondary" onClick={() => setLead("investidor")}>Falar com a VisionZ</Button>
+            <Button size="lg" variant="secondary" onClick={() => setContact(true)}>Falar com a VisionZ</Button>
           </div>
         </Card>
       </Section>
       <LeadDialog open={lead !== null} onOpenChange={(v) => !v && setLead(null)} kind={lead ?? "espera"} />
+      <ContactDialog open={contact} onOpenChange={setContact} />
     </main>
   );
 }
