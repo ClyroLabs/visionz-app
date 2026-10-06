@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Bot, Clapperboard, Coins, Handshake, Lock, Music2, Network, ShieldCheck, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
+import { Bot, Coins, Handshake, Lock, Network, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Eyebrow, Input, Label, Reveal, ScrollSnapRow, SectionHeading, Stat, Tabs, TabsContent, TabsList, TabsTrigger, TokenBadge, cn } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { projections } from "@/experience/data";
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/site/ecossistema")({
 const pillars = [
   { key: "synth", logo: synthLogo.url, glow: "drop-shadow-[0_0_14px_var(--cyan)]", name: "Clyro Synth", short: "Criar vídeos com IA.", more: "Você escreve uma ideia e o Synth monta as cenas. Sua equipe revisa e aprova antes de publicar." },
   { key: "jukebox", logo: jukeboxLogo.url, glow: "drop-shadow-[0_0_14px_var(--magenta)]", name: "Clyro Jukebox", short: "Criar músicas e provar que são suas.", more: "Cada música guarda quem criou e quando. O crédito fica sempre visível e o pagamento vai direto para quem criou." },
-  { key: "filter", logo: filterLogo, glow: "drop-shadow-[0_0_14px_var(--violet)]", name: "Filtro Inteligente", short: "Protege as crianças e explica cada decisão.", more: "A IA olha imagem, som e contexto. Quando tem dúvida, uma pessoa decide — e a IA aprende com essa decisão." },
+  { key: "filter", logo: filterLogo, glow: "drop-shadow-[0_0_14px_var(--indigo)]", name: "Filtro Inteligente", short: "Protege as crianças e explica cada decisão.", more: "A IA olha imagem, som e contexto. Quando tem dúvida, uma pessoa decide — e a IA aprende com essa decisão." },
 ] as const;
 
 const news = [
