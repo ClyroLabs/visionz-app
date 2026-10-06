@@ -1,7 +1,13 @@
 import { useCallback, useEffect, useState, type ReactNode } from "react";
 import { BadgePercent, Brain, ChevronLeft, ChevronRight, Clapperboard, Cloud, Download, Ear, Eye, Flame, Globe, Lightbulb, Music, Rocket, ShieldCheck, ShoppingCart, FileBadge, Tv, Users, Wallet, X, Zap } from "lucide-react";
 import { Button, Logo, cn } from "@/index";
-import paper from "@/assets/visionz-litepaper.pdf.asset.json";
+import paperPt from "@/assets/visionz-litepaper.pdf.asset.json";
+import paperEn from "@/assets/visionz-litepaper-en.pdf.asset.json";
+import paperEs from "@/assets/visionz-litepaper-es.pdf.asset.json";
+import paperZh from "@/assets/visionz-litepaper-zh.pdf.asset.json";
+import { useLang } from "@/experience/i18n";
+
+const PAPERS = { pt: paperPt.url, en: paperEn.url, es: paperEs.url, zh: paperZh.url } as const;
 
 /** Native, translatable Litepaper reader (10 slides) over the current page. Esc / ✕ closes, ←/→ navigate. */
 
@@ -150,6 +156,7 @@ const SLIDES: ReactNode[] = [
 
 export function LitepaperViewer({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [i, setI] = useState(0);
+  const { lang } = useLang();
   const go = useCallback((d: number) => setI((n) => Math.min(SLIDES.length - 1, Math.max(0, n + d))), []);
   useEffect(() => {
     if (!open) return;
@@ -171,7 +178,7 @@ export function LitepaperViewer({ open, onClose }: { open: boolean; onClose: () 
         <div className="flex items-center justify-between gap-3 border-b px-4 py-3">
           <p className="font-display text-sm font-semibold tracking-wide md:text-base">Litepaper <span className="text-gradient-brand">VisionZ</span></p>
           <div className="flex items-center gap-2">
-            <a href={paper.url} download="VisionZ-Litepaper-PT.pdf"><Button size="sm" variant="soft"><Download />PDF (PT)</Button></a>
+            <a href={PAPERS[lang]} download={`VisionZ-Litepaper-${lang.toUpperCase()}.pdf`}><Button size="sm" variant="soft"><Download />PDF</Button></a>
             <Button size="sm" variant="ghost" aria-label="Fechar" onClick={onClose}><X /></Button>
           </div>
         </div>
