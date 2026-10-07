@@ -48,24 +48,28 @@ function Intro() {
     setTimeout(() => navigate({ to: "/site" }), 600);
   };
 
+  const setSound = (on: boolean) => {
+    const v = video.current;
+    if (v) { v.muted = !on; if (on) v.play().catch(() => {}); }
+    setMuted(!on);
+  };
+
   useEffect(() => {
     const v = video.current;
     if (v) {
-      // Tenta tocar com som; se o navegador bloquear, toca mudo e libera o som no primeiro toque.
+      // Tenta tocar com som; se o navegador bloquear (comum no celular), toca mudo e mostra o aviso para ligar o som.
       v.muted = false;
       v.play().then(() => setMuted(false)).catch(() => {
         v.muted = true;
         setMuted(true);
         v.play().catch(() => {});
-        const unlock = () => { v.muted = false; setMuted(false); };
-        window.addEventListener("pointerdown", unlock, { once: true });
-        window.addEventListener("keydown", unlock, { once: true });
       });
     }
     const safety = setTimeout(finish, 20000);
     return () => clearTimeout(safety);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, src]);
+
 
   return (
     <div className={`fixed inset-0 z-50 h-dvh overflow-hidden bg-background transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}>
@@ -80,9 +84,8 @@ function Intro() {
           key={src}
           src={src}
           poster={poster.url}
-          className={`relative size-full object-contain transition-opacity duration-500 landscape:object-cover ${ready ? "opacity-100" : "opacity-0"}`}
+          className={`relative h-dvh w-full object-contain transition-opacity duration-500 landscape:object-cover ${ready ? "opacity-100" : "opacity-0"}`}
           autoPlay
-          muted={muted}
           playsInline
           preload="auto"
           onPlaying={() => setReady(true)}
@@ -91,9 +94,14 @@ function Intro() {
           aria-label="Vídeo de abertura da VisionZ"
         />
       )}
+      {muted && ready && !leaving && (
+        <button type="button" onClick={() => setSound(true)} className="absolute inset-x-0 bottom-[calc(max(1.25rem,env(safe-area-inset-bottom))+4rem)] mx-auto flex w-max max-w-[90vw] items-center gap-2 rounded-full border border-magenta/50 bg-background/70 px-5 py-3 text-sm font-medium text-foreground shadow-glow-brand backdrop-blur animate-breathe focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2">
+          <Volume2 className="size-5 text-magenta" />Toque para ativar o som
+        </button>
+      )}
       <LanguageSwitcher className="absolute right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))]" />
       <div className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] flex gap-2">
-        <Button variant="secondary" size="icon" className="size-11" aria-label={muted ? "Ligar som" : "Desligar som"} onClick={() => setMuted((m) => !m)}>
+        <Button variant="secondary" size="icon" className="size-11" aria-label={muted ? "Ligar som" : "Desligar som"} onClick={() => setSound(muted)}>
           {muted ? <VolumeX /> : <Volume2 />}
         </Button>
         <Button variant="secondary" className="h-11 px-5" onClick={finish}>Pular</Button>
