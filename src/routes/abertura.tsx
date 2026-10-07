@@ -70,9 +70,6 @@ function Intro() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, src]);
 
-  return () => clearTimeout(safety);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lang, src]);
 
   return (
     <div className={`fixed inset-0 z-50 h-dvh overflow-hidden bg-background transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}>
