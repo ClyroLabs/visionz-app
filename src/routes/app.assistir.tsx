@@ -68,9 +68,9 @@ function Watch() {
               <p className="text-sm text-muted-foreground">{blocked ? t.blockReason ?? `Classificação ${t.rating}` : `Compre por ${t.price} na tela inicial para assistir.`}</p>
               <Link to="/app"><Button variant="secondary">Voltar ao catálogo</Button></Link>
             </div>
-          ) : (
+          ) : (<>
             <button type="button" onClick={() => setMuted((m) => !m)} aria-label={muted ? "Ativar som" : "Silenciar"} className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border bg-background/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}</button>
-            <PlayerBar className="absolute inset-x-3 bottom-3" playing={playing} onPlayingChange={setPlaying} progress={(sec / total) * 100} current={fmt(sec)} total={fmt(total)} />
+            <PlayerBar className="absolute inset-x-3 bottom-3" playing={playing} onPlayingChange={setPlaying} progress={(sec / total) * 100} current={fmt(sec)} total={fmt(total)} /></>
           )}
         </div>
         <div className="space-y-3">
