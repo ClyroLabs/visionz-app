@@ -4142,6 +4142,11 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Toque a faixa gerada com autoria registrada.": ["Play the generated track with registered authorship.", "Reproduce la pista generada con autoría registrada.", "播放已登记作者权的生成曲目。"],
   "Testar na Launchpad": ["Test on Launchpad", "Probar en Launchpad", "在 Launchpad 测试"],
   "Ambiente de testes · respostas simuladas, nenhuma chave real é criada": ["Test environment · simulated responses, no real key is created", "Entorno de pruebas · respuestas simuladas, no se crea ninguna clave real", "测试环境 · 模拟响应，不会创建真实密钥"],
+  "Narração": ["Narration", "Narración", "旁白"],
+  "Linha do tempo do filme": ["Film timeline", "Línea de tiempo de la película", "影片时间轴"],
+  "Linha do tempo das cenas": ["Scene timeline", "Línea de tiempo de escenas", "场景时间轴"],
+  "Repetir": ["Loop", "Repetir", "循环"],
+  "Baixar filme": ["Download film", "Descargar película", "下载影片"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];

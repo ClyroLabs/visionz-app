@@ -8,7 +8,7 @@ import { ReportButton } from "@/experience/report-dialog";
 import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, useFileUrl, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { localizeBoard, type Aspect, type BoardText, type Storyboard } from "@/lib/creator";
 import { useServerFn } from "@tanstack/react-start";
 import { translateCreation } from "@/lib/creator.functions";
