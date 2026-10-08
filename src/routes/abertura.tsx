@@ -56,17 +56,26 @@ function Intro() {
 
   useEffect(() => {
     const v = video.current;
+    const unlock = (e: Event) => {
+      const el = e.target as Element | null;
+      if (el?.closest?.("button")) return; // buttons handle sound themselves
+      const cur = video.current;
+      if (cur && cur.muted) { cur.muted = false; cur.play().catch(() => {}); setMuted(false); }
+    };
+    const evs = ["pointerdown", "touchstart", "keydown", "wheel", "scroll"] as const;
     if (v) {
-      // Tenta tocar com som; se o navegador bloquear (comum no celular), toca mudo e mostra o aviso para ligar o som.
+      // Starts with sound; browsers that block unmuted autoplay get muted playback,
+      // and sound turns on automatically at the visitor's first interaction anywhere.
       v.muted = false;
       v.play().then(() => setMuted(false)).catch(() => {
         v.muted = true;
         setMuted(true);
         v.play().catch(() => {});
+        evs.forEach((n) => window.addEventListener(n, unlock, { once: true, capture: true, passive: true }));
       });
     }
     const safety = setTimeout(finish, 20000);
-    return () => clearTimeout(safety);
+    return () => { clearTimeout(safety); evs.forEach((n) => window.removeEventListener(n, unlock, { capture: true })); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, src]);
 
