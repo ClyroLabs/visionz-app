@@ -71,7 +71,7 @@ export interface DialogProps extends Omit<ComponentProps<"dialog">, "open" | "ti
 /** Modal dialog built on native <dialog> (focus trap + Esc). */
 export function Dialog({ open, onOpenChange, title, description, className, children, ...props }: DialogProps) {
   const ref = useRef<HTMLDialogElement>(null);
-  useEffect(() => {
+  console.warn("dlg-render", open); useEffect(() => { console.warn("dlg-eff", open, !!ref.current);
     const d = ref.current;
     if (!d) return;
     if (open && !d.open) d.showModal();
