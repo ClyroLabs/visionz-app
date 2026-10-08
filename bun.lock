@@ -14,6 +14,7 @@
         "@tanstack/react-router": "1.170.41",
         "@tanstack/react-start": "1.168.60",
         "@tanstack/router-plugin": "1.168.42",
+        "@vladmandic/face-api": "^1.7.15",
         "ai": "^7.0.127",
         "class-variance-authority": "0.7.1",
         "clsx": "2.1.1",
@@ -486,6 +487,8 @@
     "@vitest/mocker": ["@vitest/mocker@5.0.3", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@vitest/mocker/-/mocker-5.0.3.tgz", { "dependencies": { "@jridgewell/trace-mapping": "0.3.31", "@vitest/spy": "5.0.3", "estree-walker": "^3.0.3", "magic-string": "^1.2.3" }, "peerDependencies": { "msw": "^2.4.9", "vite": "^6.0.0 || ^7.0.0 || ^8.0.0" }, "optionalPeers": ["msw", "vite"] }, "sha512-T8sWAIbkSyAjkwTcaEc3Iu0o9A27X1/kdXrizhZkGuSKScRQtRzclfAMpOTcGdXCsqxeWlpGy3XjqaW8CpLORg=="],
 
     "@vitest/spy": ["@vitest/spy@5.0.3", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@vitest/spy/-/spy-5.0.3.tgz", {}, "sha512-XhFysQTB8AZ+P4gMi+Lpo99vg2AZi0qKpaB9yXQl37+CaMEAPO3iH/wGVnSyL5MPERiLezpqTVtrR6UZH5GCXg=="],
+
+    "@vladmandic/face-api": ["@vladmandic/face-api@1.7.15", "https://europe-west1-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@vladmandic/face-api/-/face-api-1.7.15.tgz", {}, "sha512-WDMmK3CfNLo8jylWqMoQgf4nIst3M0fzx1dnac96wv/dvMTN4DxC/Pq1DGtduDk1lktCamQ3MIDXFnvrdHTXDw=="],
 
     "@workflow/serde": ["@workflow/serde@4.1.0", "https://europe-west4-npm.pkg.dev/lovable-core-prod/sandbox-npm-cache/@workflow/serde/-/serde-4.1.0.tgz", {}, "sha512-pav4F2BoirECWR7Nf1TKt+2eETcBj7jj4cBefQ8VXQCA6NPkaKeLfj/zMgi+3zYV5ZIBT4GuUiphsj0/b9hPQQ=="],
 
