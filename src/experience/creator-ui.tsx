@@ -136,7 +136,7 @@ export function CreationActions({ c }: { c: Creation }) {
   );
 }
 
-export function useMyCreations(tool: "synth" | "jukebox") {
+export function useMyCreations(tool: "synth" | "jukebox" | "video") {
   return useQuery({
     queryKey: ["creations", tool],
     queryFn: async () => {
