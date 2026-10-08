@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Copy, KeyRound } from "lucide-react";
-import { Badge, Button, Card, CardTitle, useToast } from "@/vizionz";
+import { Badge, Button, Card, CardTitle, useToast } from "@/index";
 import { JukeboxIcon, SmartFilterIcon, SynthIcon } from "./api-icons";
 
 type Id = "filter" | "synth" | "jukebox";
