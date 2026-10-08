@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { ListMusic, Layers, Play, SkipForward, Sparkles, Upload } from "lucide-react";
 import { useQueryClient } from "@tanstack/react-query";
-import { AgeRating, AIVerifiedBadge, Badge, Button, Dialog, Input, Label, Select, Textarea, cn, useToast, type AgeRatingValue } from "@/index";
+import { AgeRating, AIVerifiedBadge, Badge, Button, Dialog, Input, Label, Select, cn, useToast, type AgeRatingValue } from "@/index";
+import type { ComponentProps } from "react";
+function Textarea({ className, ...p }: ComponentProps<"textarea">) { return <textarea className={cn("w-full rounded-lg border bg-background px-3 py-2 text-sm outline-none focus-visible:ring-2 focus-visible:ring-ring", className)} {...p} />; }
 import { supabase } from "@/integrations/supabase/client";
 import {
   albumTracks, chapterAt, episodeLabel, fmtClock, groupSeries, moreLikeThis, nextEpisode, normalizeMeta, parseChapters,
@@ -220,20 +222,14 @@ export function MetaEditor({ c }: { c: Creation }) {
   const qc = useQueryClient();
   const toast = useToast();
   const m = normalizeMeta(c);
-  const [f, setF] = useState(() => ({
+  const [f, setF] = useState<MetaForm>(() => ({
     genres: m.genres.join(", "), reasons: m.ratingReasons.join(", "), origin: m.origin,
     sTitle: m.series?.title ?? "", season: String(m.series?.season ?? 1), episode: String(m.series?.episode ?? 1), synopsis: m.series?.synopsis ?? "",
     chapters: m.chapters.map((x) => `${fmtClock(x.t)} ${x.title}`).join("\n"), album: m.album?.title ?? "", track: String(m.album?.track ?? 1),
   }));
   const set = (k: keyof typeof f) => (e: { target: { value: string } }) => setF({ ...f, [k]: e.target.value });
   const save = async () => {
-    const list = (s: string) => s.split(",").map((x) => x.trim()).filter(Boolean).slice(0, 8);
-    const meta = {
-      ...((c.data as { meta?: object }).meta ?? {}),
-      genres: list(f.genres), ratingReasons: list(f.reasons), origin: f.origin,
-      series: f.sTitle.trim() ? { id: f.sTitle.trim().toLowerCase().replace(/\W+/g, "-"), title: f.sTitle.trim(), season: Number(f.season) || 1, episode: Number(f.episode) || 1, synopsis: f.synopsis.trim() || undefined } : undefined,
-      chapters: parseChapters(f.chapters), album: f.album.trim() ? { title: f.album.trim(), track: Number(f.track) || 1 } : undefined,
-    };
+    const meta = { ...((c.data as { meta?: object }).meta ?? {}), ...metaFromForm(f) };
     const { error } = await supabase.from("creations").update({ data: { ...(c.data as object), meta } }).eq("id", c.id);
     if (error) return toast({ title: "Não foi possível salvar", description: error.message, variant: "error" });
     qc.invalidateQueries({ queryKey: ["creations"] }); qc.invalidateQueries({ queryKey: ["vitrine"] });
