@@ -1,0 +1,1 @@
+- [Plan limits](mem://features/plans) — per-plan AI/API caps, screens, export res; none unlimited
