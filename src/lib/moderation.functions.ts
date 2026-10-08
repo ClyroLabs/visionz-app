@@ -39,7 +39,7 @@ export const decide = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const db = await requireModerator(context as unknown as Ctx);
     if (data.targetType === "creation") {
-      const patch: Record<string, string> = {};
+      const patch: { status?: string; age_rating?: string; moderation_note?: string } = {};
       if (data.decision === "approve") patch.status = "published";
       if (data.decision === "block") patch.status = "blocked";
       if (data.rating) patch.age_rating = data.rating;
@@ -63,7 +63,7 @@ export const analyzeCreation = createServerFn({ method: "POST" })
     const { analyzeContent, creationText } = await import("./moderation.server");
     try {
       const a = await analyzeContent(creationText(c));
-      await db.from("creations").update({ ai_analysis: a }).eq("id", c.id);
+      await db.from("creations").update({ ai_analysis: a as never }).eq("id", c.id);
       return { ok: true as const, analysis: a };
     } catch (e) {
       return { ok: false as const, error: e instanceof Error ? e.message : "A IA não respondeu." };
