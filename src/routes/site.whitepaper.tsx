@@ -31,6 +31,24 @@ const layers = [
   { icon: Boxes, t: "Solana", d: "Contratos e token $VZN" },
 ];
 
+const vectors = [
+  ["Ferramentas de IA", "Pagamento do Synth e do Jukebox", "Queima de 10% do que é gasto"],
+  ["Assinaturas e marketplace", "Recompra com 20% do lucro do mês", "Recompra e queima mensal"],
+  ["Crédito (DeFi)", "Taxas, juros e liquidações", "Metade queimada, metade para quem tem $VZN em staking"],
+  ["Launchpad", "Taxas de lançamento e uso das APIs", "$VZN travado como garantia"],
+  ["Ponte entre redes", "Comissão nas transferências", "Recompra para o tesouro"],
+  ["Koda", "Recompensas por aprender", "Emissão controlada da reserva de incentivos"],
+] as const;
+
+const bySource = [
+  ["Assinaturas e SaaS de criadores", "R$ 3,2M", "R$ 24,5M", "R$ 110M"],
+  ["Taxas do Crédito (DeFi)", "R$ 1,5M", "R$ 12M", "R$ 65M"],
+  ["Launchpad e APIs", "R$ 0,8M", "R$ 8,5M", "R$ 35M"],
+  ["Ponte e Koda", "R$ 0,5M", "R$ 5M", "R$ 22M"],
+  ["Total", "R$ 6M", "R$ 50M", "R$ 232M"],
+  ["Margem EBITDA", "−10%", "+28%", "+42%"],
+] as const;
+
 function Block({ id, eyebrow, title, description, children }: { id: string; eyebrow: string; title: string; description?: string; children: React.ReactNode }) {
   return (
     <section id={id} className="scroll-mt-24 space-y-6 border-b py-12 last:border-0 md:py-16">
@@ -100,6 +118,13 @@ function Whitepaper() {
 
           <Block id="queima" eyebrow="6. Recompra e queima" title="Menos tokens circulando com o tempo" description="Parte da receita recompra $VZN e parte dos tokens gastos em IA é destruída. Mexa nos controles e veja o efeito em 36 meses.">
             <BurnSimulator />
+            <Card padding="lg" className="space-y-3">
+              <CardTitle>Para onde vai o $VZN</CardTitle>
+              <div className="overflow-x-auto"><table className="w-full min-w-[520px] text-sm">
+                <thead className="text-left text-muted-foreground"><tr><th className="p-2">Onde é usado</th><th className="p-2">Como funciona</th><th className="p-2">Efeito no $VZN</th></tr></thead>
+                <tbody>{vectors.map(([a, b, c]) => <tr key={a} className="border-t"><td className="p-2 font-semibold">{a}</td><td className="p-2 text-muted-foreground">{b}</td><td className="p-2 text-magenta">{c}</td></tr>)}</tbody>
+              </table></div>
+            </Card>
           </Block>
 
           <Block id="expansao" eyebrow="7. Expansão" title="Novos módulos do ecossistema">
@@ -126,6 +151,13 @@ function Whitepaper() {
               <RevenueChart />
               <div className="grid grid-cols-3 gap-3 text-center"><Stat value="R$ 232 mi" label="receita no ano 3" /><Stat value="42%" tone="cyan" label="margem EBITDA no ano 3" /><Stat value="Mês 11" label="ponto de equilíbrio" /></div>
               <p className="text-xs text-muted-foreground">Projeções do Relatório de Expansão. São metas, não garantia de resultado.</p>
+            </Card>
+            <Card padding="lg" className="space-y-3">
+              <CardTitle>Receita por fonte (estimativa)</CardTitle>
+              <div className="overflow-x-auto"><table className="w-full min-w-[520px] font-mono text-sm">
+                <thead className="text-left font-sans text-muted-foreground"><tr><th className="p-2">Fonte</th><th className="p-2">Ano 1</th><th className="p-2">Ano 2</th><th className="p-2">Ano 3</th></tr></thead>
+                <tbody>{bySource.map((r, i) => <tr key={r[0]} className={i >= bySource.length - 2 ? "border-t font-semibold" : "border-t"}><td className="p-2 font-sans">{r[0]}</td>{r.slice(1).map((v, j) => <td key={j} className="p-2">{v}</td>)}</tr>)}</tbody>
+              </table></div>
             </Card>
           </Block>
 

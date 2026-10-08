@@ -23,13 +23,19 @@ import { Route as TipografiaRouteImport } from './routes/tipografia'
 import { Route as AppIndexRouteImport } from './routes/app.index'
 import { Route as AppAssistirRouteImport } from './routes/app.assistir'
 import { Route as AppCarteiraRouteImport } from './routes/app.carteira'
+import { Route as AppCofresRouteImport } from './routes/app.cofres'
 import { Route as AppContaRouteImport } from './routes/app.conta'
+import { Route as AppCreditoRouteImport } from './routes/app.credito'
 import { Route as AppEcossistemaRouteImport } from './routes/app.ecossistema'
 import { Route as AppEstudioRouteImport } from './routes/app.estudio'
 import { Route as AppFinancasRouteImport } from './routes/app.financas'
 import { Route as AppJukeboxRouteImport } from './routes/app.jukebox'
+import { Route as AppKodaRouteImport } from './routes/app.koda'
+import { Route as AppLaunchpadRouteImport } from './routes/app.launchpad'
 import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
 import { Route as AppPerfisRouteImport } from './routes/app.perfis'
+import { Route as AppPonteRouteImport } from './routes/app.ponte'
+import { Route as AppRadarRouteImport } from './routes/app.radar'
 import { Route as AppSynthRouteImport } from './routes/app.synth'
 import { Route as AppVitrineRouteImport } from './routes/app.vitrine'
 import { Route as SiteIndexRouteImport } from './routes/site.index'
@@ -111,9 +117,19 @@ const AppCarteiraRoute = AppCarteiraRouteImport.update({
   path: '/carteira',
   getParentRoute: () => AppRoute,
 } as any)
+const AppCofresRoute = AppCofresRouteImport.update({
+  id: '/cofres',
+  path: '/cofres',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppContaRoute = AppContaRouteImport.update({
   id: '/conta',
   path: '/conta',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCreditoRoute = AppCreditoRouteImport.update({
+  id: '/credito',
+  path: '/credito',
   getParentRoute: () => AppRoute,
 } as any)
 const AppEcossistemaRoute = AppEcossistemaRouteImport.update({
@@ -136,6 +152,16 @@ const AppJukeboxRoute = AppJukeboxRouteImport.update({
   path: '/jukebox',
   getParentRoute: () => AppRoute,
 } as any)
+const AppKodaRoute = AppKodaRouteImport.update({
+  id: '/koda',
+  path: '/koda',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppLaunchpadRoute = AppLaunchpadRouteImport.update({
+  id: '/launchpad',
+  path: '/launchpad',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppModeracaoRoute = AppModeracaoRouteImport.update({
   id: '/moderacao',
   path: '/moderacao',
@@ -144,6 +170,16 @@ const AppModeracaoRoute = AppModeracaoRouteImport.update({
 const AppPerfisRoute = AppPerfisRouteImport.update({
   id: '/perfis',
   path: '/perfis',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPonteRoute = AppPonteRouteImport.update({
+  id: '/ponte',
+  path: '/ponte',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppRadarRoute = AppRadarRouteImport.update({
+  id: '/radar',
+  path: '/radar',
   getParentRoute: () => AppRoute,
 } as any)
 const AppSynthRoute = AppSynthRouteImport.update({
@@ -213,13 +249,19 @@ export interface FileRoutesByFullPath {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/cofres': typeof AppCofresRoute
   '/app/conta': typeof AppContaRoute
+  '/app/credito': typeof AppCreditoRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
+  '/app/koda': typeof AppKodaRoute
+  '/app/launchpad': typeof AppLaunchpadRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/ponte': typeof AppPonteRoute
+  '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
@@ -244,13 +286,19 @@ export interface FileRoutesByTo {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/cofres': typeof AppCofresRoute
   '/app/conta': typeof AppContaRoute
+  '/app/credito': typeof AppCreditoRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
+  '/app/koda': typeof AppKodaRoute
+  '/app/launchpad': typeof AppLaunchpadRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/ponte': typeof AppPonteRoute
+  '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
@@ -278,13 +326,19 @@ export interface FileRoutesById {
   '/tipografia': typeof TipografiaRoute
   '/app/assistir': typeof AppAssistirRoute
   '/app/carteira': typeof AppCarteiraRoute
+  '/app/cofres': typeof AppCofresRoute
   '/app/conta': typeof AppContaRoute
+  '/app/credito': typeof AppCreditoRoute
   '/app/ecossistema': typeof AppEcossistemaRoute
   '/app/estudio': typeof AppEstudioRoute
   '/app/financas': typeof AppFinancasRoute
   '/app/jukebox': typeof AppJukeboxRoute
+  '/app/koda': typeof AppKodaRoute
+  '/app/launchpad': typeof AppLaunchpadRoute
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
+  '/app/ponte': typeof AppPonteRoute
+  '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
   '/site/criadores': typeof SiteCriadoresRoute
@@ -313,13 +367,19 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/cofres'
     | '/app/conta'
+    | '/app/credito'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/financas'
     | '/app/jukebox'
+    | '/app/koda'
+    | '/app/launchpad'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/ponte'
+    | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
@@ -344,13 +404,19 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/cofres'
     | '/app/conta'
+    | '/app/credito'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/financas'
     | '/app/jukebox'
+    | '/app/koda'
+    | '/app/launchpad'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/ponte'
+    | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
@@ -377,13 +443,19 @@ export interface FileRouteTypes {
     | '/tipografia'
     | '/app/assistir'
     | '/app/carteira'
+    | '/app/cofres'
     | '/app/conta'
+    | '/app/credito'
     | '/app/ecossistema'
     | '/app/estudio'
     | '/app/financas'
     | '/app/jukebox'
+    | '/app/koda'
+    | '/app/launchpad'
     | '/app/moderacao'
     | '/app/perfis'
+    | '/app/ponte'
+    | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
     | '/site/criadores'
@@ -513,11 +585,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppCarteiraRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/cofres': {
+      id: '/app/cofres'
+      path: '/cofres'
+      fullPath: '/app/cofres'
+      preLoaderRoute: typeof AppCofresRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/conta': {
       id: '/app/conta'
       path: '/conta'
       fullPath: '/app/conta'
       preLoaderRoute: typeof AppContaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/credito': {
+      id: '/app/credito'
+      path: '/credito'
+      fullPath: '/app/credito'
+      preLoaderRoute: typeof AppCreditoRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/ecossistema': {
@@ -548,6 +634,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppJukeboxRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/koda': {
+      id: '/app/koda'
+      path: '/koda'
+      fullPath: '/app/koda'
+      preLoaderRoute: typeof AppKodaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/launchpad': {
+      id: '/app/launchpad'
+      path: '/launchpad'
+      fullPath: '/app/launchpad'
+      preLoaderRoute: typeof AppLaunchpadRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/moderacao': {
       id: '/app/moderacao'
       path: '/moderacao'
@@ -560,6 +660,20 @@ declare module '@tanstack/react-router' {
       path: '/perfis'
       fullPath: '/app/perfis'
       preLoaderRoute: typeof AppPerfisRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/ponte': {
+      id: '/app/ponte'
+      path: '/ponte'
+      fullPath: '/app/ponte'
+      preLoaderRoute: typeof AppPonteRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/radar': {
+      id: '/app/radar'
+      path: '/radar'
+      fullPath: '/app/radar'
+      preLoaderRoute: typeof AppRadarRouteImport
       parentRoute: typeof AppRoute
     }
     '/app/synth': {
@@ -638,13 +752,19 @@ declare module '@tanstack/react-router' {
 interface AppRouteChildren {
   AppAssistirRoute: typeof AppAssistirRoute
   AppCarteiraRoute: typeof AppCarteiraRoute
+  AppCofresRoute: typeof AppCofresRoute
   AppContaRoute: typeof AppContaRoute
+  AppCreditoRoute: typeof AppCreditoRoute
   AppEcossistemaRoute: typeof AppEcossistemaRoute
   AppEstudioRoute: typeof AppEstudioRoute
   AppFinancasRoute: typeof AppFinancasRoute
   AppJukeboxRoute: typeof AppJukeboxRoute
+  AppKodaRoute: typeof AppKodaRoute
+  AppLaunchpadRoute: typeof AppLaunchpadRoute
   AppModeracaoRoute: typeof AppModeracaoRoute
   AppPerfisRoute: typeof AppPerfisRoute
+  AppPonteRoute: typeof AppPonteRoute
+  AppRadarRoute: typeof AppRadarRoute
   AppSynthRoute: typeof AppSynthRoute
   AppVitrineRoute: typeof AppVitrineRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -653,13 +773,19 @@ interface AppRouteChildren {
 const AppRouteChildren: AppRouteChildren = {
   AppAssistirRoute: AppAssistirRoute,
   AppCarteiraRoute: AppCarteiraRoute,
+  AppCofresRoute: AppCofresRoute,
   AppContaRoute: AppContaRoute,
+  AppCreditoRoute: AppCreditoRoute,
   AppEcossistemaRoute: AppEcossistemaRoute,
   AppEstudioRoute: AppEstudioRoute,
   AppFinancasRoute: AppFinancasRoute,
   AppJukeboxRoute: AppJukeboxRoute,
+  AppKodaRoute: AppKodaRoute,
+  AppLaunchpadRoute: AppLaunchpadRoute,
   AppModeracaoRoute: AppModeracaoRoute,
   AppPerfisRoute: AppPerfisRoute,
+  AppPonteRoute: AppPonteRoute,
+  AppRadarRoute: AppRadarRoute,
   AppSynthRoute: AppSynthRoute,
   AppVitrineRoute: AppVitrineRoute,
   AppIndexRoute: AppIndexRoute,

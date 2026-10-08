@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Badge, Card, CardTitle, Progress } from "@/index";
 import { Donut, VaultSimulator } from "@/experience/finance-ui";
@@ -31,6 +31,7 @@ function Finance() {
   return (
     <div className="space-y-8">
       <div className="flex flex-wrap items-center justify-between gap-3"><h1 className="font-display text-3xl font-bold tracking-wide">Finanças</h1><Badge variant="neutral">Dados de demonstração</Badge></div>
+      <div className="flex flex-wrap gap-2">{([["/app/credito", "Crédito"], ["/app/cofres", "Cofres"], ["/app/radar", "Radar IA"], ["/app/ponte", "Ponte"]] as const).map(([to, l]) => <Link key={to} to={to} className="rounded-full border px-4 py-1.5 text-sm text-muted-foreground transition-colors hover:border-cyan/60 hover:text-cyan">{l} →</Link>)}</div>
       <Card padding="lg" className="space-y-4">
         <CardTitle>Carteira por categorias</CardTitle>
         <Donut total="US$ 100 mil" unit="5 categorias" items={holdings} />
