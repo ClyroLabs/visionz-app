@@ -4057,7 +4057,7 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Nenhum vídeo publicado ainda.": ["No videos published yet.", "Aún no hay videos publicados.", "暂无已发布视频。"],
   "Como converter e sacar": ["How to convert and withdraw", "Cómo convertir y retirar", "如何兑换和提现"],
   "Ir para Converter e sacar": ["Go to Convert & withdraw", "Ir a Convertir y retirar", "前往兑换与提现"],
-  "Vídeo de demonstração · legendas em português": ["Demo video · captions in Portuguese", "Video de demostración · subtítulos en portugués", "演示视频 · 葡萄牙语字幕"],
+  "Vídeo de demonstração · legendas no seu idioma": ["Demo video · captions in English", "Video de demostración · subtítulos en español", "演示视频 · 中文字幕"],
   "Nenhum modelo para esta rede.": ["No templates for this network.", "No hay plantillas para esta red.", "此网络暂无模板。"],
   "Iniciante": ["Beginner", "Principiante", "入门"],
   "Intermediário": ["Intermediate", "Intermedio", "中级"],
