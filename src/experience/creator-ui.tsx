@@ -1,3 +1,4 @@
+import { MetaEditor } from "./title-details";
 import { useEffect, useRef, useState } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
@@ -131,6 +132,7 @@ export function CreationActions({ c }: { c: Creation }) {
       {c.status === "published"
         ? <Button size="sm" variant="soft" loading={unpublish.isPending} onClick={() => unpublish.mutate()}><Lock />Despublicar</Button>
         : <Button size="sm" loading={publish.isPending} onClick={() => publish.mutate()}><Globe />{publish.isPending ? "IA analisando…" : c.status === "blocked" ? "Revisar de novo" : "Publicar"}</Button>}
+      <MetaEditor c={c} />
       <Button size="icon" variant="danger" aria-label="Excluir" loading={remove.isPending} onClick={() => { if (confirm("Excluir esta criação?")) remove.mutate(); }}><Trash2 /></Button>
     </div>
   );

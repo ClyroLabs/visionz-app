@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { CheckCircle2, Code2, Rocket } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Input, Label, Select, Tabs, TabsContent, TabsList, TabsTrigger, cn } from "@/index";
 import { ApiPlayground } from "@/experience/api-playground";
-import { LaunchpadGallery } from "@/experience/launchpad-ui";
+import { AllocationsTab, LaunchpadGallery } from "@/experience/launchpad-ui";
 import { DemoHeader, useLocal } from "@/experience/defi-ui";
 import { TemplateGallery } from "@/experience/template-ui";
 import { TEMPLATES } from "@/experience/templates";
@@ -42,7 +42,7 @@ function Launchpad() {
     <div className="space-y-8">
       <DemoHeader title="Launchpad" text="Estúdios, jogos e apps podem nascer na infraestrutura VisionZ, usando modelos de contrato prontos e as APIs do Filtro Inteligente, Synth e Jukebox." />
       <Tabs defaultValue="vitrine" value={tab} onValueChange={setTab} className="space-y-6">
-        <TabsList className="max-w-full overflow-x-auto"><TabsTrigger value="vitrine">Projetos</TabsTrigger><TabsTrigger value="enviar">Enviar meu projeto</TabsTrigger><TabsTrigger value="modelos">Modelos</TabsTrigger><TabsTrigger value="apis">APIs</TabsTrigger></TabsList>
+        <TabsList className="max-w-full overflow-x-auto"><TabsTrigger value="vitrine">Projetos</TabsTrigger><TabsTrigger value="enviar">Enviar meu projeto</TabsTrigger><TabsTrigger value="modelos">Modelos</TabsTrigger><TabsTrigger value="apis">APIs</TabsTrigger><TabsTrigger value="cotas">Minhas cotas</TabsTrigger></TabsList>
         <TabsContent value="vitrine"><LaunchpadGallery /></TabsContent>
         <TabsContent value="enviar">
           {d.sent ? (
@@ -69,6 +69,7 @@ function Launchpad() {
         <TabsContent value="modelos">
           <TemplateGallery onUse={(t, v) => { up({ template: t.name, params: v, sent: false }); setStep(1); setTab("enviar"); }} />
         </TabsContent>
+        <TabsContent value="cotas"><AllocationsTab /></TabsContent>
         <TabsContent value="apis">
           <ApiPlayground />
         </TabsContent>

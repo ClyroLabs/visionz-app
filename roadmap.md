@@ -14,3 +14,5 @@
 - [ ] Saldo na moeda do idioma
 - [ ] Checkout de depósito estilo gateway + reflexo em Minha conta
 - [ ] Menu lateral recolhível no Protótipo
+- [x] Launchpad presale checkout + Minhas cotas
+- [x] Vitrine Netflix/Deezer-style details (series, chapters, album)
