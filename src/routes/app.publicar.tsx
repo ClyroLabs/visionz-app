@@ -1,3 +1,4 @@
+import { MetaFields, emptyMetaForm, metaFromForm, type MetaForm } from "@/experience/title-details";
 import { createFileRoute, Link, redirect } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -100,7 +101,7 @@ function Publish() {
       }
       const { data: row, error } = await supabase.from("creations").insert({
         user_id: user.id, tool: "video", title: title.trim(), description: desc.trim() || null, age_rating: age,
-        cover_path: coverPath, data: { video_path: videoPath, duration_sec: frame ? Math.round(frame.duration) : null, size_mb: Math.round(file.size / 1048576) },
+        cover_path: coverPath, data: { video_path: videoPath, duration_sec: frame ? Math.round(frame.duration) : null, size_mb: Math.round(file.size / 1048576), meta: metaFromForm(meta) },
       }).select("id").single();
       if (error || !row) throw new Error("Não foi possível salvar");
       setStep("IA verificando o conteúdo…");
