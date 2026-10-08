@@ -63,6 +63,8 @@ function Publish() {
   const [preview, setPreview] = useState<string | null>(null);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
+  const [meta, setMeta] = useState<MetaForm>(() => emptyMetaForm("external"));
+  const setM = (k: keyof MetaForm) => (e: { target: { value: string } }) => setMeta((f) => ({ ...f, [k]: e.target.value }));
   const [age, setAge] = useState<Age>("L");
   const [agree, setAgree] = useState(false);
   const [step, setStep] = useState<string | null>(null);
@@ -155,6 +157,7 @@ function Publish() {
             <textarea id="pv-d" value={desc} maxLength={1000} rows={3} onChange={(e) => setDesc(e.target.value)} placeholder="Conte do que se trata o vídeo"
               className="w-full rounded-md border bg-background px-3 py-2 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring" />
           </div>
+          <details className="rounded-lg border p-3"><summary className="cursor-pointer text-sm font-medium">Detalhes do catálogo (gênero, série, capítulos)</summary><div className="mt-3"><MetaFields f={meta} set={setM} tool="video" /></div></details>
           <fieldset className="space-y-2">
             <legend className="text-sm font-medium">Classificação indicativa</legend>
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
