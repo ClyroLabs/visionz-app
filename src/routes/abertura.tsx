@@ -88,8 +88,19 @@ function Intro() {
 
   return (
     <div className={`fixed inset-0 z-50 h-dvh overflow-hidden bg-background transition-opacity duration-500 ${leaving ? "opacity-0" : "opacity-100"}`}>
-      {/* Blurred fill so portrait screens never show empty bars. */}
-      <img src={poster.url} alt="" aria-hidden className="absolute inset-0 size-full scale-110 object-cover opacity-50 blur-2xl landscape:hidden" />
+      {/* Portrait backdrop: live blurred copy of the video + brand light, so the clip blends into one scene. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 landscape:hidden">
+        <img src={poster.url} alt="" className="absolute inset-0 size-full scale-125 object-cover opacity-50 blur-3xl" />
+        {src && (
+          <video ref={bg} key={`bg-${src}`} src={src} muted playsInline preload="auto" tabIndex={-1}
+            className="absolute inset-0 size-full scale-125 object-cover opacity-60 blur-3xl" />
+        )}
+        <div className="absolute inset-0 bg-stage-glow animate-breathe" />
+        <div className="absolute inset-0 bg-light-streaks opacity-30" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 floor-reflection" />
+        <div className="absolute inset-0 bg-[radial-gradient(120%_70%_at_50%_50%,transparent_40%,var(--background)_100%)]" />
+        <Logo brand="visionz-symbol" alt="" className="absolute left-1/2 top-[calc(max(1rem,env(safe-area-inset-top))+3.5rem)] h-10 w-auto -translate-x-1/2 opacity-80 drop-shadow-[0_0_14px_var(--magenta)]" />
+      </div>
       <div className={`absolute inset-0 grid place-items-center transition-opacity duration-500 ${ready ? "opacity-0" : "opacity-100"}`} aria-hidden>
         <Logo brand="visionz-symbol" alt="" className="h-16 w-auto animate-breathe drop-shadow-[0_0_14px_var(--magenta)]" />
       </div>
@@ -99,10 +110,13 @@ function Intro() {
           key={src}
           src={src}
           poster={poster.url}
-          className={`relative h-dvh w-full object-contain transition-opacity duration-500 landscape:object-cover ${ready ? "opacity-100" : "opacity-0"}`}
+          className={`absolute inset-x-0 top-1/2 aspect-video w-full -translate-y-1/2 object-cover transition-opacity duration-500 [mask-image:linear-gradient(to_bottom,transparent,black_14%,black_86%,transparent)] [-webkit-box-reflect:below_0_linear-gradient(transparent_60%,rgb(255_255_255/0.22))] landscape:inset-0 landscape:aspect-auto landscape:h-dvh landscape:translate-y-0 landscape:[mask-image:none] landscape:[-webkit-box-reflect:unset] ${ready ? "opacity-100" : "opacity-0"}`}
           playsInline
           preload="auto"
-          onPlaying={() => setReady(true)}
+          onPlaying={() => { setReady(true); syncBg(true); }}
+          onPause={() => bg.current?.pause()}
+          onSeeked={() => syncBg(false)}
+          onTimeUpdate={() => syncBg(false)}
           onLoadedData={() => setReady(true)}
           onEnded={finish}
           aria-label="Vídeo de abertura da VisionZ"
