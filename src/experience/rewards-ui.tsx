@@ -80,3 +80,34 @@ export function MissionsCard() {
     </Card>
   );
 }
+
+const RULES = [
+  ["Assistir", "10 XP a cada 10 min (sem $VZN direto)"],
+  ["Concluir um título (80% ou mais)", "0,5 $VZN"],
+  ["Missões do dia (3 por dia)", "1 $VZN cada × nível"],
+  ["Sequência de 7 dias", "5 $VZN, fora do limite diário"],
+  ["Compra avulsa", "1 $VZN"],
+  ["Criação publicada e aprovada pela IA", "10 $VZN"],
+  ["Limite diário por pessoa", "5 $VZN"],
+] as const;
+
+/** Public summary of the rewards rules (no store dependency). */
+export function RewardRulesTable() {
+  return (
+    <Card padding="lg" className="space-y-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <CardTitle>Como se ganha $VZN</CardTitle>
+        <Badge variant="warning" size="sm">Estimativa, não é promessa</Badge>
+      </div>
+      <div className="overflow-x-auto"><table className="w-full min-w-[460px] text-sm">
+        <tbody>{RULES.map(([a, b]) => <tr key={a} className="border-t first:border-0"><td className="p-2">{a}</td><td className="p-2 font-mono text-magenta">{b}</td></tr>)}</tbody>
+      </table></div>
+      <ul className="space-y-1 text-xs text-muted-foreground">
+        <li>• Orçamento fixo: no máximo ~8,3M $VZN por mês, vindos da reserva Ecossistema & Comunidade (400M em 48 meses).</li>
+        <li>• As recompensas caem 15% a cada semestre. Se os pedidos do mês passarem do orçamento, todas diminuem na mesma proporção.</li>
+        <li>• Vídeo mudo, aba em segundo plano ou repetir o mesmo título não contam. Perfis infantis ganham só XP.</li>
+        <li>• XP sobe seu nível e troca por itens do perfil. Ele não vira $VZN nem dinheiro.</li>
+      </ul>
+    </Card>
+  );
+}
