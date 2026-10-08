@@ -30,3 +30,10 @@ Valor -> Forma de pagamento -> Pagamento -> Comprovante
 - Grava em `wallet_transactions` (já existente) com rótulo do meio; status e último uso derivados do rótulo/registro, sem mudança de banco se possível; se faltar campo de status, migration pequena adicionando `status` e `method_id`.
 - Visitante sem conta: fluxo funciona só no navegador (store local) como hoje.
 - Rótulo do saldo via chave de dicionário por idioma; todo texto novo em EN/ES/ZH.
+
+## 4. Menu lateral recolhível no Protótipo
+- Botão no topo do menu lateral (computador/tablet) que recolhe o menu para uma faixa estreita só com ícones; ao passar o mouse, cada ícone mostra o nome.
+- Logo vira o símbolo VZ quando recolhido; Modo infantil, saldo, idiomas e "Voltar ao site" viram ícones compactos.
+- A escolha (aberto/recolhido) fica salva no navegador; atalho Ctrl/Cmd + B.
+- Conteúdo principal ocupa o espaço liberado, com animação suave. Celular continua com o menu atual.
+- Técnico: estado em `app.tsx` (`w-60` ↔ `w-16`), lido do armazenamento local após carregar para evitar piscar; `Tooltip` do design system nos itens.
