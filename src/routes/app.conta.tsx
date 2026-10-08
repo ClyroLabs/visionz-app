@@ -1,3 +1,4 @@
+import { ParentalPanel } from "@/experience/parental-ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect, useState, type ReactNode } from "react";
@@ -64,12 +65,14 @@ function Account() {
           <TabsTrigger value="pagamentos">Pagamentos</TabsTrigger>
           <TabsTrigger value="recebimentos">Recebimentos</TabsTrigger>
           <TabsTrigger value="preferencias">Preferências</TabsTrigger>
+          <TabsTrigger value="parental">Controle parental</TabsTrigger>
         </TabsList>
         <TabsContent value="perfil"><ProfileTab uid={uid} profile={profile} avatarUrl={avatar.data ?? undefined} name={name} /></TabsContent>
         <TabsContent value="saldos"><BalancesTab uid={uid} /></TabsContent>
         <TabsContent value="pagamentos"><PaymentsTab uid={uid} /></TabsContent>
         <TabsContent value="recebimentos"><PayoutsTab uid={uid} /></TabsContent>
         <TabsContent value="preferencias"><PrefsTab uid={uid} /></TabsContent>
+        <TabsContent value="parental"><ParentalPanel /></TabsContent>
       </Tabs>
     </div>
   );

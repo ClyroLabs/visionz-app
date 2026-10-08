@@ -4,6 +4,8 @@ import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
 import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft, PieChart as PieChartIcon, Landmark, Vault, Radar, Rocket, GraduationCap, ArrowLeftRight } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
+import { FaceGateHost } from "@/experience/parental-ui";
+import { ClientOnly } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/app")({ component: AppLayout });
 
@@ -94,6 +96,7 @@ function Frame() {
         </header>
         {kids && <div className="border-b border-success/30 bg-success/10 px-6 py-2 text-sm text-success"><Badge variant="success" size="sm">Perfil infantil</Badge> Mostrando só conteúdos Livre e 10 anos.</div>}
         <main className="p-6 md:p-10"><Outlet /></main>
+        <ClientOnly><FaceGateHost /></ClientOnly>
       </div>
     </div>
   );

@@ -79,11 +79,11 @@ export function Dialog({ open, onOpenChange, title, description, className, chil
   }, [open]);
   return (
     <dialog
-      ref={ref}
       onClose={() => onOpenChange(false)}
       onClick={(e) => e.target === ref.current && onOpenChange(false)}
       className={cn("m-auto w-[min(92vw,30rem)] rounded-xl border border-cyan/30 bg-surface p-0 text-foreground shadow-glow-cyan backdrop:bg-background/70 backdrop:backdrop-blur-sm", className)}
       {...props}
+      ref={ref}
     >
       <div className="p-6">
         <div className="mb-4 flex items-start justify-between gap-4">

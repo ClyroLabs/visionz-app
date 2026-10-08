@@ -6,8 +6,15 @@ export function isAllowedForKids(rating: Rating) {
   return KIDS_ALLOWED.includes(rating);
 }
 
-export function filterCatalog<T extends { rating: Rating }>(items: T[], kidsMode: boolean) {
-  return kidsMode ? items.filter((i) => isAllowedForKids(i.rating)) : items;
+const ORDER: Rating[] = ["L", "10", "12", "14", "16", "18"];
+/** In kids mode, keeps only titles up to the child's maximum rating (default 10). */
+export function allowedForKid(rating: Rating, max: string = "10") {
+  const m = ORDER.indexOf(max as Rating);
+  return ORDER.indexOf(rating) <= (m < 0 ? 1 : m);
+}
+
+export function filterCatalog<T extends { rating: Rating }>(items: T[], kidsMode: boolean, max: string = "10") {
+  return kidsMode ? items.filter((i) => allowedForKid(i.rating, max)) : items;
 }
 
 /** Withdraws from balance; refuses amounts that are non-positive or exceed the balance. */

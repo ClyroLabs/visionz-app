@@ -1,4 +1,6 @@
 import { useNavigate } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { requestPurchase } from "@/lib/parental.functions";
 import { Carousel, ContentCard, useToast } from "@/index";
 import type { Title } from "./data";
 import { useExperience } from "./store";
@@ -8,7 +10,8 @@ export function Cover({ src }: { src: string }) {
 }
 
 export function CatalogRow({ title, items }: { title: string; items: Title[] }) {
-  const { owned, buy } = useExperience();
+  const { owned, buy, child } = useExperience();
+  const ask = useServerFn(requestPurchase);
   const toast = useToast();
   const nav = useNavigate();
   if (!items.length) return null;
@@ -21,6 +24,12 @@ export function CatalogRow({ title, items }: { title: string; items: Title[] }) 
           return (
             <div key={t.id} className="shrink-0 space-y-2" onClickCapture={(e) => {
               e.preventDefault();
+              if (t.priceValue && !isOwned && child) {
+                ask({ data: { childId: child.id, titleId: t.id, title: t.title, price: t.priceValue } })
+                  .then(() => toast({ title: "Pedido enviado ao responsável", description: "A compra espera a aprovação com verificação facial em Minha conta.", variant: "info" }))
+                  .catch((err) => toast({ title: "Não foi possível pedir", description: (err as Error).message, variant: "error" }));
+                return;
+              }
               if (t.priceValue && !isOwned) {
                 const ok = buy(t.id, t.title, t.priceValue);
                 toast(ok ? { title: `Compra confirmada: ${t.title}`, description: "+1 VZN de recompensa", variant: "reward" } : { title: "Saldo insuficiente", description: "Adicione saldo na Carteira.", variant: "error" });
