@@ -37,3 +37,58 @@ All amounts are examples and nothing is sent on any network. The usual "Demonstr
 - **Translations:** all new PT-BR text gets EN/ES/ZH entries in `dict.ts`.
 - **Tests:** `presale.test.ts` covers the quote math, minimum/maximum, insufficient balance, the round-full limit and the release-schedule totals.
 - **Check with Playwright:** run a full contribution with the demo wallet, confirm the notice is visible, and confirm "Minhas cotas" and the progress update.
+
+---
+
+# Part 2: Richer production details in Vitrine (Netflix / Deezer style)
+
+## What the user will see
+Clicking any video, Synth production or song in Vitrine opens a full details page in a window.
+
+**Header**
+- Cover, title, year and duration.
+- Age rating with its reasons (for example "violência leve").
+- "Verificado por IA" badge.
+- Genre/style chips (for example Ficção científica · Animação 3D · Cinematográfico).
+- Language and subtitles.
+
+**Origin badge**
+- "Criado na VisionZ" (Synth / Jukebox / Publicar), or "Enviado pelo criador · produção externa".
+- Credits: creator, tool used and AI model when applicable.
+
+**Series (videos/Synth)**
+- A season selector ("Temporada 1 ▾").
+- An episode list with number, title, synopsis, duration and progress bar.
+- The player title always reads "T1:E3 · <episode title>".
+- "Próximo episódio" at the end, with an autoplay countdown.
+
+**Chapters**
+- A chapter list with timestamps. Clicking one jumps the player.
+- The current chapter is shown above the progress bar.
+
+**Music (Deezer style)**
+- Album or single, track list with number, title and duration, plus "Faixa 2 de 8".
+- Genre, mood, BPM/key when known, and lyrics.
+- Full credits (composition, producer, "Gerado com Jukebox").
+
+**More like this**
+- A row of related productions with the same genre.
+
+Cards also gain small labels: rating, origin, "3 temporadas" or "Álbum · 8 faixas", and genre.
+
+## Publishing side
+**Publish video** and the Synth/Jukebox save screens get optional fields:
+- Genre/style, rating reasons and origin. Origin is automatic for in-platform tools, and "externo" for uploads.
+- **Série**: create or choose a series, then set the season and episode number.
+- **Capítulos**: title + time.
+- **Álbum** (music): album name + track number.
+
+Existing productions keep working. Missing data simply hides that section.
+
+## Technical details
+- No new tables. A schema-light `data.meta` on `creations` holds: `genres[]`, `ratingReasons[]`, `origin`, `series {id, title, season, episode, synopsis}`, `chapters[{t,title}]`, `album {title, track, total}`, `bpm`, `key`, `lyrics`.
+- Episodes are grouped by `series.id` across the creator's published items.
+- `src/lib/catalog-meta.ts` holds the pure helpers `normalizeMeta`, `groupSeries`, `episodeLabel`, `chapterAt`, `nextEpisode` and `albumTracks`, plus tests.
+- `src/experience/title-details.tsx` holds `TitleDetails`, `SeasonSelector`, `EpisodeList`, `ChapterList`, `TrackList` and `CreditsBlock`. These are used by VideoCard, SynthCard and the music cards.
+- A small set of seeded example series and an album, written by migration as published demo items so the selectors are visible right away.
+- AI-generated text keeps `data-no-translate`. Labels get EN/ES/ZH entries.
