@@ -73,7 +73,7 @@ export function ApiPlayground() {
             <div className="flex gap-2">
               <code data-no-translate className="min-w-0 flex-1 truncate rounded-md border bg-background px-3 py-2 font-mono text-xs">{k}</code>
               {key ? <Button size="sm" variant="ghost" aria-label="Copiar chave" onClick={() => copy(key)}><Copy className="size-4" /></Button>
-                : <Button size="sm" variant="outline" onClick={() => setKey(`vz_test_${rid()}${rid()}`)}><KeyRound className="size-4" />Gerar chave</Button>}
+                : <Button size="sm" variant="secondary" onClick={() => setKey(`vz_test_${rid()}${rid()}`)}><KeyRound className="size-4" />Gerar chave</Button>}
             </div>
           </div>
           <div className="space-y-2">
