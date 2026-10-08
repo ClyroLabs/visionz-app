@@ -9,7 +9,16 @@ import { Badge, Button, Card, CardTitle, NetworkTag, useToast } from "@/index";
 import { useExperience } from "@/experience/store";
 import { WalletConvert } from "@/experience/wallet-convert";
 import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
-import tutorialVideo from "@/assets/tutorial/wallet-tutorial.mp4.asset.json";
+import tutPt from "@/assets/tutorial/wallet-tutorial-pt.mp4.asset.json";
+import tutEn from "@/assets/tutorial/wallet-tutorial-en.mp4.asset.json";
+import tutEs from "@/assets/tutorial/wallet-tutorial-es.mp4.asset.json";
+import tutZh from "@/assets/tutorial/wallet-tutorial-zh.mp4.asset.json";
+import { useLang } from "@/experience/i18n";
+const TUTORIAL: Record<string, string> = { pt: tutPt.url, en: tutEn.url, es: tutEs.url, zh: tutZh.url };
+function TutorialVideo({ poster }: { poster: string }) {
+  const { lang } = useLang();
+  return <video key={lang} controls preload="none" playsInline poster={poster} src={TUTORIAL[lang] ?? tutPt.url} className="aspect-video w-full" aria-label="Tutorial: como converter e sacar" />;
+}
 import tutorialPoster from "@/assets/tutorial/wallet-tutorial-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/app/carteira")({
@@ -58,10 +67,10 @@ function WalletPage() {
               <a href="#converter-sacar" className="text-xs text-cyan hover:underline focus-visible:ring-2 focus-visible:ring-ring rounded">Ir para Converter e sacar</a>
             </div>
             <div className="relative overflow-hidden rounded-xl border border-border bg-surface">
-              <video controls preload="none" playsInline poster={tutorialPoster.url} src={tutorialVideo.url} className="aspect-video w-full" aria-label="Tutorial: como converter e sacar" />
+              <TutorialVideo poster={tutorialPoster.url} />
               <span className="pointer-events-none absolute right-2 top-2 rounded bg-background/80 px-1.5 py-0.5 font-mono text-[10px]">0:26</span>
             </div>
-            <p className="text-xs text-muted-foreground">Vídeo de demonstração · legendas em português</p>
+            <p className="text-xs text-muted-foreground">Vídeo de demonstração · legendas no seu idioma</p>
           </div>
         </Card>
       </div>
