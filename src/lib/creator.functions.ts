@@ -1,7 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
-import { asAge, normalizeComposition, normalizeStoryboard, stricterRating, AGE_RATINGS } from "./creator";
+import { asAge, normalizeComposition, normalizeStoryboard, normalizeText, stricterRating, AGE_RATINGS, ASPECTS, CAMERAS, LANGS } from "./creator";
 
 const age = z.enum(AGE_RATINGS);
 
@@ -17,29 +17,99 @@ async function guard<T>(fn: () => Promise<T>): Promise<{ ok: true; data: T } | {
   }
 }
 
+const CAMERA_EN: Record<(typeof CAMERAS)[number], string> = {
+  "zoom-in": "slow push-in toward the subject", "zoom-out": "slow pull-back revealing the scene", "pan-left": "smooth pan to the left",
+  "pan-right": "smooth pan to the right", "tilt-up": "gentle tilt upward", orbit: "slow orbit around the subject", parallax: "subtle parallax dolly with depth",
+};
+
 export const synthStoryboard = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ idea: z.string().trim().min(5).max(800), style: z.string().max(60), scenes: z.number().int().min(3).max(6), age }).parse(d))
+  .inputValidator((d) => z.object({ idea: z.string().trim().min(5).max(800), style: z.string().max(60), scenes: z.number().int().min(3).max(6), age, aspect: z.enum(ASPECTS) }).parse(d))
   .handler(({ data }) => guard(async () => {
     const { askJson } = await ai();
+    // One call returns the film plan plus EN/ES/ZH copies of the short texts, so viewers never trigger extra translations.
     const raw = await askJson(
-      "Você é o roteirista do Clyro Synth, estúdio de mídia sintética da VisionZ. Escreva em português do Brasil.",
-      `Crie um storyboard de ${data.scenes} cenas para: "${data.idea}". Estilo visual: ${data.style}. Classificação indicativa: ${data.age} (respeite rigorosamente; para L e 10, nada de violência, medo intenso ou temas adultos).
-Formato: {"title": string, "logline": string (1 frase), "scenes": [{"title": string, "description": string (2 frases), "narration": string (fala/narração curta), "image_prompt": string (em inglês, descrição visual detalhada da cena, sem texto escrito na imagem, estilo ${data.style}, enquadramento cinematográfico 16:9)}]}`,
+      "Você é o diretor do Clyro Synth, estúdio de filmes com IA da VisionZ. Seja conciso.",
+      `Planeje um filme curto de ${data.scenes} cenas para: "${data.idea}". Estilo: ${data.style}. Formato ${data.aspect}. Classificação: ${data.age} (para L e 10, nada de violência, medo intenso ou temas adultos).
+Textos curtos: título até 6 palavras, logline 1 frase, descrição 1 frase, narração até 15 palavras.
+Formato JSON: {"title","logline","scenes":[{"title","description","narration","image_prompt" (inglês, visual detalhado, sem texto na imagem, estilo ${data.style}, enquadramento ${data.aspect}),"camera" (um de: ${CAMERAS.join(", ")}),"duration_sec" (3 a 8),"transition" ("cut"|"fade"|"wipe")}],
+"i18n":{"en":{"title","logline","scenes":[{"title","description","narration"}]},"es":{...mesmo formato},"zh":{...mesmo formato, chinês simplificado}}}. Textos principais em português do Brasil.`,
     );
     return normalizeStoryboard(raw, data.scenes);
   }));
 
+const SIZE: Record<(typeof ASPECTS)[number], string> = { "16:9": "1536x1024", "21:9": "1536x1024", "4:3": "1536x1024", "1:1": "1024x1024", "9:16": "1024x1536" };
+
 export const synthSceneImage = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) => z.object({ prompt: z.string().trim().min(5).max(1200) }).parse(d))
+  .inputValidator((d) => z.object({ prompt: z.string().trim().min(5).max(1200), aspect: z.enum(ASPECTS).default("16:9") }).parse(d))
   .handler(({ data, context }) => guard(async () => {
     const { generateImageBytes } = await ai();
-    const bytes = await generateImageBytes(`${data.prompt}. Family-safe, high quality cinematic still, no text, no watermark.`);
+    const bytes = await generateImageBytes(`${data.prompt}. Composition for ${data.aspect} frame. Family-safe, high quality cinematic still, no text, no watermark.`, SIZE[data.aspect]);
     const path = `${context.userId}/synth/${crypto.randomUUID()}.png`;
     const { error } = await context.supabase.storage.from("creations").upload(path, bytes, { contentType: "image/png" });
     if (error) throw new Error("Não foi possível guardar a imagem.");
     return { path };
+  }));
+
+/** Starts an AI clip from a scene image the caller owns. Runs only on an explicit click. */
+export const synthClipStart = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ imagePath: z.string().max(300), prompt: z.string().trim().min(3).max(1200), camera: z.enum(CAMERAS), aspect: z.enum(ASPECTS), seconds: z.number().int().min(3).max(8) }).parse(d))
+  .handler(({ data, context }) => guard(async () => {
+    if (!data.imagePath.startsWith(`${context.userId}/`)) throw new Error("Imagem inválida.");
+    const { data: blob, error } = await context.supabase.storage.from("creations").download(data.imagePath);
+    if (error || !blob) throw new Error("Imagem da cena não encontrada.");
+    const buf = new Uint8Array(await blob.arrayBuffer());
+    let bin = ""; for (let i = 0; i < buf.length; i += 0x8000) bin += String.fromCharCode(...buf.subarray(i, i + 0x8000));
+    const { createVideoJob } = await ai();
+    const job = await createVideoJob(
+      `Animate the image: ${CAMERA_EN[data.camera]}, in a single continuous shot, no scene cuts. ${data.prompt}. Keep the characters, colors and layout of the image unchanged. Family-safe. Audio: soft ambient score matching the mood. No dialogue. No on-screen text.`,
+      { b64: btoa(bin), mime: blob.type || "image/png" }, data.aspect === "9:16" ? "9:16" : "16:9", data.seconds,
+    );
+    return { id: job.id };
+  }));
+
+/** Polls a clip job; when done, stores the MP4 in the caller's folder once. */
+export const synthClipStatus = createServerFn({ method: "POST" })
+  .middleware([requireSupabaseAuth])
+  .inputValidator((d) => z.object({ id: z.string().min(3).max(200) }).parse(d))
+  .handler(({ data, context }) => guard(async () => {
+    const { getVideoJob, downloadVideo } = await ai();
+    const job = await getVideoJob(data.id);
+    if (job.status === "failed") return { status: "failed" as const, error: job.error?.message ?? "O clipe não foi gerado." };
+    if (job.status !== "completed") return { status: "running" as const, progress: job.progress ?? 0 };
+    const path = `${context.userId}/synth/clips/${data.id.replace(/[^\w-]/g, "")}.mp4`;
+    const dir = path.slice(0, path.lastIndexOf("/"));
+    const { data: existing } = await context.supabase.storage.from("creations").list(dir, { search: path.slice(dir.length + 1) });
+    if (!existing?.length) {
+      const bytes = await downloadVideo(data.id);
+      const { error } = await context.supabase.storage.from("creations").upload(path, bytes, { contentType: "video/mp4" });
+      if (error) throw new Error("Não foi possível guardar o clipe.");
+    }
+    return { status: "done" as const, path };
+  }));
+
+/** Public: returns a production's text in `lang`, translating once and caching it on the record. */
+export const translateCreation = createServerFn({ method: "POST" })
+  .inputValidator((d) => z.object({ id: z.string().uuid(), lang: z.enum(LANGS) }).parse(d))
+  .handler(({ data }) => guard(async () => {
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { data: row } = await supabaseAdmin.from("creations").select("id, data, status, tool").eq("id", data.id).maybeSingle();
+    if (!row || row.status !== "published" || row.tool !== "synth") throw new Error("Produção não encontrada.");
+    const d = (row.data ?? {}) as Record<string, any>;
+    const src = (d.lang ?? "pt") as string;
+    if (src === data.lang) return null;
+    if (d.i18n?.[data.lang]) return d.i18n[data.lang];
+    const scenes = Array.isArray(d.scenes) ? d.scenes : [];
+    const payload = { title: d.title, logline: d.logline, scenes: scenes.map((s: any) => ({ title: s.title, description: s.description, narration: s.narration })) };
+    const name = { pt: "português do Brasil", en: "English", es: "español", zh: "简体中文" }[data.lang];
+    const { askJson } = await ai();
+    const raw = await askJson("Você traduz textos curtos de filmes. Mantenha nomes próprios.", `Traduza para ${name}, mantendo exatamente a mesma estrutura JSON: ${JSON.stringify(payload)}`);
+    const t = normalizeText(raw, scenes.length);
+    if (!t) throw new Error("Tradução indisponível agora.");
+    await supabaseAdmin.from("creations").update({ data: { ...d, i18n: { ...(d.i18n ?? {}), [data.lang]: t } } }).eq("id", data.id);
+    return t;
   }));
 
 export const jukeboxCompose = createServerFn({ method: "POST" })
