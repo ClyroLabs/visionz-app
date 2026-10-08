@@ -147,7 +147,7 @@ export function PresaleCheckout({ p, onBack, onSeeAllocations }: { p: LaunchProj
             <Input aria-label="Valor" inputMode="decimal" placeholder={`Valor em ${tok.symbol}`} value={amount} onChange={(e) => setAmount(e.target.value)} />
             {[0.25, 0.5, 1].map((f) => <Button key={f} size="sm" variant="ghost" onClick={() => setAmount(String(+(Math.min(balance(tok), q.maxUsd / tok.usd) * f).toFixed(4)))}>{f === 1 ? "Máx." : `${f * 100}%`}</Button>)}
           </div>
-          <Card padding="sm" className="space-y-1.5 text-sm">
+          <Card padding="md" className="space-y-1.5 text-sm">
             <Row k="Você recebe" v={<span className="text-gradient-brand font-semibold">{compact(q.tokens)} ${p.symbol}</span>} />
             <Row k="Equivale a" v={usd(q.usd)} />
             <Row k="Tarifa de rede" v={usd(q.fee)} />
@@ -161,7 +161,7 @@ export function PresaleCheckout({ p, onBack, onSeeAllocations }: { p: LaunchProj
 
       {step === 2 && (
         <div className="space-y-3">
-          <Card padding="sm" className="space-y-1.5 text-sm">
+          <Card padding="md" className="space-y-1.5 text-sm">
             <Row k="Projeto" v={`${p.name} · $${p.symbol}`} />
             <Row k="Pagamento" v={`${fmt(amt, 4)} ${tok.symbol}`} />
             <Row k="Tarifa de rede" v={usd(q.fee)} />
@@ -196,7 +196,7 @@ export function PresaleCheckout({ p, onBack, onSeeAllocations }: { p: LaunchProj
                 <p className="font-display text-lg tracking-wide">Apoio confirmado</p>
                 <p className="text-gradient-brand text-2xl font-semibold">{compact(done.tokens)} ${done.symbol}</p>
               </div>
-              <Card padding="sm" className="space-y-1.5 text-sm">
+              <Card padding="md" className="space-y-1.5 text-sm">
                 <Row k="Pago" v={`${fmt(done.amount, 4)} ${done.pay} (${usd(done.usd)})`} />
                 <Row k="Tarifa de rede" v={usd(done.fee)} />
                 <Row k="Transação" v={<code data-no-translate className="font-mono text-xs">{short(done.tx)}</code>} />
