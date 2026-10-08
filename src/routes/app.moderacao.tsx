@@ -94,7 +94,7 @@ function useDecide() {
   const qc = useQueryClient();
   const toast = useToast();
   return useMutation({
-    mutationFn: (d: Parameters<typeof fn>[0]["data"]) => fn({ data: d }),
+    mutationFn: (d: { targetType: "creation" | "report"; targetId: string; title: string; decision: "approve" | "block" | "rating" | "dismiss"; rating?: (typeof RATINGS)[number]; note?: string }) => fn({ data: d }),
     onSuccess: () => { qc.invalidateQueries({ queryKey: ["moderation"] }); toast({ title: "Decisão salva", description: "A IA aprende com sua escolha.", variant: "success" }); },
     onError: (e) => toast({ title: "Não foi possível salvar", description: (e as Error).message, variant: "error" }),
   });
