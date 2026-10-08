@@ -67,6 +67,7 @@ function Synth() {
     const sc = board.scenes[i];
     setClipIndex(i);
     const r = await startClip({ data: { imagePath: paths[i]!, prompt: sc.image_prompt || sc.description, camera: sc.camera, aspect, seconds: sc.duration_sec } });
+    refreshPlan();
     if (!r.ok) { setClipIndex(null); return toast({ title: "Clipe não iniciado", description: r.error, variant: "error" }); }
     for (let n = 0; n < 60; n++) {
       await new Promise((ok) => setTimeout(ok, 6000));
@@ -85,6 +86,7 @@ function Synth() {
     if (idea.trim().length < 5) return toast({ title: "Descreva sua ideia com pelo menos 5 letras", variant: "error" });
     setBusy("board");
     const r = await genBoard({ data: { idea, style, scenes, age, aspect } });
+    refreshPlan();
     setBusy(null);
     if (!r.ok) return toast({ title: "Não deu para criar o roteiro", description: r.error, variant: "error" });
     setBoard(r.data); setPaths(r.data.scenes.map(() => null)); setClips(r.data.scenes.map(() => null)); setSel(0);
@@ -94,6 +96,7 @@ function Synth() {
     if (!board) return false;
     setImgIndex(i);
     const r = await genImage({ data: { prompt: board.scenes[i].image_prompt || board.scenes[i].description, aspect } });
+    refreshPlan();
     setImgIndex(null);
     if (!r.ok) { toast({ title: `Cena ${i + 1}: imagem não gerada`, description: r.error, variant: "error" }); return false; }
     setPaths((p) => p.map((x, j) => (j === i ? r.data.path : x)));

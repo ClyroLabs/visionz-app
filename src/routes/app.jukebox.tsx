@@ -1,4 +1,4 @@
-import { PlanGate, QuotaHint, usePlan, useRefreshPlan, blocked } from "@/experience/plan-ui";
+import { QuotaHint, usePlan, useRefreshPlan, blocked } from "@/experience/plan-ui";
 import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
@@ -62,6 +62,8 @@ function Jukebox() {
 
 function Compose() {
   const { user } = Route.useRouteContext();
+  const plan = usePlan();
+  const refreshPlan = useRefreshPlan();
   const toast = useToast();
   const qc = useQueryClient();
   const compose = useServerFn(jukeboxCompose);
@@ -77,6 +79,7 @@ function Compose() {
     if (idea.trim().length < 3) return toast({ title: "Conte sobre o que é a música", variant: "error" });
     setBusy(true);
     const r = await compose({ data: { idea, genre, mood, age } });
+    refreshPlan();
     setBusy(false);
     if (!r.ok) return toast({ title: "Não deu para compor", description: r.error, variant: "error" });
     setSong(r.data);
