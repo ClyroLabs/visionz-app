@@ -7,6 +7,7 @@ import { useDeposit } from "@/experience/use-deposit";
 import { useSession } from "@/lib/use-session";
 import { Badge, Button, Card, CardTitle, Input, Label, NetworkTag, Select, networks, useToast, type Network } from "@/index";
 import { useExperience } from "@/experience/store";
+import { WalletConvert } from "@/experience/wallet-convert";
 import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
 
 export const Route = createFileRoute("/app/carteira")({
@@ -63,6 +64,7 @@ function WalletPage() {
           </form>
         </Card>
       </div>
+      <WalletConvert />
       <Card padding="lg">
         <CardTitle className="mb-4 text-lg">Histórico</CardTitle>
         <ul className="divide-y">
