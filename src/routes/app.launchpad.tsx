@@ -38,7 +38,7 @@ function Launchpad() {
   return (
     <div className="space-y-8">
       <DemoHeader title="Launchpad" text="Estúdios, jogos e apps podem nascer na infraestrutura VisionZ, usando modelos de contrato prontos e as APIs do Filtro Inteligente, Synth e Jukebox." />
-      <Tabs value={tab} onValueChange={setTab} className="space-y-6">
+      <Tabs defaultValue="vitrine" value={tab} onValueChange={setTab} className="space-y-6">
         <TabsList className="max-w-full overflow-x-auto"><TabsTrigger value="vitrine">Projetos</TabsTrigger><TabsTrigger value="enviar">Enviar meu projeto</TabsTrigger><TabsTrigger value="modelos">Modelos</TabsTrigger><TabsTrigger value="apis">APIs</TabsTrigger></TabsList>
         <TabsContent value="vitrine"><LaunchpadGallery /></TabsContent>
         <TabsContent value="enviar">
