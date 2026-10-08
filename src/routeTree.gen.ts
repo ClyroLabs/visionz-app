@@ -35,6 +35,7 @@ import { Route as AppLaunchpadRouteImport } from './routes/app.launchpad'
 import { Route as AppModeracaoRouteImport } from './routes/app.moderacao'
 import { Route as AppPerfisRouteImport } from './routes/app.perfis'
 import { Route as AppPonteRouteImport } from './routes/app.ponte'
+import { Route as AppPublicarRouteImport } from './routes/app.publicar'
 import { Route as AppRadarRouteImport } from './routes/app.radar'
 import { Route as AppSynthRouteImport } from './routes/app.synth'
 import { Route as AppVitrineRouteImport } from './routes/app.vitrine'
@@ -177,6 +178,11 @@ const AppPonteRoute = AppPonteRouteImport.update({
   path: '/ponte',
   getParentRoute: () => AppRoute,
 } as any)
+const AppPublicarRoute = AppPublicarRouteImport.update({
+  id: '/publicar',
+  path: '/publicar',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppRadarRoute = AppRadarRouteImport.update({
   id: '/radar',
   path: '/radar',
@@ -261,6 +267,7 @@ export interface FileRoutesByFullPath {
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
   '/app/ponte': typeof AppPonteRoute
+  '/app/publicar': typeof AppPublicarRoute
   '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
@@ -298,6 +305,7 @@ export interface FileRoutesByTo {
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
   '/app/ponte': typeof AppPonteRoute
+  '/app/publicar': typeof AppPublicarRoute
   '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
@@ -338,6 +346,7 @@ export interface FileRoutesById {
   '/app/moderacao': typeof AppModeracaoRoute
   '/app/perfis': typeof AppPerfisRoute
   '/app/ponte': typeof AppPonteRoute
+  '/app/publicar': typeof AppPublicarRoute
   '/app/radar': typeof AppRadarRoute
   '/app/synth': typeof AppSynthRoute
   '/app/vitrine': typeof AppVitrineRoute
@@ -379,6 +388,7 @@ export interface FileRouteTypes {
     | '/app/moderacao'
     | '/app/perfis'
     | '/app/ponte'
+    | '/app/publicar'
     | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
@@ -416,6 +426,7 @@ export interface FileRouteTypes {
     | '/app/moderacao'
     | '/app/perfis'
     | '/app/ponte'
+    | '/app/publicar'
     | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
@@ -455,6 +466,7 @@ export interface FileRouteTypes {
     | '/app/moderacao'
     | '/app/perfis'
     | '/app/ponte'
+    | '/app/publicar'
     | '/app/radar'
     | '/app/synth'
     | '/app/vitrine'
@@ -669,6 +681,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppPonteRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/publicar': {
+      id: '/app/publicar'
+      path: '/publicar'
+      fullPath: '/app/publicar'
+      preLoaderRoute: typeof AppPublicarRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/radar': {
       id: '/app/radar'
       path: '/radar'
@@ -764,6 +783,7 @@ interface AppRouteChildren {
   AppModeracaoRoute: typeof AppModeracaoRoute
   AppPerfisRoute: typeof AppPerfisRoute
   AppPonteRoute: typeof AppPonteRoute
+  AppPublicarRoute: typeof AppPublicarRoute
   AppRadarRoute: typeof AppRadarRoute
   AppSynthRoute: typeof AppSynthRoute
   AppVitrineRoute: typeof AppVitrineRoute
@@ -785,6 +805,7 @@ const AppRouteChildren: AppRouteChildren = {
   AppModeracaoRoute: AppModeracaoRoute,
   AppPerfisRoute: AppPerfisRoute,
   AppPonteRoute: AppPonteRoute,
+  AppPublicarRoute: AppPublicarRoute,
   AppRadarRoute: AppRadarRoute,
   AppSynthRoute: AppSynthRoute,
   AppVitrineRoute: AppVitrineRoute,

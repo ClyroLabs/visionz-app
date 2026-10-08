@@ -1,12 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { Clapperboard } from "lucide-react";
+import { Clapperboard, Film } from "lucide-react";
 import { Button, buttonVariants, Card, CardDescription, CardTitle, Dialog, Tabs, TabsContent, TabsList, TabsTrigger } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
 import { allowedForKid, type Rating } from "@/experience/logic";
 import { ReportButton } from "@/experience/report-dialog";
 import { useExperience } from "@/experience/store";
-import { CreationMeta, EmptyLibrary, FileImage, type Creation } from "@/experience/creator-ui";
+import { CreationMeta, EmptyLibrary, FileImage, useFileUrl, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
 import { useState } from "react";
 import type { Storyboard } from "@/lib/creator";
@@ -33,15 +33,20 @@ function Vitrine() {
   const visible = kids ? data.filter((c) => allowedForKid(c.age_rating as Rating, kidsMax)) : data;
   const synth = visible.filter((c) => c.tool === "synth");
   const jukebox = visible.filter((c) => c.tool === "jukebox");
+  const videos = visible.filter((c) => c.tool === "video");
   return (
     <div className="space-y-8">
       <header className="space-y-2 text-center sm:text-left">
         <h1 className="font-display text-3xl font-bold tracking-wide">Vitrine de criadores</h1>
         <p className="text-muted-foreground">Tudo aqui passou pela análise da IA de moderação.{kids && " Modo infantil ativo: só a classificação permitida."}</p>
-        <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Link to="/app/synth" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Synth</Link><Link to="/app/jukebox" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Jukebox</Link></div>
+        <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Link to="/app/publicar" className={buttonVariants({ size: "sm" })}>Publicar vídeo</Link><Link to="/app/synth" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Synth</Link><Link to="/app/jukebox" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Jukebox</Link></div>
       </header>
-      <Tabs defaultValue="synth" className="space-y-6">
-        <TabsList><TabsTrigger value="synth">Produções ({synth.length})</TabsTrigger><TabsTrigger value="jukebox">Músicas ({jukebox.length})</TabsTrigger></TabsList>
+      <Tabs defaultValue="videos" className="space-y-6">
+        <TabsList className="max-w-full overflow-x-auto"><TabsTrigger value="videos">Vídeos ({videos.length})</TabsTrigger><TabsTrigger value="synth">Produções ({synth.length})</TabsTrigger><TabsTrigger value="jukebox">Músicas ({jukebox.length})</TabsTrigger></TabsList>
+        <TabsContent value="videos">
+          {isLoading ? <EmptyLibrary text="Carregando…" /> : videos.length === 0 ? <EmptyLibrary text="Nenhum vídeo publicado ainda." /> :
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{videos.map((c) => <VideoCard key={c.id} c={c} />)}</div>}
+        </TabsContent>
         <TabsContent value="synth">
           {isLoading ? <EmptyLibrary text="Carregando…" /> : synth.length === 0 ? <EmptyLibrary text="Nenhuma produção publicada ainda." /> :
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{synth.map((c) => <SynthCard key={c.id} c={c} />)}</div>}
@@ -82,6 +87,32 @@ function SynthCard({ c }: { c: Creation }) {
             </div>
           ))}
         </div>
+      </Dialog>
+    </>
+  );
+}
+
+function VideoCard({ c }: { c: Creation }) {
+  const [open, setOpen] = useState(false);
+  const d = c.data as { video_path?: string; duration_sec?: number | null };
+  const url = useFileUrl(open ? d.video_path : null);
+  const dur = d.duration_sec ? `${Math.floor(d.duration_sec / 60)}:${String(d.duration_sec % 60).padStart(2, "0")}` : null;
+  return (
+    <>
+      <Card padding="none" className="overflow-hidden">
+        <button type="button" className="relative block w-full" onClick={() => setOpen(true)} aria-label={`Assistir ${c.title}`}>
+          {c.cover_path ? <FileImage path={c.cover_path} alt={c.title} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-muted"><Film className="size-8" /></div>}
+          {dur && <span className="absolute bottom-2 right-2 rounded bg-background/80 px-1.5 py-0.5 font-mono text-[10px]">{dur}</span>}
+        </button>
+        <div className="space-y-3 p-4 text-center sm:text-left">
+          <CardTitle className="truncate">{c.title}</CardTitle>
+          {c.description && <CardDescription className="line-clamp-2">{c.description}</CardDescription>}
+          <CreationMeta c={c} />
+          <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Button size="sm" variant="soft" onClick={() => setOpen(true)}>Assistir</Button><ReportButton titleRef={c.id} title={c.title} /></div>
+        </div>
+      </Card>
+      <Dialog open={open} onOpenChange={setOpen} title={c.title} description={c.description ?? undefined}>
+        {url.data ? <video src={url.data} controls autoPlay className="aspect-video w-full rounded-xl bg-background" /> : <EmptyLibrary text="Carregando…" />}
       </Dialog>
     </>
   );
