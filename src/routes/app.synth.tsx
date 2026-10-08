@@ -193,8 +193,6 @@ function Synth() {
                 {!paths[i] && <Button size="sm" variant="soft" loading={imgIndex === i} disabled={busy !== null || imgIndex !== null} onClick={() => makeImage(i)}><ImagePlus />{imgIndex === i ? "Gerando…" : "Gerar imagem"}</Button>}
                 {!paths[i] && <QuotaHint feature="synth_image" />}
                 {paths[i] && !clips[i] && <PlanGate feature="synth_clip"><div className="flex flex-wrap items-center gap-2"><Button size="sm" variant="neon" loading={clipIndex === i} disabled={clipIndex !== null || busy !== null || blocked(plan, "synth_clip")} onClick={() => makeClip(i)}><Video />{clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button><QuotaHint feature="synth_clip" /></div></PlanGate>}
-                {false && <Button size="sm" variant="neon" loading={clipIndex === i} disabled={!!clips[i] || clipIndex !== null || busy !== null} onClick={() => makeClip(i)}><Video />{clips[i] ? "Clipe pronto" : clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button>}
-                {paths[i] && !clips[i] && <span className="text-xs text-muted-foreground">{`este clipe usa ~${COST.clip} créditos de exemplo`}</span>}
               </div>
             </Card>); })()}
         </section>
