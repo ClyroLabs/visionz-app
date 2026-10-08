@@ -76,7 +76,7 @@ export function Dialog({ open, onOpenChange, title, description, className, chil
     if (!d) return;
     if (open && !d.open) d.showModal();
     if (!open && d.open) d.close();
-  }, [open]);
+  });
   return (
     <dialog
       ref={ref}
