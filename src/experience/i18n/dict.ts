@@ -3706,6 +3706,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "• Orçamento fixo: no máximo ~8,3M $VZN por mês, vindos da reserva Ecossistema & Comunidade (400M em 48 meses).": ["• Fixed budget: maximum ~8.3M $VZN per month, from the Ecosystem & Community reserve (400M over 48 months).", "• Presupuesto fijo: máximo ~8,3M $VZN por mes, provenientes de la reserva de Ecosistema y Comunidad (400M en 48 meses).", "• 固定预算：每月最多约 830 万 $VZN，来自生态系统和社区储备（48 个月内 4 亿）。"],
   "• Vídeo mudo, aba em segundo plano ou repetir o mesmo título não contam. Perfis infantis ganham só XP.": ["• Muted video, background tab, or repeating the same title do not count. Kids profiles only earn XP.", "• El video silenciado, la pestaña en segundo plano o la repetición del mismo título no cuentan. Los perfiles infantiles solo ganan XP.", "• 静音视频、后台标签页或重复观看同一标题不计入。儿童档案只获得 XP。"],
   "• XP sobe seu nível e troca por itens do perfil. Ele não vira $VZN nem dinheiro.": ["• XP raises your level and exchanges for profile items. It doesn't turn into $VZN or money.", "• El XP sube tu nivel y se canjea por elementos del perfil. No se convierte en $VZN ni en dinero.", "• XP 提升你的等级并可兑换个人资料物品。它不会变成 $VZN 或金钱。"],
+  "em": ["in", "en", "还需"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
