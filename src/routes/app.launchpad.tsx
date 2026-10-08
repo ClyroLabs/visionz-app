@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CheckCircle2, Code2, Rocket } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Input, Label, Select, Tabs, TabsContent, TabsList, TabsTrigger, cn } from "@/index";
+import { LaunchpadGallery } from "@/experience/launchpad-ui";
 import { DemoHeader, useLocal } from "@/experience/defi-ui";
-import { launchProjects, templates } from "@/experience/defi-data";
+import { templates } from "@/experience/defi-data";
 
 export const Route = createFileRoute("/app/launchpad")({
   head: () => ({
@@ -31,23 +32,12 @@ function Launchpad() {
   const [step, setStep] = useState(0);
   const [d, setD] = useLocal<Draft>("vz-launchpad", EMPTY);
   const up = (p: Partial<Draft>) => setD({ ...d, ...p });
-  const statusTone = { Ativo: "success", "Em análise": "warning", Captação: "cyan" } as const;
   return (
     <div className="space-y-8">
       <DemoHeader title="Launchpad" text="Estúdios, jogos e apps podem nascer na infraestrutura VisionZ, usando modelos de contrato prontos e as APIs do Filtro Inteligente, Synth e Jukebox." />
       <Tabs defaultValue="vitrine" className="space-y-6">
-        <TabsList><TabsTrigger value="vitrine">Projetos</TabsTrigger><TabsTrigger value="enviar">Enviar meu projeto</TabsTrigger><TabsTrigger value="modelos">Modelos</TabsTrigger><TabsTrigger value="apis">APIs</TabsTrigger></TabsList>
-        <TabsContent value="vitrine">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {launchProjects.map((p) => (
-              <Card key={p.name} padding="lg" className="space-y-2">
-                <div className="flex items-center justify-between gap-2"><CardTitle>{p.name}</CardTitle><Badge variant={statusTone[p.status as keyof typeof statusTone]} size="sm">{p.status}</Badge></div>
-                <p className="text-xs text-cyan">{p.kind}</p>
-                <p className="text-sm text-muted-foreground">{p.text}</p>
-              </Card>
-            ))}
-          </div>
-        </TabsContent>
+        <TabsList className="max-w-full overflow-x-auto"><TabsTrigger value="vitrine">Projetos</TabsTrigger><TabsTrigger value="enviar">Enviar meu projeto</TabsTrigger><TabsTrigger value="modelos">Modelos</TabsTrigger><TabsTrigger value="apis">APIs</TabsTrigger></TabsList>
+        <TabsContent value="vitrine"><LaunchpadGallery /></TabsContent>
         <TabsContent value="enviar">
           {d.sent ? (
             <Card variant="featured" padding="lg" className="space-y-3 text-center">
