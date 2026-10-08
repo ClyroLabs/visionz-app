@@ -102,7 +102,7 @@ function Credit() {
           {sh && (
             <div className={cn("rounded-xl border p-4 text-sm animate-rise", sh.autoClosed ? "border-cyan/50 bg-cyan/10" : sh.liquidated ? "border-destructive/50 bg-destructive/10" : "border-success/40 bg-success/10")}>
               <p className="font-semibold">{sh.autoClosed ? "Trava acionada: posição encerrada automaticamente." : sh.liquidated ? "A posição seria liquidada." : "A posição continua aberta."}</p>
-              <p className="mt-1 font-mono text-xs text-muted-foreground">Preço {usd(sh.price)} · saúde {Number.isFinite(sh.health) ? sh.health.toFixed(2) : "∞"} · perda {pct(Math.min(1, sh.loss))}</p>
+              <p className="mt-1 flex flex-wrap gap-x-3 font-mono text-xs text-muted-foreground"><span><span>Preço</span> {usd(sh.price)}</span><span><span>Saúde</span> {Number.isFinite(sh.health) ? sh.health.toFixed(2) : "∞"}</span><span><span>Perda</span> {pct(Math.min(1, sh.loss))}</span></p>
             </div>
           )}
         </Card>

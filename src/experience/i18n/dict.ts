@@ -3631,6 +3631,8 @@ const EXTRA: Record<string, [string, string, string]> = {
   "twitter:card": ["twitter:card", "twitter:tarjeta", "twitter:卡片"],
   "up(": ["up(", "arriba(", "向上("],
   "” — Em análise pela governança": ["” — Under governance review", "” — En análisis por la gobernanza", "” — 治理审核中"],
+  "Saúde": ["Health", "Salud", "健康度"],
+  "Perda": ["Loss", "Pérdida", "亏损"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
