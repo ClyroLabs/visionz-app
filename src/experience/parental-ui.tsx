@@ -46,7 +46,10 @@ export function FaceGateHost() {
 
   if (!open) return null;
   return (
-    <Dialog open onOpenChange={(v) => !v && close(false)} title="Confirme que é você" description={faceRequest?.title}>
+    <div role="dialog" aria-modal="true" aria-labelledby="face-gate-title" className="fixed inset-0 z-[100] flex items-center justify-center bg-background/70 p-4 backdrop-blur-sm" onClick={(e) => e.target === e.currentTarget && close(false)} onKeyDown={(e) => e.key === "Escape" && close(false)}>
+     <div className="relative w-[min(92vw,30rem)] space-y-4 rounded-xl border border-cyan/30 bg-surface p-6 text-foreground shadow-glow-cyan">
+      <button type="button" aria-label="Fechar" onClick={() => close(false)} className="absolute right-3 top-3 rounded-full p-1 text-muted-foreground hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"><X className="size-4" /></button>
+      <div><h2 id="face-gate-title" className="font-display text-lg font-semibold tracking-wide">Confirme que é você</h2><p className="text-sm text-muted-foreground">{faceRequest?.title}</p></div>
       {session === null ? (
         <div className="space-y-4 text-center">
           <p className="text-sm text-muted-foreground">Entre com a conta do responsável para usar a verificação facial.</p>
@@ -64,7 +67,8 @@ export function FaceGateHost() {
           <p className="text-center text-xs text-muted-foreground">Só o responsável cadastrado pode confirmar. Nenhuma foto é enviada.</p>
         </div>
       )}
-    </Dialog>
+     </div>
+    </div>
   );
 }
 
