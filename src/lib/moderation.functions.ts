@@ -60,6 +60,8 @@ export const analyzeCreation = createServerFn({ method: "POST" })
     const db = await requireModerator(context as unknown as Ctx);
     const { data: c } = await db.from("creations").select("*").eq("id", data.id).maybeSingle();
     if (!c) throw new Error("Criação não encontrada.");
+    try { await (await import("./quota.server")).requireQuota(context.userId, "moderation_analyze"); }
+    catch (e) { return { ok: false as const, error: e instanceof Error ? e.message : "Bloqueado." }; }
     const { analyzeContent, creationText } = await import("./moderation.server");
     try {
       const a = await analyzeContent(creationText(c));
