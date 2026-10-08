@@ -78,15 +78,19 @@ function Frame() {
             <Link to="/site" aria-label="Voltar ao site" title="Voltar ao site" className="grid size-9 place-items-center rounded-md text-muted-foreground hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4" /></Link>
           </div>
         ) : (
-          <>
-            <div className="space-y-3 rounded-lg border bg-background/60 p-3">
-              <div className="flex items-center justify-between text-sm"><span>Modo infantil</span><Switch checked={kids} onCheckedChange={setKids} aria-label="Modo infantil" /></div>
-              <p className="font-mono text-xs text-muted-foreground">{vzn.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} VZN</p>
+          <div className="space-y-2 border-t border-border pt-3">
+            <div className="flex items-center justify-between gap-2 rounded-md bg-background/60 px-3 py-2">
+              <div className="min-w-0">
+                <p className="text-xs font-medium">Modo infantil</p>
+                <p className="truncate font-mono text-[10px] text-muted-foreground">{vzn.toLocaleString("pt-BR", { minimumFractionDigits: 2 })} VZN</p>
+              </div>
+              <Switch checked={kids} onCheckedChange={setKids} aria-label="Modo infantil" className="shrink-0" />
             </div>
-            <div className="mt-3"><Link to="/site" className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4 shrink-0" />Voltar ao site</Link></div>
-            <LanguageSwitcher className="mx-auto mt-3" />
-            <p className="mt-3 text-center text-[10px] text-muted-foreground">Protótipo · dados de exemplo</p>
-          </>
+            <div className="flex items-center justify-between gap-2">
+              <Link to="/site" className="flex min-w-0 items-center gap-2 rounded-md px-2 py-1.5 text-xs text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-3.5 shrink-0" /><span className="truncate">Voltar ao site</span></Link>
+              <LanguageSwitcher className="shrink-0 scale-90 origin-right" />
+            </div>
+          </div>
         )}
       </aside>
       <div className="min-w-0 flex-1 overflow-x-clip">
