@@ -14,6 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
+      ai_usage: {
+        Row: {
+          count: number
+          feature: string
+          period: string
+          user_id: string
+        }
+        Insert: {
+          count?: number
+          feature: string
+          period: string
+          user_id: string
+        }
+        Update: {
+          count?: number
+          feature?: string
+          period?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       child_profiles: {
         Row: {
           created_at: string
@@ -412,6 +433,24 @@ export type Database = {
           },
         ]
       }
+      subscriptions: {
+        Row: {
+          plan: Database["public"]["Enums"]["plan_tier"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          plan?: Database["public"]["Enums"]["plan_tier"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          plan?: Database["public"]["Enums"]["plan_tier"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_preferences: {
         Row: {
           kids_default: boolean
@@ -495,6 +534,15 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      consume_quota: {
+        Args: {
+          _feature: string
+          _limit: number
+          _period: string
+          _uid: string
+        }
+        Returns: number
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
@@ -505,6 +553,7 @@ export type Database = {
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
+      plan_tier: "free" | "premium" | "family" | "creator_pro"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -633,6 +682,7 @@ export const Constants = {
   public: {
     Enums: {
       app_role: ["admin", "moderator", "user"],
+      plan_tier: ["free", "premium", "family", "creator_pro"],
     },
   },
 } as const
