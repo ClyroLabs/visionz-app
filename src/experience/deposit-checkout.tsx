@@ -124,7 +124,7 @@ export function DepositCheckout({ open, onOpenChange, methods, onComplete, onAdd
                   className={cn("flex w-full items-center gap-3 rounded-lg border p-3 text-left transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring", sel ? "border-cyan bg-cyan/10" : "hover:border-cyan/40")}>
                   <span className="grid size-10 shrink-0 place-items-center rounded-full bg-surface-raised">{m.kind === "pix" ? <Banknote className="size-5 text-cyan" /> : <CreditCard className="size-5 text-magenta" />}</span>
                   <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold">{m.title}{m.isDefault && <Badge variant="brand" size="sm" className="ml-2 align-middle">Principal</Badge>}</span><span className="block truncate font-mono text-xs text-muted-foreground">{m.subtitle}</span></span>
-                  <span className="shrink-0 text-xs text-muted-foreground">{m.kind === "pix" ? "Sem taxa" : `Taxa ${(CARD_FEE * 100).toFixed(2).replace(".", ",")}%`}</span>
+                  <span className="shrink-0 text-xs text-muted-foreground">{m.kind === "pix" ? "Sem taxa" : `${(CARD_FEE * 100).toFixed(2).replace(".", ",")}%`}</span>
                 </button>
               );
             })}
@@ -140,10 +140,10 @@ export function DepositCheckout({ open, onOpenChange, methods, onComplete, onAdd
           ) : <Button variant="ghost" size="sm" onClick={() => setAdding({ kind: "card", value: "" })}><Plus />Adicionar forma de pagamento</Button>)}
           <dl className="space-y-1 rounded-lg bg-background/60 p-3 text-sm">
             <div className="flex justify-between"><dt className="text-muted-foreground">Valor</dt><dd className="font-mono">{`R$ ${money(amount)}`}</dd></div>
-            <div className="flex justify-between"><dt className="text-muted-foreground">Taxa</dt><dd className="font-mono">{`R$ ${money(fee)}`}</dd></div>
+            <div className="flex justify-between"><dt className="text-muted-foreground">Tarifa</dt><dd className="font-mono">{`R$ ${money(fee)}`}</dd></div>
             <div className="flex justify-between border-t pt-1 font-semibold"><dt>Total</dt><dd className="font-mono">{`R$ ${money(total)}`}</dd></div>
           </dl>
-          <div className="flex gap-2"><Button variant="ghost" onClick={() => setStep("amount")}>Voltar</Button><Button className="flex-1" disabled={!method} onClick={startPay}><Lock />{`Pagar R$ ${money(total)}`}</Button></div>
+          <div className="flex gap-2"><Button variant="ghost" onClick={() => setStep("amount")}>Voltar</Button><Button className="flex-1" disabled={!method} onClick={startPay}><Lock /><span>Pagar</span><span>{`R$ ${money(total)}`}</span></Button></div>
         </div>
       )}
 
@@ -188,7 +188,7 @@ export function DepositCheckout({ open, onOpenChange, methods, onComplete, onAdd
             <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Data</dt><dd className="font-mono">{result.at.toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Meio</dt><dd className="truncate">{methodText(result.method)}</dd></div>
             <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Valor</dt><dd className="font-mono">{`R$ ${money(result.amount)}`}</dd></div>
-            <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Taxa</dt><dd className="font-mono">{`R$ ${money(result.fee)}`}</dd></div>
+            <div className="flex justify-between gap-2"><dt className="text-muted-foreground">Tarifa</dt><dd className="font-mono">{`R$ ${money(result.fee)}`}</dd></div>
             <div className="flex justify-between gap-2 border-t pt-1.5 font-semibold"><dt>Total</dt><dd className="font-mono">{`R$ ${money(result.total)}`}</dd></div>
           </dl>
           <div className="flex gap-2">{!result.ok && <Button variant="secondary" onClick={() => setStep("method")}>Tentar de novo</Button>}<Button className="flex-1" onClick={() => onOpenChange(false)}>Concluir</Button></div>

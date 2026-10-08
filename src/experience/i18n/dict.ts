@@ -3955,6 +3955,8 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Etapas": ["Steps", "Pasos", "步骤"],
 "Código de verificação": ["Verification code", "Código de verificación", "验证码"],
 "Copiar ID": ["Copy ID", "Copiar ID", "复制 ID"],
+"Tarifa": ["Fee", "Comisión", "手续费"],
+"Pagar": ["Pay", "Pagar", "支付"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
