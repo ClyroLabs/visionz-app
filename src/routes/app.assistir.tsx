@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { z } from "zod";
-import { Lock } from "lucide-react";
+import { Lock, Volume2, VolumeX } from "lucide-react";
 import { AIVerifiedBadge, AgeRating, Avatar, Badge, Button, Card, PlayerBar, useToast } from "@/index";
 import { catalog } from "@/experience/data";
 import { isAllowedForKids } from "@/experience/logic";
 import { useExperience } from "@/experience/store";
+import { COMPLETE_THRESHOLD, COMPLETE_VZN, eligibleWatch } from "@/experience/rewards";
 
 export const Route = createFileRoute("/app/assistir")({
   validateSearch: z.object({ id: z.string().optional() }),
@@ -25,7 +26,10 @@ const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "
 function Watch() {
   const { id } = Route.useSearch();
   const t = catalog.find((c) => c.id === id) ?? catalog[0];
-  const { kids, earn, owned } = useExperience();
+  const { kids, earn, owned, addXp, addWatchMin, completed, complete } = useExperience();
+  const [muted, setMuted] = useState(false);
+  const [xpSession, setXpSession] = useState(0);
+  const repeat = completed.includes(t.id);
   const toast = useToast();
   const [playing, setPlaying] = useState(false);
   const [sec, setSec] = useState(0);
@@ -38,10 +42,14 @@ function Watch() {
     return () => clearInterval(i);
   }, [playing]);
   useEffect(() => {
-    if (sec - last.current >= 120) {
+    if (sec - last.current >= 60) {
       last.current = sec;
-      earn(`Tempo assistido: ${t.title}`, 2);
-      toast({ title: "+2 VZN", description: "Recompensa por tempo assistido.", variant: "reward" });
+      const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+      if (eligibleWatch({ muted, hidden, repeat })) { addXp(1); addWatchMin(1); setXpSession((x) => x + 1); }
+    }
+    if (sec >= total * COMPLETE_THRESHOLD && !muted && complete(t.id)) {
+      const g = earn(`Título concluído: ${t.title}`, COMPLETE_VZN, "conclusao");
+      toast(g > 0 ? { title: `+${g.toLocaleString("pt-BR")} VZN`, description: "Título concluído.", variant: "reward" } : { title: "Título concluído", description: kids ? "Perfil infantil ganha só XP." : "Limite de hoje atingido.", variant: "info" });
     }
   }, [sec]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -60,8 +68,9 @@ function Watch() {
               <p className="text-sm text-muted-foreground">{blocked ? t.blockReason ?? `Classificação ${t.rating}` : `Compre por ${t.price} na tela inicial para assistir.`}</p>
               <Link to="/app"><Button variant="secondary">Voltar ao catálogo</Button></Link>
             </div>
-          ) : (
-            <PlayerBar className="absolute inset-x-3 bottom-3" playing={playing} onPlayingChange={setPlaying} progress={(sec / total) * 100} current={fmt(sec)} total={fmt(total)} />
+          ) : (<>
+            <button type="button" onClick={() => setMuted((m) => !m)} aria-label={muted ? "Ativar som" : "Silenciar"} className="absolute right-3 top-3 grid size-10 place-items-center rounded-full border bg-background/70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{muted ? <VolumeX className="size-4" /> : <Volume2 className="size-4" />}</button>
+            <PlayerBar className="absolute inset-x-3 bottom-3" playing={playing} onPlayingChange={setPlaying} progress={(sec / total) * 100} current={fmt(sec)} total={fmt(total)} /></>
           )}
         </div>
         <div className="space-y-3">
@@ -72,8 +81,11 @@ function Watch() {
       </div>
       <Card variant="glass" className="h-fit space-y-3">
         <p className="font-semibold">Recompensas desta sessão</p>
-        <p className="text-sm text-muted-foreground">A cada 2 minutos assistidos você ganha 2 VZN. Dê play e acompanhe os avisos.</p>
-        <p className="font-display text-2xl font-bold text-gradient-brand">{Math.floor(sec / 120) * 2} VZN</p>
+        <p className="text-sm text-muted-foreground">Assistir rende XP (10 XP a cada 10 min). Concluir o título rende {COMPLETE_VZN.toLocaleString("pt-BR")} $VZN.</p>
+        <p className="font-display text-2xl font-bold text-cyan">+{xpSession} XP</p>
+        <div className="space-y-1"><div className="flex justify-between text-xs text-muted-foreground"><span>Progresso para concluir</span><span>{Math.min(100, Math.round((sec / (total * COMPLETE_THRESHOLD)) * 100))}%</span></div>
+          <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-gradient-brand transition-all" style={{ width: `${Math.min(100, (sec / (total * COMPLETE_THRESHOLD)) * 100)}%` }} /></div></div>
+        {(muted || repeat) && <p className="text-xs text-warning">{muted ? "Com o som desligado, o tempo não conta." : "Você já concluiu este título hoje: repetir não rende XP."}</p>}
       </Card>
     </div>
   );

@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { ArrowDownLeft, ArrowUpRight, Banknote, Coins, Wallet } from "lucide-react";
-import { Button, Card, CardTitle, Input, Label, NetworkTag, Select, networks, useToast, type Network } from "@/index";
+import { Badge, Button, Card, CardTitle, Input, Label, NetworkTag, Select, networks, useToast, type Network } from "@/index";
 import { useExperience } from "@/experience/store";
+import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
 
 export const Route = createFileRoute("/app/carteira")({
   head: () => ({
@@ -38,6 +39,7 @@ function WalletPage() {
         <Card variant="glow" padding="lg" className="space-y-4">
           <div className="flex items-center justify-between"><span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Wallet className="size-4" />Recompensas</span><NetworkTag network={network} /></div>
           <p className="font-display text-4xl font-bold">{money(vzn)} <span className="text-lg text-cyan">VZN</span></p>
+          <DailyCapBar />
           <form className="grid gap-3 sm:grid-cols-[1fr_auto_auto]" onSubmit={(e) => {
             e.preventDefault();
             const v = Number(amount.replace(",", "."));
@@ -58,6 +60,7 @@ function WalletPage() {
             <li key={t.id} className="flex items-center gap-3 py-3">
               <span className={t.kind === "in" ? "text-success" : "text-ember"}>{t.kind === "in" ? <ArrowDownLeft className="size-4" /> : <ArrowUpRight className="size-4" />}</span>
               <span className="flex-1 text-sm">{t.label}</span>
+              {t.source && <Badge variant="neutral" size="sm">{SOURCE_LABEL[t.source]}</Badge>}
               {t.amount > 0 && <span className="font-mono text-sm">{t.kind === "in" ? "+" : "−"}{money(t.amount)} VZN</span>}
               <span className="w-16 text-right text-xs text-muted-foreground">{t.when}</span>
             </li>

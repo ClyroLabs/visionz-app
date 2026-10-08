@@ -5,6 +5,7 @@ import { catalog } from "@/experience/data";
 import { filterCatalog } from "@/experience/logic";
 import { useExperience } from "@/experience/store";
 import { CatalogRow } from "@/experience/catalog-row";
+import { MissionsCard } from "@/experience/rewards-ui";
 
 export const Route = createFileRoute("/app/")({
   head: () => ({
@@ -36,6 +37,7 @@ function AppHome() {
           </div>
         </div>
       )}
+      <MissionsCard />
       <CatalogRow title="Em alta" items={list.filter((t) => t.row === "alta")} />
       <CatalogRow title="Produções Clyro Synth" items={list.filter((t) => t.row === "synth")} />
       <CatalogRow title="Para a família" items={list.filter((t) => t.row === "familia")} />

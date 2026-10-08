@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Award, Music, Sparkles, Wand2 } from "lucide-react";
 import { Logo, Button, Card, CardDescription, CardTitle, EarningsCard, Progress, ScrollSnapRow, SectionHeading, Stat } from "@/index";
 import { LeadDialog, Section } from "@/experience/site-parts";
+import { RewardRulesTable } from "@/experience/rewards-ui";
 import trio from "@/assets/covers/trio-alegria.jpg";
 
 export const Route = createFileRoute("/site/criadores")({
@@ -45,6 +46,7 @@ function Creators() {
           <Stat value="24h" tone="cyan" label="para análise e publicação pela IA" className="rounded-xl border bg-surface p-5" />
         </div>
       </Section>
+      <Section className="py-6 md:py-10"><RewardRulesTable /></Section>
       <Section className="pt-6 md:pt-10">
         <Card variant="glow" padding="lg" className="flex flex-col items-center text-center md:text-left justify-between gap-6 md:flex-row md:items-center">
           <div className="flex flex-col items-center gap-4 md:flex-row md:items-start"><Award className="size-10 shrink-0 text-magenta" /><div><CardTitle className="text-2xl">VisionZ Ambassadors</CardTitle><CardDescription className="mt-2 max-w-xl text-base">Embaixadores recebem participação direta no crescimento que trazem para a plataforma.</CardDescription></div></div>

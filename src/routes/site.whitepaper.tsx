@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ArrowDown, AudioLines, Boxes, Coins, Cpu, Eye, Flame, GraduationCap, Layers, Rocket, Server, ShieldCheck, Smartphone, UserCheck, Wand2 } from "lucide-react";
 import { Badge, Card, CardDescription, CardTitle, NetworkTag, Reveal, SectionHeading, Stat } from "@/index";
 import { Section } from "@/experience/site-parts";
+import { RewardRulesTable } from "@/experience/rewards-ui";
 import { BurnSimulator, RevenueChart, TokenomicsDonut, VaultSimulator } from "@/experience/finance-ui";
 import { expansionPhases, risks } from "@/experience/data";
 
@@ -110,6 +111,7 @@ function Whitepaper() {
               <Stat value="10%" tone="cyan" label="dos tokens usados em IA são queimados" />
             </div>
             <p className="text-xs text-muted-foreground">Token-2022 é um padrão oficial da Solana para tokens com regras automáticas. O $VZN ainda não foi lançado; os números são do planejamento.</p>
+            <RewardRulesTable />
           </Block>
 
           <Block id="distribuicao" eyebrow="5. Distribuição" title="Para onde vão os tokens" description="Toque numa fatia para ver a quantidade e quando ela é liberada.">

@@ -23,7 +23,7 @@ export function CatalogRow({ title, items }: { title: string; items: Title[] }) 
               e.preventDefault();
               if (t.priceValue && !isOwned) {
                 const ok = buy(t.id, t.title, t.priceValue);
-                toast(ok ? { title: `Compra confirmada: ${t.title}`, description: "+5 VZN de recompensa", variant: "reward" } : { title: "Saldo insuficiente", description: "Adicione saldo na Carteira.", variant: "error" });
+                toast(ok ? { title: `Compra confirmada: ${t.title}`, description: "+1 VZN de recompensa", variant: "reward" } : { title: "Saldo insuficiente", description: "Adicione saldo na Carteira.", variant: "error" });
                 if (!ok) return;
               }
               nav({ to: "/app/assistir", search: { id: t.id } });
