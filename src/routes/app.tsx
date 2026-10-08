@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LanguageSwitcher } from "@/experience/i18n";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft, PieChart as PieChartIcon } from "lucide-react";
+import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft, PieChart as PieChartIcon, Landmark, Vault, Radar, Rocket, GraduationCap, ArrowLeftRight } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
 
@@ -20,6 +20,15 @@ const nav = [
   { to: "/app/moderacao", label: "Moderação", icon: ShieldCheck },
   { to: "/app/ecossistema", label: "Ecossistema", icon: Network },
   { to: "/app/conta", label: "Minha conta", icon: UserRound },
+] as const;
+
+const defiNav = [
+  { to: "/app/credito", label: "Crédito", icon: Landmark },
+  { to: "/app/cofres", label: "Cofres", icon: Vault },
+  { to: "/app/radar", label: "Radar IA", icon: Radar },
+  { to: "/app/launchpad", label: "Launchpad", icon: Rocket },
+  { to: "/app/koda", label: "Koda", icon: GraduationCap },
+  { to: "/app/ponte", label: "Ponte", icon: ArrowLeftRight },
 ] as const;
 
 function AppLayout() {
@@ -42,8 +51,14 @@ function Frame() {
           <Logo brand="visionz-symbol" alt="" className="h-8 w-auto shrink-0 drop-shadow-[0_0_10px_var(--magenta)] transition-transform duration-300 group-hover:scale-105" />
           <span className="flex flex-col leading-none"><span className="font-display text-lg font-bold tracking-[0.12em] text-foreground">VISIONZ</span><span className="mt-1 text-[0.55rem] font-medium uppercase tracking-[0.42em] text-muted-foreground">Entertainment</span></span>
         </Link>
-        <nav className="flex flex-1 flex-col gap-1" aria-label="Plataforma">
+        <nav className="flex flex-1 flex-col gap-1 overflow-y-auto" aria-label="Plataforma">
           {nav.map(({ to, label, icon: Icon }) => (
+            <Link key={to} to={to} activeOptions={{ exact: true }} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground" activeProps={{ className: "bg-surface-raised !text-cyan shadow-glow-cyan" }}>
+              <Icon className="size-4" />{label}
+            </Link>
+          ))}
+          <p className="mt-4 px-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">Ecossistema DeFi</p>
+          {defiNav.map(({ to, label, icon: Icon }) => (
             <Link key={to} to={to} activeOptions={{ exact: true }} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground" activeProps={{ className: "bg-surface-raised !text-cyan shadow-glow-cyan" }}>
               <Icon className="size-4" />{label}
             </Link>
@@ -64,9 +79,13 @@ function Frame() {
             <button type="button" onClick={() => setOpen((o) => !o)} aria-label={open ? "Fechar menu" : "Abrir menu"} aria-expanded={open} aria-controls="vz-app-menu" className="grid h-9 w-9 shrink-0 place-items-center rounded-md border border-border text-foreground transition-colors hover:border-magenta/60 hover:text-magenta focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">{open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}</button>
           </div>
           {open && (
-            <nav id="vz-app-menu" aria-label="Plataforma" className="absolute inset-x-3 top-full mt-2 grid gap-1 rounded-xl border border-border bg-surface/95 p-2 shadow-panel backdrop-blur animate-rise">
+            <nav id="vz-app-menu" aria-label="Plataforma" className="absolute inset-x-3 top-full mt-2 grid max-h-[80dvh] overflow-y-auto gap-1 rounded-xl border border-border bg-surface/95 p-2 shadow-panel backdrop-blur animate-rise">
               <LanguageSwitcher className="mb-1 justify-self-center" />
               {nav.map(({ to, label, icon: Icon }) => (
+                <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
+              ))}
+              <p className="mt-2 px-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">Ecossistema DeFi</p>
+              {defiNav.map(({ to, label, icon: Icon }) => (
                 <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
               ))}
               <div className="mt-1 border-t border-border pt-1"><Link to="/site" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4 shrink-0" />Voltar ao site</Link></div>

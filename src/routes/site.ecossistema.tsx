@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import { Bot, Coins, Handshake, Lock, Network, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
+import { ArrowLeftRight, GraduationCap, Landmark, Radar, Rocket, Vault, Bot, Coins, Handshake, Lock, Network, Sparkles, TrendingUp, Users, AlertTriangle, Scale, Eye } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Eyebrow, Input, Label, Reveal, ScrollSnapRow, SectionHeading, Stat, Tabs, TabsContent, TabsList, TabsTrigger, TokenBadge, cn } from "@/index";
 import { Glow, LeadDialog, Section } from "@/experience/site-parts";
 import { ContactDialog } from "@/experience/contact-dialog";
@@ -37,6 +37,15 @@ const news = [
   { icon: Bot, title: "IA que ajuda, pessoas que decidem", text: "A IA faz o trabalho repetitivo. A decisão final é sempre de uma pessoa.", example: "Exemplo: a IA faz o rascunho do vídeo; você escolhe o corte final." },
 ] as const;
 
+const modules = [
+  { icon: Landmark, title: "Crédito", what: "Pegue emprestado usando o que você já tem como garantia, com uma trava que encerra a posição antes de perder demais.", ex: "Exemplo: deixa SOL de garantia e pega USDC sem vender seus SOL." },
+  { icon: Vault, title: "Cofres de rendimento", what: "Cofres automáticos que reinvestem sozinhos.", ex: "Exemplo: financia uma série do Synth e recebe parte da receita." },
+  { icon: Radar, title: "Radar IA", what: "A IA dá uma nota de segurança para cada token e explica o porquê.", ex: "Exemplo: avisa quando um token novo pode ser golpe." },
+  { icon: Rocket, title: "Launchpad", what: "Outros estúdios, jogos e apps podem nascer na VisionZ.", ex: "Exemplo: um jogo usa o Filtro Inteligente para moderar chats." },
+  { icon: GraduationCap, title: "Koda", what: "Aprenda e ganhe: aulas curtas com recompensas e certificado.", ex: "Exemplo: conclui a trilha de DeFi e ganha taxa menor no Crédito." },
+  { icon: ArrowLeftRight, title: "Ponte entre redes", what: "Leve tokens entre Solana, Base e Arbitrum em segundos.", ex: "Exemplo: traz USDC da Base para um cofre na Solana." },
+] as const;
+
 const bridge = {
   comum: { label: "Jeito comum", tone: "warning", rows: [["Onde fica o dinheiro", "Parado num cofre de terceiros"], ["O que você recebe", "Uma “cópia” do seu token"], ["Principal risco", "Se o cofre for atacado, todos perdem"]] },
   visionz: { label: "Jeito VisionZ", tone: "success", rows: [["Onde fica o dinheiro", "Não fica parado em cofre nenhum"], ["O que você recebe", "O token original, na outra rede"], ["Principal risco", "Menor: só a mensagem viaja"]] },
@@ -56,10 +65,10 @@ const cares = [
 ] as const;
 
 const phases = [
-  { n: "01", period: "Meses 1–4", title: "Base", items: ["Synth e Jukebox funcionando", "Regras do $VZN publicadas", "Medição de uso com consentimento"] },
-  { n: "02", period: "Meses 5–8", title: "Recompensas", items: ["Guardar $VZN e receber recompensas", "Limites claros de valor", "Alertas de risco"] },
-  { n: "03", period: "Meses 9–12", title: "Parceiros e redes", items: ["Ferramentas para parceiros", "Conexão com Solana, Base e Arbitrum", "Guia de integração"] },
-  { n: "04", period: "Mês 13 em diante", title: "Crescimento", items: ["Conselho de criadores e parceiros", "Relatórios públicos", "Novos mercados"] },
+  { n: "01", period: "Meses 1–4", title: "Base", items: ["Streaming e Filtro Inteligente no ar", "$VZN lançado na Solana com recompra e queima", "Synth e Jukebox em beta para criadores"] },
+  { n: "02", period: "Meses 5–8", title: "DeFi e Radar IA", items: ["Crédito com garantia e cofres automáticos", "Radar IA com dados da Birdeye e DexScreener", "Auditorias completas de segurança"] },
+  { n: "03", period: "Meses 9–12", title: "Launchpad e redes", items: ["Ponte entre Solana, Base e Arbitrum", "Launchpad e APIs abertas para terceiros", "Koda: aprenda e ganhe"] },
+  { n: "04", period: "Mês 13 em diante", title: "Governança global", items: ["Quem tem $VZN vota nas regras", "Filtro Inteligente para escolas e redes de mídia", "Novas redes e IA mais precisa"] },
 ] as const;
 
 const badgeTone = { success: "success", warning: "warning", danger: "destructive" } as const;
@@ -178,6 +187,22 @@ function Roadmap() {
             ))}
           </Tabs>
         </Card>
+      </Section>
+
+      {/* Módulos novos */}
+      <Section className="pt-0 md:pt-0">
+        <SectionHeading align="center" eyebrow="Novos módulos" title="Seis novidades do ecossistema" description="Já dá para experimentar tudo no protótipo, com valores de exemplo." />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {modules.map((m) => (
+            <Card key={m.title} padding="lg" className="flex h-full flex-col items-center gap-3 text-center">
+              <span className="grid size-12 place-items-center rounded-full bg-cyan/12 text-cyan"><m.icon className="size-5" /></span>
+              <CardTitle>{m.title}</CardTitle>
+              <p className="text-sm text-foreground/85">{m.what}</p>
+              <p className="mt-auto text-xs text-muted-foreground">{m.ex}</p>
+            </Card>
+          ))}
+        </div>
+        <div className="mt-8 text-center"><Link to="/app/credito"><Button variant="secondary">Experimentar no protótipo</Button></Link></div>
       </Section>
 
       {/* 4. Token */}
