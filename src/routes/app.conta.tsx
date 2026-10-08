@@ -8,6 +8,9 @@ import {
   networks, useToast, type Network,
 } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
+import { DepositCheckout } from "@/experience/deposit-checkout";
+import { parseDepositLabel } from "@/experience/deposit";
+import { useDeposit } from "@/experience/use-deposit";
 import { cardBrand, cardLast4, pixKeySchema, profileSchema, walletAddressSchema } from "@/lib/account";
 
 export const Route = createFileRoute("/app/conta")({
@@ -157,6 +160,8 @@ function BalancesTab({ uid }: { uid: string }) {
   const bal = (cur: "BRL" | "VZN") => txs.filter((t) => t.currency === cur).reduce((s, t) => s + (t.direction === "in" ? 1 : -1) * Number(t.amount), 0);
   const brl = bal("BRL"), vzn = bal("VZN");
   const [amount, setAmount] = useState("");
+  const [depOpen, setDepOpen] = useState(false);
+  const dep = useDeposit(uid);
   const add = useMutation({
     mutationFn: async (t: { label: string; amount: number; currency: "BRL" | "VZN"; direction: "in" | "out" }) => {
       const { error } = await supabase.from("wallet_transactions").insert({ user_id: uid, ...t });
@@ -176,9 +181,12 @@ function BalancesTab({ uid }: { uid: string }) {
         <Card variant="glass" padding="lg" className="space-y-4 text-center sm:text-left">
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Banknote className="size-4" />Saldo em reais</span>
           <p className="font-display text-4xl font-bold">{`R$ ${money(brl)}`}</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:justify-start">
-            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="soft" onClick={() => add.mutate({ label: `Depósito via Pix (simulado)`, amount: v, currency: "BRL", direction: "in" }, { onSuccess: () => toast({ title: `R$ ${v},00 adicionados (simulado)`, variant: "success" }) })}><Plus />{`R$ ${v}`}</Button>)}
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:justify-start">
+            <Button onClick={() => setDepOpen(true)}><Plus />Depositar</Button>
+            <span className="text-xs text-muted-foreground">Pix ou cartão · VisionZ Pay</span>
           </div>
+          <DepositCheckout open={depOpen} onOpenChange={setDepOpen} methods={dep.methods} onAddMethod={dep.addMethod}
+            onComplete={async (r) => { await dep.record(r); toast(r.ok ? { title: "Depósito aprovado", variant: "success" } : { title: "Pagamento recusado", variant: "error" }); }} />
         </Card>
         <Card variant="featured" padding="lg" className="space-y-4 text-center sm:text-left">
           <div className="flex flex-wrap items-center justify-center gap-2 sm:justify-between"><span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Wallet className="size-4" />Recompensas</span>{prefs.data && <NetworkTag network={prefs.data.network as Network} />}</div>
@@ -197,7 +205,7 @@ function BalancesTab({ uid }: { uid: string }) {
             {txs.map((t) => (
               <li key={t.id} className="flex items-center gap-3 py-3">
                 <span className={`grid size-9 shrink-0 place-items-center rounded-full ${t.direction === "in" ? "bg-success/12 text-success" : "bg-ember/12 text-ember"}`}>{t.direction === "in" ? <ArrowDownLeft className="size-4" /> : <ArrowUpRight className="size-4" />}</span>
-                <span className="min-w-0 flex-1"><span className="block truncate text-sm">{t.label}</span><span className="text-xs text-muted-foreground">{new Date(t.created_at).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</span></span>
+                <span className="min-w-0 flex-1"><span className="block truncate text-sm">{(() => { const d = parseDepositLabel(t.label); return d ? <>{d.ok ? "Depósito" : "Depósito recusado"} · {d.method}</> : t.label; })()}</span><span className="text-xs text-muted-foreground">{new Date(t.created_at).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" })}</span></span>
                 <span className="shrink-0 font-mono text-sm">{t.direction === "in" ? "+" : "−"}{t.currency === "BRL" ? `R$ ${money(Number(t.amount))}` : `${money(Number(t.amount))} VZN`}</span>
               </li>
             ))}
@@ -208,11 +216,11 @@ function BalancesTab({ uid }: { uid: string }) {
   );
 }
 
-function ListCard({ icon, title, subtitle, isDefault, onDefault, onDelete }: { icon: ReactNode; title: string; subtitle: string; isDefault: boolean; onDefault: () => void; onDelete: () => void }) {
+function ListCard({ icon, title, subtitle, extra, isDefault, onDefault, onDelete }: { icon: ReactNode; title: string; subtitle: string; extra?: ReactNode; isDefault: boolean; onDefault: () => void; onDelete: () => void }) {
   return (
     <Card className="flex flex-col items-center gap-3 text-center sm:flex-row sm:text-left">
       <span className="grid size-11 shrink-0 place-items-center rounded-full bg-magenta/12 text-magenta [&_svg]:size-5">{icon}</span>
-      <div className="min-w-0 flex-1"><p className="truncate font-semibold">{title}{isDefault && <Badge variant="brand" size="sm" className="ml-2 align-middle">Principal</Badge>}</p><p className="truncate font-mono text-xs text-muted-foreground">{subtitle}</p></div>
+      <div className="min-w-0 flex-1"><p className="truncate font-semibold">{title}{isDefault && <Badge variant="brand" size="sm" className="ml-2 align-middle">Principal</Badge>}</p><p className="truncate font-mono text-xs text-muted-foreground">{subtitle}</p>{extra}</div>
       <div className="flex gap-2">
         {!isDefault && <Button size="sm" variant="soft" onClick={onDefault}><Star />Tornar principal</Button>}
         <Button size="icon" variant="danger" aria-label="Remover" onClick={onDelete}><Trash2 /></Button>
@@ -229,6 +237,10 @@ function PaymentsTab({ uid }: { uid: string }) {
   const [label, setLabel] = useState("");
   const [value, setValue] = useState("");
   const refresh = () => qc.invalidateQueries({ queryKey: ["pm", uid] });
+  const { data: txs = [] } = useTxs(uid);
+  const deposits = txs.flatMap((t) => { const d = parseDepositLabel(t.label); return d ? [{ ...d, amount: Number(t.amount), at: t.created_at, key: t.id }] : []; });
+  const lastUse = (text: string) => deposits.find((d) => d.method === text)?.at;
+  const fmt = (iso: string) => new Date(iso).toLocaleString("pt-BR", { dateStyle: "short", timeStyle: "short" });
 
   const add = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -255,7 +267,7 @@ function PaymentsTab({ uid }: { uid: string }) {
   return (
     <div className="space-y-4">
       <CardDescription className="text-center sm:text-left">Como você paga assinaturas e compras avulsas. Do cartão guardamos só a bandeira e os 4 últimos números.</CardDescription>
-      {data.map((m) => <ListCard key={m.id} icon={m.kind === "card" ? <CreditCard /> : <Banknote />} title={m.label} subtitle={m.kind === "card" ? `${m.brand} •••• ${m.last4}` : `Pix · ${m.pix_key}`} isDefault={m.is_default} onDefault={() => makeDefault(m.id)} onDelete={async () => { await supabase.from("payment_methods").delete().eq("id", m.id); refresh(); }} />)}
+      {data.map((m) => <ListCard key={m.id} icon={m.kind === "card" ? <CreditCard /> : <Banknote />} title={m.label} extra={(() => { const u = lastUse(m.kind === "card" ? `${m.brand} •••• ${m.last4}` : "Pix"); return <p className="text-xs text-muted-foreground">{u ? <>Último uso: <span className="font-mono">{fmt(u)}</span></> : "Ainda não usado"}</p>; })()} subtitle={m.kind === "card" ? `${m.brand} •••• ${m.last4}` : `Pix · ${m.pix_key}`} isDefault={m.is_default} onDefault={() => makeDefault(m.id)} onDelete={async () => { await supabase.from("payment_methods").delete().eq("id", m.id); refresh(); }} />)}
       <Card padding="lg">
         <form onSubmit={add} className="grid gap-4 sm:grid-cols-[10rem_1fr_1fr_auto] sm:items-end">
           <Field id="pm-k" label="Tipo"><Select id="pm-k" value={kind} onChange={(e) => { setKind(e.target.value as "card" | "pix"); setValue(""); }}><option value="card">Cartão</option><option value="pix">Pix</option></Select></Field>
@@ -263,6 +275,19 @@ function PaymentsTab({ uid }: { uid: string }) {
           <Field id="pm-v" label={kind === "card" ? "Número do cartão" : "Chave Pix"}><Input id="pm-v" value={value} inputMode={kind === "card" ? "numeric" : "text"} autoComplete={kind === "card" ? "cc-number" : "off"} onChange={(e) => setValue(e.target.value)} /></Field>
           <Button type="submit"><Plus />Adicionar</Button>
         </form>
+      </Card>
+      <Card padding="lg" className="space-y-3">
+        <CardTitle className="text-lg">Histórico de depósitos</CardTitle>
+        {deposits.length === 0 ? <p className="text-sm text-muted-foreground">Nenhum depósito ainda. Use "Depositar" na aba Saldos.</p> : (
+          <ul className="divide-y">
+            {deposits.map((d) => (
+              <li key={d.key} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 py-2.5">
+                <span className="min-w-0"><span className="block truncate text-sm">{d.method}</span><span className="block truncate font-mono text-xs text-muted-foreground"><span data-no-translate>{d.id}</span> · {fmt(d.at)}</span></span>
+                <span className="flex flex-col items-end gap-1"><Badge variant={d.ok ? "success" : "destructive"} size="sm">{d.ok ? "Aprovado" : "Recusado"}</Badge>{d.ok && <span className="font-mono text-xs">{`R$ ${d.amount.toLocaleString("pt-BR", { minimumFractionDigits: 2 })}`}</span>}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </Card>
     </div>
   );
