@@ -4,7 +4,8 @@ import { z } from "zod";
 import { Lock, Volume2, VolumeX } from "lucide-react";
 import { AIVerifiedBadge, AgeRating, Avatar, Badge, Button, Card, PlayerBar, useToast } from "@/index";
 import { catalog } from "@/experience/data";
-import { isAllowedForKids } from "@/experience/logic";
+import { allowedForKid } from "@/experience/logic";
+import { ReportButton } from "@/experience/report-dialog";
 import { useExperience } from "@/experience/store";
 import { COMPLETE_THRESHOLD, COMPLETE_VZN, eligibleWatch } from "@/experience/rewards";
 
@@ -26,7 +27,8 @@ const fmt = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "
 function Watch() {
   const { id } = Route.useSearch();
   const t = catalog.find((c) => c.id === id) ?? catalog[0];
-  const { kids, earn, owned, addXp, addWatchMin, completed, complete } = useExperience();
+  const { kids, kidsMax, child, childMinutes, addChildMinute, earn, owned, addXp, addWatchMin, completed, complete } = useExperience();
+  const timeUp = !!child && childMinutes >= child.daily_minutes;
   const [muted, setMuted] = useState(false);
   const [xpSession, setXpSession] = useState(0);
   const repeat = completed.includes(t.id);
@@ -38,13 +40,15 @@ function Watch() {
 
   useEffect(() => {
     if (!playing) return;
+    if (timeUp) { setPlaying(false); return; }
     const i = setInterval(() => setSec((s) => Math.min(total, s + 5)), 250);
     return () => clearInterval(i);
-  }, [playing]);
+  }, [playing, timeUp]);
   useEffect(() => {
     if (sec - last.current >= 60) {
       last.current = sec;
       const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
+      if (child) addChildMinute();
       if (eligibleWatch({ muted, hidden, repeat })) { addXp(1); addWatchMin(1); setXpSession((x) => x + 1); }
     }
     if (sec >= total * COMPLETE_THRESHOLD && !muted && complete(t.id)) {
@@ -53,7 +57,7 @@ function Watch() {
     }
   }, [sec]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const blocked = kids && !isAllowedForKids(t.rating);
+  const blocked = kids && !allowedForKid(t.rating, kidsMax);
   const locked = !!t.priceValue && !owned.includes(t.id);
 
   return (
@@ -61,7 +65,12 @@ function Watch() {
       <div className="space-y-6">
         <div className="relative overflow-hidden rounded-xl border border-cyan/20">
           <img src={t.cover} alt="" width={1280} height={720} className={blocked || locked ? "aspect-video w-full object-cover blur-xl" : "aspect-video w-full object-cover"} />
-          {blocked || locked ? (
+          {timeUp && !blocked ? (
+            <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/80 p-6 text-center">
+              <p className="font-display text-xl font-semibold">O tempo de tela de hoje acabou</p>
+              <p className="text-sm text-muted-foreground">Até amanhã, {child?.name}! Um responsável pode mudar o limite em Minha conta.</p>
+            </div>
+          ) : blocked || locked ? (
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/70 p-6 text-center">
               <Lock className="size-10 text-destructive" />
               <p className="font-display text-xl font-semibold">{blocked ? "Bloqueado no perfil infantil" : "Título à la carte"}</p>
@@ -74,7 +83,7 @@ function Watch() {
           )}
         </div>
         <div className="space-y-3">
-          <div className="flex flex-wrap items-center gap-2"><AgeRating rating={t.rating} /><AIVerifiedBadge /><Badge variant="cyan">4K HDR</Badge></div>
+          <div className="flex flex-wrap items-center gap-2"><AgeRating rating={t.rating} /><AIVerifiedBadge /><Badge variant="cyan">4K HDR</Badge><ReportButton titleRef={t.id} title={t.title} /></div>
           <h1 className="font-display text-3xl font-bold tracking-wide">{t.title}</h1>
           <div className="flex items-center gap-3"><Avatar name={t.creator} size="sm" ring="brand" /><span className="text-sm text-muted-foreground">{t.creator} · {t.duration}</span></div>
         </div>
@@ -85,6 +94,7 @@ function Watch() {
         <p className="font-display text-2xl font-bold text-cyan">+{xpSession} XP</p>
         <div className="space-y-1"><div className="flex justify-between text-xs text-muted-foreground"><span>Progresso para concluir</span><span>{Math.min(100, Math.round((sec / (total * COMPLETE_THRESHOLD)) * 100))}%</span></div>
           <div className="h-2 overflow-hidden rounded-full bg-muted"><div className="h-full bg-gradient-brand transition-all" style={{ width: `${Math.min(100, (sec / (total * COMPLETE_THRESHOLD)) * 100)}%` }} /></div></div>
+        {child && <p className="text-xs text-muted-foreground"><span>Tempo de tela hoje:</span> {childMinutes}/{child.daily_minutes} min</p>}
         {(muted || repeat) && <p className="text-xs text-warning">{muted ? "Com o som desligado, o tempo não conta." : "Você já concluiu este título hoje: repetir não rende XP."}</p>}
       </Card>
     </div>

@@ -20,8 +20,8 @@ export const Route = createFileRoute("/app/")({
 });
 
 function AppHome() {
-  const { kids } = useExperience();
-  const list = filterCatalog(catalog, kids);
+  const { kids, kidsMax, child } = useExperience();
+  const list = filterCatalog(catalog, kids, kidsMax);
   const hero = list[0];
   return (
     <div className="space-y-10">
@@ -37,6 +37,7 @@ function AppHome() {
           </div>
         </div>
       )}
+      {child && <p className="rounded-xl border border-success/40 bg-success/5 p-3 text-sm"><span>Perfil infantil:</span> <strong>{child.name}</strong> · <span>até</span> {kidsMax === "L" ? "Livre" : `${kidsMax} anos`}</p>}
       <MissionsCard />
       <CatalogRow title="Em alta" items={list.filter((t) => t.row === "alta")} />
       <CatalogRow title="Produções Clyro Synth" items={list.filter((t) => t.row === "synth")} />

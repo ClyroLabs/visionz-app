@@ -3,6 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Clapperboard } from "lucide-react";
 import { Button, buttonVariants, Card, CardDescription, CardTitle, Dialog, Tabs, TabsContent, TabsList, TabsTrigger } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
+import { allowedForKid, type Rating } from "@/experience/logic";
+import { ReportButton } from "@/experience/report-dialog";
 import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
@@ -23,19 +25,19 @@ export const Route = createFileRoute("/app/vitrine")({
 });
 
 function Vitrine() {
-  const { kids } = useExperience();
+  const { kids, kidsMax } = useExperience();
   const { data = [], isLoading } = useQuery({
     queryKey: ["vitrine"],
     queryFn: async () => (await supabase.from("creations").select("*").eq("status", "published").order("created_at", { ascending: false }).limit(60)).data ?? [],
   });
-  const visible = kids ? data.filter((c) => c.age_rating === "L" || c.age_rating === "10") : data;
+  const visible = kids ? data.filter((c) => allowedForKid(c.age_rating as Rating, kidsMax)) : data;
   const synth = visible.filter((c) => c.tool === "synth");
   const jukebox = visible.filter((c) => c.tool === "jukebox");
   return (
     <div className="space-y-8">
       <header className="space-y-2 text-center sm:text-left">
         <h1 className="font-display text-3xl font-bold tracking-wide">Vitrine de criadores</h1>
-        <p className="text-muted-foreground">Tudo aqui passou pela análise da IA de moderação.{kids && " Modo infantil: só Livre e 10 anos."}</p>
+        <p className="text-muted-foreground">Tudo aqui passou pela análise da IA de moderação.{kids && " Modo infantil ativo: só a classificação permitida."}</p>
         <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Link to="/app/synth" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Synth</Link><Link to="/app/jukebox" className={buttonVariants({ size: "sm", variant: "soft" })}>Criar no Jukebox</Link></div>
       </header>
       <Tabs defaultValue="synth" className="space-y-6">
@@ -66,7 +68,7 @@ function SynthCard({ c }: { c: Creation }) {
           <CardTitle className="truncate">{c.title}</CardTitle>
           <CardDescription className="line-clamp-2">{c.description}</CardDescription>
           <CreationMeta c={c} />
-          <Button size="sm" variant="soft" onClick={() => setOpen(true)}>Ver storyboard</Button>
+          <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Button size="sm" variant="soft" onClick={() => setOpen(true)}>Ver storyboard</Button><ReportButton titleRef={c.id} title={c.title} /></div>
         </div>
       </Card>
       <Dialog open={open} onOpenChange={setOpen} title={c.title} description={c.description ?? undefined}>
