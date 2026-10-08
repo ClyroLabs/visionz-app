@@ -48,7 +48,7 @@ export function ApiAccess({ api }: { api: Id }) {
           <div className="flex flex-wrap gap-2">
             {key ? <Button size="sm" variant="secondary" onClick={() => copy(key)}><Copy className="size-4" />Copiar chave</Button>
               : <Button size="sm" variant="secondary" onClick={gen}><KeyRound className="size-4" />Gerar chave</Button>}
-            <Button size="sm" variant="ghost" asChild><Link to="/app/launchpad" search={{ tab: "apis" }}>Testar na Launchpad<ArrowRight className="size-4" /></Link></Button>
+            <Link to="/app/launchpad" search={{ tab: "apis" }} className="inline-flex h-9 items-center gap-2 rounded-full px-4 text-sm text-cyan hover:bg-cyan/10 focus-visible:ring-2 focus-visible:ring-ring">Testar na Launchpad<ArrowRight className="size-4" /></Link>
           </div>
         </div>
         <div className="min-w-0 space-y-2">

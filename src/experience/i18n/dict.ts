@@ -4129,6 +4129,19 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Clipe não gerado": ["Clip not generated", "Clip no generado", "片段未生成"],
   "O clipe está demorando": ["The clip is taking a while", "El clip está tardando", "片段生成时间较长"],
   "Tente abrir de novo em alguns minutos.": ["Try opening it again in a few minutes.", "Intenta abrirlo de nuevo en unos minutos.", "请几分钟后再打开。"],
+  "API do Filtro Inteligente": ["Smart Filter API", "API del Filtro Inteligente", "智能过滤 API"],
+  "API do Clyro Synth": ["Clyro Synth API", "API de Clyro Synth", "Clyro Synth API"],
+  "API do Clyro Jukebox": ["Clyro Jukebox API", "API de Clyro Jukebox", "Clyro Jukebox API"],
+  "Para desenvolvedores": ["For developers", "Para desarrolladores", "面向开发者"],
+  "Use esta ferramenta dentro do seu próprio app ou jogo.": ["Use this tool inside your own app or game.", "Usa esta herramienta dentro de tu propia app o juego.", "在你自己的应用或游戏中使用此工具。"],
+  "Gere sua chave de teste (grátis, sem cobrança).": ["Generate your test key (free, no charge).", "Genera tu clave de prueba (gratis, sin cobro).", "生成测试密钥（免费，不收费）。"],
+  "Instale o SDK: npm i @visionz/sdk": ["Install the SDK: npm i @visionz/sdk", "Instala el SDK: npm i @visionz/sdk", "安装 SDK：npm i @visionz/sdk"],
+  "Chame a API com o código ao lado.": ["Call the API with the code beside.", "Llama a la API con el código de al lado.", "使用旁边的代码调用 API。"],
+  "Use o resultado (classificação e motivo) para liberar ou segurar o envio.": ["Use the result (rating and reason) to allow or hold the upload.", "Usa el resultado (clasificación y motivo) para liberar o retener el envío.", "根据结果（分级和原因）放行或暂缓上传。"],
+  "Receba a cena pronta e mostre no seu jogo ou app.": ["Get the finished scene and show it in your game or app.", "Recibe la escena lista y muéstrala en tu juego o app.", "获取生成的场景并在你的游戏或应用中展示。"],
+  "Toque a faixa gerada com autoria registrada.": ["Play the generated track with registered authorship.", "Reproduce la pista generada con autoría registrada.", "播放已登记作者权的生成曲目。"],
+  "Testar na Launchpad": ["Test on Launchpad", "Probar en Launchpad", "在 Launchpad 测试"],
+  "Ambiente de testes · respostas simuladas, nenhuma chave real é criada": ["Test environment · simulated responses, no real key is created", "Entorno de pruebas · respuestas simuladas, no se crea ninguna clave real", "测试环境 · 模拟响应，不会创建真实密钥"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
