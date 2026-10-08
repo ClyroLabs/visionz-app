@@ -181,9 +181,12 @@ export function VideoWatch({ c, all, onSelect }: { c: Creation; all: Creation[];
   const ref = useRef<HTMLVideoElement>(null);
   const [time, setTime] = useState(0);
   const [count, setCount] = useState<number | null>(null);
+  const [err, setErr] = useState(false);
+  const [buf, setBuf] = useState(true);
+  const [retry, setRetry] = useState(0);
   const m = normalizeMeta(c);
   const next = nextEpisode(all, c);
-  useEffect(() => { setCount(null); setTime(0); }, [c.id]);
+  useEffect(() => { setCount(null); setTime(0); setErr(false); setBuf(true); }, [c.id]);
   useEffect(() => {
     if (count === null) return;
     if (count <= 0) { if (next) onSelect(next); return; }
@@ -195,7 +198,10 @@ export function VideoWatch({ c, all, onSelect }: { c: Creation; all: Creation[];
       <div className="relative overflow-hidden rounded-lg bg-black">
         {m.series && <p className="absolute left-3 top-3 z-10 rounded bg-background/70 px-2 py-1 text-xs"><span className="font-mono">{episodeLabel(m.series)}</span>{" · "}<span data-no-translate>{c.title}</span></p>}
         {ch && <p className="absolute bottom-14 left-3 z-10 rounded bg-background/70 px-2 py-0.5 text-[11px] text-cyan" data-no-translate>{ch.title}</p>}
-        {src ? <video key={c.id} ref={ref} src={src} controls autoPlay playsInline className="aspect-video w-full"
+        {src && buf && !err && <div className="pointer-events-none absolute inset-0 z-10 grid place-items-center"><span className="size-10 animate-spin rounded-full border-2 border-cyan border-t-transparent" aria-label="Carregando…" /></div>}
+        {err && <div className="absolute inset-0 z-20 grid place-items-center bg-background/90 p-4 text-center"><div className="space-y-3"><p className="text-sm">Não foi possível carregar a mídia</p><Button size="sm" onClick={() => { setErr(false); setBuf(true); setRetry((r) => r + 1); }}>Tentar de novo</Button></div></div>}
+        {src ? <video key={`${c.id}-${retry}`} ref={ref}
+          onError={() => setErr(true)} onWaiting={() => setBuf(true)} onPlaying={() => setBuf(false)} onCanPlay={() => setBuf(false)} src={src} controls autoPlay playsInline className="aspect-video w-full"
           onLoadedMetadata={(e) => { const p = getProg(c.id); if (p && p < e.currentTarget.duration - 3) e.currentTarget.currentTime = p; }}
           onTimeUpdate={(e) => { const t = e.currentTarget.currentTime; setTime(t); localStorage.setItem(progKey(c.id), String(Math.floor(t))); }}
           onEnded={() => next && setCount(5)} /> : <div className="grid aspect-video place-items-center text-sm text-muted-foreground">Carregando…</div>}
