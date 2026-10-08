@@ -10,7 +10,7 @@ let apiPromise: Promise<FaceApi> | null = null;
 function loadApi() {
   apiPromise ??= (async () => {
     const faceapi = await import("@vladmandic/face-api");
-    await faceapi.tf.ready();
+    await (faceapi.tf as unknown as { ready: () => Promise<void> }).ready();
     await Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
       faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
