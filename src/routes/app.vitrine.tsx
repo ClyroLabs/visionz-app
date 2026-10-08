@@ -9,7 +9,26 @@ import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, useFileUrl, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
 import { useState } from "react";
-import type { Storyboard } from "@/lib/creator";
+import { localizeBoard, type Aspect, type BoardText, type Storyboard } from "@/lib/creator";
+import { useServerFn } from "@tanstack/react-start";
+import { translateCreation } from "@/lib/creator.functions";
+import { useLang } from "@/experience/i18n";
+import { FilmPlayer } from "@/experience/scene-motion";
+
+type SynthData = Storyboard & { scene_images?: (string | null)[]; scene_clip_by_index?: (string | null)[]; aspect?: Aspect; resolution?: string };
+
+/** Production text in the viewer's language; translates once on the server and caches it on the record. */
+function useBoardText(c: Creation): BoardText {
+  const { lang } = useLang();
+  const d = c.data as unknown as SynthData;
+  const need = (d.lang ?? "pt") !== lang && !d.i18n?.[lang as "en"];
+  const tr = useServerFn(translateCreation);
+  const { data } = useQuery({
+    queryKey: ["synth-tr", c.id, lang], enabled: need, staleTime: Infinity, retry: false,
+    queryFn: async () => { const r = await tr({ data: { id: c.id, lang: lang as "en" } }); return r.ok ? r.data : null; },
+  });
+  return localizeBoard(data ? { ...d, i18n: { ...(d.i18n ?? {}), [lang]: data } } : d, lang);
+}
 
 export const Route = createFileRoute("/app/vitrine")({
   ssr: false,
@@ -62,35 +81,43 @@ function Vitrine() {
 
 function SynthCard({ c }: { c: Creation }) {
   const [open, setOpen] = useState(false);
-  const d = c.data as unknown as Storyboard & { scene_images?: (string | null)[] };
+  const d = c.data as unknown as SynthData;
+  const t = useBoardText(c);
+  const aspect = d.aspect ?? "16:9";
+  const film = (d.scenes ?? []).map((s, i) => ({ camera: s.camera ?? "zoom-in", duration_sec: s.duration_sec ?? 5, transition: s.transition ?? "fade", title: t.scenes[i]?.title ?? s.title, narration: t.scenes[i]?.narration ?? s.narration, image: d.scene_images?.[i], clip: d.scene_clip_by_index?.[i] })).filter((s) => s.image || s.clip);
   return (
     <>
       <Card padding="none" className="overflow-hidden">
-        <button type="button" className="block w-full text-left" onClick={() => setOpen(true)} aria-label={`Ver ${c.title}`}>
-          {c.cover_path ? <FileImage path={c.cover_path} alt={c.title} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-muted"><Clapperboard className="size-8" /></div>}
+        <button type="button" className="relative block w-full text-left" onClick={() => setOpen(true)} aria-label={`Assistir ${t.title}`}>
+          {c.cover_path ? <FileImage path={c.cover_path} alt={t.title} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-muted"><Clapperboard className="size-8" /></div>}
+          <span className="absolute bottom-2 right-2 flex gap-1 font-mono text-[10px]"><span className="rounded bg-background/80 px-1.5 py-0.5">{aspect}</span>{d.resolution && <span className="rounded bg-background/80 px-1.5 py-0.5">{d.resolution}</span>}<span className="rounded bg-background/80 px-1.5 py-0.5">{`${filmSeconds(film)} s`}</span></span>
         </button>
         <div className="space-y-3 p-4 text-center sm:text-left">
-          <CardTitle className="truncate">{c.title}</CardTitle>
-          <CardDescription className="line-clamp-2">{c.description}</CardDescription>
+          <CardTitle data-no-translate className="truncate">{t.title}</CardTitle>
+          <CardDescription data-no-translate className="line-clamp-2">{t.logline}</CardDescription>
           <CreationMeta c={c} />
-          <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Button size="sm" variant="soft" onClick={() => setOpen(true)}>Ver storyboard</Button><ReportButton titleRef={c.id} title={c.title} /></div>
+          <div className="flex flex-wrap justify-center gap-2 sm:justify-start"><Button size="sm" variant="soft" onClick={() => setOpen(true)}><Film />Assistir</Button><ReportButton titleRef={c.id} title={c.title} /></div>
         </div>
       </Card>
-      <Dialog open={open} onOpenChange={setOpen} title={c.title} description={c.description ?? undefined}>
-        <div className="max-h-[70vh] space-y-4 overflow-y-auto pr-1">
-          {(d.scenes ?? []).map((s, i) => (
-            <div key={i} className="space-y-2">
-              {d.scene_images?.[i] && <FileImage path={d.scene_images[i]} alt={s.title} className="aspect-video w-full rounded-xl object-cover" />}
-              <p className="font-semibold">Cena {i + 1} · {s.title}</p>
-              <p className="text-sm text-muted-foreground">{s.description}</p>
-              {s.narration && <p className="text-sm italic">“{s.narration}”</p>}
-            </div>
-          ))}
+      <Dialog open={open} onOpenChange={setOpen} title={t.title} description={t.logline || undefined}>
+        <div className="max-h-[75vh] space-y-5 overflow-y-auto pr-1">
+          {open && film.length > 0 && <FilmPlayer scenes={film} aspect={aspect} />}
+          <div className="space-y-3">
+            {(d.scenes ?? []).map((s, i) => (
+              <div key={i} className="space-y-1 border-l-2 border-cyan/40 pl-3">
+                <p className="font-semibold"><span>Cena</span>{` ${i + 1} · `}<span data-no-translate>{t.scenes[i]?.title}</span></p>
+                <p data-no-translate className="text-sm text-muted-foreground">{t.scenes[i]?.description}</p>
+                {t.scenes[i]?.narration && <p data-no-translate className="text-sm italic">“{t.scenes[i].narration}”</p>}
+              </div>
+            ))}
+          </div>
         </div>
       </Dialog>
     </>
   );
 }
+
+const filmSeconds = (f: { duration_sec: number }[]) => f.reduce((n, s) => n + s.duration_sec, 0);
 
 function VideoCard({ c }: { c: Creation }) {
   const [open, setOpen] = useState(false);
