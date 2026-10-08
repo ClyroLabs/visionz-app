@@ -3,14 +3,17 @@ import { Camera, Eye, ScanFace } from "lucide-react";
 import { Button, cn } from "@/index";
 
 const MODEL_URL = "https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/model";
+const LIB_URL = "https://cdn.jsdelivr.net/npm/@vladmandic/face-api@1.7.15/dist/face-api.esm.js";
 type FaceApi = typeof import("@vladmandic/face-api");
 let apiPromise: Promise<FaceApi> | null = null;
 
 /** Loads the face library and models once, only in the browser. */
 function loadApi() {
   apiPromise ??= (async () => {
-    const faceapi = await import("@vladmandic/face-api");
-    await (faceapi.tf as unknown as { ready: () => Promise<void> }).ready();
+    const faceapi = (await import(/* @vite-ignore */ LIB_URL)) as FaceApi;
+    const tf = faceapi.tf as unknown as { setBackend: (b: string) => Promise<boolean>; ready: () => Promise<void> };
+    try { if (!(await tf.setBackend("webgl"))) throw new Error(); } catch { await tf.setBackend("cpu"); }
+    await tf.ready();
     await Promise.all([
       faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL),
       faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URL),
