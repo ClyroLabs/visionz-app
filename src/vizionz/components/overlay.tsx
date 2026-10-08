@@ -79,7 +79,10 @@ export function Dialog({ open, onOpenChange, title, description, className, chil
   });
   return (
     <dialog
-      ref={ref}
+      ref={(el) => {
+        ref.current = el;
+        if (el && open && !el.open && el.isConnected) { try { el.showModal(); } catch { /* not ready */ } }
+      }}
       onClose={() => onOpenChange(false)}
       onClick={(e) => e.target === ref.current && onOpenChange(false)}
       className={cn("m-auto w-[min(92vw,30rem)] rounded-xl border border-cyan/30 bg-surface p-0 text-foreground shadow-glow-cyan backdrop:bg-background/70 backdrop:backdrop-blur-sm", className)}
