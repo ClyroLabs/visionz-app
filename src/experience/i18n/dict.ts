@@ -3633,6 +3633,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "” — Em análise pela governança": ["” — Under governance review", "” — En análisis por la gobernanza", "” — 治理审核中"],
   "Saúde": ["Health", "Salud", "健康度"],
   "Perda": ["Loss", "Pérdida", "亏损"],
+  "· preço atual": ["· current price", "· precio actual", "· 当前价格"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];

@@ -86,7 +86,7 @@ function Credit() {
             <div className="h-2.5 overflow-hidden rounded-full bg-muted" role="meter" aria-label="Saúde da posição" aria-valuenow={Number.isFinite(h) ? h : 99}>
               <div className={cn("h-full rounded-full transition-all", hPct < 10 ? "bg-destructive" : hPct < 50 ? "bg-warning" : "bg-success")} style={{ width: `${hPct}%` }} />
             </div>
-            <p className="text-xs text-muted-foreground">Liquidação se {m.asset} cair para <span className="font-mono text-foreground">{usd(lp)}</span> (hoje {usd(price)}).</p>
+            <p className="text-xs text-muted-foreground">Liquidação se {m.asset} cair para <span className="font-mono text-foreground">{usd(lp)}</span> <span>· preço atual</span> {usd(price)}</p>
           </div>
         </Card>
 

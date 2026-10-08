@@ -1,12 +1,12 @@
 # Roadmap — Expansão DeFi (demo)
-- [ ] Lógica + testes (defi.ts)
-- [ ] Crédito (com trava anti-perdas até 50% e encerramento automático)
-- [ ] Cofres
-- [ ] Radar IA
-- [ ] Launchpad
-- [ ] Koda
-- [ ] Ponte
-- [ ] Menu "Ecossistema DeFi"
-- [ ] Site: O que vem por aí + Whitepaper
-- [ ] Traduções EN/ES/ZH
-- [ ] Verificação
+- [x] Lógica + testes (defi.ts)
+- [x] Crédito (com trava anti-perdas até 50% e encerramento automático)
+- [x] Cofres
+- [x] Radar IA
+- [x] Launchpad
+- [x] Koda
+- [x] Ponte
+- [x] Menu "Ecossistema DeFi"
+- [x] Site: O que vem por aí + Whitepaper
+- [x] Traduções EN/ES/ZH
+- [x] Verificação
