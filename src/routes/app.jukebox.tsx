@@ -1,3 +1,4 @@
+import { Cover } from "@/experience/title-details";
 import { QuotaHint, usePlan, useRefreshPlan, blocked } from "@/experience/plan-ui";
 import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
@@ -180,11 +181,12 @@ function UploadTrack() {
 }
 
 export function TrackCard({ c, owner }: { c: Creation; owner?: boolean }) {
-  const d = c.data as Partial<Composition> & { kind?: string; tags?: string[] };
-  const audio = useFileUrl(c.audio_path);
+  const d = c.data as Partial<Composition> & { kind?: string; tags?: string[]; audio_url?: string };
+  const signed = useFileUrl(d.audio_url ? null : c.audio_path);
+  const audio = d.audio_url ?? signed;
   return (
     <Card padding="none" className="overflow-hidden">
-      {c.cover_path ? <FileImage path={c.cover_path} alt={c.title} className="aspect-square w-full object-cover" />
+      {c.cover_path || (c.data as { cover_key?: string }).cover_key ? <Cover c={c} className="aspect-square w-full object-cover" />
         : <div className="grid aspect-square place-items-center bg-gradient-to-br from-magenta/25 via-violet/20 to-ember/20"><Music2 className="size-12 text-foreground/70" /></div>}
       <div className="space-y-3 p-4 text-center sm:text-left">
         <CardTitle className="truncate">{c.title}</CardTitle>
