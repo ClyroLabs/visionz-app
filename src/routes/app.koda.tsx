@@ -15,10 +15,28 @@ export const Route = createFileRoute("/app/koda")({
       { property: "og:description", content: "Aprenda Web3, DeFi e criação com IA e ganhe recompensas de demonstração." },
     ],
   }),
-  component: Koda,
+  component: KodaSoon,
 });
 
-function Koda() {
+function KodaSoon() {
+  return (
+    <div className="grid min-h-[60vh] place-items-center">
+      <Card padding="lg" className="relative max-w-lg space-y-4 overflow-hidden text-center">
+        <div className="pointer-events-none absolute inset-0 bg-stage-glow opacity-60" aria-hidden />
+        <div className="relative space-y-4">
+          <span className="mx-auto grid size-16 place-items-center rounded-2xl border border-gold/50 bg-gold/10 shadow-glow-brand"><GraduationCap className="size-8 text-gold" /></span>
+          <Badge variant="brand" size="sm">Em breve</Badge>
+          <h1 className="font-display text-3xl font-bold tracking-wide text-metallic">Koda</h1>
+          <p className="text-muted-foreground">A escola da Clyro Labs está sendo preparada: trilhas curtas sobre Web3, DeFi e criação com IA, com recompensas e certificados. Avisaremos quando abrir.</p>
+          <p className="text-xs text-muted-foreground">Demonstração · exemplo, não é promessa</p>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+// Full Koda experience kept for when it launches.
+export function Koda() {
   const toast = useToast();
   const [done, setDone] = useLocal<Record<string, number>>("vz-koda", {});
   const [quiz, setQuiz] = useState<string | null>(null);
