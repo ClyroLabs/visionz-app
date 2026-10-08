@@ -92,7 +92,8 @@ export function ApiPlayground() {
             <p className="text-xs text-muted-foreground">Entrada ({a.field})</p>
             <Input value={input} onChange={(e) => setInput(e.target.value)} data-no-translate />
           </div>
-          <Button className="w-full" onClick={run} disabled={busy || !key || !input.trim()}>
+          <PlanGate feature="api_call"><QuotaHint feature="api_call" className="block text-center" /></PlanGate>
+          <Button className="w-full" onClick={run} disabled={busy || !key || !input.trim() || blocked(plan, "api_call")}>
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" />}{busy ? "Enviando…" : "Executar"}
           </Button>
           {!key && <p className="text-xs text-muted-foreground">Gere uma chave de teste para executar.</p>}
