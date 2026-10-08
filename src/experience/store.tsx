@@ -6,8 +6,18 @@ import { applyDailyCap, missionReward, PURCHASE_VZN, STREAK7_BONUS, XP_SHOP, typ
 export interface Tx { id: number; label: string; amount: number; kind: "in" | "out"; when: string; source?: RewardSource }
 export interface Flag { id: number; title: string; reason: string; confidence: number; timestamp: string; severity: "low" | "medium" | "high" }
 
+export interface ChildProfile { id: string; name: string; max_rating: string; daily_minutes: number }
+export type FaceAction =
+  | { type: "kids_off" }
+  | { type: "rule"; childId: string; maxRating: string; dailyMinutes: number }
+  | { type: "purchase"; requestId: string; approve: boolean };
+export interface FaceRequest { action: FaceAction; title: string; resolve: (ok: boolean) => void }
+
 interface Store {
   kids: boolean; setKids: (v: boolean) => void;
+  child: ChildProfile | null; setChild: (c: ChildProfile | null) => void; kidsMax: string;
+  childMinutes: number; addChildMinute: () => void;
+  faceRequest: FaceRequest | null; requestFace: (action: FaceAction, title: string) => Promise<boolean>; closeFace: (ok: boolean) => void;
   vzn: number; brl: number; network: Network; setNetwork: (n: Network) => void;
   txs: Tx[]; owned: string[];
   earn: (label: string, amount: number, source: RewardSource) => number;
@@ -25,7 +35,24 @@ const Ctx = createContext<Store | null>(null);
 const now = () => new Date().toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
 
 export function ExperienceProvider({ children }: { children: ReactNode }) {
-  const [kids, setKids] = useState(false);
+  const [kids, setKidsRaw] = useState(false);
+  const [child, setChildRaw] = useState<ChildProfile | null>(null);
+  const [faceRequest, setFaceRequest] = useState<FaceRequest | null>(null);
+  const [minutesMap, setMinutesMap] = useState<Record<string, number>>({});
+  const dayKey = new Date().toDateString();
+  useEffect(() => {
+    try { const d = JSON.parse(localStorage.getItem("vz-screen") ?? "null"); if (d?.day === dayKey) setMinutesMap(d.m ?? {}); } catch { /* ignore */ }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => { localStorage.setItem("vz-screen", JSON.stringify({ day: dayKey, m: minutesMap })); }, [minutesMap, dayKey]);
+  const requestFace = (action: FaceAction, title: string) => new Promise<boolean>((resolve) => setFaceRequest({ action, title, resolve }));
+  const closeFace = (ok: boolean) => { faceRequest?.resolve(ok); setFaceRequest(null); };
+  const setKids = (v: boolean) => {
+    if (v) { setKidsRaw(true); return; }
+    requestFace({ type: "kids_off" }, "Sair do modo infantil").then((ok) => { if (ok) { setKidsRaw(false); setChildRaw(null); } });
+  };
+  const setChild = (c: ChildProfile | null) => {
+    if (c) { setChildRaw(c); setKidsRaw(true); } else setKids(false);
+  };
   const [vzn, setVzn] = useState(1284.5);
   const [brl, setBrl] = useState(48.6);
   const [network, setNetwork] = useState<Network>("solana");
@@ -70,7 +97,11 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
   };
 
   const store: Store = {
-    kids, setKids, vzn, brl, network, setNetwork, txs, owned,
+    kids, setKids, child, setChild, kidsMax: child?.max_rating ?? "10",
+    childMinutes: child ? minutesMap[child.id] ?? 0 : 0,
+    addChildMinute: () => { if (child) setMinutesMap((m) => ({ ...m, [child.id]: (m[child.id] ?? 0) + 1 })); },
+    faceRequest, requestFace, closeFace,
+    vzn, brl, network, setNetwork, txs, owned,
     earn, xp, addXp: (n) => setXp((x) => x + n), earnedToday, streak, watchMin,
     addWatchMin: (n) => setWatchMin((m) => m + n), completed,
     complete: (id) => { if (completed.includes(id)) return false; setCompleted((c) => [...c, id]); return true; },
