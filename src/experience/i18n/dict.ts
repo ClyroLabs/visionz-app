@@ -4244,7 +4244,6 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Nome do álbum": ["Album name", "Nombre del álbum", "专辑名称"],
   "Capítulos (um por linha: 0:00 Título)": ["Chapters (one per line: 0:00 Title)", "Capítulos (uno por línea: 0:00 Título)", "章节（每行一个：0:00 标题）"],
   "Detalhes salvos": ["Details saved", "Detalles guardados", "详情已保存"],
-  "Salvar": ["Save", "Guardar", "保存"],
   "Ver detalhes": ["See details", "Ver detalles", "查看详情"],
   "Roteiro por cena": ["Script by scene", "Guion por escena", "分场剧本"],
   "Detalhes do catálogo (gênero, série, capítulos)": ["Catalog details (genre, series, chapters)", "Detalles del catálogo (género, serie, capítulos)", "目录详情（类型、剧集、章节）"],
