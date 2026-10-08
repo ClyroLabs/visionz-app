@@ -67,11 +67,11 @@ export async function askJson<T>(system: string, prompt: string): Promise<T> {
 }
 
 /** Generates one image and returns its PNG bytes. */
-export async function generateImageBytes(prompt: string): Promise<Uint8Array> {
+export async function generateImageBytes(prompt: string, size = "1536x1024"): Promise<Uint8Array> {
   const res = await fetch(`${BASE_URL}/images/generations`, {
     method: "POST",
     headers: { Authorization: `Bearer ${key()}`, "Content-Type": "application/json" },
-    body: JSON.stringify({ model: IMAGE_MODEL, prompt, size: "1536x1024", quality: "low" }),
+    body: JSON.stringify({ model: IMAGE_MODEL, prompt, size, quality: "low" }),
   });
   if (!res.ok) {
     console.error("AI image error", res.status, await res.text());
@@ -81,4 +81,35 @@ export async function generateImageBytes(prompt: string): Promise<Uint8Array> {
   const b64 = json.data?.[0]?.b64_json;
   if (!b64) throw new AiError(500, "A imagem não foi gerada. Tente de novo.");
   return Uint8Array.from(atob(b64), (c) => c.charCodeAt(0));
+}
+
+const VIDEO_MODEL = "google/gemini-omni-1.1-flash";
+export type VideoJob = { id: string; status: string; progress?: number; error?: { code?: string; message?: string } };
+
+/** Starts one short, low-cost image-to-video job. */
+export async function createVideoJob(prompt: string, image: { b64: string; mime: string }, aspect: "16:9" | "9:16", seconds: number): Promise<VideoJob> {
+  const res = await fetch(`${BASE_URL}/videos`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${key()}`, "Content-Type": "application/json", "X-Lovable-AIG-SDK": "fetch" },
+    body: JSON.stringify({
+      model: VIDEO_MODEL,
+      input: [{ type: "image", data: image.b64, mime_type: image.mime }, { type: "text", text: prompt }],
+      response_format: { type: "video", resolution: "360p", duration: `${seconds}s`, aspect_ratio: aspect },
+      generation_config: { thinking_level: "low" },
+    }),
+  });
+  if (!res.ok) { console.error("AI video error", res.status, await res.text()); throw new AiError(res.status, friendlyAiError(res.status)); }
+  return (await res.json()) as VideoJob;
+}
+
+export async function getVideoJob(id: string): Promise<VideoJob> {
+  const res = await fetch(`${BASE_URL}/videos/${encodeURIComponent(id)}`, { headers: { Authorization: `Bearer ${key()}`, "X-Lovable-AIG-SDK": "fetch" } });
+  if (!res.ok) throw new AiError(res.status, friendlyAiError(res.status));
+  return (await res.json()) as VideoJob;
+}
+
+export async function downloadVideo(id: string): Promise<Uint8Array> {
+  const res = await fetch(`${BASE_URL}/videos/${encodeURIComponent(id)}/content`, { headers: { Authorization: `Bearer ${key()}`, "X-Lovable-AIG-SDK": "fetch" } });
+  if (!res.ok) throw new AiError(res.status, friendlyAiError(res.status));
+  return new Uint8Array(await res.arrayBuffer());
 }
