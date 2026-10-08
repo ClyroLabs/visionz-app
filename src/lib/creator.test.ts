@@ -30,3 +30,21 @@ describe("composição do Jukebox", () => {
     expect(chordNotes("Am")).toEqual([57, 60, 64]);
   });
 });
+
+import { filmLength, localizeBoard, normalizeStoryboard as nb } from "./creator";
+describe("Synth films", () => {
+  const raw = { title: "Robô", logline: "L", scenes: [{ description: "d", image_prompt: "x", camera: "orbit", duration_sec: 20 }, { description: "e", image_prompt: "y", camera: "bad" }],
+    i18n: { en: { title: "Robot", logline: "EN", scenes: [{ title: "", description: "d-en", narration: "" }] } } };
+  it("clamps durations to 3–8 s and defaults unknown cameras", () => {
+    const b = nb(raw, 4);
+    expect(b.scenes.map((s) => s.duration_sec)).toEqual([8, 5]);
+    expect(b.scenes[1].camera).toBe("zoom-in");
+    expect(filmLength(b.scenes)).toBe(13);
+  });
+  it("shows the selected language and falls back to the original", () => {
+    const b = nb(raw, 4);
+    expect(localizeBoard(b, "en").title).toBe("Robot");
+    expect(localizeBoard(b, "en").scenes[1].description).toBe("e");
+    expect(localizeBoard(b, "es").title).toBe("Robô");
+  });
+});
