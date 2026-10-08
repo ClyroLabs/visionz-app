@@ -30,7 +30,7 @@ const defiNav = [
   { to: "/app/cofres", label: "Cofres", icon: Vault },
   { to: "/app/radar", label: "Radar IA", icon: Radar },
   { to: "/app/launchpad", label: "Launchpad", icon: Rocket },
-  { to: "/app/koda", label: "Koda", icon: GraduationCap },
+  { to: "/app/koda", label: "Koda", icon: GraduationCap, soon: true },
   { to: "/app/ponte", label: "Ponte", icon: ArrowLeftRight },
 ] as const;
 
@@ -107,7 +107,9 @@ function Frame() {
                 <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
               ))}
               <p className="mt-2 px-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">Ecossistema DeFi</p>
-              {defiNav.map(({ to, label, icon: Icon }) => (
+              {defiNav.map(({ to, label, icon: Icon, ...r }) => "soon" in r && r.soon ? (
+                <span key={to} aria-disabled="true" className="flex cursor-not-allowed items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground/50"><Icon className="h-4 w-4 shrink-0" />{label}<span className="ml-auto rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-gold">Em breve</span></span>
+              ) : (
                 <Link key={to} to={to} activeOptions={{ exact: true }} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2.5 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta" activeProps={{ className: "!text-magenta bg-magenta/10" }}><Icon className="h-4 w-4 shrink-0" />{label}</Link>
               ))}
               <div className="mt-1 border-t border-border pt-1"><Link to="/site" onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-magenta/10 hover:text-magenta"><ArrowLeft className="size-4 shrink-0" />Voltar ao site</Link></div>
@@ -122,7 +124,14 @@ function Frame() {
   );
 }
 
-function SideLink({ to, label, icon: Icon, collapsed }: { to: string; label: string; icon: ComponentType<{ className?: string }>; collapsed: boolean }) {
+function SideLink({ to, label, icon: Icon, collapsed, soon }: { to: string; label: string; icon: ComponentType<{ className?: string }>; collapsed: boolean; soon?: boolean }) {
+  if (soon) return (
+    <span aria-disabled="true" title={collapsed ? `${label} · Em breve` : undefined}
+      className={cn("relative flex cursor-not-allowed select-none items-center rounded-md py-2 text-sm text-muted-foreground/50", collapsed ? "justify-center px-0" : "gap-3 px-3")}>
+      <Icon className="size-4 shrink-0" />{!collapsed && <>{label}<span className="ml-auto rounded-full border border-gold/50 bg-gold/10 px-2 py-0.5 text-[9px] font-semibold uppercase tracking-widest text-gold">Em breve</span></>}
+      {collapsed && <span className="absolute right-1 top-1 size-1.5 rounded-full bg-gold" aria-hidden />}
+    </span>
+  );
   return (
     <Link to={to} activeOptions={{ exact: true }} aria-label={collapsed ? label : undefined} title={collapsed ? label : undefined}
       className={cn("group relative flex items-center rounded-md py-2 text-sm text-muted-foreground hover:bg-muted hover:text-foreground", collapsed ? "justify-center px-0" : "gap-3 px-3")}
