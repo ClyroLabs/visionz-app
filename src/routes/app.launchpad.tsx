@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { CheckCircle2, Code2, Rocket } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Input, Label, Select, Tabs, TabsContent, TabsList, TabsTrigger, cn } from "@/index";
+import { ApiPlayground } from "@/experience/api-playground";
 import { LaunchpadGallery } from "@/experience/launchpad-ui";
 import { DemoHeader, useLocal } from "@/experience/defi-ui";
 import { templates } from "@/experience/defi-data";
@@ -64,13 +65,7 @@ function Launchpad() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">{templates.map((t) => <Card key={t.name} padding="lg" className="space-y-2"><Badge variant="success" size="sm">Pré-auditado</Badge><CardTitle>{t.name}</CardTitle><p className="text-sm text-muted-foreground">{t.text}</p></Card>)}</div>
         </TabsContent>
         <TabsContent value="apis">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="space-y-3">
-              {[["Filtro Inteligente", "Modere o que seus usuários enviam, em tempo real."], ["Clyro Synth", "Gere cenas e capas para o seu jogo ou app."], ["Clyro Jukebox", "Crie trilhas com autoria registrada."]].map(([n, t]) => <Card key={n} className="space-y-1"><CardTitle>{n}</CardTitle><p className="text-sm text-muted-foreground">{t}</p></Card>)}
-              <p className="text-xs text-muted-foreground">Taxas pagas em $VZN com desconto. Chave de teste falsa, só para demonstração.</p>
-            </div>
-            <Card padding="lg" className="space-y-2"><div className="flex items-center gap-2"><Code2 className="size-5 text-cyan" /><CardTitle>Exemplo em TypeScript</CardTitle></div><pre data-no-translate className="overflow-x-auto rounded-xl border bg-background p-4 font-mono text-xs text-cyan">{snippet}</pre></Card>
-          </div>
+          <ApiPlayground />
         </TabsContent>
       </Tabs>
     </div>

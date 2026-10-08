@@ -3957,6 +3957,23 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Copiar ID": ["Copy ID", "Copiar ID", "复制 ID"],
 "Tarifa": ["Fee", "Comisión", "手续费"],
 "Pagar": ["Pay", "Pagar", "支付"],
+"0,02 VZN / vídeo": ["0.02 VZN / video", "0,02 VZN / video", "0.02 VZN / 视频"],
+"0,10 VZN / imagem": ["0.10 VZN / image", "0,10 VZN / imagen", "0.10 VZN / 图像"],
+"0,25 VZN / faixa": ["0.25 VZN / track", "0,25 VZN / pista", "0.25 VZN / 曲目"],
+"Testar agora": ["Try it now", "Probar ahora", "立即试用"],
+"Chave de teste": ["Test key", "Clave de prueba", "测试密钥"],
+"Gerar chave": ["Generate key", "Generar clave", "生成密钥"],
+"Copiar chave": ["Copy key", "Copiar clave", "复制密钥"],
+"Executar": ["Run", "Ejecutar", "运行"],
+"Enviando…": ["Sending…", "Enviando…", "发送中…"],
+"Gere uma chave de teste para executar.": ["Generate a test key to run.", "Genera una clave de prueba para ejecutar.", "生成测试密钥后即可运行。"],
+"Chamadas hoje": ["Calls today", "Llamadas hoy", "今日调用"],
+"Taxas": ["Fees", "Tarifas", "费用"],
+"Pagas em $VZN com desconto": ["Paid in $VZN at a discount", "Pagadas en $VZN con descuento", "以 $VZN 折扣支付"],
+"Copiar código": ["Copy code", "Copiar código", "复制代码"],
+"Resposta": ["Response", "Respuesta", "响应"],
+"Copiado": ["Copied", "Copiado", "已复制"],
+"Ambiente de testes · respostas simuladas, nenhuma chave real é criada.": ["Test environment · simulated responses, no real key is created.", "Entorno de pruebas · respuestas simuladas, no se crea ninguna clave real.", "测试环境 · 模拟响应，不会创建真实密钥。"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
