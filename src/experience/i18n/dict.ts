@@ -4249,6 +4249,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "Detalhes do catálogo (gênero, série, capítulos)": ["Catalog details (genre, series, chapters)", "Detalles del catálogo (género, serie, capítulos)", "目录详情（类型、剧集、章节）"],
   "Em breve": ["Coming soon", "Próximamente", "即将推出"],
   "A escola da Clyro Labs está sendo preparada: trilhas curtas sobre Web3, DeFi e criação com IA, com recompensas e certificados. Avisaremos quando abrir.": ["The Clyro Labs school is being prepared: short tracks on Web3, DeFi and AI creation, with rewards and certificates. We'll let you know when it opens.", "La escuela de Clyro Labs se está preparando: rutas cortas sobre Web3, DeFi y creación con IA, con recompensas y certificados. Te avisaremos cuando abra.", "Clyro Labs 学院正在筹备中：Web3、DeFi 与 AI 创作的短课程，附带奖励和证书。开放时我们会通知你。"],
+  "Não foi possível carregar a mídia": ["Couldn't load the media", "No se pudo cargar el contenido", "无法加载媒体"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
