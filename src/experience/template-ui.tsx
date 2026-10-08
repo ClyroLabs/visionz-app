@@ -25,7 +25,7 @@ export function TemplateGallery({ onUse }: { onUse: (t: Template, v: Record<stri
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {list.map((t) => { const I = ICON[t.id]; return (
           <button key={t.id} type="button" onClick={() => setOpen(t)} className="group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-xl">
-            <Card padding="lg" className="h-full space-y-4 transition-all group-hover:-translate-y-0.5 group-hover:border-magenta/60 group-hover:shadow-glow-magenta">
+            <Card padding="lg" className="h-full space-y-4 transition-all group-hover:-translate-y-0.5 group-hover:border-magenta/60 group-hover:shadow-glow-brand">
               <div className="flex items-start justify-between gap-2">
                 <span className="grid size-11 place-items-center rounded-xl bg-gradient-brand text-white"><I className="size-5" /></span>
                 <Badge variant="success" size="sm"><ShieldCheck className="size-3" />Pré-auditado</Badge>
