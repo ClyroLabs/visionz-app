@@ -8,7 +8,7 @@ import { ReportButton } from "@/experience/report-dialog";
 import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, useFileUrl, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { localizeBoard, type Aspect, type BoardText, type Storyboard } from "@/lib/creator";
 import { useServerFn } from "@tanstack/react-start";
 import { translateCreation } from "@/lib/creator.functions";
@@ -81,6 +81,13 @@ function Vitrine() {
 
 function SynthCard({ c }: { c: Creation }) {
   const [open, setOpen] = useState(false);
+  const [live, setLive] = useState(false);
+  const cardRef = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    const el = cardRef.current; if (!el || !window.matchMedia("(hover: none)").matches) return;
+    const io = new IntersectionObserver(([e]) => setLive(e.intersectionRatio > 0.6), { threshold: [0, 0.6] });
+    io.observe(el); return () => io.disconnect();
+  }, []);
   const d = c.data as unknown as SynthData;
   const t = useBoardText(c);
   const aspect = d.aspect ?? "16:9";
@@ -88,8 +95,8 @@ function SynthCard({ c }: { c: Creation }) {
   return (
     <>
       <Card padding="none" className="overflow-hidden">
-        <button type="button" className="relative block w-full text-left" onClick={() => setOpen(true)} aria-label={`Assistir ${t.title}`}>
-          {c.cover_path ? <FileImage path={c.cover_path} alt={t.title} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-muted"><Clapperboard className="size-8" /></div>}
+        <button ref={cardRef} type="button" className="relative block w-full text-left" onMouseEnter={() => setLive(true)} onMouseLeave={() => setLive(false)} onFocus={() => setLive(true)} onBlur={() => setLive(false)} onClick={() => setOpen(true)} aria-label={`Assistir ${t.title}`}>
+          {live && film.length > 0 ? <div className="aspect-video w-full overflow-hidden"><FilmPlayer mini scenes={film} aspect="16:9" className="[&>div]:rounded-none" /></div> : c.cover_path ? <FileImage path={c.cover_path} alt={t.title} className="aspect-video w-full object-cover" /> : <div className="grid aspect-video place-items-center bg-muted"><Clapperboard className="size-8" /></div>}
           <span className="absolute bottom-2 right-2 flex gap-1 font-mono text-[10px]"><span className="rounded bg-background/80 px-1.5 py-0.5">{aspect}</span>{d.resolution && <span className="rounded bg-background/80 px-1.5 py-0.5">{d.resolution}</span>}<span className="rounded bg-background/80 px-1.5 py-0.5">{`${filmSeconds(film)} s`}</span></span>
         </button>
         <div className="space-y-3 p-4 text-center sm:text-left">
@@ -101,7 +108,7 @@ function SynthCard({ c }: { c: Creation }) {
       </Card>
       <Dialog open={open} onOpenChange={setOpen} title={t.title} description={t.logline || undefined}>
         <div className="max-h-[75vh] space-y-5 overflow-y-auto pr-1">
-          {open && film.length > 0 && <FilmPlayer scenes={film} aspect={aspect} />}
+          {open && film.length > 0 && <FilmPlayer scenes={film} aspect={aspect} title={t.title} />}
           <div className="space-y-3">
             {(d.scenes ?? []).map((s, i) => (
               <div key={i} className="space-y-1 border-l-2 border-cyan/40 pl-3">
