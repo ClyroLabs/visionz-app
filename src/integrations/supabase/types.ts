@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      child_profiles: {
+        Row: {
+          created_at: string
+          daily_minutes: number
+          id: string
+          max_rating: string
+          name: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          daily_minutes?: number
+          id?: string
+          max_rating?: string
+          name: string
+          user_id?: string
+        }
+        Update: {
+          created_at?: string
+          daily_minutes?: number
+          id?: string
+          max_rating?: string
+          name?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       contact_submissions: {
         Row: {
           created_at: string
@@ -44,9 +71,43 @@ export type Database = {
         }
         Relationships: []
       }
+      content_reports: {
+        Row: {
+          created_at: string
+          details: string | null
+          id: string
+          reason: string
+          reporter_id: string
+          status: string
+          title: string
+          title_ref: string
+        }
+        Insert: {
+          created_at?: string
+          details?: string | null
+          id?: string
+          reason: string
+          reporter_id?: string
+          status?: string
+          title: string
+          title_ref: string
+        }
+        Update: {
+          created_at?: string
+          details?: string | null
+          id?: string
+          reason?: string
+          reporter_id?: string
+          status?: string
+          title?: string
+          title_ref?: string
+        }
+        Relationships: []
+      }
       creations: {
         Row: {
           age_rating: string
+          ai_analysis: Json | null
           audio_path: string | null
           cover_path: string | null
           created_at: string
@@ -62,6 +123,7 @@ export type Database = {
         }
         Insert: {
           age_rating?: string
+          ai_analysis?: Json | null
           audio_path?: string | null
           cover_path?: string | null
           created_at?: string
@@ -77,6 +139,7 @@ export type Database = {
         }
         Update: {
           age_rating?: string
+          ai_analysis?: Json | null
           audio_path?: string | null
           cover_path?: string | null
           created_at?: string
@@ -88,6 +151,96 @@ export type Database = {
           title?: string
           tool?: string
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      moderation_decisions: {
+        Row: {
+          created_at: string
+          decision: string
+          id: string
+          moderator_id: string
+          note: string | null
+          rating: string | null
+          target_id: string
+          target_title: string
+          target_type: string
+        }
+        Insert: {
+          created_at?: string
+          decision: string
+          id?: string
+          moderator_id: string
+          note?: string | null
+          rating?: string | null
+          target_id: string
+          target_title: string
+          target_type: string
+        }
+        Update: {
+          created_at?: string
+          decision?: string
+          id?: string
+          moderator_id?: string
+          note?: string | null
+          rating?: string | null
+          target_id?: string
+          target_title?: string
+          target_type?: string
+        }
+        Relationships: []
+      }
+      parent_biometrics: {
+        Row: {
+          consent_at: string
+          descriptor: number[]
+          failed_attempts: number
+          locked_until: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          consent_at?: string
+          descriptor: number[]
+          failed_attempts?: number
+          locked_until?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          consent_at?: string
+          descriptor?: number[]
+          failed_attempts?: number
+          locked_until?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      parental_events: {
+        Row: {
+          action: string
+          created_at: string
+          detail: string | null
+          id: string
+          result: string
+          user_id: string
+        }
+        Insert: {
+          action: string
+          created_at?: string
+          detail?: string | null
+          id?: string
+          result: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          created_at?: string
+          detail?: string | null
+          id?: string
+          result?: string
           user_id?: string
         }
         Relationships: []
@@ -218,6 +371,47 @@ export type Database = {
         }
         Relationships: []
       }
+      purchase_requests: {
+        Row: {
+          child_profile_id: string
+          created_at: string
+          id: string
+          price: number
+          status: string
+          title: string
+          title_id: string
+          user_id: string
+        }
+        Insert: {
+          child_profile_id: string
+          created_at?: string
+          id?: string
+          price?: number
+          status?: string
+          title: string
+          title_id: string
+          user_id?: string
+        }
+        Update: {
+          child_profile_id?: string
+          created_at?: string
+          id?: string
+          price?: number
+          status?: string
+          title?: string
+          title_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "purchase_requests_child_profile_id_fkey"
+            columns: ["child_profile_id"]
+            isOneToOne: false
+            referencedRelation: "child_profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_preferences: {
         Row: {
           kids_default: boolean
@@ -244,6 +438,24 @@ export type Database = {
           notify_email?: boolean
           notify_push?: boolean
           updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
           user_id?: string
         }
         Relationships: []
@@ -283,10 +495,16 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "moderator" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -413,6 +631,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "moderator", "user"],
+    },
   },
 } as const
