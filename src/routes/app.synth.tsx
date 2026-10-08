@@ -1,3 +1,5 @@
+import { PlanGate, QuotaHint, usePlan, useRefreshPlan, blocked } from "@/experience/plan-ui";
+import { resolutionAllowed } from "@/lib/plans";
 import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
@@ -53,6 +55,8 @@ function Synth() {
   const [clips, setClips] = useState<(string | null)[]>([]);
   const [clipIndex, setClipIndex] = useState<number | null>(null);
   const [sel, setSel] = useState(0);
+  const plan = usePlan();
+  const refreshPlan = useRefreshPlan();
   const [seek, setSeek] = useState<{ t: number; n: number } | undefined>();
   const startClip = useServerFn(synthClipStart);
   const clipStatus = useServerFn(synthClipStatus);
@@ -145,13 +149,14 @@ function Synth() {
           </div>
           <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
             <div className="space-y-1.5"><Label htmlFor="sy-f">Formato</Label><Select id="sy-f" value={aspect} onChange={(e) => setAspect(e.target.value as Aspect)}>{ASPECTS.map((a) => <option key={a} value={a}>{a}</option>)}</Select></div>
-            <div className="space-y-1.5"><Label htmlFor="sy-r">Exportação final</Label><Select id="sy-r" value={res} onChange={(e) => setRes(e.target.value as Resolution)}>{RESOLUTIONS.map((r) => <option key={r} value={r}>{r}</option>)}</Select></div>
+            <div className="space-y-1.5"><Label htmlFor="sy-r">Exportação final</Label><Select id="sy-r" value={res} onChange={(e) => setRes(e.target.value as Resolution)}>{RESOLUTIONS.map((r) => <option key={r} value={r} disabled={!resolutionAllowed(plan.plan, r)}>{resolutionAllowed(plan.plan, r) ? r : `${r} 🔒`}</option>)}</Select></div>
             <div className="space-y-1.5"><Label htmlFor="sy-s">Estilo</Label><Select id="sy-s" value={style} onChange={(e) => setStyle(e.target.value)}>{STYLES.map((s) => <option key={s}>{s}</option>)}</Select></div>
             <div className="space-y-1.5"><Label htmlFor="sy-n">Cenas</Label><Select id="sy-n" value={scenes} onChange={(e) => setScenes(Number(e.target.value))}>{[3, 4, 5, 6].map((n) => <option key={n} value={n}>{n} cenas</option>)}</Select></div>
             <div className="space-y-1.5"><Label htmlFor="sy-a">Classificação</Label><Select id="sy-a" value={age} onChange={(e) => setAge(e.target.value as Age)}>{AGE_RATINGS.map((a) => <option key={a} value={a}>{a === "L" ? "Livre" : `${a} anos`}</option>)}</Select></div>
           </div>
           <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <Button type="submit" loading={busy === "board"} className="w-full sm:w-auto"><Sparkles />{busy === "board" ? "Escrevendo roteiro…" : "Criar filme"}</Button>
+            <Button type="submit" loading={busy === "board"} disabled={blocked(plan, "synth_board")} className="w-full sm:w-auto"><Sparkles />{busy === "board" ? "Escrevendo roteiro…" : "Criar filme"}</Button>
+            <QuotaHint feature="synth_board" />
             <span className="text-xs text-muted-foreground">{`Roteiro em 4 idiomas numa só chamada · ~${COST.board} crédito de exemplo`}</span>
           </div>
           <p className="text-xs text-muted-foreground">A exportação em 2K, 4K ou 8K é a etapa final (demonstração). Os clipes de IA saem na qualidade máxima do modelo.</p>
@@ -166,7 +171,7 @@ function Synth() {
             <p className="text-muted-foreground">{board.logline}</p>
             <div className="space-y-1"><div className="flex justify-between text-sm"><span>Imagens das cenas</span><span className="font-mono">{done}/{board.scenes.length}</span></div><Progress value={(done / board.scenes.length) * 100} variant="cyan" label="Imagens geradas" /><p className="text-xs text-muted-foreground">{`~${COST.image} créditos de exemplo por imagem · os movimentos de câmera são gratuitos`}</p></div>
             <div className="flex flex-col gap-2 sm:flex-row">
-              <Button variant="neon" loading={busy === "images"} disabled={done === board.scenes.length || busy !== null} onClick={makeAll}><ImagePlus />{busy === "images" ? `Gerando cena ${(imgIndex ?? 0) + 1}…` : "Gerar todas as imagens"}</Button>
+              <Button variant="neon" loading={busy === "images"} disabled={done === board.scenes.length || busy !== null || blocked(plan, "synth_image")} onClick={makeAll}><ImagePlus />{busy === "images" ? `Gerando cena ${(imgIndex ?? 0) + 1}…` : "Gerar todas as imagens"}</Button>
               <Button loading={busy === "save"} disabled={busy !== null || clipIndex !== null} onClick={save}><Save />Salvar na biblioteca</Button>
             </div>
           </Card>
@@ -186,7 +191,9 @@ function Synth() {
               </div>
               <div className="flex flex-wrap items-center gap-2">
                 {!paths[i] && <Button size="sm" variant="soft" loading={imgIndex === i} disabled={busy !== null || imgIndex !== null} onClick={() => makeImage(i)}><ImagePlus />{imgIndex === i ? "Gerando…" : "Gerar imagem"}</Button>}
-                {paths[i] && <Button size="sm" variant="neon" loading={clipIndex === i} disabled={!!clips[i] || clipIndex !== null || busy !== null} onClick={() => makeClip(i)}><Video />{clips[i] ? "Clipe pronto" : clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button>}
+                {!paths[i] && <QuotaHint feature="synth_image" />}
+                {paths[i] && !clips[i] && <PlanGate feature="synth_clip"><div className="flex flex-wrap items-center gap-2"><Button size="sm" variant="neon" loading={clipIndex === i} disabled={clipIndex !== null || busy !== null || blocked(plan, "synth_clip")} onClick={() => makeClip(i)}><Video />{clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button><QuotaHint feature="synth_clip" /></div></PlanGate>}
+                {false && <Button size="sm" variant="neon" loading={clipIndex === i} disabled={!!clips[i] || clipIndex !== null || busy !== null} onClick={() => makeClip(i)}><Video />{clips[i] ? "Clipe pronto" : clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button>}
                 {paths[i] && !clips[i] && <span className="text-xs text-muted-foreground">{`este clipe usa ~${COST.clip} créditos de exemplo`}</span>}
               </div>
             </Card>); })()}

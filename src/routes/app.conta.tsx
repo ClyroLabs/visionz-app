@@ -1,3 +1,4 @@
+import { PlanUsageTab } from "@/experience/plan-ui";
 import { ParentalPanel } from "@/experience/parental-ui";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -28,6 +29,7 @@ export const Route = createFileRoute("/app/conta")({
       { property: "og:description", content: "Gerencie sua conta VisionZ." },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { tab?: string } => (typeof s.tab === "string" ? { tab: s.tab } : {}),
   component: Account,
 });
 
@@ -61,7 +63,7 @@ function Account() {
         </div>
         <Badge variant="cyan">Dados de demonstração · nada é cobrado</Badge>
       </Card>
-      <Tabs defaultValue="perfil" className="space-y-6">
+      <Tabs defaultValue={Route.useSearch().tab ?? "perfil"} className="space-y-6">
         <TabsList>
           <TabsTrigger value="perfil">Perfil</TabsTrigger>
           <TabsTrigger value="saldos">Saldos</TabsTrigger>
@@ -69,6 +71,7 @@ function Account() {
           <TabsTrigger value="recebimentos">Recebimentos</TabsTrigger>
           <TabsTrigger value="preferencias">Preferências</TabsTrigger>
           <TabsTrigger value="parental">Controle parental</TabsTrigger>
+          <TabsTrigger value="plano">Plano e uso</TabsTrigger>
         </TabsList>
         <TabsContent value="perfil"><ProfileTab uid={uid} profile={profile} avatarUrl={avatar.data ?? undefined} name={name} /></TabsContent>
         <TabsContent value="saldos"><BalancesTab uid={uid} /></TabsContent>
@@ -76,6 +79,7 @@ function Account() {
         <TabsContent value="recebimentos"><PayoutsTab uid={uid} /></TabsContent>
         <TabsContent value="preferencias"><PrefsTab uid={uid} /></TabsContent>
         <TabsContent value="parental"><ParentalPanel /></TabsContent>
+        <TabsContent value="plano"><PlanUsageTab /></TabsContent>
       </Tabs>
     </div>
   );
