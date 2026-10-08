@@ -44,8 +44,9 @@ export function FaceGateHost() {
     }
   };
 
+  if (!open) return null;
   return (
-    <Dialog open={open} onOpenChange={(v) => !v && close(false)} title="Confirme que é você" description={faceRequest?.title}>
+    <Dialog open onOpenChange={(v) => !v && close(false)} title="Confirme que é você" description={faceRequest?.title}>
       {session === null ? (
         <div className="space-y-4 text-center">
           <p className="text-sm text-muted-foreground">Entre com a conta do responsável para usar a verificação facial.</p>
