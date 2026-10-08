@@ -184,7 +184,7 @@ export function PresaleCheckout({ p, onBack, onSeeAllocations }: { p: LaunchProj
             <ol className="space-y-2">
               {["Transação enviada", "Confirmando 1/3", "Confirmando 2/3", "Confirmando 3/3", "Concluída"].map((s, i) => (
                 <li key={s} className="flex items-center gap-2 text-sm">
-                  {i < conf + 1 ? (i <= conf - 1 || i === 0 && conf > 0 ? <Check className="size-4 text-success" /> : <Loader2 className="size-4 animate-spin text-cyan" />) : <span className="size-4 rounded-full border" />}
+                  {i < conf ? <Check className="size-4 text-success" /> : i === conf ? <Loader2 className="size-4 animate-spin text-cyan" /> : <span className="size-4 rounded-full border" />}
                   <span className={i <= conf ? "" : "text-muted-foreground"}>{s}</span>
                 </li>
               ))}

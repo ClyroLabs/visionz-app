@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import { CalendarDays, Copy, Search, ShieldCheck, Users } from "lucide-react";
 import { Badge, Button, Card, Dialog, Input, NetworkTag, Progress, Select, cn, useToast } from "@/index";
+import { MyAllocations, PresaleCheckout, useAllocations } from "./presale-ui";
+import { raisedBy } from "./presale";
 import { LP_CATEGORIES, LP_NETWORKS, LP_PROJECTS, LP_STATUSES, compact, fdv, filterProjects, marketCap, progressPct, type LaunchProject, type LpFilter, type LpSort } from "./launchpad-data";
 
 const tone = { Ativo: "success", "Em análise": "warning", Captação: "cyan", Encerrado: "neutral" } as const;
@@ -20,7 +22,9 @@ function Chip({ active, onClick, children }: { active: boolean; onClick: () => v
 export function LaunchpadGallery() {
   const [f, setF] = useState<LpFilter>({ category: "Todas", network: "todas", status: "Todos", q: "", sort: "recentes" });
   const [open, setOpen] = useState<LaunchProject | null>(null);
-  const list = useMemo(() => filterProjects(LP_PROJECTS, f), [f]);
+  const all = useAllocations();
+  const live = useMemo(() => LP_PROJECTS.map((p) => { const extra = raisedBy(all, p.id); const n = all.filter((a) => a.projectId === p.id).length; return extra ? { ...p, raised: p.raised + extra, backers: p.backers + n } : p; }), [all]);
+  const list = useMemo(() => filterProjects(live, f), [f, live]);
   const up = (p: Partial<LpFilter>) => setF({ ...f, ...p });
 
   return (
@@ -55,7 +59,7 @@ export function LaunchpadGallery() {
           {list.map((p) => <ProjectCard key={p.id} p={p} onOpen={() => setOpen(p)} />)}
         </div>
       )}
-      <ProjectDialog p={open} onClose={() => setOpen(null)} />
+      <ProjectDialog p={open ? live.find((x) => x.id === open.id) ?? open : null} onClose={() => setOpen(null)} />
     </div>
   );
 }
@@ -97,11 +101,22 @@ function Stat({ k, v }: { k: string; v: string }) {
 
 function ProjectDialog({ p, onClose }: { p: LaunchProject | null; onClose: () => void }) {
   const toast = useToast();
+  const [mode, setMode] = useState<"info" | "buy" | "mine">("info");
+  const [lastId, setLastId] = useState<string | null>(null);
+  if ((p?.id ?? null) !== lastId) { setLastId(p?.id ?? null); setMode("info"); }
   const alloc = p ? ([["Comunidade", p.allocation.community, "bg-magenta"], ["Equipe", p.allocation.team, "bg-primary"], ["Tesouraria", p.allocation.treasury, "bg-cyan"], ["Liquidez", p.allocation.liquidity, "bg-gold"]] as const) : [];
   return (
     <Dialog open={!!p} onOpenChange={(o) => !o && onClose()} title={p?.name ?? ""} description={p?.category ?? ""}
       className="max-sm:h-dvh max-sm:max-h-dvh max-sm:w-screen max-sm:max-w-none max-sm:rounded-none sm:w-[min(92vw,44rem)] max-h-[90dvh] overflow-y-auto">
-      {p && (
+      {p && mode === "buy" && <PresaleCheckout p={p} onBack={() => setMode("info")} onSeeAllocations={() => setMode("mine")} />}
+      {p && mode === "mine" && (
+        <div className="space-y-3">
+          <Button size="sm" variant="ghost" onClick={() => setMode("info")}>Voltar ao projeto</Button>
+          <p className="label-eyebrow text-xs">Minhas cotas</p>
+          <MyAllocations projectId={p.id} projects={LP_PROJECTS} />
+        </div>
+      )}
+      {p && mode === "info" && (
         <div className="space-y-5">
           <div className="relative -mx-1 overflow-hidden rounded-lg">
             <img src={p.image} alt={p.name} width={992} height={672} className="aspect-[16/8] w-full object-cover" />
@@ -140,11 +155,16 @@ function ProjectDialog({ p, onClose }: { p: LaunchProject | null; onClose: () =>
           </div>
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <Button variant="ghost" onClick={onClose}>Fechar</Button>
-            <Button disabled={p.status !== "Captação"} onClick={() => toast({ title: "Apoio simulado registrado", description: "Demonstração · exemplo, não é promessa" })}>Apoiar (demonstração)</Button>
+            <Button variant="ghost" onClick={() => setMode("mine")}>Minhas cotas</Button>
+            <Button disabled={p.status !== "Captação"} onClick={() => setMode("buy")}>Apoiar (demonstração)</Button>
           </div>
           <p className="text-center text-xs text-muted-foreground">Demonstração · exemplo, não é promessa. Dados simulados, sem dinheiro real.</p>
         </div>
       )}
     </Dialog>
   );
+}
+
+export function AllocationsTab() {
+  return <MyAllocations projects={LP_PROJECTS} />;
 }

@@ -195,10 +195,17 @@ export function ToastProvider({ children }: ToastProviderProps) {
     setItems((s) => [...s, { ...t, id }]);
     setTimeout(() => setItems((s) => s.filter((x) => x.id !== id)), 4000);
   }, []);
+  const box = useRef<HTMLDivElement>(null);
+  // Re-raise into the browser top layer so notices show above open modals.
+  useEffect(() => {
+    const el = box.current as (HTMLDivElement & { showPopover?: () => void; hidePopover?: () => void }) | null;
+    if (!el?.showPopover) return;
+    try { if (el.matches(":popover-open")) el.hidePopover!(); if (items.length) el.showPopover(); } catch { /* unsupported */ }
+  }, [items]);
   return (
     <ToastContext.Provider value={push}>
       {children}
-      <div aria-live="polite" className="pointer-events-none fixed bottom-4 right-4 z-[100] flex flex-col gap-2">
+      <div ref={box} popover="manual" aria-live="polite" className="pointer-events-none fixed inset-auto bottom-4 right-4 z-[100] m-0 flex flex-col gap-2 overflow-visible border-0 bg-transparent p-0 [&:not(:popover-open)]:hidden">
         {items.map((t) => (
           <div key={t.id} role="status" className={toastVariants({ variant: t.variant })}>
             <div className="flex-1">
