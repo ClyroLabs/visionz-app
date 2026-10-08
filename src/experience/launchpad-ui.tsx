@@ -5,7 +5,7 @@ import { LP_CATEGORIES, LP_NETWORKS, LP_PROJECTS, LP_STATUSES, compact, fdv, fil
 
 const tone = { Ativo: "success", "Em análise": "warning", Captação: "cyan", Encerrado: "neutral" } as const;
 const netLabel = { solana: "Solana", base: "Base", arbitrum: "Arbitrum", ethereum: "Ethereum" } as const;
-const usd = (n: number) => `US$ ${n < 1 ? n.toFixed(n < 0.01 ? 4 : 3) : compact(n)}`;
+const usd = (n: number) => n === 0 ? "US$ 0" : `US$ ${n < 1 ? n.toFixed(n < 0.01 ? 4 : 3) : compact(n)}`;
 
 function Chip({ active, onClick, children }: { active: boolean; onClick: () => void; children: React.ReactNode }) {
   return (
@@ -97,9 +97,9 @@ function Stat({ k, v }: { k: string; v: string }) {
 
 function ProjectDialog({ p, onClose }: { p: LaunchProject | null; onClose: () => void }) {
   const toast = useToast();
-  const alloc = p ? ([["Comunidade", p.allocation.community, "bg-magenta"], ["Equipe", p.allocation.team, "bg-violet"], ["Tesouraria", p.allocation.treasury, "bg-cyan"], ["Liquidez", p.allocation.liquidity, "bg-gold"]] as const) : [];
+  const alloc = p ? ([["Comunidade", p.allocation.community, "bg-magenta"], ["Equipe", p.allocation.team, "bg-primary"], ["Tesouraria", p.allocation.treasury, "bg-cyan"], ["Liquidez", p.allocation.liquidity, "bg-gold"]] as const) : [];
   return (
-    <Dialog open={!!p} onOpenChange={(o) => !o && onClose()} title={p?.name ?? ""} description={p ? `${p.category} · ${netLabel[p.network]}` : ""}
+    <Dialog open={!!p} onOpenChange={(o) => !o && onClose()} title={p?.name ?? ""} description={p?.category ?? ""}
       className="max-sm:h-dvh max-sm:max-h-dvh max-sm:w-screen max-sm:max-w-none max-sm:rounded-none sm:w-[min(92vw,44rem)] max-h-[90dvh] overflow-y-auto">
       {p && (
         <div className="space-y-5">
