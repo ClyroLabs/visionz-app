@@ -54,30 +54,36 @@ function Intro() {
     setMuted(!on);
   };
 
+  // Phones/tablets forbid sound before a tap. Instead of playing muted, the intro waits on a
+  // full-screen "tap to start" layer, so it always begins from 0s with sound on every device.
+  const [gate, setGate] = useState(false);
+  const started = useRef(false);
+  const start = () => {
+    const v = video.current;
+    if (!v) return;
+    v.muted = false;
+    v.currentTime = 0;
+    v.play().then(() => { setMuted(false); setGate(false); started.current = true; }).catch(() => {});
+  };
+
   useEffect(() => {
     const v = video.current;
-    const unlock = (e: Event) => {
-      const el = e.target as Element | null;
-      if (el?.closest?.("button")) return; // buttons handle sound themselves
-      const cur = video.current;
-      if (cur && cur.muted) { cur.muted = false; cur.play().catch(() => {}); setMuted(false); }
-    };
-    const evs = ["pointerdown", "touchstart", "keydown", "wheel", "scroll"] as const;
-    if (v) {
-      // Starts with sound; browsers that block unmuted autoplay get muted playback,
-      // and sound turns on automatically at the visitor's first interaction anywhere.
+    if (v && !started.current) {
       v.muted = false;
-      v.play().then(() => setMuted(false)).catch(() => {
-        v.muted = true;
-        setMuted(true);
-        v.play().catch(() => {});
-        evs.forEach((n) => window.addEventListener(n, unlock, { once: true, capture: true, passive: true }));
+      v.play().then(() => { setMuted(false); started.current = true; }).catch(() => {
+        v.pause();
+        setGate(true);
       });
     }
-    const safety = setTimeout(finish, 20000);
-    return () => { clearTimeout(safety); evs.forEach((n) => window.removeEventListener(n, unlock, { capture: true })); };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lang, src]);
+
+  useEffect(() => {
+    if (gate) return;
+    const safety = setTimeout(finish, 20000);
+    return () => clearTimeout(safety);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gate]);
 
 
   return (
@@ -94,7 +100,6 @@ function Intro() {
           src={src}
           poster={poster.url}
           className={`relative h-dvh w-full object-contain transition-opacity duration-500 landscape:object-cover ${ready ? "opacity-100" : "opacity-0"}`}
-          autoPlay
           playsInline
           preload="auto"
           onPlaying={() => setReady(true)}
@@ -103,9 +108,12 @@ function Intro() {
           aria-label="Vídeo de abertura da VisionZ"
         />
       )}
-      {muted && ready && !leaving && (
-        <button type="button" onClick={() => setSound(true)} className="absolute inset-x-0 bottom-[calc(max(1.25rem,env(safe-area-inset-bottom))+4rem)] mx-auto flex w-max max-w-[90vw] items-center gap-2 rounded-full border border-magenta/50 bg-background/70 px-5 py-3 text-sm font-medium text-foreground shadow-glow-brand backdrop-blur animate-breathe focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring sm:bottom-auto sm:top-1/2 sm:-translate-y-1/2">
-          <Volume2 className="size-5 text-magenta" />Toque para ativar o som
+      {gate && !leaving && (
+        <button type="button" onClick={start} aria-label="Toque para começar" className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-6 bg-background/60 backdrop-blur-sm focus-visible:outline-none">
+          <Logo brand="visionz-symbol" alt="" className="h-20 w-auto drop-shadow-[0_0_18px_var(--magenta)]" />
+          <span className="flex items-center gap-2 rounded-full border border-magenta/50 bg-background/70 px-6 py-3 text-base font-medium text-foreground shadow-glow-brand animate-breathe">
+            <Volume2 className="size-5 text-magenta" />Toque para começar
+          </span>
         </button>
       )}
       <LanguageSwitcher className="absolute right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))]" />

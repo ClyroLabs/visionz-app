@@ -3340,6 +3340,7 @@ const EXTRA: Record<string, [string, string, string]> = {
   "O entretenimento nunca mais será o mesmo.": ["Entertainment will never be the same again.", "El entretenimiento nunca más será lo mismo.", "娱乐将不再一样。"],
   "Tecnologia. Conteúdo. Comunidade. O futuro é agora.": ["Technology. Content. Community. The future is now.", "Tecnología. Contenido. Comunidad. El futuro es ahora.", "技术。内容。社区。未来已来。"],
   "Toque para ativar o som": ["Tap to turn on sound", "Toca para activar el sonido", "点击开启声音"],
+  "Toque para começar": ["Tap to start", "Toca para empezar", "点击开始"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
