@@ -33,6 +33,14 @@ function Intro() {
   const navigate = useNavigate();
   const { lang } = useLang();
   const video = useRef<HTMLVideoElement>(null);
+  const bg = useRef<HTMLVideoElement>(null);
+  /** Keeps the blurred backdrop copy in step with the main video (drift > 0.3s is corrected). */
+  const syncBg = (play: boolean) => {
+    const m = video.current, b = bg.current;
+    if (!m || !b) return;
+    if (Math.abs(b.currentTime - m.currentTime) > 0.3) b.currentTime = m.currentTime;
+    if ((play || !m.paused) && b.paused) b.play().catch(() => {});
+  };
   const [muted, setMuted] = useState(true);
   const [leaving, setLeaving] = useState(false);
   const [ready, setReady] = useState(false);
