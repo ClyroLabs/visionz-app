@@ -3,7 +3,7 @@ import { CalendarDays, Copy, Search, ShieldCheck, Users } from "lucide-react";
 import { Badge, Button, Card, Dialog, Input, NetworkTag, Progress, Select, cn, useToast } from "@/index";
 import { LP_CATEGORIES, LP_NETWORKS, LP_PROJECTS, LP_STATUSES, compact, fdv, filterProjects, marketCap, progressPct, type LaunchProject, type LpFilter, type LpSort } from "./launchpad-data";
 
-const tone = { Ativo: "success", "Em análise": "warning", Captação: "cyan", Encerrado: "secondary" } as const;
+const tone = { Ativo: "success", "Em análise": "warning", Captação: "cyan", Encerrado: "neutral" } as const;
 const netLabel = { solana: "Solana", base: "Base", arbitrum: "Arbitrum", ethereum: "Ethereum" } as const;
 const usd = (n: number) => `US$ ${n < 1 ? n.toFixed(n < 0.01 ? 4 : 3) : compact(n)}`;
 
