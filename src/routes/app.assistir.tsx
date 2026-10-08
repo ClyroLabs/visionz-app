@@ -49,7 +49,7 @@ function Watch() {
     }
     if (sec >= total * COMPLETE_THRESHOLD && !muted && complete(t.id)) {
       const g = earn(`Título concluído: ${t.title}`, COMPLETE_VZN, "conclusao");
-      toast(g > 0 ? { title: `+${g.toLocaleString("pt-BR")} VZN`, description: "Título concluído.", variant: "reward" } : { title: "Título concluído", description: kids ? "Perfil infantil ganha só XP." : "Limite de hoje atingido.", variant: "default" });
+      toast(g > 0 ? { title: `+${g.toLocaleString("pt-BR")} VZN`, description: "Título concluído.", variant: "reward" } : { title: "Título concluído", description: kids ? "Perfil infantil ganha só XP." : "Limite de hoje atingido.", variant: "info" });
     }
   }, [sec]); // eslint-disable-line react-hooks/exhaustive-deps
 

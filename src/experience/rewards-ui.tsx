@@ -31,7 +31,7 @@ export function MissionsCard() {
     { id: "comprar1", label: "Comprar um título avulso", done: owned.length >= 1, progress: `${Math.min(1, owned.length)}/1` },
   ];
   const reward = missionReward(xp);
-  const tell = (g: number) => toast(g > 0 ? { title: `+${g.toLocaleString("pt-BR")} VZN`, description: "Recompensa da gamificação.", variant: "reward" } : { title: "Sem $VZN agora", description: kids ? "Perfil infantil ganha só XP." : "Limite de hoje atingido.", variant: "default" });
+  const tell = (g: number) => toast(g > 0 ? { title: `+${g.toLocaleString("pt-BR")} VZN`, description: "Recompensa da gamificação.", variant: "reward" } : { title: "Sem $VZN agora", description: kids ? "Perfil infantil ganha só XP." : "Limite de hoje atingido.", variant: "info" });
 
   return (
     <Card variant="featured" padding="lg" className="space-y-6">
