@@ -80,21 +80,16 @@ export const publishCreation = createServerFn({ method: "POST" })
   .handler(({ data, context }) => guard(async () => {
     const { data: c } = await context.supabase.from("creations").select("*").eq("id", data.id).eq("user_id", context.userId).maybeSingle();
     if (!c) throw new Error("Criação não encontrada.");
-    const d = (c.data ?? {}) as Record<string, unknown>;
-    const content = [c.title, c.description, d.logline, d.lyrics, ...(Array.isArray(d.scenes) ? (d.scenes as { description?: string; narration?: string }[]).flatMap((s) => [s.description, s.narration]) : [])]
-      .filter(Boolean).join("\n").slice(0, 6000);
-    const { askJson } = await ai();
-    const review = await askJson<{ allowed?: boolean; rating?: string; reason?: string }>(
-      "Você é a IA de moderação da VisionZ (classificação indicativa brasileira: L, 10, 12, 14, 16, 18). Bloqueie discurso de ódio, conteúdo sexual envolvendo menores, incitação à violência real, violação clara de direitos autorais.",
-      `Avalie o conteúdo abaixo. Formato: {"allowed": boolean, "rating": "L"|"10"|"12"|"14"|"16"|"18", "reason": string curta em português}.\n---\n${content}`,
-    );
-    const allowed = review.allowed === true;
-    const rating = stricterRating(asAge(c.age_rating), asAge(review.rating));
-    const note = String(review.reason ?? "").slice(0, 300);
+    const { analyzeContent, creationText, routeDecision } = await import("./moderation.server");
+    const a = await analyzeContent(creationText(c));
+    const status = routeDecision(a);
+    const allowed = status === "published";
+    const rating = stricterRating(asAge(c.age_rating), asAge(a.rating));
+    const note = (status === "review" ? "Em revisão por uma pessoa. " : "") + a.reasons.join(" ").slice(0, 280);
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
-    const { error } = await supabaseAdmin.from("creations").update({ status: allowed ? "published" : "blocked", age_rating: rating, moderation_note: note }).eq("id", c.id);
+    const { error } = await supabaseAdmin.from("creations").update({ status, age_rating: rating, moderation_note: note, ai_analysis: a as never }).eq("id", c.id);
     if (error) throw new Error("Não foi possível publicar agora.");
-    return { allowed, rating, note };
+    return { allowed, rating, note, status };
   }));
 
 export const unpublishCreation = createServerFn({ method: "POST" })
