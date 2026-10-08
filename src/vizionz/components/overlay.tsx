@@ -74,15 +74,12 @@ export function Dialog({ open, onOpenChange, title, description, className, chil
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
-    if (open && !d.open) { try { d.showModal(); } catch (e) { console.warn("dialog", e); } console.warn("dlg-eff", open, d.open, d.isConnected); }
+    if (open && !d.open) d.showModal();
     if (!open && d.open) d.close();
-  });
+  }, [open]);
   return (
     <dialog
-      ref={(el) => {
-        ref.current = el;
-        if (el && open && !el.open && el.isConnected) { try { el.showModal(); } catch { /* not ready */ } }
-      }}
+      ref={ref}
       onClose={() => onOpenChange(false)}
       onClick={(e) => e.target === ref.current && onOpenChange(false)}
       className={cn("m-auto w-[min(92vw,30rem)] rounded-xl border border-cyan/30 bg-surface p-0 text-foreground shadow-glow-cyan backdrop:bg-background/70 backdrop:backdrop-blur-sm", className)}
