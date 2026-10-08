@@ -4055,6 +4055,9 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Falha no envio do vídeo": ["Video upload failed", "Error al subir el video", "视频上传失败"],
 "Algo deu errado": ["Something went wrong", "Algo salió mal", "出了点问题"],
 "Nenhum vídeo publicado ainda.": ["No videos published yet.", "Aún no hay videos publicados.", "暂无已发布视频。"],
+  "Como converter e sacar": ["How to convert and withdraw", "Cómo convertir y retirar", "如何兑换和提现"],
+  "Ir para Converter e sacar": ["Go to Convert & withdraw", "Ir a Convertir y retirar", "前往兑换与提现"],
+  "Vídeo de demonstração · legendas em português": ["Demo video · captions in Portuguese", "Video de demostración · subtítulos en portugués", "演示视频 · 葡萄牙语字幕"],
 };
 export const DICT: Record<string, [string, string, string]> = { ...BASE, ...EXTRA };
 delete DICT["Entertainment"];
