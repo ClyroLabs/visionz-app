@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { Copy, KeyRound, Loader2, Music, Play, ShieldCheck, Sparkles } from "lucide-react";
+import { Copy, KeyRound, Loader2, Play } from "lucide-react";
+import { JukeboxIcon, SmartFilterIcon, SynthIcon } from "./api-icons";
 import { Badge, Button, Card, CardTitle, Input, cn, useToast } from "@/index";
 
 type ApiId = "filter" | "synth" | "jukebox";
-const APIS: { id: ApiId; name: string; text: string; icon: typeof ShieldCheck; method: string; path: string; price: string; field: string; sample: string }[] = [
-  { id: "filter", name: "Filtro Inteligente", text: "Modere o que seus usuários enviam, em tempo real.", icon: ShieldCheck, method: "POST", path: "/v1/smart-filter/check", price: "0,02 VZN / vídeo", field: "url", sample: "https://cdn.meujogo.gg/trailer.mp4" },
-  { id: "synth", name: "Clyro Synth", text: "Gere cenas e capas para o seu jogo ou app.", icon: Sparkles, method: "POST", path: "/v1/synth/generate", price: "0,10 VZN / imagem", field: "prompt", sample: "cidade neon ao amanhecer, estilo cinematográfico" },
-  { id: "jukebox", name: "Clyro Jukebox", text: "Crie trilhas com autoria registrada.", icon: Music, method: "POST", path: "/v1/jukebox/compose", price: "0,25 VZN / faixa", field: "mood", sample: "épico, synthwave, 90 bpm" },
+const APIS: { id: ApiId; name: string; text: string; icon: typeof SynthIcon; method: string; path: string; price: string; field: string; sample: string }[] = [
+  { id: "filter", name: "Filtro Inteligente", text: "Modere o que seus usuários enviam, em tempo real.", icon: SmartFilterIcon, method: "POST", path: "/v1/smart-filter/check", price: "0,02 VZN / vídeo", field: "url", sample: "https://cdn.meujogo.gg/trailer.mp4" },
+  { id: "synth", name: "Clyro Synth", text: "Gere cenas e capas para o seu jogo ou app.", icon: SynthIcon, method: "POST", path: "/v1/synth/generate", price: "0,10 VZN / imagem", field: "prompt", sample: "cidade neon ao amanhecer, estilo cinematográfico" },
+  { id: "jukebox", name: "Clyro Jukebox", text: "Crie trilhas com autoria registrada.", icon: JukeboxIcon, method: "POST", path: "/v1/jukebox/compose", price: "0,25 VZN / faixa", field: "mood", sample: "épico, synthwave, 90 bpm" },
 ];
 
 const rid = () => Math.random().toString(36).slice(2, 10);
@@ -53,7 +54,7 @@ export function ApiPlayground() {
             <button key={x.id} type="button" onClick={() => pick(x.id)} aria-pressed={on}
               className={cn("rounded-xl border bg-surface/60 p-4 text-left transition-all focus-visible:ring-2 focus-visible:ring-ring", on ? "border-cyan shadow-glow-cyan" : "hover:border-cyan/50")}>
               <div className="flex items-center gap-3">
-                <span className={cn("grid size-10 shrink-0 place-items-center rounded-lg", on ? "bg-cyan/15 text-cyan" : "bg-background text-muted-foreground")}><Icon className="size-5" /></span>
+                <span className={cn("relative grid size-12 shrink-0 place-items-center rounded-xl border transition-all", on ? "border-cyan/60 bg-cyan/10 text-cyan shadow-glow-cyan" : "border-border bg-background text-muted-foreground")}><Icon className="size-7" /></span>
                 <div className="min-w-0"><p className="truncate font-display text-sm tracking-wide">{x.name}</p><p className="font-mono text-[10px] text-muted-foreground">{x.price}</p></div>
               </div>
               <p className="mt-3 text-sm text-muted-foreground">{x.text}</p>
