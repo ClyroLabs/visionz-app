@@ -74,7 +74,7 @@ export function PlanUsageTab() {
           {FEATURES.map((f) => { const lim = p.limit(f); const u = p.used[f]; return (
             <div key={f} className="space-y-1">
               <div className="flex justify-between text-sm"><span>{FEATURE_LABEL[f]}</span><span className="font-mono">{lim ? `${u}/${lim}` : "—"}</span></div>
-              {lim ? <Progress value={(u / lim) * 100} variant={u >= lim ? "default" : "cyan"} label={FEATURE_LABEL[f]} /> : <p className="text-xs text-muted-foreground"><Lock className="mr-1 inline size-3" />Não incluído no seu plano</p>}
+              {lim ? <Progress value={(u / lim) * 100} variant={u >= lim ? "brand" : "cyan"} label={FEATURE_LABEL[f]} /> : <p className="text-xs text-muted-foreground"><Lock className="mr-1 inline size-3" />Não incluído no seu plano</p>}
             </div>); })}
         </div>
       </Card>
