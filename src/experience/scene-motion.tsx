@@ -45,7 +45,7 @@ function FilmLayer({ scene, index, layer, t, start, playing, urls }: { scene: Fi
     <div className="absolute inset-0 overflow-hidden" style={style} aria-hidden={!visible}>
       {clip ? <video ref={vref} src={clip} muted playsInline loop preload="auto" className="size-full object-cover" style={{ transform: "scale(1.02)" }} />
         : img ? <img src={img} alt={scene.title} className="size-full object-cover will-change-transform" style={{ transform: cameraTransform(scene.camera, layer?.progress ?? 0) }} />
-        : <div className="size-full bg-gradient-to-br from-violet/40 via-background to-cyan/20" style={{ transform: cameraTransform(scene.camera, layer?.progress ?? 0) }}><div className="size-full animate-pulse bg-[radial-gradient(circle_at_30%_40%,hsl(var(--primary)/.35),transparent_60%)]" /></div>}
+        : <div className="size-full bg-gradient-to-br from-violet/40 via-background to-cyan/20" style={{ transform: cameraTransform(scene.camera, layer?.progress ?? 0) }}><div className="size-full animate-pulse bg-primary/20" /></div>}
     </div>
   );
 }
@@ -98,13 +98,32 @@ export function FilmPlayer({ scenes, aspect, className, mini = false, seek, titl
         <div className="flex items-center gap-2">
           <Button size="sm" variant="soft" aria-label={playing ? "Pausar" : "Reproduzir"} onClick={toggle}>{playing ? <Pause /> : <Play />}</Button>
           <span className="font-mono text-xs tabular-nums text-muted-foreground">{fmtTime(t)}</span>
-          <input type="range" min={0} max={total} step={0.05} value={t} onChange={(e) => go(Number(e.target.value))} aria-label="Linha do tempo do filme" className="h-1.5 flex-1 cursor-pointer accent-[hsl(var(--primary))]" />
+          <input type="range" min={0} max={total} step={0.05} value={t} onChange={(e) => go(Number(e.target.value))} aria-label="Linha do tempo do filme" className="h-1.5 flex-1 cursor-pointer accent-cyan" />
           <span className="font-mono text-xs tabular-nums text-muted-foreground">{fmtTime(total)}</span>
           <Button size="sm" variant={loop ? "soft" : "ghost"} aria-label="Repetir" aria-pressed={loop} onClick={() => setLoop(!loop)}><Repeat /></Button>
           <Button size="sm" variant="ghost" aria-label="Tela cheia" onClick={() => box.current?.requestFullscreen?.()}><Maximize /></Button>
           <Button size="sm" variant="ghost" aria-label="Baixar filme" disabled={exporting !== null} onClick={doExport}><Download />{exporting !== null && <span className="font-mono text-xs">{Math.round(exporting * 100)}%</span>}</Button>
         </div>
       )}
+    </div>
+  );
+}
+
+/** Editor strip: one thumbnail per scene, width proportional to its length, transitions marked between. */
+export function SceneTimeline({ scenes, paths, clips, aspect, sel, onPick }: { scenes: { title: string; camera: Camera; duration_sec: number; transition: Transition }[]; paths: (string | null)[]; clips: (string | null)[]; aspect: Aspect; sel: number; onPick: (i: number) => void }) {
+  return (
+    <div className="flex items-stretch gap-1 overflow-x-auto pb-1" role="list" aria-label="Linha do tempo das cenas">
+      {scenes.map((s, i) => (
+        <div key={i} role="listitem" className="flex items-center gap-1" style={{ flex: `${s.duration_sec} 0 ${s.duration_sec * 18}px` }}>
+          {i > 0 && <span className="shrink-0 font-mono text-[10px] text-cyan" title={TRANSITION_LABEL[s.transition]}>{s.transition === "cut" ? "|" : s.transition === "wipe" ? "»" : "◇"}</span>}
+          <button type="button" onClick={() => onPick(i)} aria-pressed={sel === i} aria-label={`Cena ${i + 1}`}
+            className={cn("relative h-14 w-full overflow-hidden rounded-md border transition-all focus-visible:ring-2 focus-visible:ring-ring", sel === i ? "border-cyan shadow-glow-cyan" : "border-border opacity-80 hover:opacity-100")}>
+            {paths[i] ? <MotionFrame image={paths[i]} camera={s.camera} duration={s.duration_sec} alt={s.title} playing={false} className="size-full" /> : <div className="size-full animate-pulse bg-primary/15" />}
+            <span className="absolute bottom-0.5 left-1 font-mono text-[10px] text-white drop-shadow">{`${i + 1} · ${s.duration_sec}s`}</span>
+            {clips[i] && <span className="absolute right-1 top-0.5 rounded bg-cyan/80 px-1 font-mono text-[9px] text-background">IA</span>}
+          </button>
+        </div>
+      ))}
     </div>
   );
 }

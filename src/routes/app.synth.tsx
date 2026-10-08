@@ -8,7 +8,8 @@ import { Badge, Button, Card, CardDescription, CardTitle, Input, Label, Logo, Pr
 import { supabase } from "@/integrations/supabase/client";
 import { AGE_RATINGS, ASPECTS, CAMERAS, RESOLUTIONS, TRANSITIONS, filmLength, type Age, type Aspect, type Resolution, type Scene, type Storyboard } from "@/lib/creator";
 import { synthClipStart, synthClipStatus, synthSceneImage, synthStoryboard } from "@/lib/creator.functions";
-import { ASPECT_CLASS, CAMERA_LABEL, FilmPlayer, MotionFrame, TRANSITION_LABEL } from "@/experience/scene-motion";
+import { CAMERA_LABEL, FilmPlayer, SceneTimeline, TRANSITION_LABEL } from "@/experience/scene-motion";
+import { buildTimeline } from "@/experience/film-engine";
 import { CreationActions, CreationMeta, EmptyLibrary, FileImage, useMyCreations } from "@/experience/creator-ui";
 
 export const Route = createFileRoute("/app/synth")({
@@ -51,7 +52,10 @@ function Synth() {
   const [res, setRes] = useState<Resolution>("4K");
   const [clips, setClips] = useState<(string | null)[]>([]);
   const [clipIndex, setClipIndex] = useState<number | null>(null);
-  const [preview, setPreview] = useState(false);
+  const [sel, setSel] = useState(0);
+  const [seek, setSeek] = useState<{ t: number; n: number } | undefined>();
+  const setPreview = (_: boolean) => {};
+  const preview = true;
   const startClip = useServerFn(synthClipStart);
   const clipStatus = useServerFn(synthClipStatus);
   const editScene = (i: number, p: Partial<Scene>) => setBoard((b) => b && { ...b, scenes: b.scenes.map((s, j) => (j === i ? { ...s, ...p } : s)) });
@@ -165,40 +169,29 @@ function Synth() {
             <div className="space-y-1"><div className="flex justify-between text-sm"><span>Imagens das cenas</span><span className="font-mono">{done}/{board.scenes.length}</span></div><Progress value={(done / board.scenes.length) * 100} variant="cyan" label="Imagens geradas" /><p className="text-xs text-muted-foreground">{`~${COST.image} créditos de exemplo por imagem · os movimentos de câmera são gratuitos`}</p></div>
             <div className="flex flex-col gap-2 sm:flex-row">
               <Button variant="neon" loading={busy === "images"} disabled={done === board.scenes.length || busy !== null} onClick={makeAll}><ImagePlus />{busy === "images" ? `Gerando cena ${(imgIndex ?? 0) + 1}…` : "Gerar todas as imagens"}</Button>
-              <Button variant="soft" disabled={done === 0} onClick={() => setPreview(!preview)}><Film />{preview ? "Fechar prévia" : "Assistir prévia"}</Button>
               <Button loading={busy === "save"} disabled={busy !== null || clipIndex !== null} onClick={save}><Save />Salvar na biblioteca</Button>
             </div>
           </Card>
-          {preview && <Card padding="lg"><FilmPlayer aspect={aspect} scenes={board.scenes.map((s, i) => ({ ...s, image: paths[i], clip: clips[i] })).filter((s) => s.image)} /></Card>}
-          <div className="grid gap-4 md:grid-cols-2">
-            {board.scenes.map((s, i) => (
-              <Card key={i} padding="none" className="overflow-hidden">
-                <div className={`relative bg-muted ${ASPECT_CLASS[aspect]}`}>
-                  {paths[i] ? <MotionFrame image={paths[i]} clip={clips[i]} camera={s.camera} duration={s.duration_sec} alt={s.title} loop className="size-full" />
-                    : <div className="grid size-full place-items-center">
-                        <Button size="sm" variant="soft" loading={imgIndex === i} disabled={busy !== null || imgIndex !== null} onClick={() => makeImage(i)}><ImagePlus />{imgIndex === i ? "Gerando…" : "Gerar imagem"}</Button>
-                      </div>}
-                  <span className="absolute left-3 top-3 rounded-full bg-background/80 px-2.5 py-1 font-mono text-xs">Cena {i + 1}</span>
-                </div>
-                <div className="space-y-2 p-5 text-center sm:text-left">
-                  <CardTitle>{s.title}</CardTitle>
-                  <CardDescription>{s.description}</CardDescription>
-                  {s.narration && <p className="border-l-2 border-cyan/60 pl-3 text-left text-sm italic text-foreground/85">“{s.narration}”</p>}
-                  <div className="grid grid-cols-3 gap-2 pt-1 text-left">
-                    <div className="space-y-1"><Label htmlFor={`cam-${i}`} className="text-xs">Câmera</Label><Select id={`cam-${i}`} value={s.camera} onChange={(e) => editScene(i, { camera: e.target.value as Scene["camera"] })}>{CAMERAS.map((c) => <option key={c} value={c}>{CAMERA_LABEL[c]}</option>)}</Select></div>
-                    <div className="space-y-1"><Label htmlFor={`dur-${i}`} className="text-xs">Duração</Label><Select id={`dur-${i}`} value={s.duration_sec} onChange={(e) => editScene(i, { duration_sec: Number(e.target.value) })}>{[3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n}>{`${n} s`}</option>)}</Select></div>
-                    <div className="space-y-1"><Label htmlFor={`tr-${i}`} className="text-xs">Transição</Label><Select id={`tr-${i}`} value={s.transition} onChange={(e) => editScene(i, { transition: e.target.value as Scene["transition"] })}>{TRANSITIONS.map((t) => <option key={t} value={t}>{TRANSITION_LABEL[t]}</option>)}</Select></div>
-                  </div>
-                  {paths[i] && (
-                    <div className="flex flex-wrap items-center gap-2 pt-1">
-                      <Button size="sm" variant="neon" loading={clipIndex === i} disabled={!!clips[i] || clipIndex !== null || busy !== null} onClick={() => makeClip(i)}><Video />{clips[i] ? "Clipe pronto" : clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button>
-                      {!clips[i] && <span className="text-xs text-muted-foreground">{`este clipe usa ~${COST.clip} créditos de exemplo`}</span>}
-                    </div>
-                  )}
-                </div>
-              </Card>
-            ))}
-          </div>
+          <Card padding="lg" className="space-y-4">
+            <FilmPlayer aspect={aspect} title={board.title} seek={seek} scenes={board.scenes.map((s, i) => ({ ...s, image: paths[i], clip: clips[i] }))} />
+            <SceneTimeline scenes={board.scenes} paths={paths} clips={clips} aspect={aspect} sel={sel} onPick={(i) => { setSel(i); setSeek({ t: buildTimeline(board.scenes)[i].start, n: Date.now() }); }} />
+          </Card>
+          {(() => { const i = sel; const s = board.scenes[i]; if (!s) return null; return (
+            <Card padding="lg" className="space-y-4">
+              <div className="flex flex-wrap items-center justify-between gap-2"><CardTitle><span>Cena</span>{` ${i + 1} · `}<span data-no-translate>{s.title}</span></CardTitle><Badge variant="neutral" size="sm">{`${s.duration_sec} s`}</Badge></div>
+              <CardDescription data-no-translate>{s.description}</CardDescription>
+              <div className="space-y-1"><Label htmlFor="nar" className="text-xs">Narração</Label><Input id="nar" data-no-translate value={s.narration} maxLength={240} onChange={(e) => editScene(i, { narration: e.target.value })} /></div>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="space-y-1"><Label htmlFor="cam" className="text-xs">Câmera</Label><Select id="cam" value={s.camera} onChange={(e) => editScene(i, { camera: e.target.value as Scene["camera"] })}>{CAMERAS.map((c) => <option key={c} value={c}>{CAMERA_LABEL[c]}</option>)}</Select></div>
+                <div className="space-y-1"><Label htmlFor="dur" className="text-xs">Duração</Label><Select id="dur" value={s.duration_sec} onChange={(e) => editScene(i, { duration_sec: Number(e.target.value) })}>{[3, 4, 5, 6, 7, 8].map((n) => <option key={n} value={n}>{`${n} s`}</option>)}</Select></div>
+                <div className="space-y-1"><Label htmlFor="tr" className="text-xs">Transição</Label><Select id="tr" value={s.transition} onChange={(e) => editScene(i, { transition: e.target.value as Scene["transition"] })}>{TRANSITIONS.map((x) => <option key={x} value={x}>{TRANSITION_LABEL[x]}</option>)}</Select></div>
+              </div>
+              <div className="flex flex-wrap items-center gap-2">
+                {!paths[i] && <Button size="sm" variant="soft" loading={imgIndex === i} disabled={busy !== null || imgIndex !== null} onClick={() => makeImage(i)}><ImagePlus />{imgIndex === i ? "Gerando…" : "Gerar imagem"}</Button>}
+                {paths[i] && <Button size="sm" variant="neon" loading={clipIndex === i} disabled={!!clips[i] || clipIndex !== null || busy !== null} onClick={() => makeClip(i)}><Video />{clips[i] ? "Clipe pronto" : clipIndex === i ? "Gerando clipe…" : "Gerar clipe com IA"}</Button>}
+                {paths[i] && !clips[i] && <span className="text-xs text-muted-foreground">{`este clipe usa ~${COST.clip} créditos de exemplo`}</span>}
+              </div>
+            </Card>); })()}
         </section>
       )}
 
