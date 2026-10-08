@@ -1,7 +1,7 @@
 import { useEffect, useState, type ComponentType } from "react";
 import { LanguageSwitcher } from "@/experience/i18n";
 import { createFileRoute, Link, Outlet } from "@tanstack/react-router";
-import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft, PieChart as PieChartIcon, Landmark, Vault, Radar, Rocket, GraduationCap, ArrowLeftRight, PanelLeftClose, PanelLeftOpen } from "lucide-react";
+import { Menu, X, Baby, Clapperboard, Home, Network, PlayCircle, ShieldCheck, UserRound, Wallet, Sparkles, Music2, LayoutGrid, ArrowLeft, PieChart as PieChartIcon, Landmark, Vault, Radar, Rocket, GraduationCap, ArrowLeftRight, PanelLeftClose, PanelLeftOpen, Upload } from "lucide-react";
 import { Badge, Logo, Switch, ToastProvider, cn } from "@/index";
 import { ExperienceProvider, useExperience } from "@/experience/store";
 import { FaceGateHost } from "@/experience/parental-ui";
@@ -14,6 +14,7 @@ const nav = [
   { to: "/app/assistir", label: "Assistir", icon: PlayCircle },
   { to: "/app/perfis", label: "Perfis", icon: Baby },
   { to: "/app/estudio", label: "Estúdio", icon: Clapperboard },
+  { to: "/app/publicar", label: "Publicar vídeo", icon: Upload },
   { to: "/app/synth", label: "Clyro Synth", icon: Sparkles },
   { to: "/app/jukebox", label: "Clyro Jukebox", icon: Music2 },
   { to: "/app/vitrine", label: "Vitrine", icon: LayoutGrid },
