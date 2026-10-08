@@ -93,6 +93,7 @@ export function CompositionPlayer({ composition, className }: { composition: Com
 export function StatusBadge({ c }: { c: Creation }) {
   if (c.status === "published") return <Badge variant="success"><Globe />Publicado</Badge>;
   if (c.status === "blocked") return <Badge variant="destructive"><ShieldAlert />Bloqueado</Badge>;
+  if (c.status === "review") return <Badge variant="warning"><ShieldAlert />Em revisão</Badge>;
   return <Badge variant="neutral"><Lock />Rascunho</Badge>;
 }
 
@@ -108,7 +109,9 @@ export function CreationActions({ c }: { c: Creation }) {
     onSuccess: (r) => {
       refresh();
       if (!r.ok) return toast({ title: "Não foi possível publicar", description: r.error, variant: "error" });
-      toast(r.data.allowed
+      toast(r.data.status === "review"
+        ? { title: "Em revisão", description: "A IA ficou em dúvida: uma pessoa da moderação vai decidir.", variant: "info" }
+        : r.data.allowed
         ? { title: "Publicado na vitrine", description: `Aprovado pela IA · classificação ${r.data.rating}`, variant: "success" }
         : { title: "Bloqueado pela IA", description: r.data.note, variant: "error" });
     },
