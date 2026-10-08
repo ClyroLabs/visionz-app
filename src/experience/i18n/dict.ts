@@ -4043,7 +4043,6 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Meus vídeos": ["My videos", "Mis videos", "我的视频"],
 "Você ainda não publicou vídeos.": ["You haven't published any videos yet.", "Aún no has publicado videos.", "您还没有发布视频。"],
 "Publicado no catálogo!": ["Published to the catalog!", "¡Publicado en el catálogo!", "已发布到目录！"],
-"Em revisão": ["In review", "En revisión", "审核中"],
 "Não publicado": ["Not published", "No publicado", "未发布"],
 "Classificação final:": ["Final rating:", "Clasificación final:", "最终分级："],
 "Ver no catálogo": ["View in catalog", "Ver en el catálogo", "在目录中查看"],

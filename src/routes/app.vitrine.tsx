@@ -112,7 +112,7 @@ function VideoCard({ c }: { c: Creation }) {
         </div>
       </Card>
       <Dialog open={open} onOpenChange={setOpen} title={c.title} description={c.description ?? undefined}>
-        {url.data ? <video src={url.data} controls autoPlay className="aspect-video w-full rounded-xl bg-background" /> : <EmptyLibrary text="Carregando…" />}
+        {url ? <video src={url} controls autoPlay className="aspect-video w-full rounded-xl bg-background" /> : <EmptyLibrary text="Carregando…" />}
       </Dialog>
     </>
   );
