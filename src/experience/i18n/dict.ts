@@ -3965,7 +3965,6 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Gerar chave": ["Generate key", "Generar clave", "生成密钥"],
 "Copiar chave": ["Copy key", "Copiar clave", "复制密钥"],
 "Executar": ["Run", "Ejecutar", "运行"],
-"Enviando…": ["Sending…", "Enviando…", "发送中…"],
 "Gere uma chave de teste para executar.": ["Generate a test key to run.", "Genera una clave de prueba para ejecutar.", "生成测试密钥后即可运行。"],
 "Chamadas hoje": ["Calls today", "Llamadas hoy", "今日调用"],
 "Taxas": ["Fees", "Tarifas", "费用"],
