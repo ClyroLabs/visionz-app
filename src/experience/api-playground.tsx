@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Copy, KeyRound, Loader2, Play } from "lucide-react";
 import { JukeboxIcon, SmartFilterIcon, SynthIcon } from "./api-icons";
 import { Badge, Button, Card, CardTitle, Input, cn, useToast } from "@/index";
@@ -23,7 +23,9 @@ export function ApiPlayground() {
   const a = APIS.find((x) => x.id === api)!;
   const [input, setInput] = useState(a.sample);
   const [lang, setLang] = useState<"ts" | "curl">("ts");
-  const [key, setKey] = useState<string | null>(null);
+  const [key, setKeyState] = useState<string | null>(null);
+  useEffect(() => { setKeyState(localStorage.getItem("vz-api-key")); }, []);
+  const setKey = (k: string) => { localStorage.setItem("vz-api-key", k); setKeyState(k); };
   const [busy, setBusy] = useState(false);
   const [res, setRes] = useState<{ ms: number; body: string } | null>(null);
   const [calls, setCalls] = useState(0);

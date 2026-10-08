@@ -1,3 +1,4 @@
+import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -223,6 +224,7 @@ function Synth() {
           </div>
         )}
       </section>
+      <ApiAccess api="synth" />
     </div>
   );
 }

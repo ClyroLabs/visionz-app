@@ -1,3 +1,4 @@
+import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
@@ -53,6 +54,7 @@ function Jukebox() {
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{library.data!.map((c) => <TrackCard key={c.id} c={c} owner />)}</div>
         )}
       </section>
+      <ApiAccess api="jukebox" />
     </div>
   );
 }

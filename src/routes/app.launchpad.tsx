@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CheckCircle2, Code2, Rocket } from "lucide-react";
 import { Badge, Button, Card, CardTitle, Input, Label, Select, Tabs, TabsContent, TabsList, TabsTrigger, cn } from "@/index";
 import { ApiPlayground } from "@/experience/api-playground";
@@ -17,6 +17,7 @@ export const Route = createFileRoute("/app/launchpad")({
       { property: "og:description", content: "Plataforma para projetos de terceiros no ecossistema VisionZ." },
     ],
   }),
+  validateSearch: (s: Record<string, unknown>): { tab?: string } => (typeof s.tab === "string" ? { tab: s.tab } : {}),
   component: Launchpad,
 });
 
@@ -34,7 +35,9 @@ function Launchpad() {
   const [step, setStep] = useState(0);
   const [d, setD] = useLocal<Draft>("vz-launchpad", EMPTY);
   const up = (p: Partial<Draft>) => setD({ ...d, ...p });
-  const [tab, setTab] = useState("vitrine");
+  const search = Route.useSearch();
+  const [tab, setTab] = useState(search.tab ?? "vitrine");
+  useEffect(() => { if (search.tab) setTab(search.tab); }, [search.tab]);
   return (
     <div className="space-y-8">
       <DemoHeader title="Launchpad" text="Estúdios, jogos e apps podem nascer na infraestrutura VisionZ, usando modelos de contrato prontos e as APIs do Filtro Inteligente, Synth e Jukebox." />
