@@ -74,7 +74,7 @@ export function Dialog({ open, onOpenChange, title, description, className, chil
   useEffect(() => {
     const d = ref.current;
     if (!d) return;
-    if (open && !d.open) d.showModal();
+    if (open && !d.open) { try { d.showModal(); } catch (e) { console.warn("dialog", e); } console.warn("dlg-eff", open, d.open, d.isConnected); }
     if (!open && d.open) d.close();
   });
   return (
