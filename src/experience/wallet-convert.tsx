@@ -31,7 +31,7 @@ function useRecord() {
 export function WalletConvert() {
   const { kids } = useExperience();
   return (
-    <Card padding="lg" className="space-y-5">
+    <Card id="converter-sacar" padding="lg" className="scroll-mt-6 space-y-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2"><Repeat className="size-5 text-cyan" /><CardTitle className="text-lg">Converter e sacar</CardTitle></div>
         <Badge variant="neutral" size="sm">Demonstração · exemplo, não é promessa</Badge>
