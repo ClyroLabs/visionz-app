@@ -25,8 +25,8 @@ export function LaunchpadGallery() {
 
   return (
     <div className="space-y-5">
-      <div className="grid gap-3 sm:grid-cols-[minmax(0,1fr)_auto_auto_auto]">
-        <div className="relative min-w-0">
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-[minmax(0,1fr)_auto_auto_auto] sm:gap-3">
+        <div className="relative col-span-3 min-w-0 sm:col-span-1">
           <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden />
           <Input aria-label="Buscar projeto" placeholder="Buscar projeto ou símbolo" className="pl-9" value={f.q} onChange={(e) => up({ q: e.target.value })} />
         </div>
