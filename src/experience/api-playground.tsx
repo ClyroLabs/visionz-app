@@ -1,3 +1,6 @@
+import { useServerFn } from "@tanstack/react-start";
+import { apiCall } from "@/lib/plans.functions";
+import { PlanGate, QuotaHint, usePlan, useRefreshPlan, blocked } from "./plan-ui";
 import { useEffect, useState } from "react";
 import { Copy, KeyRound, Loader2, Play } from "lucide-react";
 import { JukeboxIcon, SmartFilterIcon, SynthIcon } from "./api-icons";
@@ -38,9 +41,15 @@ export function ApiPlayground() {
 
   const pick = (id: ApiId) => { setApi(id); setInput(APIS.find((x) => x.id === id)!.sample); setRes(null); };
   const copy = (t: string) => { navigator.clipboard?.writeText(t); toast({ title: "Copiado", variant: "success" }); };
+  const plan = usePlan();
+  const refreshPlan = useRefreshPlan();
+  const callApi = useServerFn(apiCall);
   const run = async () => {
     if (!input.trim()) return;
     setBusy(true); setRes(null);
+    const q = await callApi().catch(() => ({ ok: false as const, error: "Entre na sua conta para testar." }));
+    refreshPlan();
+    if (!q.ok) { setBusy(false); toast({ title: q.error, variant: "error" }); return; }
     const ms = 180 + Math.round(Math.random() * 500);
     await new Promise((r) => setTimeout(r, ms + 400));
     setRes({ ms, body: JSON.stringify(fakeResponse(api, input.trim()), null, 2) });
@@ -76,14 +85,15 @@ export function ApiPlayground() {
             <div className="flex gap-2">
               <code data-no-translate className="min-w-0 flex-1 truncate rounded-md border bg-background px-3 py-2 font-mono text-xs">{k}</code>
               {key ? <Button size="sm" variant="ghost" aria-label="Copiar chave" onClick={() => copy(key)}><Copy className="size-4" /></Button>
-                : <Button size="sm" variant="secondary" onClick={() => setKey(`vz_test_${rid()}${rid()}`)}><KeyRound className="size-4" />Gerar chave</Button>}
+                : <Button size="sm" variant="secondary" disabled={blocked(plan, "api_call")} onClick={() => setKey(`vz_test_${rid()}${rid()}`)}><KeyRound className="size-4" />Gerar chave</Button>}
             </div>
           </div>
           <div className="space-y-2">
             <p className="text-xs text-muted-foreground">Entrada ({a.field})</p>
             <Input value={input} onChange={(e) => setInput(e.target.value)} data-no-translate />
           </div>
-          <Button className="w-full" onClick={run} disabled={busy || !key || !input.trim()}>
+          <PlanGate feature="api_call"><QuotaHint feature="api_call" className="block text-center" /></PlanGate>
+          <Button className="w-full" onClick={run} disabled={busy || !key || !input.trim() || blocked(plan, "api_call")}>
             {busy ? <Loader2 className="size-4 animate-spin" /> : <Play className="size-4" />}{busy ? "Enviando…" : "Executar"}
           </Button>
           {!key && <p className="text-xs text-muted-foreground">Gere uma chave de teste para executar.</p>}

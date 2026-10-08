@@ -1,3 +1,4 @@
+import { QuotaHint } from "@/experience/plan-ui";
 import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
@@ -135,6 +136,7 @@ function CreationItem({ c }: { c: { id: string; tool: string; title: string; des
         <Input aria-label="Nota para o criador" placeholder="Nota para o criador (opcional)" value={note} maxLength={300} onChange={(e) => setNote(e.target.value)} />
         <div className="flex flex-wrap gap-2">
           <Button size="sm" variant="secondary" loading={analyze.isPending} onClick={() => analyze.mutate()}><Sparkles />{a ? "Reanalisar" : "Analisar com IA"}</Button>
+          <QuotaHint feature="moderation_analyze" className="self-center" />
           <Button size="sm" loading={d.isPending} onClick={() => d.mutate({ ...base, decision: "approve", rating: rating as never, note: note || undefined })}><Check />Aprovar</Button>
           <Button size="sm" variant="secondary" onClick={() => d.mutate({ ...base, decision: "rating", rating: rating as never })}>Só mudar classificação</Button>
           <Button size="sm" variant="destructive" onClick={() => d.mutate({ ...base, decision: "block", note: note || undefined })}><X />Bloquear</Button>

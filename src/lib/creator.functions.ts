@@ -25,7 +25,8 @@ const CAMERA_EN: Record<(typeof CAMERAS)[number], string> = {
 export const synthStoryboard = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ idea: z.string().trim().min(5).max(800), style: z.string().max(60), scenes: z.number().int().min(3).max(6), age, aspect: z.enum(ASPECTS) }).parse(d))
-  .handler(({ data }) => guard(async () => {
+  .handler(({ data, context }) => guard(async () => {
+    await (await import("./quota.server")).requireQuota(context.userId, "synth_board");
     const { askJson } = await ai();
     // One call returns the film plan plus EN/ES/ZH copies of the short texts, so viewers never trigger extra translations.
     const raw = await askJson(
@@ -44,6 +45,7 @@ export const synthSceneImage = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ prompt: z.string().trim().min(5).max(1200), aspect: z.enum(ASPECTS).default("16:9") }).parse(d))
   .handler(({ data, context }) => guard(async () => {
+    await (await import("./quota.server")).requireQuota(context.userId, "synth_image");
     const { generateImageBytes } = await ai();
     const bytes = await generateImageBytes(`${data.prompt}. Composition for ${data.aspect} frame. Family-safe, high quality cinematic still, no text, no watermark.`, SIZE[data.aspect]);
     const path = `${context.userId}/synth/${crypto.randomUUID()}.png`;
@@ -57,6 +59,7 @@ export const synthClipStart = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ imagePath: z.string().max(300), prompt: z.string().trim().min(3).max(1200), camera: z.enum(CAMERAS), aspect: z.enum(ASPECTS), seconds: z.number().int().min(3).max(8) }).parse(d))
   .handler(({ data, context }) => guard(async () => {
+    await (await import("./quota.server")).requireQuota(context.userId, "synth_clip");
     if (!data.imagePath.startsWith(`${context.userId}/`)) throw new Error("Imagem inválida.");
     const { data: blob, error } = await context.supabase.storage.from("creations").download(data.imagePath);
     if (error || !blob) throw new Error("Imagem da cena não encontrada.");
@@ -115,7 +118,8 @@ export const translateCreation = createServerFn({ method: "POST" })
 export const jukeboxCompose = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ idea: z.string().trim().min(3).max(600), genre: z.string().max(40), mood: z.string().max(40), age }).parse(d))
-  .handler(({ data }) => guard(async () => {
+  .handler(({ data, context }) => guard(async () => {
+    await (await import("./quota.server")).requireQuota(context.userId, "jukebox_compose");
     const { askJson } = await ai();
     const raw = await askJson(
       "Você é o compositor do Clyro Jukebox, da VisionZ. Escreva letras originais em português do Brasil, nunca copie músicas existentes.",
@@ -128,7 +132,8 @@ Formato: {"title": string, "lyrics": string (2 estrofes e refrão, com quebras d
 export const jukeboxDescribe = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .inputValidator((d) => z.object({ filename: z.string().max(200), notes: z.string().max(500) }).parse(d))
-  .handler(({ data }) => guard(async () => {
+  .handler(({ data, context }) => guard(async () => {
+    await (await import("./quota.server")).requireQuota(context.userId, "jukebox_describe");
     const { askJson } = await ai();
     const r = await askJson<{ title?: string; description?: string; tags?: string[]; cover_prompt?: string }>(
       "Você é o curador do Clyro Jukebox, da VisionZ. Escreva em português do Brasil.",

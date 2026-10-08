@@ -1,3 +1,4 @@
+import { PlanGate, QuotaHint } from "./plan-ui";
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Copy, KeyRound } from "lucide-react";
@@ -45,6 +46,7 @@ export function ApiAccess({ api }: { api: Id }) {
               <li key={s} className="flex gap-3 text-sm"><span className="grid size-6 shrink-0 place-items-center rounded-full bg-gradient-brand font-mono text-xs text-white">{i + 1}</span><span className="pt-0.5">{s}</span></li>
             ))}
           </ol>
+          <PlanGate feature="api_call"><QuotaHint feature="api_call" className="block" /></PlanGate>
           <div className="flex flex-wrap gap-2">
             {key ? <Button size="sm" variant="secondary" onClick={() => copy(key)}><Copy className="size-4" />Copiar chave</Button>
               : <Button size="sm" variant="secondary" onClick={gen}><KeyRound className="size-4" />Gerar chave</Button>}

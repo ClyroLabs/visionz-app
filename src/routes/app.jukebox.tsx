@@ -1,3 +1,4 @@
+import { QuotaHint, usePlan, useRefreshPlan, blocked } from "@/experience/plan-ui";
 import { ApiAccess } from "@/experience/api-access";
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
@@ -61,6 +62,8 @@ function Jukebox() {
 
 function Compose() {
   const { user } = Route.useRouteContext();
+  const plan = usePlan();
+  const refreshPlan = useRefreshPlan();
   const toast = useToast();
   const qc = useQueryClient();
   const compose = useServerFn(jukeboxCompose);
@@ -76,6 +79,7 @@ function Compose() {
     if (idea.trim().length < 3) return toast({ title: "Conte sobre o que é a música", variant: "error" });
     setBusy(true);
     const r = await compose({ data: { idea, genre, mood, age } });
+    refreshPlan();
     setBusy(false);
     if (!r.ok) return toast({ title: "Não deu para compor", description: r.error, variant: "error" });
     setSong(r.data);
@@ -100,7 +104,8 @@ function Compose() {
             <div className="space-y-1.5"><Label htmlFor="jk-m">Clima</Label><Select id="jk-m" value={mood} onChange={(e) => setMood(e.target.value)}>{MOODS.map((g) => <option key={g}>{g}</option>)}</Select></div>
             <div className="space-y-1.5"><Label htmlFor="jk-a">Classificação</Label><Select id="jk-a" value={age} onChange={(e) => setAge(e.target.value as Age)}>{AGE_RATINGS.map((a) => <option key={a} value={a}>{ageLabel(a)}</option>)}</Select></div>
           </div>
-          <Button type="submit" loading={busy} className="w-full sm:w-auto"><Sparkles />{busy ? "Compondo…" : "Compor música"}</Button>
+          <Button type="submit" loading={busy} disabled={blocked(plan, "jukebox_compose")} className="w-full sm:w-auto"><Sparkles />{busy ? "Compondo…" : "Compor música"}</Button>
+          <QuotaHint feature="jukebox_compose" className="block" />
         </form>
       </Card>
       {song && (
