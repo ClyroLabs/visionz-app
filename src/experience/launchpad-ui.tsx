@@ -96,7 +96,7 @@ function Stat({ k, v }: { k: string; v: string }) {
 }
 
 function ProjectDialog({ p, onClose }: { p: LaunchProject | null; onClose: () => void }) {
-  const { toast } = useToast();
+  const toast = useToast();
   const alloc = p ? ([["Comunidade", p.allocation.community, "bg-magenta"], ["Equipe", p.allocation.team, "bg-violet"], ["Tesouraria", p.allocation.treasury, "bg-cyan"], ["Liquidez", p.allocation.liquidity, "bg-gold"]] as const) : [];
   return (
     <Dialog open={!!p} onOpenChange={(o) => !o && onClose()} title={p?.name ?? ""} description={p ? `${p.category} · ${netLabel[p.network]}` : ""}
