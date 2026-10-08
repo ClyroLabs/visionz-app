@@ -1,14 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowDownLeft, ArrowUpRight, Banknote, Coins, Lock, Plus, Wallet } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Banknote, Lock, PlayCircle, Plus, Wallet } from "lucide-react";
 import { DepositCheckout, methodText } from "@/experience/deposit-checkout";
 import { depositLabel } from "@/experience/deposit";
 import { useDeposit } from "@/experience/use-deposit";
 import { useSession } from "@/lib/use-session";
-import { Badge, Button, Card, CardTitle, Input, Label, NetworkTag, Select, networks, useToast, type Network } from "@/index";
+import { Badge, Button, Card, CardTitle, NetworkTag, useToast } from "@/index";
 import { useExperience } from "@/experience/store";
 import { WalletConvert } from "@/experience/wallet-convert";
 import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
+import tutorialVideo from "@/assets/tutorial/wallet-tutorial.mp4.asset.json";
+import tutorialPoster from "@/assets/tutorial/wallet-tutorial-poster.jpg.asset.json";
 
 export const Route = createFileRoute("/app/carteira")({
   head: () => ({
@@ -25,9 +27,8 @@ export const Route = createFileRoute("/app/carteira")({
 const money = (n: number) => n.toLocaleString("pt-BR", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
 function WalletPage() {
-  const { vzn, brl, network, setNetwork, txs, redeem, deposit } = useExperience();
+  const { vzn, brl, network, txs, deposit } = useExperience();
   const toast = useToast();
-  const [amount, setAmount] = useState("");
   const [depOpen, setDepOpen] = useState(false);
   const session = useSession();
   const dep = useDeposit(session?.user.id);
@@ -51,17 +52,17 @@ function WalletPage() {
           <div className="flex items-center justify-between"><span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Wallet className="size-4" />Recompensas</span><NetworkTag network={network} /></div>
           <p className="font-display text-4xl font-bold">{money(vzn)} <span className="text-lg text-cyan">VZN</span></p>
           <DailyCapBar />
-          <form className="grid gap-3 sm:grid-cols-[1fr_auto_auto]" onSubmit={(e) => {
-            e.preventDefault();
-            const v = Number(amount.replace(",", "."));
-            const ok = redeem(v);
-            toast(ok ? { title: `${money(v)} VZN resgatados`, description: `Enviados pela rede ${networks[network].label} (simulado).`, variant: "success" } : { title: "Valor inválido", description: "Informe um valor maior que zero e até o seu saldo.", variant: "error" });
-            if (ok) setAmount("");
-          }}>
-            <div><Label htmlFor="wl-a" className="sr-only">Valor</Label><Input id="wl-a" inputMode="decimal" placeholder="Valor em VZN" value={amount} onChange={(e) => setAmount(e.target.value)} /></div>
-            <Select aria-label="Rede" value={network} onChange={(e) => setNetwork(e.target.value as Network)}>{Object.entries(networks).map(([k, n]) => <option key={k} value={k}>{n.label}</option>)}</Select>
-            <Button type="submit" variant="neon"><Coins />Resgatar</Button>
-          </form>
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <span className="inline-flex items-center gap-2 text-sm font-medium"><PlayCircle className="size-4 text-cyan" />Como converter e sacar</span>
+              <a href="#converter-sacar" className="text-xs text-cyan hover:underline focus-visible:ring-2 focus-visible:ring-ring rounded">Ir para Converter e sacar</a>
+            </div>
+            <div className="relative overflow-hidden rounded-xl border border-border bg-surface">
+              <video controls preload="none" playsInline poster={tutorialPoster.url} src={tutorialVideo.url} className="aspect-video w-full" aria-label="Tutorial: como converter e sacar" />
+              <span className="pointer-events-none absolute right-2 top-2 rounded bg-background/80 px-1.5 py-0.5 font-mono text-[10px]">0:26</span>
+            </div>
+            <p className="text-xs text-muted-foreground">Vídeo de demonstração · legendas em português</p>
+          </div>
         </Card>
       </div>
       <WalletConvert />
