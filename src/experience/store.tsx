@@ -27,7 +27,7 @@ interface Store {
   items: string[]; buyItem: (id: string) => boolean;
   buy: (id: string, title: string, price: number) => boolean;
   redeem: (amount: number) => boolean;
-  deposit: (amount: number) => void;
+  deposit: (amount: number, label?: string) => void;
   flags: Flag[]; retrained: number; decide: (id: number) => void;
 }
 
@@ -121,7 +121,7 @@ export function ExperienceProvider({ children }: { children: ReactNode }) {
       if (r.ok) { setVzn(r.balance); addTx("Resgate de recompensas", amount, "out"); }
       return r.ok;
     },
-    deposit: (amount) => { setBrl((b) => Math.round((b + amount) * 100) / 100); addTx(`Depósito via Pix: R$ ${amount.toFixed(2)}`, 0, "in"); },
+    deposit: (amount, label) => { setBrl((b) => Math.round((b + amount) * 100) / 100); addTx(label ?? `Depósito via Pix: R$ ${amount.toFixed(2)}`, 0, "in"); },
     flags, retrained,
     decide: (id) => { setFlags((f) => f.filter((x) => x.id !== id)); setRetrained((r) => r + 1); },
   };

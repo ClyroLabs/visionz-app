@@ -1,6 +1,10 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowDownLeft, ArrowUpRight, Banknote, Coins, Wallet } from "lucide-react";
+import { ArrowDownLeft, ArrowUpRight, Banknote, Coins, Lock, Plus, Wallet } from "lucide-react";
+import { DepositCheckout, methodText } from "@/experience/deposit-checkout";
+import { depositLabel } from "@/experience/deposit";
+import { useDeposit } from "@/experience/use-deposit";
+import { useSession } from "@/lib/use-session";
 import { Badge, Button, Card, CardTitle, Input, Label, NetworkTag, Select, networks, useToast, type Network } from "@/index";
 import { useExperience } from "@/experience/store";
 import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
@@ -23,6 +27,9 @@ function WalletPage() {
   const { vzn, brl, network, setNetwork, txs, redeem, deposit } = useExperience();
   const toast = useToast();
   const [amount, setAmount] = useState("");
+  const [depOpen, setDepOpen] = useState(false);
+  const session = useSession();
+  const dep = useDeposit(session?.user.id);
 
   return (
     <div className="space-y-8">
@@ -32,9 +39,12 @@ function WalletPage() {
           <span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Banknote className="size-4" />Saldo em reais</span>
           <p className="font-display text-4xl font-bold">{`R$ ${money(brl)}`}</p>
           <p className="text-sm text-muted-foreground">Usado para compras avulsas e pacotes on-demand.</p>
-          <div className="flex flex-wrap gap-2">
-            {[20, 50, 100].map((v) => <Button key={v} size="sm" variant="secondary" onClick={() => { deposit(v); toast({ title: `R$ ${v},00 adicionados via Pix`, variant: "success" }); }}>{`+ R$ ${v}`}</Button>)}
+          <div className="flex flex-wrap items-center gap-3">
+            <Button onClick={() => setDepOpen(true)}><Plus />Depositar</Button>
+            <span className="inline-flex items-center gap-1.5 text-xs text-muted-foreground"><Lock className="size-3" />Pix ou cartão · VisionZ Pay</span>
           </div>
+          <DepositCheckout open={depOpen} onOpenChange={setDepOpen} methods={dep.methods} onAddMethod={dep.addMethod}
+            onComplete={async (r) => { if (r.ok) deposit(r.amount, depositLabel(true, methodText(r.method), r.id)); await dep.record(r); toast(r.ok ? { title: "Depósito aprovado", variant: "success" } : { title: "Pagamento recusado", variant: "error" }); }} />
         </Card>
         <Card variant="glow" padding="lg" className="space-y-4">
           <div className="flex items-center justify-between"><span className="inline-flex items-center gap-2 text-sm text-muted-foreground"><Wallet className="size-4" />Recompensas</span><NetworkTag network={network} /></div>

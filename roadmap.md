@@ -10,3 +10,7 @@
 - [x] Site: O que vem por aí + Whitepaper
 - [x] Traduções EN/ES/ZH
 - [x] Verificação
+
+- [ ] Saldo na moeda do idioma
+- [ ] Checkout de depósito estilo gateway + reflexo em Minha conta
+- [ ] Menu lateral recolhível no Protótipo
