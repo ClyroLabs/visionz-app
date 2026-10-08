@@ -3,7 +3,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
-import { Clapperboard, Film, ImagePlus, Save, Sparkles, Video, Wand2 } from "lucide-react";
+import { Clapperboard, ImagePlus, Save, Sparkles, Video, Wand2 } from "lucide-react";
 import { Badge, Button, Card, CardDescription, CardTitle, Input, Label, Logo, Progress, Select, useToast } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
 import { AGE_RATINGS, ASPECTS, CAMERAS, RESOLUTIONS, TRANSITIONS, filmLength, type Age, type Aspect, type Resolution, type Scene, type Storyboard } from "@/lib/creator";
@@ -54,8 +54,6 @@ function Synth() {
   const [clipIndex, setClipIndex] = useState<number | null>(null);
   const [sel, setSel] = useState(0);
   const [seek, setSeek] = useState<{ t: number; n: number } | undefined>();
-  const setPreview = (_: boolean) => {};
-  const preview = true;
   const startClip = useServerFn(synthClipStart);
   const clipStatus = useServerFn(synthClipStatus);
   const editScene = (i: number, p: Partial<Scene>) => setBoard((b) => b && { ...b, scenes: b.scenes.map((s, j) => (j === i ? { ...s, ...p } : s)) });
@@ -85,7 +83,7 @@ function Synth() {
     const r = await genBoard({ data: { idea, style, scenes, age, aspect } });
     setBusy(null);
     if (!r.ok) return toast({ title: "Não deu para criar o roteiro", description: r.error, variant: "error" });
-    setBoard(r.data); setPaths(r.data.scenes.map(() => null)); setClips(r.data.scenes.map(() => null)); setPreview(false);
+    setBoard(r.data); setPaths(r.data.scenes.map(() => null)); setClips(r.data.scenes.map(() => null)); setSel(0);
   };
 
   const makeImage = async (i: number) => {
