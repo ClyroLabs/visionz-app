@@ -15,6 +15,13 @@
       "when": 1791492352780,
       "tag": "0001_creations_video",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1791494068479,
+      "tag": "0002_synth_clips_public_read",
+      "breakpoints": true
     }
   ]
 }
