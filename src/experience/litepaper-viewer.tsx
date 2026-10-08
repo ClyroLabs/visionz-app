@@ -113,13 +113,13 @@ const SLIDES: ReactNode[] = [
       <Tag>Uma rampa regional → global</Tag>
       <Title a="Crescimento exponencial." b="Valor real." />
       <p className="label-eyebrow text-muted-foreground">Projeção financeira (estimativa)</p>
-      <div className="rounded-xl border-gradient-brand p-4"><p className="font-display text-sm tracking-wide text-muted-foreground">Breakeven no mês</p><p className="font-display text-5xl font-bold text-gradient-brand">16</p></div>
+      <div className="rounded-xl border-gradient-brand p-4"><p className="font-display text-sm tracking-wide text-muted-foreground">Breakeven no mês</p><p className="font-display text-5xl font-bold text-gradient-brand">11</p></div>
     </div>
     <div className="overflow-hidden rounded-xl border">
       <table className="w-full text-sm">
         <thead className="bg-surface-raised text-left text-muted-foreground"><tr><th className="p-3">Período</th><th className="p-3">Usuários</th><th className="p-3">Receita projetada</th></tr></thead>
         <tbody className="font-mono">
-          {[["Ano 1", "80K", "R$ 3,2M"], ["Ano 2", "500K", "R$ 24,5M"], ["Ano 3", "2.5M+", "R$ 110M"]].map(([p, u, r]) => (
+          {[["Ano 1", "80K", "R$ 3,2M"], ["Ano 2", "500K", "R$ 24,5M"], ["Ano 3", "2.5M+", "R$ 232M"]].map(([p, u, r]) => (
             <tr key={p} className="border-t"><td className="p-3 font-sans text-magenta">{p}</td><td className="p-3">{u}</td><td className="p-3 text-gradient-brand font-semibold">{r}</td></tr>
           ))}
         </tbody>
