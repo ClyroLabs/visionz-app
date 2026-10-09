@@ -34,6 +34,7 @@ function Watch() {
   const [xpSession, setXpSession] = useState(0);
   const repeat = completed.includes(t.id);
   const toast = useToast();
+  const report = useServerFn(reportWatch);
   const [playing, setPlaying] = useState(false);
   const [sec, setSec] = useState(0);
   const total = 600;
@@ -50,7 +51,10 @@ function Watch() {
       last.current = sec;
       const hidden = typeof document !== "undefined" && document.visibilityState === "hidden";
       if (child) addChildMinute();
-      if (eligibleWatch({ muted, hidden, repeat })) { addXp(1); addWatchMin(1); setXpSession((x) => x + 1); }
+      if (eligibleWatch({ muted, hidden, repeat })) {
+        addXp(1); addWatchMin(1); setXpSession((x) => x + 1);
+        if (!kids) report({ data: { titleRef: t.id } }).catch(() => {});
+      }
     }
     if (sec >= total * COMPLETE_THRESHOLD && !muted && complete(t.id)) {
       const g = earn(`Título concluído: ${t.title}`, COMPLETE_VZN, "conclusao");
