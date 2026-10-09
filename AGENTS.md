@@ -11,3 +11,4 @@
 - Launchpad presale contributions are client-only demo state (`vz-presale` localStorage, `src/experience/presale.ts`) — prototype, no real funds or DB writes.
 - Catalog metadata (genres, origin, series/season/episode, chapters, album) lives in `creations.data.meta`, normalized by `src/lib/catalog-meta.ts` — no extra tables; missing fields simply hide UI sections.
 - Toast container is a `popover="manual"` element re-shown on each toast so notices sit above native `<dialog>` modals in the top layer.
+- Real $VZN rewards (watch completion + 2 daily missions) are SPL transfers on Solana devnet from a server-held reward wallet (`src/lib/vzn-devnet.server.ts`, `@solana/kit` for Workers); claims are decided server-side from `watch_sessions` by `src/lib/vzn-rules.ts` and recorded in `vzn_rewards` with a unique claim key — browser state can't mint tokens or pay twice. Everything else Web3 stays sandbox.
