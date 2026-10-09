@@ -43,6 +43,13 @@
       "when": 1791527038769,
       "tag": "0005_migration",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791527837459,
+      "tag": "0006_vzn_devnet_rewards",
+      "breakpoints": true
     }
   ]
 }

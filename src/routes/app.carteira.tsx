@@ -9,6 +9,7 @@ import { Badge, Button, Card, CardTitle, NetworkTag, useToast } from "@/index";
 import { useExperience } from "@/experience/store";
 import { WalletConvert } from "@/experience/wallet-convert";
 import { DailyCapBar, SOURCE_LABEL } from "@/experience/rewards-ui";
+import { DevnetRewardsCard } from "@/experience/devnet-ui";
 import tutPt from "@/assets/tutorial/wallet-tutorial-pt.mp4.asset.json";
 import tutEn from "@/assets/tutorial/wallet-tutorial-en.mp4.asset.json";
 import tutEs from "@/assets/tutorial/wallet-tutorial-es.mp4.asset.json";
@@ -74,6 +75,7 @@ function WalletPage() {
           </div>
         </Card>
       </div>
+      <DevnetRewardsCard />
       <WalletConvert />
       <Card padding="lg">
         <CardTitle className="mb-4 text-lg">Histórico</CardTitle>

@@ -499,6 +499,66 @@ export type Database = {
         }
         Relationships: []
       }
+      vzn_rewards: {
+        Row: {
+          address: string
+          amount: number
+          claim_key: string
+          created_at: string
+          error: string | null
+          id: string
+          label: string
+          signature: string | null
+          source: string
+          status: string
+          user_id: string
+        }
+        Insert: {
+          address: string
+          amount: number
+          claim_key: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          label: string
+          signature?: string | null
+          source: string
+          status?: string
+          user_id: string
+        }
+        Update: {
+          address?: string
+          amount?: number
+          claim_key?: string
+          created_at?: string
+          error?: string | null
+          id?: string
+          label?: string
+          signature?: string | null
+          source?: string
+          status?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      wallet_links: {
+        Row: {
+          address: string
+          user_id: string
+          verified_at: string
+        }
+        Insert: {
+          address: string
+          user_id: string
+          verified_at?: string
+        }
+        Update: {
+          address?: string
+          user_id?: string
+          verified_at?: string
+        }
+        Relationships: []
+      }
       wallet_transactions: {
         Row: {
           amount: number
@@ -525,6 +585,30 @@ export type Database = {
           direction?: string
           id?: string
           label?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      watch_sessions: {
+        Row: {
+          day: string
+          last_report: string
+          seconds: number
+          title_ref: string
+          user_id: string
+        }
+        Insert: {
+          day?: string
+          last_report?: string
+          seconds?: number
+          title_ref: string
+          user_id: string
+        }
+        Update: {
+          day?: string
+          last_report?: string
+          seconds?: number
+          title_ref?: string
           user_id?: string
         }
         Relationships: []
