@@ -9,6 +9,8 @@ import { ReportButton, useReportedTitles } from "@/experience/report-dialog";
 import { hiddenForKids } from "@/lib/moderation-metrics";
 import { useExperience } from "@/experience/store";
 import { COMPLETE_THRESHOLD, COMPLETE_VZN, eligibleWatch } from "@/experience/rewards";
+import { useServerFn } from "@tanstack/react-start";
+import { reportWatch } from "@/lib/vzn-rewards.functions";
 
 export const Route = createFileRoute("/app/assistir")({
   validateSearch: z.object({ id: z.string().optional() }),
