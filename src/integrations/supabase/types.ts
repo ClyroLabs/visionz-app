@@ -550,6 +550,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      reported_open_titles: { Args: never; Returns: string[] }
     }
     Enums: {
       app_role: "admin" | "moderator" | "user"
