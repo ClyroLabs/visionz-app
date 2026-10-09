@@ -16,3 +16,5 @@
 - [ ] Menu lateral recolhível no Protótipo
 - [x] Launchpad presale checkout + Minhas cotas
 - [x] Vitrine Netflix/Deezer-style details (series, chapters, album)
+
+- [ ] Devnet $VZN: fund reward wallet 8jLZP3osNpShKdFKPkGxTN7ykpGnhSiod16gyZ8gW5GL with devnet SOL, then create mint + set VZN_DEVNET_MINT and run an end-to-end transfer (blocked: faucet rate limit)
