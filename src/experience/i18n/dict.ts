@@ -4285,7 +4285,6 @@ const EXTRA: Record<string, [string, string, string]> = {
 "Nenhum envio ainda.": ["No sends yet.", "Aún no hay envíos.", "暂无发送记录。"],
 "Ver no Solana Explorer": ["View on Solana Explorer", "Ver en Solana Explorer", "在 Solana Explorer 查看"],
 "Falhou": ["Failed", "Falló", "失败"],
-"Enviando…": ["Sending…", "Enviando…", "发送中…"],
 "Receber 0,5 $VZN por concluir": ["Receive 0.5 $VZN for finishing", "Recibir 0,5 $VZN por terminar", "完成后领取 0.5 $VZN"],
 "Carteira vinculada": ["Wallet linked", "Billetera vinculada", "钱包已绑定"],
 "Não foi possível vincular": ["Couldn't link", "No se pudo vincular", "无法绑定"],
