@@ -13,6 +13,7 @@ import { hasPhantom, short } from "./web3";
 type Sol = { connect: () => Promise<{ publicKey: { toString(): string } }>; signMessage: (m: Uint8Array, e: string) => Promise<{ signature: Uint8Array }> };
 const phantom = () => { const w = window as unknown as { phantom?: { solana?: Sol }; solana?: Sol }; return w.phantom?.solana ?? w.solana; };
 
+type ClaimData = { kind: "conclusao"; titleRef: string; kids: boolean } | { kind: "missao"; mission: "assistir30" | "concluir1"; kids: boolean };
 export const DEVNET_KEY = ["vzn-devnet"] as const;
 
 /** Real $VZN on Solana devnet: link Phantom, claim missions/completions, see on-chain history. */
@@ -40,17 +41,17 @@ export function DevnetRewardsCard() {
       await link({ data: { address: addr, signature: getBase58Decoder().decode(signature) } });
       toast({ title: "Carteira vinculada", description: short(addr), variant: "success" });
       qc.invalidateQueries({ queryKey: DEVNET_KEY });
-    } catch (e) { toast({ title: "Não foi possível vincular", description: (e as Error).message, variant: "danger" }); }
+    } catch (e) { toast({ title: "Não foi possível vincular", description: (e as Error).message, variant: "error" }); }
     setBusy(null);
   };
 
-  const run = async (id: string, input: Parameters<typeof claim>[0]["data"]) => {
+  const run = async (id: string, input: ClaimData) => {
     setBusy(id);
     try {
       const r = await claim({ data: input });
       if (r.ok) toast({ title: `+${r.amount.toLocaleString("pt-BR")} $VZN na devnet`, description: "Enviado para sua Phantom.", variant: "reward" });
       else toast({ title: "Sem envio agora", description: r.reason, variant: "info" });
-    } catch (e) { toast({ title: "Erro no envio", description: (e as Error).message, variant: "danger" }); }
+    } catch (e) { toast({ title: "Erro no envio", description: (e as Error).message, variant: "error" }); }
     qc.invalidateQueries({ queryKey: DEVNET_KEY });
     setBusy(null);
   };
@@ -102,7 +103,7 @@ export function DevnetRewardsCard() {
                       <span className="flex items-center gap-3">
                         <span className="font-mono">{Number(r.amount).toLocaleString("pt-BR")} $VZN</span>
                         {r.signature ? <a href={explorerTx(r.signature)} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-cyan hover:underline"><ExternalLink className="size-3" />Ver no Solana Explorer</a>
-                          : <Badge size="sm" variant={r.status === "failed" ? "danger" : "warning"}>{r.status === "failed" ? "Falhou" : "Enviando…"}</Badge>}
+                          : <Badge size="sm" variant={r.status === "failed" ? "destructive" : "warning"}>{r.status === "failed" ? "Falhou" : "Enviando…"}</Badge>}
                       </span>
                     </li>
                   ))}
