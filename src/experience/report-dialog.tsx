@@ -1,12 +1,26 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useServerFn } from "@tanstack/react-start";
 import { Flag } from "lucide-react";
 import { Button, Dialog, Label, Select, useToast } from "@/index";
 import { reportContent } from "@/lib/moderation.functions";
 import { useSession } from "@/lib/use-session";
+import { supabase } from "@/integrations/supabase/client";
 
 const REASONS = ["Não é adequado para a idade", "Violência", "Linguagem imprópria", "Conteúdo assustador", "Golpe ou propaganda", "Outro"];
+
+/** Titles with an open parent report — hidden from kids profiles until a moderator decides. */
+export function useReportedTitles(): ReadonlySet<string> {
+  const q = useQuery({
+    queryKey: ["reported-titles"],
+    queryFn: async () => {
+      const { data } = await supabase.rpc("reported_open_titles");
+      return new Set((data ?? []) as string[]);
+    },
+    staleTime: 30_000,
+  });
+  return q.data ?? new Set<string>();
+}
 
 /** "Report" button: sends a parent's report to the moderation queue. */
 export function ReportButton({ titleRef, title, className }: { titleRef: string; title: string; className?: string }) {
@@ -16,9 +30,10 @@ export function ReportButton({ titleRef, title, className }: { titleRef: string;
   const session = useSession();
   const send = useServerFn(reportContent);
   const toast = useToast();
+  const qc = useQueryClient();
   const m = useMutation({
     mutationFn: () => send({ data: { titleRef, title, reason, details: details || undefined } }),
-    onSuccess: () => { setOpen(false); setDetails(""); toast({ title: "Denúncia enviada", description: "A moderação vai analisar.", variant: "success" }); },
+    onSuccess: () => { setOpen(false); setDetails(""); qc.invalidateQueries({ queryKey: ["reported-titles"] }); toast({ title: "Denúncia enviada", description: "O título saiu dos perfis infantis até a moderação decidir.", variant: "success" }); },
     onError: (e) => toast({ title: "Não foi possível enviar", description: (e as Error).message, variant: "error" }),
   });
   return (

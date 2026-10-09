@@ -5,7 +5,8 @@ import { Lock, Volume2, VolumeX } from "lucide-react";
 import { AIVerifiedBadge, AgeRating, Avatar, Badge, Button, Card, PlayerBar, useToast } from "@/index";
 import { catalog } from "@/experience/data";
 import { allowedForKid } from "@/experience/logic";
-import { ReportButton } from "@/experience/report-dialog";
+import { ReportButton, useReportedTitles } from "@/experience/report-dialog";
+import { hiddenForKids } from "@/lib/moderation-metrics";
 import { useExperience } from "@/experience/store";
 import { COMPLETE_THRESHOLD, COMPLETE_VZN, eligibleWatch } from "@/experience/rewards";
 
@@ -57,7 +58,9 @@ function Watch() {
     }
   }, [sec]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const blocked = kids && !allowedForKid(t.rating, kidsMax);
+  const reported = useReportedTitles();
+  const underReview = hiddenForKids(t.id, kids, reported);
+  const blocked = (kids && !allowedForKid(t.rating, kidsMax)) || underReview;
   const locked = !!t.priceValue && !owned.includes(t.id);
 
   return (
@@ -74,7 +77,7 @@ function Watch() {
             <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-background/70 p-6 text-center">
               <Lock className="size-10 text-destructive" />
               <p className="font-display text-xl font-semibold">{blocked ? "Bloqueado no perfil infantil" : "Título à la carte"}</p>
-              <p className="text-sm text-muted-foreground">{blocked ? t.blockReason ?? `Classificação ${t.rating}` : `Compre por ${t.price} na tela inicial para assistir.`}</p>
+              <p className="text-sm text-muted-foreground">{underReview ? "Em revisão pela moderação após denúncia de um responsável." : blocked ? t.blockReason ?? `Classificação ${t.rating}` : `Compre por ${t.price} na tela inicial para assistir.`}</p>
               <Link to="/app"><Button variant="secondary">Voltar ao catálogo</Button></Link>
             </div>
           ) : (<>

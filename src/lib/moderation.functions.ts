@@ -22,12 +22,21 @@ export const getModeration = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
     const db = await requireModerator(context as unknown as Ctx);
-    const [creations, reports, history] = await Promise.all([
+    const [creations, reports, history, allDecisions, totalReports] = await Promise.all([
       db.from("creations").select("id, tool, title, description, age_rating, status, moderation_note, ai_analysis, created_at").in("status", ["review", "blocked"]).order("created_at", { ascending: false }).limit(100),
       db.from("content_reports").select("*").eq("status", "open").order("created_at", { ascending: false }).limit(100),
       db.from("moderation_decisions").select("*").order("created_at", { ascending: false }).limit(50),
+      db.from("moderation_decisions").select("target_id, decision").eq("target_type", "creation").in("decision", ["approve", "block"]).limit(5000),
+      db.from("content_reports").select("id", { count: "exact", head: true }),
     ]);
-    return { creations: creations.data ?? [], reports: reports.data ?? [], history: history.data ?? [] };
+    const decs = allDecisions.data ?? [];
+    const ids = [...new Set(decs.map((d) => d.target_id))];
+    const ai = ids.length ? (await db.from("creations").select("id, ai_analysis").in("id", ids)).data ?? [] : [];
+    const aiMap = new Map(ai.map((c) => [c.id, (c.ai_analysis as { allowed?: boolean } | null)?.allowed]));
+    const pairs = decs.filter((d) => typeof aiMap.get(d.target_id) === "boolean").map((d) => ({ aiAllowed: aiMap.get(d.target_id) as boolean, humanAllowed: d.decision === "approve" }));
+    const { overturnRate, MIN_DECISIONS } = await import("./moderation-metrics");
+    const metrics = { decisions: decs.length, reports: totalReports.count ?? 0, compared: pairs.length, overturn: overturnRate(pairs), min: MIN_DECISIONS };
+    return { creations: creations.data ?? [], reports: reports.data ?? [], history: history.data ?? [], metrics };
   });
 
 export const decide = createServerFn({ method: "POST" })

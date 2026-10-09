@@ -36,6 +36,13 @@
       "when": 1791496680954,
       "tag": "0004_seed_demo_catalog",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791527038769,
+      "tag": "0005_migration",
+      "breakpoints": true
     }
   ]
 }

@@ -4,7 +4,8 @@ import { Clapperboard, Film } from "lucide-react";
 import { Button, buttonVariants, Card, CardDescription, CardTitle, Dialog, Tabs, TabsContent, TabsList, TabsTrigger } from "@/index";
 import { supabase } from "@/integrations/supabase/client";
 import { allowedForKid, type Rating } from "@/experience/logic";
-import { ReportButton } from "@/experience/report-dialog";
+import { ReportButton, useReportedTitles } from "@/experience/report-dialog";
+import { hiddenForKids } from "@/lib/moderation-metrics";
 import { useExperience } from "@/experience/store";
 import { CreationMeta, EmptyLibrary, FileImage, useFileUrl, type Creation } from "@/experience/creator-ui";
 import { TrackCard } from "./app.jukebox";
@@ -51,7 +52,8 @@ function Vitrine() {
     queryKey: ["vitrine"],
     queryFn: async () => (await supabase.from("creations").select("*").eq("status", "published").order("created_at", { ascending: false }).limit(60)).data ?? [],
   });
-  const visible = kids ? data.filter((c) => allowedForKid(c.age_rating as Rating, kidsMax)) : data;
+  const reported = useReportedTitles();
+  const visible = kids ? data.filter((c) => allowedForKid(c.age_rating as Rating, kidsMax) && !hiddenForKids(c.id, kids, reported)) : data;
   const synth = visible.filter((c) => c.tool === "synth");
   const jukebox = visible.filter((c) => c.tool === "jukebox");
   const videos = visible.filter((c) => c.tool === "video");

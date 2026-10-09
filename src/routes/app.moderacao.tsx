@@ -47,7 +47,7 @@ function Center() {
   const [sev, setSev] = useState<"all" | "low" | "medium" | "high">("all");
   if (q.isLoading) return <Card className="text-center text-muted-foreground">Carregando fila…</Card>;
   if (q.error) return <Card className="text-center text-destructive">{(q.error as Error).message}</Card>;
-  const { creations, reports, history } = q.data!;
+  const { creations, reports, history, metrics } = q.data!;
   const sevOf = (c: { ai_analysis: unknown }) => ((c.ai_analysis as Analysis | null)?.severity ?? "medium");
   const shownC = type === "report" ? [] : creations.filter((c) => sev === "all" || sevOf(c) === sev);
   const shownR = type === "creation" || sev !== "all" ? [] : reports;
@@ -60,6 +60,15 @@ function Center() {
         <Card variant="glass"><Stat icon={<Flag />} value={String(reports.length)} label="denúncias de pais abertas" tone="cyan" size="md" /></Card>
         <Card variant="featured"><Stat icon={<Gavel />} value={String(history.length)} label="decisões recentes" size="md" /></Card>
       </div>
+      <Card padding="lg" className="space-y-2">
+        <CardTitle className="inline-flex items-center gap-2 text-lg"><BrainCircuit className="size-5 text-cyan" />Métrica de acerto da IA</CardTitle>
+        <div className="grid gap-3 text-sm sm:grid-cols-3">
+          <p><span className="text-muted-foreground">Decisões humanas:</span> <span className="font-mono">{metrics.decisions}</span></p>
+          <p><span className="text-muted-foreground">Denúncias recebidas:</span> <span className="font-mono">{metrics.reports}</span></p>
+          <p><span className="text-muted-foreground">IA revertida por humanos:</span> <span className="font-mono">{metrics.overturn === null ? "dados insuficientes" : `${metrics.overturn}%`}</span></p>
+        </div>
+        <p className="text-xs text-muted-foreground">A taxa só aparece a partir de {metrics.min} decisões comparadas com a análise da IA ({metrics.compared} até agora).</p>
+      </Card>
       <Tabs defaultValue="fila" className="space-y-6">
         <TabsList><TabsTrigger value="fila">Fila</TabsTrigger><TabsTrigger value="historico">Histórico</TabsTrigger></TabsList>
         <TabsContent value="fila" className="space-y-4">

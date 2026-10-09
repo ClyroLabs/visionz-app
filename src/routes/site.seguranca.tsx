@@ -19,10 +19,10 @@ export const Route = createFileRoute("/site/seguranca")({
 });
 
 const steps = [
-  { icon: Eye, t: "1. Análise visual", d: "Cada quadro do vídeo é analisado para identificar padrões e gestos impróprios." },
-  { icon: AudioLines, t: "2. Auditoria sonora", d: "O áudio é transcrito e verificado para linguagem e tom agressivo em vários idiomas." },
-  { icon: UserCheck, t: "3. Revisão humana", d: "Casos complexos vão para especialistas antes da publicação." },
-  { icon: RefreshCw, t: "4. Aprendizado contínuo", d: "Cada decisão humana retreina a IA, que fica mais precisa a cada dia." },
+  { icon: Eye, t: "1. Análise da IA", d: "Antes de publicar, a IA avalia imagem, texto e áudio e sugere a classificação indicativa." },
+  { icon: AudioLines, t: "2. Dúvida vai para pessoas", d: "Se a IA tem menos de 75% de certeza, um moderador humano revisa antes de publicar." },
+  { icon: UserCheck, t: "3. Denúncia dos pais", d: "Qualquer responsável pode denunciar um título; ele sai na hora dos perfis infantis." },
+  { icon: RefreshCw, t: "4. Correção e aprendizado", d: "O moderador decide, a decisão fica registrada e serve para melhorar o filtro." },
 ];
 
 function Safety() {
@@ -30,12 +30,20 @@ function Safety() {
   return (
     <>
       <Section>
-        <SectionHeading eyebrow="Segurança" title={<>A tecnologia trabalha para proteger <span className="text-cyan">quem você ama</span>.</>} description="A VisionZ coloca a segurança infantil como pilar central da engenharia. Nenhum conteúdo chega ao catálogo sem passar pelo Filtro Inteligente." />
+        <SectionHeading eyebrow="Segurança" title={<>A tecnologia trabalha para proteger <span className="text-cyan">quem você ama</span>.</>} description="A VisionZ coloca a segurança infantil como pilar central da engenharia. Toda publicação passa pelo Filtro Inteligente antes de chegar ao catálogo." />
         <div className="mt-8 grid grid-cols-3 gap-3 text-center md:mt-12 md:gap-8 md:text-left">
-          <Stat value="< 200ms" tone="cyan" label="por quadro analisado" />
-          <Stat value="100%" label="do catálogo verificado antes de publicar" />
+          <Stat value="75%" tone="cyan" label="de certeza mínima para a IA publicar sozinha" />
+          <Stat value="Toda" label="publicação passa pelo filtro" />
           <Stat value="6" tone="default" label="faixas de classificação indicativa" />
         </div>
+      </Section>
+      <Section className="py-6 md:py-10">
+        <Card padding="lg" className="space-y-3 border-warning/40">
+          <CardTitle className="text-xl">Quando a IA erra</CardTitle>
+          <p className="text-foreground/85">Se a IA tem menos de 75% de certeza, um moderador humano revisa antes de publicar. Se algo impróprio passar, qualquer responsável pode denunciar: o título sai na hora dos perfis infantis, um moderador decide e essa decisão melhora o filtro.</p>
+          <p className="text-sm text-muted-foreground">A VisionZ responde pelo que é publicado; a equipe de moderação revisa toda denúncia.</p>
+          <p className="text-sm text-muted-foreground">Métrica de acerto: ainda não medida. Vamos publicar o número real depois da beta fechada.</p>
+        </Card>
       </Section>
       <Section className="py-6 md:py-10">
         <ScrollSnapRow label="Como funciona o filtro" className="md:grid-cols-4 md:gap-4">
@@ -56,7 +64,7 @@ function Safety() {
           <div className="space-y-5 text-center lg:text-left">
             <SectionHeading eyebrow="Biometria facial" title={<>Só um <span className="text-cyan">adulto autorizado</span> muda as regras.</>} description="Sair do modo infantil, mudar a classificação ou liberar um título exige o rosto do responsável cadastrado. A criança não consegue burlar." className="lg:items-start lg:text-left" />
             <ul className="space-y-3 text-sm">
-              {[[ScanFace, "Reconhecimento facial com prova de vida: fotos ou vídeos não enganam."], [Lock, "Os dados do rosto ficam protegidos no aparelho e nunca são vendidos."], [ShieldCheck, "Toda liberação fica registrada para o responsável conferir."]].map(([I, t]) => { const Icon = I as typeof Lock; return <li key={t as string} className="flex items-start justify-center gap-3 lg:justify-start"><Icon className="mt-0.5 size-4 shrink-0 text-cyan" /><span className="text-foreground/85">{t as string}</span></li>; })}
+              {[[ScanFace, "Reconhecimento facial com prova de vida simples (piscar). Primeira versão, ainda não é nível bancário."], [Lock, "Os dados do rosto ficam protegidos no aparelho e nunca são vendidos."], [ShieldCheck, "Toda liberação fica registrada para o responsável conferir."]].map(([I, t]) => { const Icon = I as typeof Lock; return <li key={t as string} className="flex items-start justify-center gap-3 lg:justify-start"><Icon className="mt-0.5 size-4 shrink-0 text-cyan" /><span className="text-foreground/85">{t as string}</span></li>; })}
             </ul>
             <p className="text-xs text-muted-foreground">Demonstração ilustrativa do recurso em desenvolvimento.</p>
           </div>

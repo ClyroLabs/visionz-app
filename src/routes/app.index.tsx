@@ -6,6 +6,8 @@ import { filterCatalog } from "@/experience/logic";
 import { useExperience } from "@/experience/store";
 import { CatalogRow } from "@/experience/catalog-row";
 import { MissionsCard } from "@/experience/rewards-ui";
+import { useReportedTitles } from "@/experience/report-dialog";
+import { hiddenForKids } from "@/lib/moderation-metrics";
 
 export const Route = createFileRoute("/app/")({
   head: () => ({
@@ -21,7 +23,8 @@ export const Route = createFileRoute("/app/")({
 
 function AppHome() {
   const { kids, kidsMax, child } = useExperience();
-  const list = filterCatalog(catalog, kids, kidsMax);
+  const reported = useReportedTitles();
+  const list = filterCatalog(catalog, kids, kidsMax).filter((t) => !hiddenForKids(t.id, kids, reported));
   const hero = list[0];
   return (
     <div className="space-y-10">
