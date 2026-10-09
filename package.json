@@ -13,6 +13,8 @@
     "@ai-sdk/openai": "^4.0.83",
     "@cloudflare/vite-plugin": "1.39.2",
     "@lovable.dev/cloud-auth-js": "^1.1.2",
+    "@solana-program/token": "^0.17.0",
+    "@solana/kit": "^8.4.0",
     "@supabase/supabase-js": "^2.117.2",
     "@tailwindcss/vite": "4.3.3",
     "@tanstack/react-query": "5.101.1",
