@@ -64,7 +64,7 @@ function Safety() {
           <div className="space-y-5 text-center lg:text-left">
             <SectionHeading eyebrow="Biometria facial" title={<>Só um <span className="text-cyan">adulto autorizado</span> muda as regras.</>} description="Sair do modo infantil, mudar a classificação ou liberar um título exige o rosto do responsável cadastrado. A criança não consegue burlar." className="lg:items-start lg:text-left" />
             <ul className="space-y-3 text-sm">
-              {[[ScanFace, "Reconhecimento facial com prova de vida: fotos ou vídeos não enganam."], [Lock, "Os dados do rosto ficam protegidos no aparelho e nunca são vendidos."], [ShieldCheck, "Toda liberação fica registrada para o responsável conferir."]].map(([I, t]) => { const Icon = I as typeof Lock; return <li key={t as string} className="flex items-start justify-center gap-3 lg:justify-start"><Icon className="mt-0.5 size-4 shrink-0 text-cyan" /><span className="text-foreground/85">{t as string}</span></li>; })}
+              {[[ScanFace, "Reconhecimento facial com prova de vida simples (piscar). Primeira versão, ainda não é nível bancário."], [Lock, "Os dados do rosto ficam protegidos no aparelho e nunca são vendidos."], [ShieldCheck, "Toda liberação fica registrada para o responsável conferir."]].map(([I, t]) => { const Icon = I as typeof Lock; return <li key={t as string} className="flex items-start justify-center gap-3 lg:justify-start"><Icon className="mt-0.5 size-4 shrink-0 text-cyan" /><span className="text-foreground/85">{t as string}</span></li>; })}
             </ul>
             <p className="text-xs text-muted-foreground">Demonstração ilustrativa do recurso em desenvolvimento.</p>
           </div>
