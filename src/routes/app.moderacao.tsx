@@ -68,7 +68,7 @@ function Center() {
           <p><span className="text-muted-foreground">IA revertida por humanos:</span> <span className="font-mono">{metrics.overturn === null ? "dados insuficientes" : `${metrics.overturn}%`}</span></p>
         </div>
         <p className="text-xs text-muted-foreground">A taxa só aparece a partir de {metrics.min} decisões comparadas com a análise da IA ({metrics.compared} até agora).</p>
-      </div>
+      </Card>
       <Tabs defaultValue="fila" className="space-y-6">
         <TabsList><TabsTrigger value="fila">Fila</TabsTrigger><TabsTrigger value="historico">Histórico</TabsTrigger></TabsList>
         <TabsContent value="fila" className="space-y-4">
